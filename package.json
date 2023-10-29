@@ -1,0 +1,24 @@
+{
+  "name": "another-fullstack-starter",
+  "private": true,
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "typecheck": "turbo run typecheck",
+    "format": "prettier --write \"**/*.{ts,tsx,md,js,cjs,json}\"",
+    "validate": "turbo run lint typecheck build"
+  },
+  "devDependencies": {
+    "eslint": "8.48.0",
+    "gitzy": "4.0.0",
+    "prettier": "3.0.3",
+    "tsconfig": "workspace:*",
+    "turbo": "latest"
+  },
+  "packageManager": "bun@1.0.7",
+  "workspaces": [
+    "apps/*",
+    "libs/*"
+  ]
+}
