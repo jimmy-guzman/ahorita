@@ -12,10 +12,14 @@ module.exports = {
   globals: {
     JSX: true,
   },
+  plugins: ['simple-import-sort'],
   extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended'],
   parser: '@typescript-eslint/parser',
   parserOptions: { project },
-  rules: {},
+  rules: {
+    'simple-import-sort/imports': 'error',
+    'simple-import-sort/exports': 'error',
+  },
   overrides: [
     {
       env: {

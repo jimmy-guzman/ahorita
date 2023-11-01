@@ -1,7 +1,8 @@
 import { Outlet } from '@tanstack/react-router';
-import { Wrapper } from '../components/atoms/Wrapper';
-import { Footer } from '../components/atoms/Footer';
+
 import { Container } from '../components/atoms/Container';
+import { Footer } from '../components/atoms/Footer';
+import { Wrapper } from '../components/atoms/Wrapper';
 import { Navigation } from '../components/molecules/Navigation';
 
 export const RootLayout = () => {

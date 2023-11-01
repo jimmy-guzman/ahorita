@@ -1,12 +1,11 @@
+import './index.css';
+
+import { Router,RouterProvider } from '@tanstack/react-router';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 
-import { RouterProvider, Router } from '@tanstack/react-router';
-
-import { rootRoute } from './routes/Root.route';
 import { route as homeRoute } from './routes/Home.route';
-
-import './index.css';
+import { rootRoute } from './routes/Root.route';
 
 const routeTree = rootRoute.addChildren([homeRoute]);
 

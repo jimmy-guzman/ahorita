@@ -1,5 +1,5 @@
-import { App } from 'todos-api';
 import { edenFetch } from '@elysiajs/eden';
+import { App } from 'todos-api';
 
 const fetch = edenFetch<App>('http://localhost:3000');
 
