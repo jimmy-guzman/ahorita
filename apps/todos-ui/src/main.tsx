@@ -1,6 +1,6 @@
 import './index.css';
 
-import { Router,RouterProvider } from '@tanstack/react-router';
+import { Router, RouterProvider } from '@tanstack/react-router';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 

@@ -7,7 +7,7 @@
     "lint": "turbo run lint",
     "lint:fix": "turbo run lint -- --fix",
     "typecheck": "turbo run typecheck",
-    "format": "prettier --write \"**/*.{ts,tsx,md,js,cjs,json}\"",
+    "format": "prettier --write \"**/*.{ts,tsx,md,js,cjs,mjs,json}\"",
     "validate": "turbo run lint typecheck build",
     "deps:update": "bunx npm-check-updates -ui -ws --pre beta"
   },
@@ -15,6 +15,7 @@
     "eslint": "8.48.0",
     "gitzy": "4.0.0",
     "prettier": "3.0.3",
+    "prettier-plugin-tailwindcss": "^0.5.6",
     "tsconfig": "workspace:*",
     "turbo": "latest"
   },
@@ -22,8 +23,5 @@
   "workspaces": [
     "apps/*",
     "libs/*"
-  ],
-  "dependencies": {
-    "bun-types": "1.0.7"
-  }
+  ]
 }
