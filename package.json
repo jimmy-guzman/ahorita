@@ -20,5 +20,8 @@
   "workspaces": [
     "apps/*",
     "libs/*"
-  ]
+  ],
+  "dependencies": {
+    "bun-types": "^1.0.7"
+  }
 }

@@ -2,11 +2,16 @@
   "cSpell.words": [
     "ahorita",
     "bunx",
+    "daisyui",
     "elysia",
     "elysiajs",
     "gitzy",
+    "tailwindcss",
+    "tanstack",
     "todos",
     "typecheck"
   ],
-  "editor.formatOnSave": true
+  "editor.formatOnSave": true,
+  "css.lint.unknownAtRules": "ignore",
+  "editor.defaultFormatter": "esbenp.prettier-vscode"
 }
