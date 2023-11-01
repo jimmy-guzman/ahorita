@@ -9,6 +9,7 @@
     "tailwindcss",
     "tanstack",
     "todos",
+    "topo",
     "typecheck"
   ],
   "editor.formatOnSave": true,

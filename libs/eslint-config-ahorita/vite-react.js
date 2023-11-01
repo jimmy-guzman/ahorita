@@ -7,41 +7,15 @@ const project = [
 ];
 
 module.exports = {
-  root: true,
+  extends: ['./base.js', 'plugin:react-hooks/recommended'],
   env: { browser: true, es2020: true },
-  globals: {
-    JSX: true,
-  },
-  plugins: ['react-refresh', 'simple-import-sort'],
-  extends: [
-    'eslint:recommended',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:react-hooks/recommended',
-  ],
-  parser: '@typescript-eslint/parser',
+  globals: { JSX: true },
+  plugins: ['react-refresh'],
   parserOptions: { project },
   rules: {
     'react-refresh/only-export-components': [
       'warn',
       { allowConstantExport: true },
     ],
-    'simple-import-sort/imports': 'error',
-    'simple-import-sort/exports': 'error',
   },
-  overrides: [
-    {
-      env: {
-        node: true,
-      },
-      files: ['.eslintrc.{js,cjs}'],
-      parserOptions: {
-        sourceType: 'script',
-      },
-    },
-    {
-      extends: ['plugin:@typescript-eslint/disable-type-checked'],
-      files: ['./**/*.{js,cjs}'],
-    },
-  ],
-  ignorePatterns: ['node_modules/', 'dist/', '.eslintrc.js'],
 };

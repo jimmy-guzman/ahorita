@@ -1,3 +1,3 @@
 module.exports = {
-  extends: ['ahorita/vite-react'],
+  extends: ['ahorita/elysia'],
 };
