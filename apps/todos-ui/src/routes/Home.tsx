@@ -1,11 +1,12 @@
-import { route } from './Home.route';
+import { TasksForm } from '../components/molecules/TasksForm';
 
 export default function Home() {
-  const data = route.useLoader();
-
   return (
-    <main className='prose lg:prose-xl daisy-prose'>
-      <h1>{data?.message}</h1>
+    <main className='flex flex-col gap-4'>
+      <div className='prose lg:prose-xl daisy-prose'>
+        <h1>Welcome!</h1>
+      </div>
+      <TasksForm />
     </main>
   );
 }

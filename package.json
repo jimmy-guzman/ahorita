@@ -9,6 +9,9 @@
     "typecheck": "turbo run typecheck",
     "format": "prettier --write \"**/*.{ts,tsx,md,js,cjs,mjs,json}\"",
     "validate": "turbo run lint typecheck build",
+    "generate": "turbo run generate",
+    "db:push": "turbo run db:push",
+    "db:studio": "turbo run db:studio",
     "deps:update": "bunx npm-check-updates -ui -ws --pre beta"
   },
   "devDependencies": {
