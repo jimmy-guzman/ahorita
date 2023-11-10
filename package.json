@@ -18,11 +18,11 @@
     "eslint": "8.48.0",
     "gitzy": "4.0.0",
     "prettier": "3.0.3",
-    "prettier-plugin-tailwindcss": "^0.5.6",
+    "prettier-plugin-tailwindcss": "0.5.6",
     "tsconfig": "workspace:*",
     "turbo": "latest"
   },
-  "packageManager": "bun@1.0.7",
+  "packageManager": "bun@1.0.9",
   "workspaces": [
     "apps/*",
     "libs/*"

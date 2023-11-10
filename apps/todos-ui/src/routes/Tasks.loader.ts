@@ -1,12 +1,7 @@
-import { edenFetch } from '@elysiajs/eden';
-import { App } from 'todos-api';
-
-const fetch = edenFetch<App>('http://localhost:3000');
+import { getTodos } from '../lib/api';
 
 export async function loader() {
-  const response = await fetch('/tasks', {
-    method: 'GET',
-  });
+  const data = await getTodos();
 
-  return response.data ?? [];
+  return data ?? [];
 }

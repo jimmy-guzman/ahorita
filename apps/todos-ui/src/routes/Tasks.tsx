@@ -1,14 +1,14 @@
-import { edenFetch } from '@elysiajs/eden';
 import { useMutation } from '@tanstack/react-query';
 import { createColumnHelper } from '@tanstack/react-table';
 import { useMemo } from 'react';
-import { App, Task } from 'todos-api';
+import { App } from 'todos-api';
 
 import { CompletedBadge } from '../components/atoms/CompletedBadge';
 import { TagBadges } from '../components/atoms/TagBadges';
 import { TasksTableActions } from '../components/atoms/TasksTableActions';
 import { Table } from '../components/molecules/Table';
 import { TasksForm } from '../components/molecules/TasksForm';
+import { deleteTask, patchTask } from '../lib/api';
 import { route } from './Tasks.route';
 
 const dateFormatter = new Intl.DateTimeFormat('en-US', {
@@ -18,20 +18,13 @@ const dateFormatter = new Intl.DateTimeFormat('en-US', {
 
 const formatDate = (date: string) => dateFormatter.format(new Date(date));
 
-const columnHelper = createColumnHelper<Task>();
-
-const fetch = edenFetch<App>('http://localhost:3000');
+const columnHelper =
+  createColumnHelper<App['schema']['/tasks']['get']['response'][200][number]>();
 
 export default function Tasks() {
   const tasks = route.useLoader();
   const updateMutation = useMutation({
-    mutationFn: ({ id, completed }: Task) => {
-      return fetch('/tasks/:id', {
-        method: 'PATCH',
-        params: { id },
-        body: { completed },
-      });
-    },
+    mutationFn: patchTask,
     onMutate: () => {
       route.router?.cancelMatches();
     },
@@ -41,12 +34,7 @@ export default function Tasks() {
   });
 
   const deleteMutation = useMutation({
-    mutationFn: ({ id }: Task) => {
-      return fetch('/tasks/:id', {
-        method: 'DELETE',
-        params: { id },
-      });
-    },
+    mutationFn: deleteTask,
     onMutate: () => {
       route.router?.cancelMatches();
     },
@@ -83,7 +71,7 @@ export default function Tasks() {
           <TasksTableActions
             onComplete={() => {
               updateMutation.mutate({
-                ...info.row.original,
+                id: info.row.original.id,
                 completed: !info.row.original.completed,
               });
             }}
@@ -102,7 +90,7 @@ export default function Tasks() {
       <div className='prose lg:prose-xl daisy-prose'>
         <h1>Tasks</h1>
       </div>
-      <div className='flex justify-end'>
+      <div className='flex justify-center'>
         <div className='basis-full px-8 md:basis-1/2'>
           <TasksForm />
         </div>

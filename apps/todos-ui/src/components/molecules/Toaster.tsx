@@ -10,7 +10,7 @@ import {
 export const Toaster = () => {
   return (
     <HotToaster
-      position='top-right'
+      position='bottom-center'
       toastOptions={{
         error: {
           icon: <XCircleIcon />,
