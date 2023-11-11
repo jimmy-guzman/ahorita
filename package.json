@@ -26,5 +26,8 @@
   "workspaces": [
     "apps/*",
     "libs/*"
-  ]
+  ],
+  "dependencies": {
+    "@tanstack/router-devtools": "^0.0.1-alpha.0"
+  }
 }

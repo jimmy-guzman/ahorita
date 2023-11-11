@@ -1,45 +1,21 @@
-import { typeboxResolver } from '@hookform/resolvers/typebox';
-import { Static, Type } from '@sinclair/typebox';
-import { useMutation } from '@tanstack/react-query';
 import { clsx } from 'clsx';
-import { useForm } from 'react-hook-form';
-import toast from 'react-hot-toast';
 
-import { createTodos } from '../../lib/api';
-import { route } from '../../routes/Tasks.route';
-import { SubmitButton } from '../atoms/SubmitButton';
-
-const schema = Type.Object({
-  name: Type.String({ minLength: 1 }),
-});
+import { useTasksFormHooks } from './TasksForm.hooks';
 
 export const TasksForm = () => {
   const {
-    register,
-    handleSubmit,
-    control,
-    reset,
-    formState: { errors },
-  } = useForm<Static<typeof schema>>({
-    resolver: typeboxResolver(schema),
-  });
-
-  const mutation = useMutation({
-    mutationFn: createTodos,
-    onMutate: () => {
-      route.router?.cancelMatches();
+    mutation,
+    form: {
+      handleSubmit,
+      register,
+      formState: { errors, isValid, isSubmitted },
     },
-    onSuccess: async ({ name }) => {
-      await route.router?.invalidate();
-      reset();
-      toast.success(`Created new task: ${name}`);
-    },
-  });
+  } = useTasksFormHooks();
 
   return (
     <form
       className='flex gap-2'
-      onSubmit={handleSubmit(async (values) => {
+      onSubmit={handleSubmit((values) => {
         mutation.mutate(values);
       })}
     >
@@ -53,15 +29,19 @@ export const TasksForm = () => {
           )}
           {...register('name')}
         />
-        <p className='text-error'>{errors.name?.message}</p>
+        {errors.name?.message ? (
+          <p className='text-error'>{errors.name.message}</p>
+        ) : (
+          <p className='invisible'>&nbsp;</p>
+        )}
       </div>
-      <SubmitButton
-        control={control}
-        isSubmitting={mutation.isPending}
-        isError={mutation.isError}
+      <button
+        className={clsx('daisy-btn daisy-btn-primary', {
+          'daisy-btn-error': mutation.isError || (!isValid && isSubmitted),
+        })}
       >
-        Create Task
-      </SubmitButton>
+        Add Task
+      </button>
     </form>
   );
 };

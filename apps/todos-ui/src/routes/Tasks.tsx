@@ -1,45 +1,41 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { createColumnHelper } from '@tanstack/react-table';
 import { useMemo } from 'react';
-import { App } from 'todos-api';
 
 import { CompletedBadge } from '../components/atoms/CompletedBadge';
 import { TagBadges } from '../components/atoms/TagBadges';
 import { TasksTableActions } from '../components/atoms/TasksTableActions';
 import { Table } from '../components/molecules/Table';
 import { TasksForm } from '../components/molecules/TasksForm';
-import { deleteTask, patchTask } from '../lib/api';
+import { deleteTask, patchTask, Task } from '../lib/api';
+import { formatDate } from '../lib/formatters';
 import { route } from './Tasks.route';
 
-const dateFormatter = new Intl.DateTimeFormat('en-US', {
-  dateStyle: 'short',
-  timeStyle: 'short',
-});
-
-const formatDate = (date: string) => dateFormatter.format(new Date(date));
-
-const columnHelper =
-  createColumnHelper<App['schema']['/tasks']['get']['response'][200][number]>();
+const columnHelper = createColumnHelper<Task>();
 
 export default function Tasks() {
-  const tasks = route.useLoader();
+  const { queryOptions, queryClient } = route.useRouteContext();
+  const { data: tasks } = useQuery(queryOptions);
+
   const updateMutation = useMutation({
+    mutationKey: ['UPDATE_TASK'],
     mutationFn: patchTask,
-    onMutate: () => {
-      route.router?.cancelMatches();
+    onMutate: async () => {
+      await queryClient.cancelQueries({ queryKey: queryOptions.queryKey });
     },
     onSuccess: async () => {
-      await route.router?.invalidate();
+      await queryClient.invalidateQueries({ queryKey: queryOptions.queryKey });
     },
   });
 
   const deleteMutation = useMutation({
+    mutationKey: ['DELETE_TASK'],
     mutationFn: deleteTask,
-    onMutate: () => {
-      route.router?.cancelMatches();
+    onMutate: async () => {
+      await queryClient.cancelQueries({ queryKey: queryOptions.queryKey });
     },
     onSuccess: async () => {
-      await route.router?.invalidate();
+      await queryClient.invalidateQueries({ queryKey: queryOptions.queryKey });
     },
   });
 
@@ -91,11 +87,11 @@ export default function Tasks() {
         <h1>Tasks</h1>
       </div>
       <div className='flex justify-center'>
-        <div className='basis-full px-8 md:basis-1/2'>
+        <div className='basis-full md:basis-1/2'>
           <TasksForm />
         </div>
       </div>
-      <Table data={tasks} columns={columns} />
+      {tasks && <Table data={tasks} columns={columns} />}
     </main>
   );
 }
