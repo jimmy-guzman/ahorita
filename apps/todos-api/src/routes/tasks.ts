@@ -5,7 +5,7 @@ const TaskDto = t.Object({
   id: t.String(),
   name: t.String(),
   completed: t.Boolean(),
-  tags: t.Array(t.Object({ name: t.String() })),
+  tags: t.Array(t.Object({ id: t.String(), name: t.String() })),
   createdAt: t.String(),
   updatedAt: t.String(),
 });
@@ -14,7 +14,7 @@ const transformDates = ({
   createdAt,
   updatedAt,
   ...rest
-}: DbTask & { tags: Pick<Tag, 'name'>[] }) => ({
+}: DbTask & { tags: Pick<Tag, 'name' | 'id'>[] }) => ({
   createdAt: createdAt.toISOString(),
   updatedAt: updatedAt.toISOString(),
   ...rest,
@@ -39,6 +39,7 @@ export const tasks = new Elysia()
             include: {
               tags: {
                 select: {
+                  id: true,
                   name: true,
                 },
               },
@@ -60,6 +61,7 @@ export const tasks = new Elysia()
             include: {
               tags: {
                 select: {
+                  id: true,
                   name: true,
                 },
               },
@@ -67,7 +69,7 @@ export const tasks = new Elysia()
           });
 
           if (!todo) {
-            throw new NotFoundError(`todo not found`);
+            throw new NotFoundError(`tasks not found`);
           }
 
           return transformDates(todo);
@@ -87,15 +89,12 @@ export const tasks = new Elysia()
             include: {
               tags: {
                 select: {
+                  id: true,
                   name: true,
                 },
               },
             },
           });
-
-          if (!todo) {
-            throw new NotFoundError(`todo not found`);
-          }
 
           return transformDates(todo);
         },
@@ -111,6 +110,39 @@ export const tasks = new Elysia()
           response: TaskDto,
         }
       )
+      .patch(
+        '/:id/tags',
+        async ({ params: { id }, body, prisma }) => {
+          const todo = await prisma.task.update({
+            where: { id },
+            data: {
+              tags: {
+                set: body,
+              },
+            },
+            include: {
+              tags: {
+                select: {
+                  id: true,
+                  name: true,
+                },
+              },
+            },
+          });
+
+          return transformDates(todo);
+        },
+        {
+          detail: { tags: ['Tasks'] },
+          body: t.Array(
+            t.Object({
+              id: t.String(),
+            })
+          ),
+          params: t.Object({ id: t.String() }),
+          response: TaskDto,
+        }
+      )
       .post(
         '',
         async ({ body, prisma }) => {
@@ -119,6 +151,7 @@ export const tasks = new Elysia()
             include: {
               tags: {
                 select: {
+                  id: true,
                   name: true,
                 },
               },
@@ -143,6 +176,7 @@ export const tasks = new Elysia()
             include: {
               tags: {
                 select: {
+                  id: true,
                   name: true,
                 },
               },

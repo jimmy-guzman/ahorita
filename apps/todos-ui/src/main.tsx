@@ -15,7 +15,7 @@ import toast from 'react-hot-toast';
 import { route as homeRoute } from './routes/Home.route';
 import { rootRoute } from './routes/Root.route';
 import { route as tagsRoute } from './routes/Tags.route';
-import { route as tasksRoute } from './routes/Tasks.route';
+import { tasksRoute as tasksRoute } from './routes/Tasks.route';
 
 const routeTree = rootRoute.addChildren([homeRoute, tasksRoute, tagsRoute]);
 

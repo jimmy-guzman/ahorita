@@ -1,97 +1,71 @@
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { createColumnHelper } from '@tanstack/react-table';
-import { useMemo } from 'react';
+import { FormProvider, useFieldArray } from 'react-hook-form';
 
 import { CompletedBadge } from '../components/atoms/CompletedBadge';
-import { TagBadges } from '../components/atoms/TagBadges';
 import { TasksTableActions } from '../components/atoms/TasksTableActions';
 import { Table } from '../components/molecules/Table';
 import { TasksForm } from '../components/molecules/TasksForm';
-import { deleteTask, patchTask, Task } from '../lib/api';
+import { NameField } from '../components/molecules/TasksNameField';
+import { TasksTagsField } from '../components/molecules/TasksTagsField';
+import { useTasksForm } from '../hooks/forms/useTasksForm';
+import { Task } from '../lib/api';
 import { formatDate } from '../lib/formatters';
-import { route } from './Tasks.route';
+import { tasksRoute } from './Tasks.route';
 
-const columnHelper = createColumnHelper<Task>();
+const columnHelper = createColumnHelper<Task & { key: string }>();
+
+const columns = [
+  columnHelper.accessor('name', {
+    header: 'Task',
+    cell: (info) => <NameField info={info} />,
+  }),
+  columnHelper.accessor('completed', {
+    header: 'Completed',
+    cell: (info) => <CompletedBadge completed={info.getValue()} />,
+  }),
+  columnHelper.accessor('tags', {
+    header: 'Tags',
+    cell: (info) => <TasksTagsField info={info} />,
+  }),
+  columnHelper.accessor('createdAt', {
+    header: 'Created At',
+    cell: (info) => formatDate(info.getValue()),
+  }),
+  columnHelper.accessor('updatedAt', {
+    header: 'Updated At',
+    cell: (info) => formatDate(info.getValue()),
+  }),
+  columnHelper.display({
+    header: 'Actions',
+    cell: (info) => <TasksTableActions info={info} />,
+  }),
+];
 
 export default function Tasks() {
-  const { queryOptions, queryClient } = route.useRouteContext();
+  const { queryOptions } = tasksRoute.useRouteContext();
+
   const { data: tasks } = useQuery(queryOptions);
-
-  const updateMutation = useMutation({
-    mutationKey: ['UPDATE_TASK'],
-    mutationFn: patchTask,
-    onMutate: async () => {
-      await queryClient.cancelQueries({ queryKey: queryOptions.queryKey });
-    },
-    onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: queryOptions.queryKey });
-    },
+  const form = useTasksForm(tasks);
+  const { fields } = useFieldArray({
+    control: form.control,
+    name: 'tasks',
+    keyName: 'key',
   });
-
-  const deleteMutation = useMutation({
-    mutationKey: ['DELETE_TASK'],
-    mutationFn: deleteTask,
-    onMutate: async () => {
-      await queryClient.cancelQueries({ queryKey: queryOptions.queryKey });
-    },
-    onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: queryOptions.queryKey });
-    },
-  });
-
-  const columns = useMemo(
-    () => [
-      columnHelper.accessor('name', {
-        header: 'Task',
-        cell: (info) => info.getValue(),
-      }),
-      columnHelper.accessor('completed', {
-        header: 'Completed',
-        cell: (info) => <CompletedBadge completed={info.getValue()} />,
-      }),
-      columnHelper.accessor('tags', {
-        header: 'Tags',
-        cell: (info) => <TagBadges tags={info.getValue()} />,
-      }),
-      columnHelper.accessor('createdAt', {
-        header: 'Created At',
-        cell: (info) => formatDate(info.getValue()),
-      }),
-      columnHelper.accessor('updatedAt', {
-        header: 'Updated At',
-        cell: (info) => formatDate(info.getValue()),
-      }),
-      columnHelper.display({
-        id: 'actions',
-        cell: (info) => (
-          <TasksTableActions
-            onComplete={() => {
-              updateMutation.mutate({
-                id: info.row.original.id,
-                completed: !info.row.original.completed,
-              });
-            }}
-            onDelete={() => {
-              deleteMutation.mutate(info.row.original);
-            }}
-          />
-        ),
-      }),
-    ],
-    [updateMutation, deleteMutation]
-  );
 
   return (
     <main className='flex flex-col gap-4'>
       <div className='prose lg:prose-xl daisy-prose'>
         <h1>Tasks</h1>
       </div>
-      <div className='flex justify-center'>
+      <div className='flex justify-center gap-4'>
         <div className='basis-full md:basis-1/2'>
           <TasksForm />
         </div>
       </div>
-      {tasks && <Table data={tasks} columns={columns} />}
+      <FormProvider {...form}>
+        {tasks && <Table data={fields} columns={columns} />}
+      </FormProvider>
     </main>
   );
 }

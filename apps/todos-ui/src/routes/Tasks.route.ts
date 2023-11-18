@@ -1,13 +1,12 @@
-import { Route } from '@tanstack/react-router';
+import { lazyRouteComponent, Route } from '@tanstack/react-router';
 
 import { getTodos } from '../lib/api';
 import { rootRoute } from './Root.route';
-import Tasks from './Tasks';
 
-export const route = new Route({
+export const tasksRoute = new Route({
   getParentRoute: () => rootRoute,
-  path: '/tasks',
-  component: Tasks,
+  path: 'tasks',
+  component: lazyRouteComponent(() => import('./Tasks')),
   beforeLoad: () => ({
     queryOptions: { queryKey: ['tasks'], queryFn: getTodos } as const,
   }),

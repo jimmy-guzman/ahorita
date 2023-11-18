@@ -1,4 +1,5 @@
 import { clsx } from 'clsx';
+import { ListPlusIcon } from 'lucide-react';
 
 import { useTasksFormHooks } from './TasksForm.hooks';
 
@@ -40,7 +41,7 @@ export const TasksForm = () => {
           'daisy-btn-error': mutation.isError || (!isValid && isSubmitted),
         })}
       >
-        Add Task
+        Add Task <ListPlusIcon />
       </button>
     </form>
   );

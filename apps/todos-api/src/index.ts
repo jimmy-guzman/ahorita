@@ -2,6 +2,7 @@ import cors from '@elysiajs/cors';
 import swagger from '@elysiajs/swagger';
 import { Elysia } from 'elysia';
 
+import { tags } from './routes/tags';
 import { tasks } from './routes/tasks';
 
 const app = new Elysia()
@@ -22,6 +23,7 @@ const app = new Elysia()
     }
   })
   .use(tasks)
+  .use(tags)
   .listen(3000, ({ hostname, port }) => {
     console.log(`🚀 Running at http://${hostname}:${port}/swagger`);
   });
