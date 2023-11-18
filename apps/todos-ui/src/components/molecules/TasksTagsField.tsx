@@ -2,11 +2,11 @@ import { CellContext } from '@tanstack/react-table';
 import { BanIcon, PencilIcon, PlusIcon, SaveIcon, XIcon } from 'lucide-react';
 import { useMemo, useState } from 'react';
 
-import { useEditTaskTags } from '../../hooks/api/useEditTaskTags';
-import { useQueryTags } from '../../hooks/api/useTags';
-import { useTasksFormField } from '../../hooks/forms/useTasksForm';
-import { Task } from '../../lib/api';
-import { TagBadges } from '../atoms/TagBadges';
+import { TagBadges } from '@/components/atoms/TagBadges';
+import { useEditTaskTags } from '@/hooks/api/useEditTaskTags';
+import { useQueryTags } from '@/hooks/api/useTags';
+import { useTasksFormField } from '@/hooks/forms/useTasksForm';
+import { Task } from '@/lib/api';
 
 export const TasksTagsField = ({
   info,

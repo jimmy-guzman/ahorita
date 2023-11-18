@@ -2,9 +2,9 @@ import { CellContext } from '@tanstack/react-table';
 import { BanIcon, PencilIcon, SaveIcon } from 'lucide-react';
 import { useState } from 'react';
 
-import { useEditMutation } from '../../hooks/api/useEditMutation';
-import { useTasksFormContext } from '../../hooks/forms/useTasksForm';
-import { Task } from '../../lib/api';
+import { useEditMutation } from '@/hooks/api/useEditMutation';
+import { useTasksFormContext } from '@/hooks/forms/useTasksForm';
+import { Task } from '@/lib/api';
 
 export const NameField = ({
   info,

@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { patchTaskTags } from '../../lib/api';
+import { patchTaskTags } from '@/lib/api';
 
 export const useEditTaskTags = () => {
   const queryClient = useQueryClient();

@@ -2,15 +2,16 @@ import { useQuery } from '@tanstack/react-query';
 import { createColumnHelper } from '@tanstack/react-table';
 import { FormProvider, useFieldArray } from 'react-hook-form';
 
-import { CompletedBadge } from '../components/atoms/CompletedBadge';
-import { TasksTableActions } from '../components/atoms/TasksTableActions';
-import { Table } from '../components/molecules/Table';
-import { TasksForm } from '../components/molecules/TasksForm';
-import { NameField } from '../components/molecules/TasksNameField';
-import { TasksTagsField } from '../components/molecules/TasksTagsField';
-import { useTasksForm } from '../hooks/forms/useTasksForm';
-import { Task } from '../lib/api';
-import { formatDate } from '../lib/formatters';
+import { CompletedBadge } from '@/components/atoms/CompletedBadge';
+import { TasksTableActions } from '@/components/atoms/TasksTableActions';
+import { Table } from '@/components/molecules/Table';
+import { TasksForm } from '@/components/molecules/TasksForm';
+import { NameField } from '@/components/molecules/TasksNameField';
+import { TasksTagsField } from '@/components/molecules/TasksTagsField';
+import { useTasksForm } from '@/hooks/forms/useTasksForm';
+import { Task } from '@/lib/api';
+import { formatDate } from '@/lib/formatters';
+
 import { tasksRoute } from './Tasks.route';
 
 const columnHelper = createColumnHelper<Task & { key: string }>();

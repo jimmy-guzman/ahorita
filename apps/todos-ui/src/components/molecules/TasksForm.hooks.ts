@@ -4,7 +4,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 
-import { createTodos } from '../../lib/api';
+import { createTodos } from '@/lib/api';
 
 const schema = Type.Object({
   name: Type.String({ minLength: 1 }),

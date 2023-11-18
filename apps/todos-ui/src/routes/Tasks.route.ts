@@ -1,6 +1,7 @@
 import { lazyRouteComponent, Route } from '@tanstack/react-router';
 
-import { getTodos } from '../lib/api';
+import { getTodos } from '@/lib/api';
+
 import { rootRoute } from './Root.route';
 
 export const tasksRoute = new Route({

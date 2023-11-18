@@ -2,7 +2,7 @@ import { typeboxResolver } from '@hookform/resolvers/typebox';
 import { Static, Type } from '@sinclair/typebox';
 import { useController, useForm, useFormContext } from 'react-hook-form';
 
-import { Task } from '../../lib/api';
+import { Task } from '@/lib/api';
 
 const schema = Type.Object({
   tasks: Type.Array(
