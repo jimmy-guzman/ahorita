@@ -26,7 +26,7 @@ export const useTasksFormContext = useFormContext<FormValues>;
 export const useTasksForm = (tasks: Task[] = []) => {
   return useForm<FormValues>({
     resolver: typeboxResolver(schema),
-    values: { tasks: tasks ?? [] },
+    values: { tasks },
   });
 };
 

@@ -1,18 +1,20 @@
 import { edenFetch } from '@elysiajs/eden';
-import { App } from 'todos-api';
+import type { App } from 'todos-api';
 
 const fetch = edenFetch<App>('http://localhost:3000');
 
 type Schema = App['schema'];
 
 export const patchTask = async ({
-  id,
-  ...body
-}: Schema['/tasks/:id']['patch']['params'] &
-  Schema['/tasks/:id']['patch']['body']) => {
+  params,
+  body,
+}: {
+  body: Schema['/tasks/:id']['patch']['body'];
+  params: Schema['/tasks/:id']['patch']['params'];
+}) => {
   const response = await fetch('/tasks/:id', {
     method: 'PATCH',
-    params: { id },
+    params,
     body,
   });
 

@@ -35,8 +35,10 @@ export const NameField = ({
         className='dsy-join-item dsy-btn dsy-btn-sm dsy-btn-secondary '
         onClick={() => {
           editMutation.mutate({
-            id: info.row.original.id,
-            name: getValues(`tasks.${info.row.index}.name`),
+            params: {
+              id: info.row.original.id,
+            },
+            body: { name: getValues(`tasks.${info.row.index}.name`) },
           });
           setIsEditEnabled((prev) => !prev);
         }}

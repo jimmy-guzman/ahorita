@@ -25,7 +25,10 @@ export const TasksTableActions = ({
         <CheckSquareIcon
           className='align-baseline'
           onClick={() => {
-            editMutation.mutate({ id: task.id, completed: !task.completed });
+            editMutation.mutate({
+              params: { id: task.id },
+              body: { completed: !task.completed },
+            });
           }}
         />
       </button>

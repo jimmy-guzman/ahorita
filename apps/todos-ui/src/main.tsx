@@ -8,9 +8,9 @@ import {
 } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Router, RouterProvider } from '@tanstack/react-router';
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import toast from 'react-hot-toast';
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import { toast } from 'react-hot-toast';
 
 import { route as homeRoute } from './routes/Home.route';
 import { rootRoute } from './routes/Root.route';
@@ -45,11 +45,15 @@ declare module '@tanstack/react-router' {
   }
 }
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
-      <ReactQueryDevtools />
-    </QueryClientProvider>
-  </React.StrictMode>
-);
+const root = document.getElementById('root');
+
+if (root) {
+  createRoot(root).render(
+    <StrictMode>
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+        <ReactQueryDevtools />
+      </QueryClientProvider>
+    </StrictMode>
+  );
+}

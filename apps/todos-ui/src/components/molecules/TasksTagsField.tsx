@@ -58,7 +58,7 @@ export const TasksTagsField = ({
           onChange={(event) => {
             field.onChange([
               ...values,
-              tags?.find((tag) => tag.id === event.target.value),
+              tags.find((tag) => tag.id === event.target.value),
             ]);
           }}
         >
