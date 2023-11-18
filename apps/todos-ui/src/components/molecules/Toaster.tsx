@@ -24,11 +24,10 @@ export const Toaster = () => {
       }}
     >
       {(toast) => {
-        const alertClassName = clsx('daisy-alert transform', {
-          'daisy-alert-success': toast.type === 'success',
-          'daisy-alert-info':
-            toast.type === 'loading' || toast.type === 'blank',
-          'daisy-alert-error': toast.type === 'error',
+        const alertClassName = clsx('dsy-alert transform', {
+          'dsy-alert-success': toast.type === 'success',
+          'dsy-alert-info': toast.type === 'loading' || toast.type === 'blank',
+          'dsy-alert-error': toast.type === 'error',
         });
 
         return (

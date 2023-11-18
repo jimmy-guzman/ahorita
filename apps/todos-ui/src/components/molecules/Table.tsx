@@ -21,7 +21,7 @@ export const Table = <TData, TColumns extends ColumnDef<TData, any>[]>({
 
   return (
     <div className='overflow-x-auto'>
-      <table className='daisy-table'>
+      <table className='dsy-table'>
         <thead>
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>

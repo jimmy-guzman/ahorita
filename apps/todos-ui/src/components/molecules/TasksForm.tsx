@@ -20,13 +20,13 @@ export const TasksForm = () => {
         mutation.mutate(values);
       })}
     >
-      <div className='daisy-form-control w-full'>
+      <div className='dsy-form-control w-full'>
         <input
           type='text'
           placeholder="Your task's name?"
           className={clsx(
-            'daisy-input daisy-input-bordered w-full',
-            errors.name?.message ? 'daisy-input-error' : 'daisy-input-primary'
+            'dsy-input dsy-input-bordered w-full',
+            errors.name?.message ? 'dsy-input-error' : 'dsy-input-primary'
           )}
           {...register('name')}
         />
@@ -37,8 +37,8 @@ export const TasksForm = () => {
         )}
       </div>
       <button
-        className={clsx('daisy-btn daisy-btn-primary', {
-          'daisy-btn-error': mutation.isError || (!isValid && isSubmitted),
+        className={clsx('dsy-btn dsy-btn-primary', {
+          'dsy-btn-error': mutation.isError || (!isValid && isSubmitted),
         })}
       >
         Add Task <ListPlusIcon />

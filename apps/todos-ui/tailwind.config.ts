@@ -9,7 +9,7 @@ export default {
   },
   daisyui: {
     themes: ['dark'],
-    prefix: 'daisy-',
+    prefix: 'dsy-',
     logs: false,
   },
   plugins: [typography, daisyui],

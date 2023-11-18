@@ -20,8 +20,8 @@ export const TasksTableActions = ({
   const editMutation = useEditMutation();
 
   return (
-    <div className='daisy-join'>
-      <button className='daisy-btn daisy-btn-ghost daisy-join-item daisy-btn-sm'>
+    <div className='dsy-join'>
+      <button className='dsy-btn dsy-btn-ghost dsy-join-item dsy-btn-sm'>
         <CheckSquareIcon
           className='align-baseline'
           onClick={() => {
@@ -29,7 +29,7 @@ export const TasksTableActions = ({
           }}
         />
       </button>
-      <button className='daisy-btn daisy-btn-ghost daisy-join-item daisy-btn-sm'>
+      <button className='dsy-btn dsy-btn-ghost dsy-join-item dsy-btn-sm'>
         <TrashIcon
           className='align-baseline'
           onClick={() => {

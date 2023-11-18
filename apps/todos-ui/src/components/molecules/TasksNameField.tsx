@@ -16,15 +16,15 @@ export const NameField = ({
   const editMutation = useEditMutation();
 
   return isEditEnabled ? (
-    <div className='daisy-join'>
+    <div className='dsy-join'>
       <input
         type='text'
         placeholder='Type here'
-        className='daisy-join-item daisy-input daisy-input-bordered daisy-input-sm w-full max-w-xs'
+        className='dsy-join-item dsy-input dsy-input-bordered dsy-input-sm w-full max-w-xs'
         {...register(`tasks.${info.row.index}.name`)}
       />
       <button
-        className='daisy-join-item daisy-btn daisy-btn-sm daisy-btn-neutral'
+        className='dsy-join-item dsy-btn dsy-btn-sm dsy-btn-neutral'
         onClick={() => {
           setIsEditEnabled((prev) => !prev);
         }}
@@ -32,7 +32,7 @@ export const NameField = ({
         <BanIcon />
       </button>
       <button
-        className='daisy-join-item daisy-btn daisy-btn-sm daisy-btn-secondary '
+        className='dsy-join-item dsy-btn dsy-btn-sm dsy-btn-secondary '
         onClick={() => {
           editMutation.mutate({
             id: info.row.original.id,
@@ -48,7 +48,7 @@ export const NameField = ({
     <div className='flex items-center gap-2'>
       {info.getValue()}
       <button
-        className='daisy-btn daisy-btn-neutral daisy-btn-xs'
+        className='dsy-btn dsy-btn-neutral dsy-btn-xs'
         onClick={() => {
           setIsEditEnabled((prev) => !prev);
         }}

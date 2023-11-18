@@ -8,7 +8,7 @@ export const TagBadges = ({
   return (
     <div className='flex gap-2'>
       {tags.map(({ name }) => (
-        <span key={name} className='daisy-badge daisy-badge-outline'>
+        <span key={name} className='dsy-badge dsy-badge-outline'>
           {name}
         </span>
       ))}

@@ -38,7 +38,7 @@ export const TasksTagsField = ({
         {values.map(({ id, name }) => (
           <div
             key={name}
-            className='daisy-badge daisy-badge-outline items-center gap-1 py-3'
+            className='dsy-badge dsy-badge-outline items-center gap-1 py-3'
           >
             <span>{name}</span>
             <button
@@ -51,9 +51,9 @@ export const TasksTagsField = ({
           </div>
         ))}
       </div>
-      <div className='daisy-join'>
+      <div className='dsy-join'>
         <select
-          className='daisy-join-item daisy-select daisy-select-sm daisy-select-bordered'
+          className='dsy-join-item dsy-select dsy-select-sm dsy-select-bordered'
           value=''
           onChange={(event) => {
             field.onChange([
@@ -70,7 +70,7 @@ export const TasksTagsField = ({
           ))}
         </select>
         <button
-          className='daisy-join-item daisy-btn daisy-btn-sm daisy-btn-neutral'
+          className='dsy-join-item dsy-btn dsy-btn-sm dsy-btn-neutral'
           onClick={() => {
             setIsEditEnabled((prev) => !prev);
           }}
@@ -78,7 +78,7 @@ export const TasksTagsField = ({
           <BanIcon />
         </button>
         <button
-          className='daisy-join-item daisy-btn daisy-btn-sm daisy-btn-secondary'
+          className='dsy-join-item dsy-btn dsy-btn-sm dsy-btn-secondary'
           onClick={() => {
             editMutation.mutate({
               params: { id: info.row.original.id },
@@ -95,7 +95,7 @@ export const TasksTagsField = ({
     <div className='flex items-center gap-2'>
       <TagBadges tags={info.getValue()} />
       <button
-        className='daisy-btn daisy-btn-xs daisy-btn-neutral'
+        className='dsy-btn dsy-btn-xs dsy-btn-neutral'
         onClick={() => {
           setIsEditEnabled((prev) => !prev);
         }}
