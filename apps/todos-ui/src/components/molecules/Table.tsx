@@ -20,8 +20,8 @@ export const Table = <TData, TColumns extends ColumnDef<TData, any>[]>({
   });
 
   return (
-    <div className='overflow-x-auto'>
-      <table className='dsy-table'>
+    <div className='h-screen overflow-x-auto'>
+      <table className='dsy-table dsy-table-pin-rows md:dsy-table-md dsy-table-xs'>
         <thead>
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>

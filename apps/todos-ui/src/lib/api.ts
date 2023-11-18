@@ -77,6 +77,8 @@ export const getTodo = async (
   return response.data;
 };
 
+export type Tag = Schema['/tags']['get']['response'][200][number];
+
 export const getTags = async () => {
   const response = await fetch('/tags', { method: 'GET' });
 

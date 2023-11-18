@@ -3,7 +3,7 @@ import { BanIcon, PencilIcon, PlusIcon, SaveIcon, XIcon } from 'lucide-react';
 import { useMemo, useState } from 'react';
 
 import { useEditTaskTags } from '@/hooks/api/useEditTaskTags';
-import { useQueryTags } from '@/hooks/api/useTags';
+import { useQueryTags } from '@/hooks/api/useQueryTags';
 import { useTasksFormField } from '@/hooks/forms/useTasksForm';
 import { Task } from '@/lib/api';
 
@@ -16,7 +16,9 @@ export const TasksTableTagsCell = ({
 
   const { field } = useTasksFormField({ name: `tasks.${info.row.index}.tags` });
 
-  const { data: tags = [] } = useQueryTags();
+  const { data: tags = [] } = useQueryTags((tags) =>
+    tags.map(({ id, name }) => ({ id, name }))
+  );
 
   const editMutation = useEditTaskTags();
 

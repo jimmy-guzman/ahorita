@@ -33,7 +33,7 @@ export const Navigation = () => {
         </Link>
       </div>
       <div className='dsy-navbar-center hidden lg:flex'>
-        <ul className='dsy-menu dsy-menu-horizontal px-1'>
+        <ul className='dsy-menu dsy-menu-horizontal gap-2 px-1'>
           {routes.map(({ to, name }) => (
             <li key={to}>
               <Link to={to}>{name}</Link>
