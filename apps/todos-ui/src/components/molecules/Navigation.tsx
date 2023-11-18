@@ -25,7 +25,10 @@ export const Navigation = () => {
             ))}
           </ul>
         </div>
-        <Link to='/' className='daisy-btn daisy-btn-ghost text-xl normal-case'>
+        <Link
+          to='/'
+          className='daisy-btn daisy-btn-ghost text-primary text-xl normal-case'
+        >
           ahorita
         </Link>
       </div>

@@ -28,14 +28,6 @@ export const tasks = new Elysia()
         '',
         async ({ prisma }) => {
           const tasks = await prisma.task.findMany({
-            orderBy: [
-              {
-                updatedAt: 'desc',
-              },
-              {
-                completed: 'desc',
-              },
-            ],
             include: {
               tags: {
                 select: {

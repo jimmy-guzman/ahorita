@@ -1,5 +1,5 @@
 import { CellContext } from '@tanstack/react-table';
-import { BanIcon, PencilIcon, SaveIcon, XIcon } from 'lucide-react';
+import { BanIcon, PencilIcon, PlusIcon, SaveIcon, XIcon } from 'lucide-react';
 import { useMemo, useState } from 'react';
 
 import { useEditTaskTags } from '../../hooks/api/useEditTaskTags';
@@ -70,7 +70,7 @@ export const TasksTagsField = ({
           ))}
         </select>
         <button
-          className='daisy-join-item daisy-btn daisy-btn-sm daisy-btn-secondary'
+          className='daisy-join-item daisy-btn daisy-btn-sm daisy-btn-neutral'
           onClick={() => {
             setIsEditEnabled((prev) => !prev);
           }}
@@ -78,7 +78,7 @@ export const TasksTagsField = ({
           <BanIcon />
         </button>
         <button
-          className='daisy-join-item daisy-btn daisy-btn-sm daisy-btn-primary'
+          className='daisy-join-item daisy-btn daisy-btn-sm daisy-btn-secondary'
           onClick={() => {
             editMutation.mutate({
               params: { id: info.row.original.id },
@@ -95,11 +95,18 @@ export const TasksTagsField = ({
     <div className='flex items-center gap-2'>
       <TagBadges tags={info.getValue()} />
       <button
+        className='daisy-btn daisy-btn-xs daisy-btn-neutral'
         onClick={() => {
           setIsEditEnabled((prev) => !prev);
         }}
       >
-        <PencilIcon className='inline-block h-4 w-4' />
+        {values.length ? (
+          <PencilIcon className='h-4 w-4' />
+        ) : (
+          <>
+            Add Tags <PlusIcon className='h-4 w-4' />
+          </>
+        )}
       </button>
     </div>
   );

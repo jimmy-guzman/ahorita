@@ -24,7 +24,7 @@ export const NameField = ({
         {...register(`tasks.${info.row.index}.name`)}
       />
       <button
-        className='daisy-join-item daisy-btn daisy-btn-sm daisy-btn-secondary'
+        className='daisy-join-item daisy-btn daisy-btn-sm daisy-btn-neutral'
         onClick={() => {
           setIsEditEnabled((prev) => !prev);
         }}
@@ -32,7 +32,7 @@ export const NameField = ({
         <BanIcon />
       </button>
       <button
-        className='daisy-join-item daisy-btn daisy-btn-sm daisy-btn-primary'
+        className='daisy-join-item daisy-btn daisy-btn-sm daisy-btn-secondary '
         onClick={() => {
           editMutation.mutate({
             id: info.row.original.id,
@@ -48,11 +48,12 @@ export const NameField = ({
     <div className='flex items-center gap-2'>
       {info.getValue()}
       <button
+        className='daisy-btn daisy-btn-neutral daisy-btn-xs'
         onClick={() => {
           setIsEditEnabled((prev) => !prev);
         }}
       >
-        <PencilIcon className='inline-block h-4 w-4' />
+        <PencilIcon className='h-4 w-4' />
       </button>
     </div>
   );
