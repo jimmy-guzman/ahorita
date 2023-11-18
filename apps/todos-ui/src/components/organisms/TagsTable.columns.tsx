@@ -12,6 +12,10 @@ export const columns = [
       <span className='dsy-badge dsy-badge-outline'>{info.getValue()}</span>
     ),
   }),
+  columnHelper.accessor('description', {
+    header: 'Description',
+    cell: (info) => info.getValue(),
+  }),
   columnHelper.accessor('_count.tasks', {
     header: '# of Tasks',
     cell: (info) => info.getValue(),

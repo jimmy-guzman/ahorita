@@ -1,9 +1,12 @@
-import { prisma, Tag as DbTag } from 'db';
+import { prisma } from 'db';
 import { Elysia, t } from 'elysia';
+
+import { transformDates } from '../utils/transformDates';
 
 const TagDto = t.Object({
   id: t.String(),
   name: t.String(),
+  description: t.String(),
   createdAt: t.String(),
   updatedAt: t.String(),
   _count: t.Object({
@@ -11,39 +14,46 @@ const TagDto = t.Object({
   }),
 });
 
-const transformDates = ({
-  createdAt,
-  updatedAt,
-  ...rest
-}: DbTag & {
-  _count: {
-    tasks: number;
-  };
-}) => ({
-  createdAt: createdAt.toISOString(),
-  updatedAt: updatedAt.toISOString(),
-  ...rest,
-});
-
 export const tags = new Elysia()
   .decorate('prisma', prisma)
   .group('/tags', (app) =>
-    app.get(
-      '',
-      async ({ prisma }) => {
-        const tags = await prisma.tag.findMany({
-          include: {
-            _count: {
-              select: { tasks: true },
+    app
+      .get(
+        '',
+        async ({ prisma }) => {
+          const tags = await prisma.tag.findMany({
+            include: {
+              _count: {
+                select: { tasks: true },
+              },
             },
-          },
-        });
+          });
 
-        return tags.map(transformDates);
-      },
-      {
-        detail: { tags: ['Tags'] },
-        response: t.Array(TagDto),
-      }
-    )
+          return tags.map(transformDates);
+        },
+        {
+          detail: { tags: ['Tags'] },
+          response: t.Array(TagDto),
+        }
+      )
+      .post(
+        '',
+        async ({ prisma, body }) => {
+          const tag = await prisma.tag.create({
+            data: body,
+            include: {
+              _count: {
+                select: { tasks: true },
+              },
+            },
+          });
+
+          return transformDates(tag);
+        },
+        {
+          detail: { tags: ['Tags'] },
+          body: t.Object({ name: t.String(), description: t.String() }),
+          response: TagDto,
+        }
+      )
   );

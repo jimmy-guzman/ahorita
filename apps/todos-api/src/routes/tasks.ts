@@ -1,5 +1,7 @@
-import { prisma, Tag, Task as DbTask } from 'db';
+import { prisma } from 'db';
 import { Elysia, NotFoundError, t } from 'elysia';
+
+import { transformDates } from '../utils/transformDates';
 
 const TaskDto = t.Object({
   id: t.String(),
@@ -8,16 +10,6 @@ const TaskDto = t.Object({
   tags: t.Array(t.Object({ id: t.String(), name: t.String() })),
   createdAt: t.String(),
   updatedAt: t.String(),
-});
-
-const transformDates = ({
-  createdAt,
-  updatedAt,
-  ...rest
-}: DbTask & { tags: Pick<Tag, 'name' | 'id'>[] }) => ({
-  createdAt: createdAt.toISOString(),
-  updatedAt: updatedAt.toISOString(),
-  ...rest,
 });
 
 export const tasks = new Elysia()

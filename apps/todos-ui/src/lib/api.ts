@@ -108,3 +108,16 @@ export const patchTaskTags = async ({
 
   return response.data;
 };
+
+export const createTag = async (body: Schema['/tags']['post']['body']) => {
+  const response = await fetch('/tags', {
+    method: 'POST',
+    body,
+  });
+
+  if (response.error) {
+    throw new Error(response.error.value);
+  }
+
+  return response.data;
+};
