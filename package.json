@@ -15,19 +15,16 @@
     "deps:update": "bunx npm-check-updates -ui -ws --pre beta"
   },
   "devDependencies": {
-    "eslint": "8.48.0",
+    "eslint": "8.54.0",
     "gitzy": "4.0.0",
-    "prettier": "3.0.3",
-    "prettier-plugin-tailwindcss": "0.5.6",
+    "prettier": "3.1.0",
+    "prettier-plugin-tailwindcss": "0.5.7",
     "tsconfig": "workspace:*",
-    "turbo": "latest"
+    "turbo": "1.10.16"
   },
-  "packageManager": "bun@1.0.9",
+  "packageManager": "bun@1.0.12",
   "workspaces": [
     "apps/*",
     "libs/*"
-  ],
-  "dependencies": {
-    "@tanstack/router-devtools": "^0.0.1-alpha.0"
-  }
+  ]
 }

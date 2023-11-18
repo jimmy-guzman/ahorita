@@ -18,7 +18,7 @@
     "elysia": "0.7.21"
   },
   "devDependencies": {
-    "bun-types": "1.0.11",
+    "bun-types": "1.0.12",
     "eslint-config-ahorita": "workspace:*",
     "tsconfig": "workspace:*"
   }
