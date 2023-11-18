@@ -1,6 +1,6 @@
 {
   "name": "another-fullstack-starter",
-  "packageManager": "bun@1.0.12",
+  "packageManager": "bun@1.0.13",
   "private": true,
   "scripts": {
     "build": "turbo run build",
