@@ -1,8 +1,8 @@
 import { CellContext } from '@tanstack/react-table';
 import { CheckSquareIcon, TrashIcon } from 'lucide-react';
 
-import { useDeleteMutation } from '@/hooks/api/useDeleteMutation';
-import { useEditMutation } from '@/hooks/api/useEditMutation';
+import { useDeleteTask } from '@/hooks/api/useDeleteTask';
+import { useEditTask } from '@/hooks/api/useEditTask';
 import { Task } from '@/lib/api';
 
 export const TasksTableActions = ({
@@ -16,8 +16,8 @@ export const TasksTableActions = ({
   >;
 }) => {
   const task = info.row.original;
-  const deleteMutation = useDeleteMutation();
-  const editMutation = useEditMutation();
+  const deleteMutation = useDeleteTask();
+  const editMutation = useEditTask();
 
   return (
     <div className='dsy-join'>

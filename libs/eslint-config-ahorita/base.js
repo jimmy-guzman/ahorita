@@ -17,11 +17,15 @@ module.exports = {
     },
   },
   rules: {
+    // stylistic
     'object-shorthand': ['error', 'always'],
+    'func-style': ['error', 'expression'],
     'simple-import-sort/imports': 'error',
     'simple-import-sort/exports': 'error',
     'node-import/prefer-node-protocol': 'error',
     'import/consistent-type-specifier-style': ['error', 'prefer-top-level'],
+
+    // errors
     '@typescript-eslint/no-misused-promises': [
       'error',
       {

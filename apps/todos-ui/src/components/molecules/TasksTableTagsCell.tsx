@@ -2,13 +2,12 @@ import { CellContext } from '@tanstack/react-table';
 import { BanIcon, PencilIcon, PlusIcon, SaveIcon, XIcon } from 'lucide-react';
 import { useMemo, useState } from 'react';
 
-import { TagBadges } from '@/components/atoms/TagBadges';
 import { useEditTaskTags } from '@/hooks/api/useEditTaskTags';
 import { useQueryTags } from '@/hooks/api/useTags';
 import { useTasksFormField } from '@/hooks/forms/useTasksForm';
 import { Task } from '@/lib/api';
 
-export const TasksTagsField = ({
+export const TasksTableTagsCell = ({
   info,
 }: {
   info: CellContext<Task & { key: string }, Task['tags']>;
@@ -93,7 +92,13 @@ export const TasksTagsField = ({
     </div>
   ) : (
     <div className='flex items-center gap-2'>
-      <TagBadges tags={info.getValue()} />
+      <div className='flex gap-2'>
+        {info.getValue().map(({ name }) => (
+          <span key={name} className='dsy-badge dsy-badge-outline'>
+            {name}
+          </span>
+        ))}
+      </div>
       <button
         className='dsy-btn dsy-btn-xs dsy-btn-neutral'
         onClick={() => {

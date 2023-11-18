@@ -8,7 +8,8 @@
     "build": "vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "clean": "rimraf .turbo node_modules dist"
   },
   "dependencies": {
     "@elysiajs/eden": "0.7.4",
@@ -37,6 +38,7 @@
     "daisyui": "4.4.1",
     "eslint-config-ahorita": "workspace:*",
     "postcss": "8.4.31",
+    "rimraf": "5.0.5",
     "tailwindcss": "3.3.5",
     "todos-api": "workspace:*",
     "tsconfig": "workspace:*",

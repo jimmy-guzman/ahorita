@@ -2,18 +2,18 @@ import { CellContext } from '@tanstack/react-table';
 import { BanIcon, PencilIcon, SaveIcon } from 'lucide-react';
 import { useState } from 'react';
 
-import { useEditMutation } from '@/hooks/api/useEditMutation';
+import { useEditTask } from '@/hooks/api/useEditTask';
 import { useTasksFormContext } from '@/hooks/forms/useTasksForm';
 import { Task } from '@/lib/api';
 
-export const NameField = ({
+export const TasksTableNameCell = ({
   info,
 }: {
   info: CellContext<Task & { key: string }, string>;
 }) => {
   const [isEditEnabled, setIsEditEnabled] = useState(false);
   const { getValues, register } = useTasksFormContext();
-  const editMutation = useEditMutation();
+  const editMutation = useEditTask();
 
   return isEditEnabled ? (
     <div className='dsy-join'>

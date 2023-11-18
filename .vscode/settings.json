@@ -23,5 +23,10 @@
   "eslint.workingDirectories": [
     { "pattern": "./apps/*" },
     { "pattern": "./libs/*" }
-  ]
+  ],
+  "tailwindCSS.experimental.classRegex": [
+    ["clsx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
+  ],
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "typescript.updateImportsOnFileMove.enabled": "always"
 }

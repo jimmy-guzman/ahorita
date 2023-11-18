@@ -10,7 +10,7 @@ const schema = Type.Object({
   name: Type.String({ minLength: 1 }),
 });
 
-export const useTasksFormHooks = () => {
+export const useAddTaskFormHooks = () => {
   const queryClient = useQueryClient();
 
   const form = useForm<Static<typeof schema>>({

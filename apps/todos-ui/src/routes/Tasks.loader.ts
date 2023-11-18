@@ -1,7 +1,7 @@
 import { getTodos } from '@/lib/api';
 
-export async function loader() {
+export const loader = async () => {
   const data = await getTodos();
 
   return data;
-}
+};

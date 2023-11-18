@@ -1,9 +1,9 @@
 import { clsx } from 'clsx';
 import { ListPlusIcon } from 'lucide-react';
 
-import { useTasksFormHooks } from './TasksForm.hooks';
+import { useAddTaskFormHooks } from './AddTaskForm.hooks';
 
-export const TasksForm = () => {
+export const AddTaskForm = () => {
   const {
     mutation,
     form: {
@@ -11,7 +11,7 @@ export const TasksForm = () => {
       register,
       formState: { errors, isValid, isSubmitted },
     },
-  } = useTasksFormHooks();
+  } = useAddTaskFormHooks();
 
   return (
     <form

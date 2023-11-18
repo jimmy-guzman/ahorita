@@ -1,13 +1,13 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { patchTask } from '@/lib/api';
+import { deleteTask } from '@/lib/api';
 
-export const useEditMutation = () => {
+export const useDeleteTask = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationKey: ['UPDATE_TASK'],
-    mutationFn: patchTask,
+    mutationKey: ['DELETE_TASK'],
+    mutationFn: deleteTask,
     onMutate: async () => {
       await queryClient.cancelQueries({ queryKey: ['tasks'] });
     },

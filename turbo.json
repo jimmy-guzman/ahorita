@@ -15,6 +15,9 @@
       "cache": false,
       "persistent": true
     },
+    "clean": {
+      "cache": false
+    },
     "generate": {
       "dependsOn": ["^generate"]
     },

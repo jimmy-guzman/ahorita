@@ -1,5 +1,6 @@
 {
   "name": "another-fullstack-starter",
+  "packageManager": "bun@1.0.12",
   "private": true,
   "scripts": {
     "build": "turbo run build",
@@ -12,7 +13,8 @@
     "generate": "turbo run generate",
     "db:push": "turbo run db:push",
     "db:studio": "turbo run db:studio",
-    "deps:update": "bunx npm-check-updates -ui -ws --pre beta"
+    "deps:update": "bunx npm-check-updates -ui -ws --pre beta",
+    "clean": "turbo clean"
   },
   "devDependencies": {
     "eslint": "8.54.0",
@@ -22,7 +24,6 @@
     "tsconfig": "workspace:*",
     "turbo": "1.10.16"
   },
-  "packageManager": "bun@1.0.12",
   "workspaces": [
     "apps/*",
     "libs/*"
