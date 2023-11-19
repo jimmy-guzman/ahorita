@@ -1,9 +1,8 @@
+import type { ColumnDef, SortingState } from '@tanstack/react-table';
 import {
-  ColumnDef,
   flexRender,
   getCoreRowModel,
   getSortedRowModel,
-  SortingState,
   useReactTable,
 } from '@tanstack/react-table';
 import { ArrowDownWideNarrowIcon, ArrowUpWideNarrowIcon } from 'lucide-react';

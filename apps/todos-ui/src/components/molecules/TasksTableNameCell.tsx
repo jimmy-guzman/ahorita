@@ -1,10 +1,10 @@
-import { CellContext } from '@tanstack/react-table';
+import type { CellContext } from '@tanstack/react-table';
 import { BanIcon, PencilIcon, SaveIcon } from 'lucide-react';
 import { useState } from 'react';
 
 import { useEditTask } from '@/hooks/api/useEditTask';
 import { useTasksFormContext } from '@/hooks/forms/useTasksForm';
-import { Task } from '@/lib/api';
+import type { Task } from '@/lib/api';
 
 export const TasksTableNameCell = ({
   info,

@@ -1,9 +1,9 @@
-import { CellContext } from '@tanstack/react-table';
+import type { CellContext } from '@tanstack/react-table';
 import { CheckSquareIcon, TrashIcon } from 'lucide-react';
 
 import { useDeleteTask } from '@/hooks/api/useDeleteTask';
 import { useEditTask } from '@/hooks/api/useEditTask';
-import { Task } from '@/lib/api';
+import type { Task } from '@/lib/api';
 
 export const TasksTableActions = ({
   info,

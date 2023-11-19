@@ -1,6 +1,6 @@
-import { CellContext } from '@tanstack/react-table';
+import type { CellContext } from '@tanstack/react-table';
 
-import { Task } from '@/lib/api';
+import type { Task } from '@/lib/api';
 
 export const TasksTableCompletedCell = ({
   info,
