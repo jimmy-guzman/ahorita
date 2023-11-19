@@ -2,8 +2,12 @@ import {
   ColumnDef,
   flexRender,
   getCoreRowModel,
+  getSortedRowModel,
+  SortingState,
   useReactTable,
 } from '@tanstack/react-table';
+import { ArrowDownWideNarrowIcon, ArrowUpWideNarrowIcon } from 'lucide-react';
+import { useState } from 'react';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const Table = <TData, TColumns extends ColumnDef<TData, any>[]>({
@@ -13,10 +17,17 @@ export const Table = <TData, TColumns extends ColumnDef<TData, any>[]>({
   data: TData[];
   columns: TColumns;
 }) => {
+  const [sorting, setSorting] = useState<SortingState>([]);
+
   const table = useReactTable({
     data,
     columns,
+    state: {
+      sorting,
+    },
+    onSortingChange: setSorting,
     getCoreRowModel: getCoreRowModel(),
+    getSortedRowModel: getSortedRowModel(),
   });
 
   return (
@@ -25,16 +36,35 @@ export const Table = <TData, TColumns extends ColumnDef<TData, any>[]>({
         <thead>
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>
-              {headerGroup.headers.map((header) => (
-                <th key={header.id}>
-                  {header.isPlaceholder
-                    ? null
-                    : flexRender(
-                        header.column.columnDef.header,
-                        header.getContext()
-                      )}
-                </th>
-              ))}
+              {headerGroup.headers.map((header) => {
+                const sort = header.column.getIsSorted();
+
+                return (
+                  <th key={header.id}>
+                    {header.isPlaceholder ? null : (
+                      <div
+                        {...{
+                          className: header.column.getCanSort()
+                            ? 'cursor-pointer select-none'
+                            : '',
+                          onClick: header.column.getToggleSortingHandler(),
+                        }}
+                      >
+                        {flexRender(
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )}
+
+                        {sort === false ? null : sort === 'asc' ? (
+                          <ArrowUpWideNarrowIcon className='inline h-4 w-4' />
+                        ) : (
+                          <ArrowDownWideNarrowIcon className='inline h-4 w-4' />
+                        )}
+                      </div>
+                    )}
+                  </th>
+                );
+              })}
             </tr>
           ))}
         </thead>
