@@ -12,81 +12,81 @@ export const patchTask = async ({
   body: Schema['/tasks/:id']['patch']['body'];
   params: Schema['/tasks/:id']['patch']['params'];
 }) => {
-  const response = await fetch('/tasks/:id', {
+  const { error, data } = await fetch('/tasks/:id', {
     method: 'PATCH',
     params,
     body,
   });
 
-  if (response.error) {
-    throw new Error(response.error.value);
+  if (error) {
+    throw new Error(error.value);
   }
 
-  return response.data;
+  return data;
 };
 
 export const deleteTask = async ({
   id,
 }: Schema['/tasks/:id']['delete']['params']) => {
-  const response = await fetch('/tasks/:id', {
+  const { error, data } = await fetch('/tasks/:id', {
     method: 'DELETE',
     params: { id },
   });
 
-  if (response.error) {
-    throw new Error(response.error.value);
+  if (error) {
+    throw new Error(error.value);
   }
 
-  return response.data;
+  return data;
 };
 
 export const createTodos = async (body: Schema['/tasks']['post']['body']) => {
-  const response = await fetch('/tasks', {
+  const { error, data } = await fetch('/tasks', {
     method: 'POST',
     body,
   });
 
-  if (response.error) {
-    throw new Error(response.error.value);
+  if (error) {
+    throw new Error(error.value);
   }
 
-  return response.data;
+  return data;
 };
 
 export type Task = Schema['/tasks']['get']['response'][200][number];
 
 export const getTodos = async () => {
-  const response = await fetch('/tasks', { method: 'GET' });
+  const { error, data } = await fetch('/tasks', { method: 'GET' });
 
-  if (response.error) {
-    throw new Error(response.error.value);
+  if (error) {
+    throw new Error(error.value);
   }
 
-  return response.data;
+  return data;
 };
 
 export const getTodo = async (
   params: Schema['/tasks/:id']['get']['params']
 ) => {
-  const response = await fetch('/tasks/:id', { method: 'GET', params });
+  const { error, data } = await fetch('/tasks/:id', { method: 'GET', params });
 
-  if (response.error) {
-    throw new Error(response.error.value);
+  if (error) {
+    throw new Error(error.value);
   }
 
-  return response.data;
+  return data;
 };
 
 export type Tag = Schema['/tags']['get']['response'][200][number];
 
 export const getTags = async () => {
-  const response = await fetch('/tags', { method: 'GET' });
+  const { error, data } = await fetch('/tags', { method: 'GET' });
 
-  if (response.error) {
-    throw new Error(response.error.value);
+  if (error) {
+    throw new Error(error.value);
   }
 
-  return response.data;
+  return data;
 };
 
 export const patchTaskTags = async ({
@@ -96,28 +96,28 @@ export const patchTaskTags = async ({
   body: Schema['/tasks/:id/tags']['patch']['body'];
   params: Schema['/tasks/:id/tags']['patch']['params'];
 }) => {
-  const response = await fetch('/tasks/:id/tags', {
+  const { error, data } = await fetch('/tasks/:id/tags', {
     method: 'PATCH',
     body,
     params,
   });
 
-  if (response.error) {
-    throw new Error(response.error.value);
+  if (error) {
+    throw new Error(error.value);
   }
 
-  return response.data;
+  return data;
 };
 
 export const createTag = async (body: Schema['/tags']['post']['body']) => {
-  const response = await fetch('/tags', {
+  const { error, data } = await fetch('/tags', {
     method: 'POST',
     body,
   });
 
-  if (response.error) {
-    throw new Error(response.error.value);
+  if (error) {
+    throw new Error(error.value);
   }
 
-  return response.data;
+  return data;
 };
