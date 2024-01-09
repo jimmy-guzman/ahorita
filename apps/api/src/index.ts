@@ -7,9 +7,7 @@ import { tags } from './routes/tags';
 import { tasks } from './routes/tasks';
 
 const app = new Elysia()
-  .use(cors())
-  .use(tasks)
-  .use(tags)
+  .use(cors({ methods: ['GET', 'POST', 'PATCH', 'DELETE'] }))
   .use(
     swagger({
       path: '/docs',
@@ -26,6 +24,8 @@ const app = new Elysia()
       return { status: error.status, code, message: error.message };
     }
   })
+  .use(tasks)
+  .use(tags)
   .listen(3000, ({ hostname, port }) => {
     console.log(`🚀 Running at ${cyan(`http://${hostname}:${port}/docs`)}`);
   });

@@ -5,17 +5,17 @@
     ".": "./src/index.ts"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "clean": "rimraf .turbo node_modules dist",
     "dev": "bun run --hot src/index.ts",
     "lint": "eslint . --ext ts --report-unused-disable-directives --max-warnings 0",
-    "typecheck": "tsc --noEmit",
     "start": "bun src/index.ts",
-    "clean": "rimraf .turbo node_modules dist"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@ahorita/db": "workspace:*",
     "@elysiajs/cors": "0.8.0",
     "@elysiajs/swagger": "0.8.3",
-    "@ahorita/db": "workspace:*",
     "elysia": "0.8.8",
     "picocolors": "1.0.0"
   },
