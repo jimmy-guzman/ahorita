@@ -1,14 +1,14 @@
 import { prisma } from '@ahorita/db';
 import { Elysia, t } from 'elysia';
 
-import { transformDates } from '../utils/transformDates';
+import { DateTime } from '../types';
 
 const TagDto = t.Object({
   id: t.String(),
   name: t.String(),
   description: t.String(),
-  createdAt: t.String(),
-  updatedAt: t.String(),
+  createdAt: DateTime,
+  updatedAt: DateTime,
   _count: t.Object({
     tasks: t.Number(),
   }),
@@ -21,15 +21,13 @@ export const tags = new Elysia()
       .get(
         '',
         async () => {
-          const tags = await prisma.tag.findMany({
+          return prisma.tag.findMany({
             include: {
               _count: {
                 select: { tasks: true },
               },
             },
           });
-
-          return tags.map(transformDates);
         },
         {
           response: 'tags',
@@ -38,7 +36,7 @@ export const tags = new Elysia()
       .post(
         '',
         async ({ body }) => {
-          const tag = await prisma.tag.create({
+          return prisma.tag.create({
             data: body,
             include: {
               _count: {
@@ -46,8 +44,6 @@ export const tags = new Elysia()
               },
             },
           });
-
-          return transformDates(tag);
         },
         {
           body: t.Object({ name: t.String(), description: t.String() }),

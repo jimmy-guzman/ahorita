@@ -1,15 +1,15 @@
 import { prisma } from '@ahorita/db';
 import { Elysia, NotFoundError, t } from 'elysia';
 
-import { transformDates } from '../utils/transformDates';
+import { DateTime } from '../types';
 
 const TaskDto = t.Object({
   id: t.String(),
   name: t.String(),
   completed: t.Boolean(),
   tags: t.Array(t.Object({ id: t.String(), name: t.String() })),
-  createdAt: t.String(),
-  updatedAt: t.String(),
+  createdAt: DateTime,
+  updatedAt: DateTime,
 });
 
 export const tasks = new Elysia()
@@ -19,7 +19,7 @@ export const tasks = new Elysia()
       .get(
         '',
         async () => {
-          const tasks = await prisma.task.findMany({
+          return prisma.task.findMany({
             include: {
               tags: {
                 select: {
@@ -29,8 +29,6 @@ export const tasks = new Elysia()
               },
             },
           });
-
-          return tasks.map(transformDates);
         },
         {
           response: 'tasks',
@@ -55,7 +53,7 @@ export const tasks = new Elysia()
             throw new NotFoundError(`tasks not found`);
           }
 
-          return transformDates(todo);
+          return todo;
         },
         {
           params: t.Object({ id: t.String() }),
@@ -65,7 +63,7 @@ export const tasks = new Elysia()
       .patch(
         '/:id',
         async ({ params: { id }, body }) => {
-          const todo = await prisma.task.update({
+          return prisma.task.update({
             where: { id },
             data: body,
             include: {
@@ -77,8 +75,6 @@ export const tasks = new Elysia()
               },
             },
           });
-
-          return transformDates(todo);
         },
         {
           body: t.Partial(
@@ -94,7 +90,7 @@ export const tasks = new Elysia()
       .patch(
         '/:id/tags',
         async ({ params: { id }, body }) => {
-          const todo = await prisma.task.update({
+          return prisma.task.update({
             where: { id },
             data: {
               tags: {
@@ -110,8 +106,6 @@ export const tasks = new Elysia()
               },
             },
           });
-
-          return transformDates(todo);
         },
         {
           body: t.Array(
@@ -126,7 +120,7 @@ export const tasks = new Elysia()
       .post(
         '',
         async ({ body }) => {
-          const task = await prisma.task.create({
+          return prisma.task.create({
             data: body,
             include: {
               tags: {
@@ -137,8 +131,6 @@ export const tasks = new Elysia()
               },
             },
           });
-
-          return transformDates(task);
         },
         {
           body: t.Object({
@@ -150,7 +142,7 @@ export const tasks = new Elysia()
       .delete(
         '/:id',
         async ({ params: { id } }) => {
-          const task = await prisma.task.delete({
+          return prisma.task.delete({
             where: { id },
             include: {
               tags: {
@@ -161,8 +153,6 @@ export const tasks = new Elysia()
               },
             },
           });
-
-          return transformDates(task);
         },
         {
           params: t.Object({ id: t.String() }),
