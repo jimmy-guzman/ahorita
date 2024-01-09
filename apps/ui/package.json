@@ -1,5 +1,5 @@
 {
-  "name": "todos-ui",
+  "name": "@ahorita/ui",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -39,7 +39,7 @@
     "postcss": "8.4.33",
     "rimraf": "5.0.5",
     "tailwindcss": "3.4.1",
-    "todos-api": "workspace:*",
+    "@ahorita/api": "workspace:*",
     "tsconfig": "workspace:*",
     "typescript": "5.3.3",
     "vite": "5.0.11"

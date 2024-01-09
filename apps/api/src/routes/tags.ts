@@ -1,4 +1,4 @@
-import { prisma } from 'db';
+import { prisma } from '@ahorita/db';
 import { Elysia, t } from 'elysia';
 
 import { transformDates } from '../utils/transformDates';

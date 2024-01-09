@@ -1,5 +1,5 @@
 {
-  "name": "todos-api",
+  "name": "@ahorita/api",
   "type": "module",
   "exports": {
     ".": "./src/index.ts"
@@ -15,7 +15,7 @@
   "dependencies": {
     "@elysiajs/cors": "0.8.0",
     "@elysiajs/swagger": "0.8.3",
-    "db": "workspace:*",
+    "@ahorita/db": "workspace:*",
     "elysia": "0.8.8",
     "picocolors": "1.0.0"
   },

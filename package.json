@@ -1,5 +1,5 @@
 {
-  "name": "another-fullstack-starter",
+  "name": "ahorita",
   "packageManager": "bun@1.0.21",
   "private": true,
   "scripts": {
@@ -8,12 +8,13 @@
     "lint": "turbo run lint",
     "lint:fix": "turbo run lint -- --fix",
     "typecheck": "turbo run typecheck",
-    "format": "prettier --write \"**/*.{ts,tsx,md,js,cjs,mjs,json}\"",
+    "format": "prettier --write .",
     "validate": "turbo run lint typecheck build",
     "generate": "turbo run generate",
     "db:push": "turbo run db:push",
     "db:studio": "turbo run db:studio",
     "deps:bump": "bunx npm-check-updates -ui -ws --pre beta",
+    "deps:kill": "bunx npkill",
     "clean": "turbo clean"
   },
   "devDependencies": {

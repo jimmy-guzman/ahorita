@@ -10,6 +10,7 @@
     "headlessui",
     "hookform",
     "lucide",
+    "npkill",
     "picocolors",
     "tailwindcss",
     "tanstack",
