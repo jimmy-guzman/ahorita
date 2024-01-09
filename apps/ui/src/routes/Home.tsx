@@ -7,7 +7,7 @@ export default function Home() {
         <div className='dsy-hero-content'>
           <div className='flex flex-col gap-4'>
             <span className='text-gray-500'>
-              "Ahorita" translates to now in Spanish and it was used when we
+              "Ahorita" translates to "now" in Spanish and it was used when we
               weren't really going{' '}
               <strong className='text-accent'>to do</strong> something in my
               family.

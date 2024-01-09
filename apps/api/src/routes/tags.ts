@@ -15,12 +15,12 @@ const TagDto = t.Object({
 });
 
 export const tags = new Elysia()
-  .decorate('prisma', prisma)
-  .group('/tags', (app) =>
+  .model({ tags: t.Array(TagDto), tag: TagDto })
+  .group('/tags', { detail: { tags: ['Tags'] } }, (app) =>
     app
       .get(
         '',
-        async ({ prisma }) => {
+        async () => {
           const tags = await prisma.tag.findMany({
             include: {
               _count: {
@@ -32,13 +32,12 @@ export const tags = new Elysia()
           return tags.map(transformDates);
         },
         {
-          detail: { tags: ['Tags'] },
-          response: t.Array(TagDto),
+          response: 'tags',
         }
       )
       .post(
         '',
-        async ({ prisma, body }) => {
+        async ({ body }) => {
           const tag = await prisma.tag.create({
             data: body,
             include: {
@@ -51,9 +50,8 @@ export const tags = new Elysia()
           return transformDates(tag);
         },
         {
-          detail: { tags: ['Tags'] },
           body: t.Object({ name: t.String(), description: t.String() }),
-          response: TagDto,
+          response: 'tag',
         }
       )
   );

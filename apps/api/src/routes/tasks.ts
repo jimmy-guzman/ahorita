@@ -1,4 +1,4 @@
-import { prisma } from "@ahorita/db";
+import { prisma } from '@ahorita/db';
 import { Elysia, NotFoundError, t } from 'elysia';
 
 import { transformDates } from '../utils/transformDates';
@@ -13,12 +13,12 @@ const TaskDto = t.Object({
 });
 
 export const tasks = new Elysia()
-  .decorate('prisma', prisma)
-  .group('/tasks', (app) =>
+  .model({ tasks: t.Array(TaskDto), task: TaskDto })
+  .group('/tasks', { detail: { tags: ['Tasks'] } }, (app) =>
     app
       .get(
         '',
-        async ({ prisma }) => {
+        async () => {
           const tasks = await prisma.task.findMany({
             include: {
               tags: {
@@ -33,13 +33,12 @@ export const tasks = new Elysia()
           return tasks.map(transformDates);
         },
         {
-          detail: { tags: ['Tasks'] },
-          response: t.Array(TaskDto),
+          response: 'tasks',
         }
       )
       .get(
         '/:id',
-        async ({ params: { id }, prisma }) => {
+        async ({ params: { id } }) => {
           const todo = await prisma.task.findUnique({
             where: { id },
             include: {
@@ -59,14 +58,13 @@ export const tasks = new Elysia()
           return transformDates(todo);
         },
         {
-          detail: { tags: ['Tasks'] },
           params: t.Object({ id: t.String() }),
-          response: TaskDto,
+          response: 'task',
         }
       )
       .patch(
         '/:id',
-        async ({ params: { id }, body, prisma }) => {
+        async ({ params: { id }, body }) => {
           const todo = await prisma.task.update({
             where: { id },
             data: body,
@@ -83,7 +81,6 @@ export const tasks = new Elysia()
           return transformDates(todo);
         },
         {
-          detail: { tags: ['Tasks'] },
           body: t.Partial(
             t.Object({
               name: t.String(),
@@ -91,12 +88,12 @@ export const tasks = new Elysia()
             })
           ),
           params: t.Object({ id: t.String() }),
-          response: TaskDto,
+          response: 'task',
         }
       )
       .patch(
         '/:id/tags',
-        async ({ params: { id }, body, prisma }) => {
+        async ({ params: { id }, body }) => {
           const todo = await prisma.task.update({
             where: { id },
             data: {
@@ -117,19 +114,18 @@ export const tasks = new Elysia()
           return transformDates(todo);
         },
         {
-          detail: { tags: ['Tasks'] },
           body: t.Array(
             t.Object({
               id: t.String(),
             })
           ),
           params: t.Object({ id: t.String() }),
-          response: TaskDto,
+          response: 'task',
         }
       )
       .post(
         '',
-        async ({ body, prisma }) => {
+        async ({ body }) => {
           const task = await prisma.task.create({
             data: body,
             include: {
@@ -145,11 +141,10 @@ export const tasks = new Elysia()
           return transformDates(task);
         },
         {
-          detail: { tags: ['Tasks'] },
           body: t.Object({
             name: t.String(),
           }),
-          response: TaskDto,
+          response: 'task',
         }
       )
       .delete(
@@ -170,9 +165,8 @@ export const tasks = new Elysia()
           return transformDates(task);
         },
         {
-          detail: { tags: ['Tasks'] },
           params: t.Object({ id: t.String() }),
-          response: TaskDto,
+          response: 'task',
         }
       )
   );
