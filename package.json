@@ -1,6 +1,6 @@
 {
   "name": "another-fullstack-starter",
-  "packageManager": "bun@1.0.13",
+  "packageManager": "bun@1.0.21",
   "private": true,
   "scripts": {
     "build": "turbo run build",
@@ -21,7 +21,6 @@
     "gitzy": "4.0.0",
     "prettier": "3.1.0",
     "prettier-plugin-tailwindcss": "0.5.7",
-    "tsconfig": "workspace:*",
     "turbo": "1.10.16"
   },
   "workspaces": [
