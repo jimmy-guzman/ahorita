@@ -12,7 +12,7 @@
     "clean": "rimraf .turbo node_modules dist"
   },
   "dependencies": {
-    "@elysiajs/eden": "0.7.4",
+    "@elysiajs/eden": "0.8.1",
     "@headlessui/react": "1.7.17",
     "@hookform/resolvers": "3.3.2",
     "@sinclair/typebox": "0.31.26",
@@ -34,7 +34,6 @@
     "@types/react-dom": "18.2.15",
     "@vitejs/plugin-react-swc": "3.5.0",
     "autoprefixer": "10.4.16",
-    "bun-types": "1.0.13",
     "daisyui": "4.4.2",
     "eslint-config-ahorita": "workspace:*",
     "postcss": "8.4.31",
