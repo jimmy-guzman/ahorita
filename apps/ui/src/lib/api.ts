@@ -1,7 +1,7 @@
 import type { App } from '@ahorita/api';
 import { edenFetch } from '@elysiajs/eden';
 
-const fetch = edenFetch<App>('http://localhost:3000');
+const fetch = edenFetch<App>(import.meta.env.VITE_AHORITA_API_ORIGIN);
 
 type Schema = App['schema'];
 

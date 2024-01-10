@@ -1,5 +1,5 @@
 import { Link } from '@tanstack/react-router';
-import { MenuIcon } from 'lucide-react';
+import { MenuIcon, ExternalLinkIcon } from 'lucide-react';
 
 const routes = [
   { to: '/tasks' as const, name: 'Tasks' },
@@ -41,7 +41,15 @@ export const Navigation = () => {
           <Links />
         </ul>
       </div>
-      <div className='dsy-navbar-end' />
+      <div className='dsy-navbar-end'>
+        <a
+          className='dsy-btn dsy-btn-link'
+          href={`${import.meta.env.VITE_AHORITA_API_ORIGIN}/docs`}
+          target='__blank'
+        >
+          API Docs <ExternalLinkIcon className='h-6 w-6' />
+        </a>
+      </div>
     </div>
   );
 };

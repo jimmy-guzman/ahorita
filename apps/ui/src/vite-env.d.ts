@@ -1,7 +1,7 @@
 /// <reference types="vite/client" />
 
 interface ImportMetaEnv {
-  readonly VITE_TASKS_API_HOST: string;
+  readonly VITE_AHORITA_API_ORIGIN: string;
 }
 
 interface ImportMeta {
