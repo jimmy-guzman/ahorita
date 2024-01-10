@@ -1,13 +1,14 @@
+import { useSuspenseQuery } from '@tanstack/react-query';
 import { FormProvider, useFieldArray } from 'react-hook-form';
 
 import { Table } from '@/components/molecules/Table';
-import { useQueryTasks } from '@/hooks/api/useQueryTasks';
+import { tasksQueryOptions } from '@/hooks/api/useQueryTasks';
 import { useTasksForm } from '@/hooks/forms/useTasksForm';
 
 import { columns } from './TaskTable.columns';
 
 export const TasksTable = () => {
-  const { data: tasks } = useQueryTasks();
+  const { data: tasks } = useSuspenseQuery(tasksQueryOptions);
   const form = useTasksForm(tasks);
   const { fields } = useFieldArray({
     control: form.control,
@@ -17,7 +18,7 @@ export const TasksTable = () => {
 
   return (
     <FormProvider {...form}>
-      {tasks && <Table data={fields} columns={columns} />}
+      <Table data={fields} columns={columns} />
     </FormProvider>
   );
 };

@@ -3,17 +3,12 @@ import { CheckSquareIcon, TrashIcon } from 'lucide-react';
 
 import { useDeleteTask } from '@/hooks/api/useDeleteTask';
 import { useEditTask } from '@/hooks/api/useEditTask';
-import type { Task } from '@/lib/api';
+import type { TaskWithId } from '@/hooks/forms/useTasksForm';
 
 export const TasksTableActions = ({
   info,
 }: {
-  info: CellContext<
-    Task & {
-      key: string;
-    },
-    unknown
-  >;
+  info: CellContext<TaskWithId, unknown>;
 }) => {
   const task = info.row.original;
   const deleteMutation = useDeleteTask();

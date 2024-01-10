@@ -3,13 +3,13 @@ import { BanIcon, PencilIcon, SaveIcon } from 'lucide-react';
 import { useState } from 'react';
 
 import { useEditTask } from '@/hooks/api/useEditTask';
+import type { TaskWithId } from '@/hooks/forms/useTasksForm';
 import { useTasksFormContext } from '@/hooks/forms/useTasksForm';
-import type { Task } from '@/lib/api';
 
 export const TasksTableNameCell = ({
   info,
 }: {
-  info: CellContext<Task & { key: string }, string>;
+  info: CellContext<TaskWithId, string>;
 }) => {
   const [isEditEnabled, setIsEditEnabled] = useState(false);
   const { getValues, register } = useTasksFormContext();

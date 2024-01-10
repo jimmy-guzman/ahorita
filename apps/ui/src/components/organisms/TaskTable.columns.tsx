@@ -4,10 +4,10 @@ import { TasksTableActions } from '@/components/molecules/TasksTableActions';
 import { TasksTableCompletedCell } from '@/components/molecules/TasksTableCompletedCell';
 import { TasksTableNameCell } from '@/components/molecules/TasksTableNameCell';
 import { TasksTableTagsCell } from '@/components/molecules/TasksTableTagsCell';
-import type { Task } from '@/lib/api';
+import type { TaskWithId } from '@/hooks/forms/useTasksForm';
 import { formatDate } from '@/lib/formatters';
 
-const columnHelper = createColumnHelper<Task & { key: string }>();
+const columnHelper = createColumnHelper<TaskWithId>();
 
 export const columns = [
   columnHelper.accessor('name', {

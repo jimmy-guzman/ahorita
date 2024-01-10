@@ -1,11 +1,11 @@
 import type { CellContext } from '@tanstack/react-table';
 
-import type { Task } from '@/lib/api';
+import type { TaskWithId } from '@/hooks/forms/useTasksForm';
 
 export const TasksTableCompletedCell = ({
   info,
 }: {
-  info: CellContext<Task & { key: string }, boolean>;
+  info: CellContext<TaskWithId, boolean>;
 }) => {
   return info.getValue() ? (
     <span className='dsy-badge dsy-badge-success'>yes</span>

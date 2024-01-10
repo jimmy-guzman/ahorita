@@ -1,24 +1,26 @@
+import { useQuery } from '@tanstack/react-query';
 import type { CellContext } from '@tanstack/react-table';
 import { BanIcon, PencilIcon, PlusIcon, SaveIcon, XIcon } from 'lucide-react';
 import { useMemo, useState } from 'react';
 
 import { useEditTaskTags } from '@/hooks/api/useEditTaskTags';
-import { useQueryTags } from '@/hooks/api/useQueryTags';
+import { tagsQueryOptions } from '@/hooks/api/useQueryTags';
+import type { TaskWithId } from '@/hooks/forms/useTasksForm';
 import { useTasksFormField } from '@/hooks/forms/useTasksForm';
-import type { Task } from '@/lib/api';
 
 export const TasksTableTagsCell = ({
   info,
 }: {
-  info: CellContext<Task & { key: string }, Task['tags']>;
+  info: CellContext<TaskWithId, TaskWithId['tags']>;
 }) => {
   const [isEditEnabled, setIsEditEnabled] = useState(false);
 
   const { field } = useTasksFormField({ name: `tasks.${info.row.index}.tags` });
 
-  const { data: tags = [] } = useQueryTags((tags) =>
-    tags.map(({ id, name }) => ({ id, name }))
-  );
+  const { data: tags = [] } = useQuery({
+    ...tagsQueryOptions,
+    select: (tags) => tags.map(({ id, name }) => ({ id, name })),
+  });
 
   const editMutation = useEditTaskTags();
 

@@ -53,9 +53,7 @@ export const createTodos = async (body: Schema['/tasks']['post']['body']) => {
   return data;
 };
 
-export type Task = Schema['/tasks']['get']['response'][200][number];
-
-export const getTodos = async () => {
+export const getTasks = async () => {
   const { error, data } = await fetch('/tasks', { method: 'GET' });
 
   if (error) {

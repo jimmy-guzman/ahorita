@@ -34,6 +34,8 @@ const queryClient = new QueryClient({
 
 const router = new Router({
   routeTree,
+  defaultPreloadStaleTime: 0,
+  defaultPreload: 'intent',
   context: {
     queryClient,
   },

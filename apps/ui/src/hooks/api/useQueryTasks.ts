@@ -1,7 +1,8 @@
-import { useQuery } from '@tanstack/react-query';
+import { queryOptions } from '@tanstack/react-query';
 
-import { getTodos } from '@/lib/api';
+import { getTasks } from '@/lib/api';
 
-export const useQueryTasks = () => {
-  return useQuery({ queryKey: ['tasks'], queryFn: getTodos } as const);
-};
+export const tasksQueryOptions = queryOptions({
+  queryKey: ['tasks'] as const,
+  queryFn: () => getTasks(),
+});
