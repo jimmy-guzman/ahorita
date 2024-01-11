@@ -31,7 +31,7 @@ export const TasksTableActions = ({
         <TrashIcon
           className='align-baseline'
           onClick={() => {
-            deleteMutation.mutate(task);
+            deleteMutation.mutate({ params: task });
           }}
         />
       </button>

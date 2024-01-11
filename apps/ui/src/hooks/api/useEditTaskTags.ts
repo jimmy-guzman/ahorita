@@ -1,18 +1,19 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { patchTaskTags } from '@/lib/api';
+import { patchTaskTags } from '@/api/tasks';
+
+import { tasksQueryOptions } from './useQueryTasks';
 
 export const useEditTaskTags = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationKey: ['EDIT_TASK_TAGS'],
     mutationFn: patchTaskTags,
     onMutate: async () => {
-      await queryClient.cancelQueries({ queryKey: ['tasks'] });
+      await queryClient.cancelQueries(tasksQueryOptions);
     },
     onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: ['tasks'] });
+      await queryClient.invalidateQueries(tasksQueryOptions);
     },
   });
 };

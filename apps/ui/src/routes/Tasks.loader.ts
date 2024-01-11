@@ -1,4 +1,4 @@
-import { getTasks } from '@/lib/api';
+import { getTasks } from '@/api/tasks';
 
 export const loader = async () => {
   const data = await getTasks();

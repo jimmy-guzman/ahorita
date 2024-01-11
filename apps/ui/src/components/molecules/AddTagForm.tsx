@@ -1,23 +1,31 @@
 import { clsx } from 'clsx';
 import { ListPlusIcon } from 'lucide-react';
 
-import { useAddTagFormHooks } from './AddTagForm.hooks';
+import { useAddTag } from '@/hooks/api/useAddTag';
+import { useAddTagForm } from '@/hooks/forms/useAddTagForm';
 
 export const AddTagForm = () => {
+  const { mutate, isPending } = useAddTag();
+
   const {
-    mutation,
-    form: {
-      handleSubmit,
-      register,
-      formState: { errors, isValid, isSubmitted },
-    },
-  } = useAddTagFormHooks();
+    handleSubmit,
+    register,
+    reset,
+    formState: { errors },
+  } = useAddTagForm();
 
   return (
     <form
       className='flex gap-2'
-      onSubmit={handleSubmit((values) => {
-        mutation.mutate(values);
+      onSubmit={handleSubmit((body) => {
+        mutate(
+          { body },
+          {
+            onSuccess: () => {
+              reset();
+            },
+          }
+        );
       })}
     >
       <div className='dsy-form-control flex-none'>
@@ -52,11 +60,7 @@ export const AddTagForm = () => {
           <p className='invisible'>&nbsp;</p>
         )}
       </div>
-      <button
-        className={clsx('dsy-btn dsy-btn-primary', {
-          'dsy-btn-error': mutation.isError || (!isValid && isSubmitted),
-        })}
-      >
+      <button className={'dsy-btn dsy-btn-primary'} disabled={isPending}>
         Add Tag <ListPlusIcon />
       </button>
     </form>

@@ -1,23 +1,31 @@
 import { clsx } from 'clsx';
 import { ListPlusIcon } from 'lucide-react';
 
-import { useAddTaskFormHooks } from './AddTaskForm.hooks';
+import { useAddTask } from '@/hooks/api/useAddTask';
+import { useAddTaskForm } from '@/hooks/forms/useAddTaskForm';
 
 export const AddTaskForm = () => {
   const {
-    mutation,
-    form: {
-      handleSubmit,
-      register,
-      formState: { errors, isValid, isSubmitted },
-    },
-  } = useAddTaskFormHooks();
+    handleSubmit,
+    register,
+    reset,
+    formState: { errors },
+  } = useAddTaskForm();
+
+  const { mutate, isPending } = useAddTask();
 
   return (
     <form
       className='flex gap-2'
-      onSubmit={handleSubmit((values) => {
-        mutation.mutate(values);
+      onSubmit={handleSubmit((body) => {
+        mutate(
+          { body },
+          {
+            onSuccess: () => {
+              reset();
+            },
+          }
+        );
       })}
     >
       <div className='dsy-form-control w-full'>
@@ -36,11 +44,7 @@ export const AddTaskForm = () => {
           <p className='invisible'>&nbsp;</p>
         )}
       </div>
-      <button
-        className={clsx('dsy-btn dsy-btn-primary', {
-          'dsy-btn-error': mutation.isError || (!isValid && isSubmitted),
-        })}
-      >
+      <button className={'dsy-btn dsy-btn-primary'} disabled={isPending}>
         Add Task <ListPlusIcon />
       </button>
     </form>

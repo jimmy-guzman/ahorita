@@ -1,6 +1,6 @@
 import { createColumnHelper } from '@tanstack/react-table';
 
-import type { Tag } from '@/lib/api';
+import type { Tag } from '@/api/tags';
 import { formatDate } from '@/lib/formatters';
 
 const columnHelper = createColumnHelper<Tag>();

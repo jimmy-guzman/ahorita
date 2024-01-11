@@ -1,14 +1,13 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { patchTask } from '@/api/tasks';
+import { createTasks } from '@/api/tasks';
+import { tasksQueryOptions } from '@/hooks/api/useQueryTasks';
 
-import { tasksQueryOptions } from './useQueryTasks';
-
-export const useEditTask = () => {
+export const useAddTask = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: patchTask,
+    mutationFn: createTasks,
     onMutate: async () => {
       await queryClient.cancelQueries(tasksQueryOptions);
     },
