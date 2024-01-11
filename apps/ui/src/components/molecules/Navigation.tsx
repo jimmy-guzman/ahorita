@@ -1,5 +1,5 @@
 import { Link } from '@tanstack/react-router';
-import { ExternalLinkIcon,MenuIcon } from 'lucide-react';
+import { ExternalLinkIcon, MenuIcon } from 'lucide-react';
 
 const routes = [
   { to: '/tasks' as const, name: 'Tasks' },
