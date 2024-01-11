@@ -5,7 +5,7 @@ import { TasksTableCompletedCell } from '@/components/molecules/TasksTableComple
 import { TasksTableNameCell } from '@/components/molecules/TasksTableNameCell';
 import { TasksTableTagsCell } from '@/components/molecules/TasksTableTagsCell';
 import type { TaskWithId } from '@/hooks/forms/useTasksForm';
-import { formatDate } from '@/lib/formatters';
+import { formatDate } from '@/utils/formatters';
 
 const columnHelper = createColumnHelper<TaskWithId>();
 

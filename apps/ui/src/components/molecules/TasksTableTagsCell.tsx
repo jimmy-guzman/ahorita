@@ -20,6 +20,7 @@ export const TasksTableTagsCell = ({
   const { data: tags = [] } = useQuery({
     ...tagsQueryOptions,
     select: (tags) => tags.map(({ id, name }) => ({ id, name })),
+    enabled: isEditEnabled,
   });
 
   const editMutation = useEditTaskTags();

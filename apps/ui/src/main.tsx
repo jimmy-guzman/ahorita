@@ -12,12 +12,10 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { toast } from 'react-hot-toast';
 
-import { route as homeRoute } from './routes/Home.route';
-import { rootRoute } from './routes/Root.route';
-import { route as tagsRoute } from './routes/Tags.route';
-import { tasksRoute as tasksRoute } from './routes/Tasks.route';
-
-const routeTree = rootRoute.addChildren([homeRoute, tasksRoute, tagsRoute]);
+import { homeRoute } from './routes/homeRoute';
+import { rootRoute } from './routes/rootRoute';
+import { tagsRoute } from './routes/tagsRoute';
+import { tasksRoute } from './routes/tasksRoute';
 
 const queryCache = new QueryCache({
   onError: (error) => toast.error(`Something went wrong: ${error.message}`),
@@ -31,6 +29,8 @@ const queryClient = new QueryClient({
   queryCache,
   mutationCache,
 });
+
+const routeTree = rootRoute.addChildren([homeRoute, tasksRoute, tagsRoute]);
 
 const router = new Router({
   routeTree,

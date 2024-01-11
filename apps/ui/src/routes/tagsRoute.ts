@@ -2,12 +2,12 @@ import { lazyRouteComponent, Route } from '@tanstack/react-router';
 
 import { tagsQueryOptions } from '@/hooks/api/useQueryTags';
 
-import { rootRoute } from './Root.route';
+import { rootRoute } from './rootRoute';
 
-export const route = new Route({
+export const tagsRoute = new Route({
   getParentRoute: () => rootRoute,
   path: '/tags',
-  component: lazyRouteComponent(() => import('./Tags')),
+  component: lazyRouteComponent(() => import('@/pages/Tags')),
   loader: async ({ context: { queryClient } }) => {
     await queryClient.ensureQueryData(tagsQueryOptions);
   },
