@@ -7,10 +7,8 @@ const schema = Type.Object({
   name: Type.String({ minLength: 1 }),
 });
 
-export type AddTaskFormValues = Static<typeof schema>;
-
 export const useAddTaskForm = () => {
-  return useForm<AddTaskFormValues>({
+  return useForm<Static<typeof schema>>({
     resolver: typeboxResolver(schema),
     defaultValues: {
       name: '',

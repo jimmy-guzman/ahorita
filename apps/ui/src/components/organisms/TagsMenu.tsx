@@ -4,7 +4,7 @@ import { PlusCircleIcon } from 'lucide-react';
 
 import { tagsQueryOptions } from '@/hooks/api/useQueryTags';
 
-export const TagsTable = () => {
+export const TagsMenu = () => {
   const { data: tags } = useSuspenseQuery(tagsQueryOptions);
 
   return (

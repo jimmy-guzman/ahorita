@@ -1,19 +1,8 @@
 import { prisma } from '@ahorita/db';
 import { Elysia, t } from 'elysia';
 
+import { TagDto } from '../models/tags';
 import { TaskDto } from '../models/tasks';
-import { DateTime } from '../types';
-
-const TagDto = t.Object({
-  id: t.String(),
-  name: t.String(),
-  description: t.String(),
-  createdAt: DateTime,
-  updatedAt: DateTime,
-  _count: t.Object({
-    tasks: t.Number(),
-  }),
-});
 
 export const tags = new Elysia()
   .model({ tags: t.Array(TagDto), tag: TagDto, tasks: t.Array(TaskDto) })
@@ -88,7 +77,7 @@ export const tags = new Elysia()
         async ({ params: { id } }) => {
           const { tasks } = await prisma.tag.findUniqueOrThrow({
             where: { id },
-            include: { tasks: { include: { tags: true } } },
+            include: { tasks: true },
           });
 
           return tasks;
@@ -104,19 +93,7 @@ export const tags = new Elysia()
           return prisma.task.create({
             data: {
               ...body,
-              tags: {
-                connect: {
-                  id,
-                },
-              },
-            },
-            include: {
-              tags: {
-                select: {
-                  id: true,
-                  name: true,
-                },
-              },
+              tags: { connect: { id } },
             },
           });
         },

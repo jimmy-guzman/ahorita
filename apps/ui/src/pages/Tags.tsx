@@ -1,7 +1,7 @@
 import { Link, Outlet } from '@tanstack/react-router';
 import { ExternalLinkIcon } from 'lucide-react';
 
-import { TagsTable } from '@/components/organisms/TagsTable';
+import { TagsMenu } from '@/components/organisms/TagsMenu';
 
 export default function Tags() {
   return (
@@ -64,7 +64,7 @@ export default function Tags() {
           >
             ahorita
           </Link>
-          <TagsTable />
+          <TagsMenu />
         </aside>
       </div>
     </div>

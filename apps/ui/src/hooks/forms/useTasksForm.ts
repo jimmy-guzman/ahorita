@@ -2,15 +2,12 @@ import { typeboxResolver } from '@hookform/resolvers/typebox';
 import type { Static } from '@sinclair/typebox';
 import { Type } from '@sinclair/typebox';
 import type { FieldArrayWithId } from 'react-hook-form';
-import { useController, useForm, useFormContext } from 'react-hook-form';
+import { useForm, useFormContext } from 'react-hook-form';
 
 const schema = Type.Object({
   tasks: Type.Array(
     Type.Object({
       name: Type.String({ minLength: 1 }),
-      tags: Type.Array(
-        Type.Object({ id: Type.String(), name: Type.String({ minLength: 1 }) })
-      ),
       createdAt: Type.Date(),
       updatedAt: Type.Date(),
       completed: Type.Boolean(),
@@ -31,5 +28,3 @@ export const useTasksForm = (tasks: FormValues['tasks'] = []) => {
     values: { tasks },
   });
 };
-
-export const useTasksFormField = useController<FormValues>;

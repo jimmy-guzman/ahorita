@@ -11,8 +11,6 @@ export const getTags = async () => {
   return data;
 };
 
-export type Tag = Awaited<ReturnType<typeof getTags>>[number];
-
 export const createTag = async ({
   body,
 }: Pick<Schema['/tags']['post'], 'body'>) => {

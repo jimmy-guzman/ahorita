@@ -9,10 +9,6 @@ export const TasksTable = ({
   tasks,
 }: {
   tasks: {
-    tags: {
-      id: string;
-      name: string;
-    }[];
     id: string;
     name: string;
     completed: boolean;

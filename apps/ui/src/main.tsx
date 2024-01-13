@@ -21,7 +21,6 @@ import {
   tagsRoute,
   tasksByTagRoute,
 } from './routes/tagsRoute';
-import { tasksRoute } from './routes/tasksRoute';
 
 const queryCache = new QueryCache({
   onError: (error) => toast.error(`Something went wrong: ${error.message}`),
@@ -38,7 +37,6 @@ const queryClient = new QueryClient({
 
 const routeTree = rootRoute.addChildren([
   homeRoute,
-  tasksRoute,
   tagsRoute.addChildren([
     tagRoute.addChildren([tasksByTagRoute, addTaskByTagRoute]),
     addTagRoute,
