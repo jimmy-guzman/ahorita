@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { deleteTask } from '@/api/tasks';
 
-import { tasksQueryOptions } from './useQueryTasks';
+import { tagsQueryOptions } from './useQueryTags';
 
 export const useDeleteTask = () => {
   const queryClient = useQueryClient();
@@ -10,10 +10,10 @@ export const useDeleteTask = () => {
   return useMutation({
     mutationFn: deleteTask,
     onMutate: async () => {
-      await queryClient.cancelQueries(tasksQueryOptions);
+      await queryClient.cancelQueries(tagsQueryOptions);
     },
     onSuccess: async () => {
-      await queryClient.invalidateQueries(tasksQueryOptions);
+      await queryClient.invalidateQueries(tagsQueryOptions);
     },
   });
 };

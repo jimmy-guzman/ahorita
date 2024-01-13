@@ -3,7 +3,6 @@ import { createColumnHelper } from '@tanstack/react-table';
 import { TasksTableActions } from '@/components/molecules/TasksTableActions';
 import { TasksTableCompletedCell } from '@/components/molecules/TasksTableCompletedCell';
 import { TasksTableNameCell } from '@/components/molecules/TasksTableNameCell';
-import { TasksTableTagsCell } from '@/components/molecules/TasksTableTagsCell';
 import type { TaskWithId } from '@/hooks/forms/useTasksForm';
 import { formatDate } from '@/utils/formatters';
 
@@ -17,10 +16,6 @@ export const columns = [
   columnHelper.accessor('completed', {
     header: 'Completed',
     cell: (info) => <TasksTableCompletedCell info={info} />,
-  }),
-  columnHelper.accessor('tags', {
-    header: 'Tags',
-    cell: (info) => <TasksTableTagsCell info={info} />,
   }),
   columnHelper.accessor('createdAt', {
     header: 'Created At',

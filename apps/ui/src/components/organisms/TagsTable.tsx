@@ -1,12 +1,31 @@
 import { useSuspenseQuery } from '@tanstack/react-query';
+import { Link } from '@tanstack/react-router';
+import { PlusCircleIcon } from 'lucide-react';
 
-import { Table } from '@/components/molecules/Table';
 import { tagsQueryOptions } from '@/hooks/api/useQueryTags';
 
-import { columns } from './TagsTable.columns';
-
 export const TagsTable = () => {
-  const { data } = useSuspenseQuery(tagsQueryOptions);
+  const { data: tags } = useSuspenseQuery(tagsQueryOptions);
 
-  return <Table data={data} columns={columns} />;
+  return (
+    <ul className='dsy-menu bg-base-100 h-dvh w-56'>
+      <h2 className='dsy-menu-title uppercase'>Tags</h2>
+      <li>
+        <Link to='/tags/add' activeProps={{ className: 'dsy-active' }}>
+          Add New <PlusCircleIcon className='h-5 w-5' />
+        </Link>
+      </li>
+      {tags.map(({ id: tagId, name }) => (
+        <li key={tagId}>
+          <Link
+            to='/tags/$tagId'
+            params={{ tagId }}
+            activeProps={{ className: 'dsy-active' }}
+          >
+            {name}
+          </Link>
+        </li>
+      ))}
+    </ul>
+  );
 };

@@ -43,7 +43,7 @@ export const Navigation = () => {
       </div>
       <div className='dsy-navbar-end'>
         <a
-          className='dsy-btn dsy-btn-link'
+          className='dsy-btn '
           href={`${import.meta.env.VITE_AHORITA_API_ORIGIN}/docs`}
           target='__blank'
         >

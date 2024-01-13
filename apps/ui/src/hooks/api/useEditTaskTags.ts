@@ -10,10 +10,10 @@ export const useEditTaskTags = () => {
   return useMutation({
     mutationFn: patchTaskTags,
     onMutate: async () => {
-      await queryClient.cancelQueries(tasksQueryOptions);
+      await queryClient.cancelQueries(tasksQueryOptions());
     },
     onSuccess: async () => {
-      await queryClient.invalidateQueries(tasksQueryOptions);
+      await queryClient.invalidateQueries(tasksQueryOptions());
     },
   });
 };

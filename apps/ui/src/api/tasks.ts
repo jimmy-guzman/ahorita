@@ -49,7 +49,9 @@ export const createTasks = async ({
 };
 
 export const getTasks = async () => {
-  const { error, data } = await ahoritaFetch('/tasks', { method: 'GET' });
+  const { error, data } = await ahoritaFetch('/tasks', {
+    method: 'GET',
+  });
 
   if (error) {
     throw new Error(error.value);

@@ -14,7 +14,13 @@ import { toast } from 'react-hot-toast';
 
 import { homeRoute } from './routes/homeRoute';
 import { rootRoute } from './routes/rootRoute';
-import { tagsRoute } from './routes/tagsRoute';
+import {
+  addTagRoute,
+  addTaskByTagRoute,
+  tagRoute,
+  tagsRoute,
+  tasksByTagRoute,
+} from './routes/tagsRoute';
 import { tasksRoute } from './routes/tasksRoute';
 
 const queryCache = new QueryCache({
@@ -30,7 +36,14 @@ const queryClient = new QueryClient({
   mutationCache,
 });
 
-const routeTree = rootRoute.addChildren([homeRoute, tasksRoute, tagsRoute]);
+const routeTree = rootRoute.addChildren([
+  homeRoute,
+  tasksRoute,
+  tagsRoute.addChildren([
+    tagRoute.addChildren([tasksByTagRoute, addTaskByTagRoute]),
+    addTagRoute,
+  ]),
+]);
 
 const router = new Router({
   routeTree,

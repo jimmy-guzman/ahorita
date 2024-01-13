@@ -4,7 +4,7 @@ import { ListPlusIcon } from 'lucide-react';
 import { useAddTag } from '@/hooks/api/useAddTag';
 import { useAddTagForm } from '@/hooks/forms/useAddTagForm';
 
-export const AddTagForm = () => {
+export const CreateTagForm = () => {
   const { mutate, isPending } = useAddTag();
 
   const {
@@ -16,7 +16,7 @@ export const AddTagForm = () => {
 
   return (
     <form
-      className='flex gap-2'
+      className='flex flex-col gap-2'
       onSubmit={handleSubmit((body) => {
         mutate(
           { body },
@@ -28,13 +28,13 @@ export const AddTagForm = () => {
         );
       })}
     >
-      <div className='dsy-form-control flex-none'>
+      <div className='dsy-form-control'>
         <input
           type='text'
           placeholder="Your tag's name?"
           className={clsx(
             'dsy-input dsy-input-bordered w-full',
-            errors.name?.message ? 'dsy-input-error' : 'dsy-input-primary'
+            errors.name?.message ? 'dsy-input-error' : ''
           )}
           {...register('name')}
         />
@@ -44,13 +44,13 @@ export const AddTagForm = () => {
           <p className='invisible'>&nbsp;</p>
         )}
       </div>
-      <div className='dsy-form-control grow'>
+      <div className='dsy-form-control'>
         <input
           type='text'
           placeholder="Your tag's description?"
           className={clsx(
             'dsy-input dsy-input-bordered w-full',
-            errors.name?.message ? 'dsy-input-error' : 'dsy-input-primary'
+            errors.name?.message ? 'dsy-input-error' : ''
           )}
           {...register('description')}
         />
@@ -60,9 +60,11 @@ export const AddTagForm = () => {
           <p className='invisible'>&nbsp;</p>
         )}
       </div>
-      <button className={'dsy-btn dsy-btn-primary'} disabled={isPending}>
-        Add Tag <ListPlusIcon />
-      </button>
+      <div className='flex justify-end'>
+        <button className={'dsy-btn dsy-btn-primary'} disabled={isPending}>
+          Add Tag <ListPlusIcon />
+        </button>
+      </div>
     </form>
   );
 };

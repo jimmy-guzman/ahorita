@@ -1,18 +1,20 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { patchTask } from '@/api/tasks';
+import { deleteTag } from '@/api/tags';
 
 import { tagsQueryOptions } from './useQueryTags';
+import { tagQueryOptions } from './useTag';
 
-export const useEditTask = () => {
+export const useDeleteTag = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: patchTask,
+    mutationFn: deleteTag,
     onMutate: async () => {
       await queryClient.cancelQueries(tagsQueryOptions);
     },
-    onSuccess: async () => {
+    onSuccess: async (_response, { params: { id } }) => {
+      queryClient.removeQueries(tagQueryOptions(id));
       await queryClient.invalidateQueries(tagsQueryOptions);
     },
   });

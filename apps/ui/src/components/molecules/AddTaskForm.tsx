@@ -1,10 +1,12 @@
 import { clsx } from 'clsx';
 import { ListPlusIcon } from 'lucide-react';
 
-import { useAddTask } from '@/hooks/api/useAddTask';
+import { useAddTaskByTagId } from '@/hooks/api/useAddTask';
 import { useAddTaskForm } from '@/hooks/forms/useAddTaskForm';
+import { addTaskByTagRoute } from '@/routes/tagsRoute';
 
 export const AddTaskForm = () => {
+  const { tagId } = addTaskByTagRoute.useParams();
   const {
     handleSubmit,
     register,
@@ -12,14 +14,14 @@ export const AddTaskForm = () => {
     formState: { errors },
   } = useAddTaskForm();
 
-  const { mutate, isPending } = useAddTask();
+  const { mutate, isPending } = useAddTaskByTagId();
 
   return (
     <form
       className='flex gap-2'
       onSubmit={handleSubmit((body) => {
         mutate(
-          { body },
+          { body, params: { id: tagId } },
           {
             onSuccess: () => {
               reset();

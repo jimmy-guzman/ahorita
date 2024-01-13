@@ -9,6 +9,6 @@ export const tasksRoute = new Route({
   path: 'tasks',
   component: lazyRouteComponent(() => import('@/pages/Tasks')),
   loader: async ({ context: { queryClient } }) => {
-    await queryClient.ensureQueryData(tasksQueryOptions);
+    await queryClient.ensureQueryData(tasksQueryOptions());
   },
 });
