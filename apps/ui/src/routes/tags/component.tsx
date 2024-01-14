@@ -1,9 +1,12 @@
+import { useSuspenseQuery } from '@tanstack/react-query';
 import { Link, Outlet } from '@tanstack/react-router';
-import { ExternalLinkIcon } from 'lucide-react';
+import { ExternalLinkIcon, PlusCircleIcon } from 'lucide-react';
 
-import { TagsMenu } from '@/components/organisms/TagsMenu';
+import { tagsQueryOptions } from '@/hooks/api/useQueryTags';
 
 export default function Tags() {
+  const { data: tags } = useSuspenseQuery(tagsQueryOptions);
+
   return (
     <div className='dsy-drawer lg:dsy-drawer-open'>
       <input id='my-drawer-3' type='checkbox' className='dsy-drawer-toggle' />
@@ -64,7 +67,25 @@ export default function Tags() {
           >
             ahorita
           </Link>
-          <TagsMenu />
+          <ul className='dsy-menu bg-base-100 h-dvh w-56'>
+            <h2 className='dsy-menu-title uppercase'>Tags</h2>
+            <li>
+              <Link to='/tags/add' activeProps={{ className: 'dsy-active' }}>
+                Add New <PlusCircleIcon className='h-5 w-5' />
+              </Link>
+            </li>
+            {tags.map(({ id: tagId, name }) => (
+              <li key={tagId}>
+                <Link
+                  to='/tags/$tagId'
+                  params={{ tagId }}
+                  activeProps={{ className: 'dsy-active' }}
+                >
+                  {name}
+                </Link>
+              </li>
+            ))}
+          </ul>
         </aside>
       </div>
     </div>

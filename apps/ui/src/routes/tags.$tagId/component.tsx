@@ -4,7 +4,8 @@ import { EyeIcon, PlusCircleIcon, TrashIcon } from 'lucide-react';
 
 import { useDeleteTag } from '@/hooks/api/useDeleteTag';
 import { tagQueryOptions } from '@/hooks/api/useTag';
-import { tagRoute } from '@/routes/tagsRoute';
+
+import { tagRoute } from './route';
 
 export default function Tag() {
   const { tagId } = tagRoute.useParams();
@@ -13,7 +14,7 @@ export default function Tag() {
   const navigate = useNavigate();
 
   return (
-    <main className='flex w-full flex-col gap-4'>
+    <section className='flex w-full flex-col gap-4'>
       <div className='dsy-card bg-base-200'>
         <div className='dsy-card-body'>
           <h2 className='dsy-card-title text-primary'>{data.name}</h2>
@@ -54,6 +55,6 @@ export default function Tag() {
         </div>
       </div>
       <Outlet />
-    </main>
+    </section>
   );
 }

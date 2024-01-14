@@ -1,10 +1,11 @@
 import { createColumnHelper } from '@tanstack/react-table';
 
-import { TasksTableActions } from '@/components/molecules/TasksTableActions';
-import { TasksTableCompletedCell } from '@/components/molecules/TasksTableCompletedCell';
-import { TasksTableNameCell } from '@/components/molecules/TasksTableNameCell';
 import type { TaskWithId } from '@/hooks/forms/useTasksForm';
 import { formatDate } from '@/utils/formatters';
+
+import { TasksTableActions } from './TasksTableActions';
+import { TasksTableCompletedCell } from './TasksTableCompletedCell';
+import { TasksTableNameCell } from './TasksTableNameCell';
 
 const columnHelper = createColumnHelper<TaskWithId>();
 
