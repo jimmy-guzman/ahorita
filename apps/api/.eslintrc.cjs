@@ -1,3 +1,3 @@
 module.exports = {
-  extends: ['ahorita/elysia'],
+  extends: ['ahorita/api'],
 };
