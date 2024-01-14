@@ -34,9 +34,12 @@ export default function AddTag() {
         })}
       >
         <div className='dsy-form-control'>
+          <label className='dsy-label' htmlFor='name'>
+            <span className='dsy-label-text'>Your tag&apos;s name?</span>
+          </label>
           <input
             type='text'
-            placeholder="Your tag's name?"
+            id='name'
             className={clsx(
               'dsy-input dsy-input-bordered w-full',
               errors.name?.message ? 'dsy-input-error' : ''
@@ -50,9 +53,12 @@ export default function AddTag() {
           )}
         </div>
         <div className='dsy-form-control'>
+          <label className='dsy-label' htmlFor='description'>
+            <span className='dsy-label-text'>Your tag&apos;s description?</span>
+          </label>
           <input
             type='text'
-            placeholder="Your tag's description?"
+            id='description'
             className={clsx(
               'dsy-input dsy-input-bordered w-full',
               errors.name?.message ? 'dsy-input-error' : ''
@@ -66,7 +72,7 @@ export default function AddTag() {
           )}
         </div>
         <div className='flex justify-end'>
-          <button className={'dsy-btn dsy-btn-primary'} disabled={isPending}>
+          <button className="dsy-btn dsy-btn-primary" disabled={isPending}>
             Add Tag <ListPlusIcon />
           </button>
         </div>

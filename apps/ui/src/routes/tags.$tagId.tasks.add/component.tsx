@@ -7,6 +7,7 @@ import { useAddTaskForm } from '@/hooks/forms/useAddTaskForm';
 
 const routeApi = new RouteApi({ id: '/tags/$tagId/tasks/add' });
 
+// eslint-disable-next-line max-lines-per-function
 export default function Component() {
   const { tagId } = routeApi.useParams();
   const {
@@ -24,7 +25,7 @@ export default function Component() {
         <h3>Add Your New Task</h3>
       </div>
       <form
-        className='flex gap-2'
+        className='flex flex-col gap-2'
         onSubmit={handleSubmit((body) => {
           mutate(
             { body, params: { id: tagId } },
@@ -37,9 +38,12 @@ export default function Component() {
         })}
       >
         <div className='dsy-form-control w-full'>
+          <label className='dsy-label' htmlFor='name'>
+            <span className='dsy-label-text'>Your task&apos;s name?</span>
+          </label>
           <input
             type='text'
-            placeholder="Your task's name?"
+            id='name'
             className={clsx(
               'dsy-input dsy-input-bordered w-full',
               errors.name?.message ? 'dsy-input-error' : 'dsy-input-primary'
@@ -52,9 +56,11 @@ export default function Component() {
             <p className='invisible'>&nbsp;</p>
           )}
         </div>
-        <button className={'dsy-btn dsy-btn-primary'} disabled={isPending}>
-          Add Task <ListPlusIcon />
-        </button>
+        <div className='flex justify-end'>
+          <button className='dsy-btn dsy-btn-primary' disabled={isPending}>
+            Add Task <ListPlusIcon />
+          </button>
+        </div>
       </form>
     </div>
   );
