@@ -2,8 +2,8 @@
   "name": "eslint-config-ahorita",
   "private": true,
   "dependencies": {
-    "eslint-plugin-react-refresh": "0.4.5",
-    "eslint-config-jimmy-guzman": "12.2.0"
+    "eslint-config-jimmy-guzman": "12.2.0",
+    "eslint-plugin-react-refresh": "0.4.5"
   },
   "devDependencies": {
     "typescript": "5.3.3"

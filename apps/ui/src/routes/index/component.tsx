@@ -20,7 +20,7 @@ export default function Home() {
               with new technologies.
             </p>
             <div className='flex justify-end'>
-              <Link to='/tags' className='dsy-btn dsy-btn-primary'>
+              <Link to='/tags/add' className='dsy-btn dsy-btn-primary'>
                 Get Started
               </Link>
             </div>

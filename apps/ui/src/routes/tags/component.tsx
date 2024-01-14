@@ -1,6 +1,6 @@
 import { useSuspenseQuery } from '@tanstack/react-query';
 import { Link, Outlet } from '@tanstack/react-router';
-import { ExternalLinkIcon, MenuIcon, PlusCircleIcon } from 'lucide-react';
+import { ExternalLinkIcon, ListPlusIcon, MenuIcon } from 'lucide-react';
 
 import { tagsQueryOptions } from '@/hooks/api/useQueryTags';
 
@@ -60,7 +60,7 @@ export default function Tags() {
             <h2 className='dsy-menu-title uppercase'>Tags</h2>
             <li>
               <Link to='/tags/add' activeProps={{ className: 'dsy-active' }}>
-                Add New <PlusCircleIcon className='h-5 w-5' />
+                Add New <ListPlusIcon className='text-accent h-5 w-5' />
               </Link>
             </li>
             {tags.map(({ id: tagId, name }) => (

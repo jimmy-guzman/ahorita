@@ -23,3 +23,7 @@ dist
 
 # sqlite
 *.db
+
+# playwright
+playwright-report
+test-results

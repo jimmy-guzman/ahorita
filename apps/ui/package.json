@@ -7,6 +7,7 @@
     "build": "vite build",
     "clean": "rimraf .turbo node_modules dist",
     "dev": "bunx --bun vite",
+    "e2e": "playwright test",
     "lint": "eslint .",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit"
@@ -29,6 +30,7 @@
   },
   "devDependencies": {
     "@ahorita/api": "workspace:*",
+    "@playwright/test": "1.40.1",
     "@tailwindcss/typography": "0.5.10",
     "@types/node": "20.11.0",
     "@types/react": "18.2.47",

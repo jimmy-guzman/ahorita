@@ -1,7 +1,7 @@
 import { useSuspenseQuery } from '@tanstack/react-query';
 import { Link, Outlet, useNavigate } from '@tanstack/react-router';
 import { RouteApi } from '@tanstack/react-router';
-import { EyeIcon, PlusCircleIcon, TrashIcon } from 'lucide-react';
+import { EyeIcon, ListPlusIcon, Trash2Icon } from 'lucide-react';
 
 import { useDeleteTag } from '@/hooks/api/useDeleteTag';
 import { tagQueryOptions } from '@/hooks/api/useTag';
@@ -10,7 +10,7 @@ const routeApi = new RouteApi({ id: '/tags/$tagId' });
 
 export default function Tag() {
   const { tagId } = routeApi.useParams();
-  const { data } = useSuspenseQuery(tagQueryOptions(tagId));
+  const { data: tag } = useSuspenseQuery(tagQueryOptions(tagId));
   const { mutateAsync, isPending } = useDeleteTag();
   const navigate = useNavigate();
 
@@ -18,39 +18,38 @@ export default function Tag() {
     <section className='flex w-full flex-col gap-4'>
       <div className='dsy-card bg-base-200'>
         <div className='dsy-card-body'>
-          <h2 className='dsy-card-title text-primary'>{data.name}</h2>
-          <p>{data.description}</p>
+          <h2 className='dsy-card-title text-primary'>{tag.name}</h2>
+          <p>{tag.description}</p>
           <div className='dsy-card-actions justify-end'>
             <button
-              className='dsy-btn dsy-btn-outline'
+              className='dsy-btn dsy-btn-sm dsy-btn-neutral'
               disabled={isPending}
               onClick={async () => {
                 await mutateAsync({ params: { id: tagId } });
-                await navigate({ to: '/tags' });
+                await navigate({ to: '/tags/add' });
               }}
             >
               Delete Tag
-              <TrashIcon className='inline' />
+              <Trash2Icon />
             </button>
             <Link
-              className='dsy-btn dsy-btn-outline dsy-btn-secondary'
+              className='dsy-btn dsy-btn-secondary dsy-btn-sm'
               to='/tags/$tagId/tasks/add'
               params={{ tagId }}
               activeProps={{ className: 'dsy-btn-active' }}
             >
               Add Task
-              <PlusCircleIcon className='inline' />
+              <ListPlusIcon />
             </Link>
             <Link
-              className='dsy-btn dsy-btn-outline dsy-btn-primary'
+              className='dsy-btn dsy-btn-primary dsy-btn-sm'
               to='/tags/$tagId/tasks'
-              disabled={data._count.tasks <= 0}
               params={{ tagId }}
               activeOptions={{ exact: true }}
               activeProps={{ className: 'dsy-btn-active' }}
             >
-              {data._count.tasks} Tasks
-              <EyeIcon className='inline' />
+              {tag._count.tasks} Tasks
+              <EyeIcon />
             </Link>
           </div>
         </div>

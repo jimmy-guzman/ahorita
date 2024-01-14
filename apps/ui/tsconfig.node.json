@@ -1,4 +1,4 @@
 {
   "extends": "tsconfig/vite-react-node",
-  "include": ["vite.config.ts", "tailwind.config.ts"]
+  "include": ["vite.config.ts", "tailwind.config.ts", "playwright.config.ts"]
 }

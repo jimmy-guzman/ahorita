@@ -1,5 +1,5 @@
 import type { CellContext } from '@tanstack/react-table';
-import { CheckSquareIcon, TrashIcon } from 'lucide-react';
+import { CheckSquareIcon, Trash2Icon } from 'lucide-react';
 
 import { useDeleteTask } from '@/hooks/api/useDeleteTask';
 import { useEditTask } from '@/hooks/api/useEditTask';
@@ -15,8 +15,8 @@ export const TasksTableActions = ({
   const editMutation = useEditTask();
 
   return (
-    <div className='dsy-join'>
-      <button className='dsy-btn dsy-btn-ghost dsy-join-item dsy-btn-sm'>
+    <div className='flex gap-2'>
+      <button className='dsy-btn dsy-btn-square dsy-join-item dsy-btn-sm dsy-btn-accent'>
         <CheckSquareIcon
           className='align-baseline'
           onClick={() => {
@@ -27,8 +27,8 @@ export const TasksTableActions = ({
           }}
         />
       </button>
-      <button className='dsy-btn dsy-btn-ghost dsy-join-item dsy-btn-sm'>
-        <TrashIcon
+      <button className='dsy-btn dsy-btn-square dsy-join-item dsy-btn-sm dsy-btn-neutral'>
+        <Trash2Icon
           className='align-baseline'
           onClick={() => {
             deleteMutation.mutate({ params: task });

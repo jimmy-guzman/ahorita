@@ -4,6 +4,7 @@ const cwd = process.cwd();
 const project = [
   resolve(cwd, 'tsconfig.json'),
   resolve(cwd, 'tsconfig.node.json'),
+  resolve(cwd, 'tsconfig.e2e.json'),
 ];
 
 module.exports = {

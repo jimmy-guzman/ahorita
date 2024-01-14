@@ -11,6 +11,9 @@
     },
     "lint": { "dependsOn": ["topo"] },
     "typecheck": {},
+    "e2e": {
+      "outputs": ["playwright-report/**", "test-results/**"]
+    },
     "dev": {
       "cache": false,
       "persistent": true
