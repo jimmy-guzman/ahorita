@@ -7,9 +7,7 @@ const project = [
 ];
 
 module.exports = {
-  extends: ['./base.js', 'plugin:react-hooks/recommended'],
-  env: { browser: true, es2020: true },
-  globals: { JSX: true },
+  extends: ['jimmy-guzman', 'jimmy-guzman/react', 'jimmy-guzman/typescript'],
   plugins: ['react-refresh'],
   parserOptions: { project },
   rules: {
@@ -18,4 +16,19 @@ module.exports = {
       { allowConstantExport: true },
     ],
   },
+  overrides: [
+    {
+      files: ['**/*.ts?(x)'],
+      rules: {
+        '@typescript-eslint/no-misused-promises': [
+          2,
+          {
+            checksVoidReturn: {
+              attributes: false,
+            },
+          },
+        ],
+      },
+    },
+  ],
 };

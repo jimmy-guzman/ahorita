@@ -7,5 +7,5 @@ export const DateTime = t
       examples: 'sss',
     })
   )
-  .Decode((v) => v.toISOString())
-  .Encode((v) => new Date(v));
+  .Decode((value) => value.toISOString())
+  .Encode((value) => new Date(value));

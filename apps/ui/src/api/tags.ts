@@ -74,7 +74,7 @@ export const getTasksByTagId = async ({
 export const addTaskByTagId = async ({
   params,
   body,
-}: Pick<Schema['/tags/:id/tasks']['post'], 'params' | 'body'>) => {
+}: Pick<Schema['/tags/:id/tasks']['post'], 'body' | 'params'>) => {
   const { error, data } = await ahoritaFetch('/tags/:id/tasks', {
     method: 'POST',
     params,

@@ -8,7 +8,7 @@ import {
 import { ArrowDownWideNarrowIcon, ArrowUpWideNarrowIcon } from 'lucide-react';
 import { useState } from 'react';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+// eslint-disable-next-line @typescript-eslint/no-explicit-any, max-lines-per-function
 export const Table = <TData, TColumns extends ColumnDef<TData, any>[]>({
   data,
   columns,
@@ -48,17 +48,21 @@ export const Table = <TData, TColumns extends ColumnDef<TData, any>[]>({
                             : '',
                           onClick: header.column.getToggleSortingHandler(),
                         }}
+                        aria-hidden='true'
                       >
                         {flexRender(
                           header.column.columnDef.header,
                           header.getContext()
                         )}
 
-                        {sort === false ? null : sort === 'asc' ? (
-                          <ArrowUpWideNarrowIcon className='inline h-4 w-4' />
-                        ) : (
-                          <ArrowDownWideNarrowIcon className='inline h-4 w-4' />
-                        )}
+                        {
+                          // eslint-disable-next-line no-nested-ternary
+                          sort === false ? null : sort === 'asc' ? (
+                            <ArrowUpWideNarrowIcon className='inline h-4 w-4' />
+                          ) : (
+                            <ArrowDownWideNarrowIcon className='inline h-4 w-4' />
+                          )
+                        }
                       </div>
                     )}
                   </th>

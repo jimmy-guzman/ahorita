@@ -23,10 +23,13 @@ const app = new Elysia()
 
       return { status: error.status, code, message: error.message };
     }
+
+    return undefined;
   })
   .use(tasks)
   .use(tags)
   .listen(3000, ({ hostname, port }) => {
+    // eslint-disable-next-line no-console
     console.log(`🚀 Running at ${cyan(`http://${hostname}:${port}/docs`)}`);
   });
 

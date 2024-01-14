@@ -6,6 +6,7 @@ import { useEditTask } from '@/hooks/api/useEditTask';
 import type { TaskWithId } from '@/hooks/forms/useTasksForm';
 import { useTasksFormContext } from '@/hooks/forms/useTasksForm';
 
+// eslint-disable-next-line max-lines-per-function
 export const TasksTableNameCell = ({
   info,
 }: {

@@ -1,13 +1,14 @@
+import { RouteApi } from '@tanstack/react-router';
 import { clsx } from 'clsx';
 import { ListPlusIcon } from 'lucide-react';
 
 import { useAddTaskByTagId } from '@/hooks/api/useAddTask';
 import { useAddTaskForm } from '@/hooks/forms/useAddTaskForm';
 
-import { addTaskByTagRoute } from './route';
+const routeApi = new RouteApi({ id: '/tags/$tagId/tasks/add' });
 
 export default function Component() {
-  const { tagId } = addTaskByTagRoute.useParams();
+  const { tagId } = routeApi.useParams();
   const {
     handleSubmit,
     register,

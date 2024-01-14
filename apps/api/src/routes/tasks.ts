@@ -7,6 +7,7 @@ const Params = t.Object({ id: t.String() });
 
 export const tasks = new Elysia()
   .model({ tasks: t.Array(TaskDto), task: TaskDto })
+  // eslint-disable-next-line max-lines-per-function
   .group('/tasks', { detail: { tags: ['Tasks'] } }, (app) =>
     app
       .get('', async () => prisma.task.findMany(), { response: 'tasks' })

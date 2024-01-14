@@ -3,6 +3,6 @@ const dateFormatter = new Intl.DateTimeFormat('en-US', {
   timeStyle: 'short',
 });
 
-export const formatDate = (date: string | Date) => {
+export const formatDate = (date: Date | string) => {
   return dateFormatter.format(new Date(date));
 };

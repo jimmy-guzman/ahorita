@@ -7,7 +7,7 @@
   "scripts": {
     "clean": "rimraf .turbo node_modules dist",
     "dev": "bun run --hot src/index.ts",
-    "lint": "eslint . --ext ts --report-unused-disable-directives --max-warnings 0",
+    "lint": "eslint .",
     "start": "bun src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
     "typecheck": "tsc --noEmit"

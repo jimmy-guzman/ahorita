@@ -4,6 +4,7 @@ import { ListPlusIcon } from 'lucide-react';
 import { useAddTag } from '@/hooks/api/useAddTag';
 import { useAddTagForm } from '@/hooks/forms/useAddTagForm';
 
+// eslint-disable-next-line max-lines-per-function
 export default function AddTag() {
   const { mutate, isPending } = useAddTag();
 

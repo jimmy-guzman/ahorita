@@ -1,14 +1,15 @@
 import { useSuspenseQuery } from '@tanstack/react-query';
 import { Link, Outlet, useNavigate } from '@tanstack/react-router';
+import { RouteApi } from '@tanstack/react-router';
 import { EyeIcon, PlusCircleIcon, TrashIcon } from 'lucide-react';
 
 import { useDeleteTag } from '@/hooks/api/useDeleteTag';
 import { tagQueryOptions } from '@/hooks/api/useTag';
 
-import { tagRoute } from './route';
+const routeApi = new RouteApi({ id: '/tags/$tagId' });
 
 export default function Tag() {
-  const { tagId } = tagRoute.useParams();
+  const { tagId } = routeApi.useParams();
   const { data } = useSuspenseQuery(tagQueryOptions(tagId));
   const { mutateAsync, isPending } = useDeleteTag();
   const navigate = useNavigate();

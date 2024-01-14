@@ -6,6 +6,7 @@ import { TaskDto } from '../models/tasks';
 
 export const tags = new Elysia()
   .model({ tags: t.Array(TagDto), tag: TagDto, tasks: t.Array(TaskDto) })
+  // eslint-disable-next-line max-lines-per-function
   .group('/tags', { detail: { tags: ['Tags'] } }, (app) =>
     app
       .get(

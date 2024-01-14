@@ -5,6 +5,6 @@ import { getTag } from '@/api/tags';
 export const tagQueryOptions = (id: string) => {
   return queryOptions({
     queryKey: ['tags', id] as const,
-    queryFn: ({ queryKey: [, id] }) => getTag({ params: { id } }),
+    queryFn: () => getTag({ params: { id } }),
   });
 };
