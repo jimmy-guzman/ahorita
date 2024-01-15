@@ -1,22 +1,15 @@
 import { RouteApi } from '@tanstack/react-router';
-import { clsx } from 'clsx';
 import { ListPlusIcon } from 'lucide-react';
 
+import { TextInput } from '@/components/TextInput';
 import { useAddTaskByTagId } from '@/hooks/api/useAddTask';
 import { useAddTaskForm } from '@/hooks/forms/useAddTaskForm';
 
 const routeApi = new RouteApi({ id: '/tags/$tagId/tasks/add' });
 
-// eslint-disable-next-line max-lines-per-function
 export default function Component() {
   const { tagId } = routeApi.useParams();
-  const {
-    handleSubmit,
-    register,
-    reset,
-    formState: { errors },
-  } = useAddTaskForm();
-
+  const { handleSubmit, reset, control } = useAddTaskForm();
   const { mutate, isPending } = useAddTaskByTagId();
 
   return (
@@ -37,25 +30,7 @@ export default function Component() {
           );
         })}
       >
-        <div className='dsy-form-control w-full'>
-          <label className='dsy-label' htmlFor='name'>
-            <span className='dsy-label-text'>Your task&apos;s name?</span>
-          </label>
-          <input
-            type='text'
-            id='name'
-            className={clsx(
-              'dsy-input dsy-input-bordered w-full',
-              errors.name?.message ? 'dsy-input-error' : 'dsy-input-primary'
-            )}
-            {...register('name')}
-          />
-          {errors.name?.message ? (
-            <p className='text-error'>{errors.name.message}</p>
-          ) : (
-            <p className='invisible'>&nbsp;</p>
-          )}
-        </div>
+        <TextInput control={control} name='name' label="Your task's name?" />
         <div className='flex justify-end'>
           <button className='dsy-btn dsy-btn-primary' disabled={isPending}>
             Add Task <ListPlusIcon />

@@ -13,6 +13,7 @@ export const useAddTagForm = () => {
     resolver: typeboxResolver(schema),
     defaultValues: {
       name: '',
+      description: '',
     },
   });
 };
