@@ -1,4 +1,4 @@
-import { RouteApi } from '@tanstack/react-router';
+import { RouteApi, useNavigate } from '@tanstack/react-router';
 import { ListPlusIcon } from 'lucide-react';
 
 import { TextInput } from '@/components/TextInput';
@@ -9,8 +9,9 @@ const routeApi = new RouteApi({ id: '/tags/$tagId/tasks/add' });
 
 export default function Component() {
   const { tagId } = routeApi.useParams();
-  const { handleSubmit, reset, control } = useAddTaskForm();
+  const { handleSubmit, control } = useAddTaskForm();
   const { mutate, isPending } = useAddTaskByTagId();
+  const navigate = useNavigate();
 
   return (
     <div className='flex w-full flex-col gap-8'>
@@ -23,8 +24,11 @@ export default function Component() {
           mutate(
             { body, params: { id: tagId } },
             {
-              onSuccess: () => {
-                reset();
+              onSuccess() {
+                return navigate({
+                  to: '/tags/$tagId/tasks',
+                  params: { tagId },
+                });
               },
             }
           );

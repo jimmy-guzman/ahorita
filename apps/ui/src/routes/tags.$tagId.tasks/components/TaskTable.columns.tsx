@@ -1,7 +1,7 @@
 import { createColumnHelper } from '@tanstack/react-table';
+import { formatDistanceToNow } from 'date-fns';
 
 import type { TaskWithId } from '@/hooks/forms/useTasksForm';
-import { formatDate } from '@/utils/formatters';
 
 import { TasksTableActions } from './TasksTableActions';
 import { TasksTableCompletedCell } from './TasksTableCompletedCell';
@@ -20,11 +20,11 @@ export const columns = [
   }),
   columnHelper.accessor('createdAt', {
     header: 'Created At',
-    cell: (info) => formatDate(info.getValue()),
+    cell: (info) => `${formatDistanceToNow(info.getValue())} ago`,
   }),
   columnHelper.accessor('updatedAt', {
     header: 'Updated At',
-    cell: (info) => formatDate(info.getValue()),
+    cell: (info) => `${formatDistanceToNow(info.getValue())} ago`,
   }),
   columnHelper.display({
     header: 'Actions',
