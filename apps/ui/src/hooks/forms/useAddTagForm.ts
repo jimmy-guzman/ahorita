@@ -4,7 +4,7 @@ import { Type } from '@sinclair/typebox';
 import { useForm } from 'react-hook-form';
 
 const schema = Type.Object({
-  name: Type.String({ minLength: 1, message: 'testing' }),
+  name: Type.String({ minLength: 1 }),
   description: Type.String({ minLength: 1 }),
 });
 

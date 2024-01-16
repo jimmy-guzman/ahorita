@@ -1,3 +1,4 @@
+import { useNavigate } from '@tanstack/react-router';
 import { ListPlusIcon } from 'lucide-react';
 
 import { TextInput } from '@/components/TextInput';
@@ -6,7 +7,8 @@ import { useAddTagForm } from '@/hooks/forms/useAddTagForm';
 
 export default function AddTag() {
   const { mutate, isPending } = useAddTag();
-  const { handleSubmit, reset, control } = useAddTagForm();
+  const { handleSubmit, control } = useAddTagForm();
+  const navigate = useNavigate();
 
   return (
     <div className='flex w-full flex-col gap-8'>
@@ -19,8 +21,11 @@ export default function AddTag() {
           mutate(
             { body },
             {
-              onSuccess: () => {
-                reset();
+              onSuccess(tag) {
+                return navigate({
+                  to: '/tags/$tagId',
+                  params: { tagId: tag.id },
+                });
               },
             }
           );

@@ -39,7 +39,7 @@ export const Table = <TData, TColumns extends ColumnDef<TData, any>[]>({
                 const sort = header.column.getIsSorted();
 
                 return (
-                  <th key={header.id}>
+                  <th key={header.id} className='uppercase'>
                     {header.isPlaceholder ? null : (
                       <div
                         {...{

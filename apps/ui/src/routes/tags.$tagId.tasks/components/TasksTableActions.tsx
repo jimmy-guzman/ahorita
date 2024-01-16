@@ -1,12 +1,14 @@
 import type { CellContext } from '@tanstack/react-table';
-import { CheckSquareIcon, Trash2Icon } from 'lucide-react';
+import { CheckSquareIcon, SquareIcon, Trash2Icon } from 'lucide-react';
 
 import { useDeleteTask } from '@/hooks/api/useDeleteTask';
 import { useEditTask } from '@/hooks/api/useEditTask';
 import type { TaskWithId } from '@/hooks/forms/useTasksForm';
 
 export const TasksTableActions = ({
-  info,
+  info: {
+    row: { original: task },
+  },
 }: {
   info: CellContext<TaskWithId, unknown>;
 }) => {
@@ -15,30 +17,41 @@ export const TasksTableActions = ({
 
   return (
     <div className='flex gap-2'>
-      <button
-        aria-label={`Complete ${info.row.original.name}`}
-        className='dsy-btn dsy-btn-square dsy-join-item dsy-btn-sm dsy-btn-accent'
-      >
-        <CheckSquareIcon
-          className='align-baseline'
+      {task.completed ? (
+        <button
+          aria-label={`Complete ${task.name}`}
+          className='dsy-btn dsy-btn-square dsy-join-item dsy-btn-sm dsy-btn-success'
           onClick={() => {
             editMutation.mutate({
-              params: { id: info.row.original.id },
-              body: { completed: !info.row.original.completed },
+              params: { id: task.id },
+              body: { completed: false },
             });
           }}
-        />
-      </button>
-      <button
-        aria-label={`Delete ${info.row.original.name}`}
-        className='dsy-btn dsy-btn-square dsy-join-item dsy-btn-sm dsy-btn-neutral'
-      >
-        <Trash2Icon
-          className='align-baseline'
+        >
+          <CheckSquareIcon className='align-baseline' />
+        </button>
+      ) : (
+        <button
+          aria-label={`Undo Complete ${task.name}`}
+          className='dsy-btn dsy-btn-square dsy-join-item dsy-btn-sm dsy-btn-warning'
           onClick={() => {
-            deleteMutation.mutate({ params: info.row.original });
+            editMutation.mutate({
+              params: { id: task.id },
+              body: { completed: true },
+            });
           }}
-        />
+        >
+          <SquareIcon className='align-baseline' />
+        </button>
+      )}
+      <button
+        aria-label={`Delete ${task.name}`}
+        className='dsy-btn dsy-btn-square dsy-join-item dsy-btn-sm dsy-btn-neutral'
+        onClick={() => {
+          deleteMutation.mutate({ params: task });
+        }}
+      >
+        <Trash2Icon className='align-baseline' />
       </button>
     </div>
   );

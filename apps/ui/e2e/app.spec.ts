@@ -48,8 +48,6 @@ test('should create tag and task', async ({ page }) => {
 
   await page.getByRole('button', { name: 'Add Tag' }).click();
 
-  await page.getByRole('link', { name: randomTag }).click();
-
   expect(
     page.getByRole('heading', { name: randomTag, level: 2 })
   ).toBeVisible();
