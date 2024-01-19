@@ -44,6 +44,7 @@ export const Table = <TData, TColumns extends ColumnDef<TData, any>[]>({
                       // eslint-disable-next-line no-nested-ternary
                       header.isPlaceholder ? null : header.column.getCanSort() ? (
                         <button
+                          className='uppercase'
                           onClick={header.column.getToggleSortingHandler()}
                         >
                           {flexRender(
