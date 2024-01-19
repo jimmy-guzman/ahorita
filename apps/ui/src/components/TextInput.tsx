@@ -12,6 +12,7 @@ interface TextFieldProps<T extends FieldValues> extends UseControllerProps<T> {
    * What is your floating label?
    */
   label: string;
+  placeholder?: string;
 }
 
 /**
@@ -26,6 +27,7 @@ export const TextInput = <T extends FieldValues>({
   shouldUnregister,
   defaultValue,
   label,
+  placeholder,
 }: TextFieldProps<T>) => {
   const {
     field,
@@ -39,12 +41,15 @@ export const TextInput = <T extends FieldValues>({
   });
 
   return (
-    <div className='dsy-form-control relative'>
+    <div className='dsy-form-control'>
+      <label className='dsy-label' htmlFor={name}>
+        <span className='dsy-label-text'>{label}</span>
+      </label>
       <input
         type='text'
-        placeholder={label}
+        placeholder={placeholder}
         className={clsx(
-          'dsy-input dsy-input-bordered peer w-full placeholder-transparent',
+          'dsy-input dsy-input-bordered w-full ',
           error?.message ? 'dsy-input-error' : ''
         )}
         id={name}
@@ -55,12 +60,7 @@ export const TextInput = <T extends FieldValues>({
         onBlur={field.onBlur}
         onChange={field.onChange}
       />
-      <label
-        className='dsy-label bg-base-100 text-base-content pointer-events-none absolute -top-4 left-3 text-xs text-opacity-50 transition-all peer-placeholder-shown:top-1.5 peer-placeholder-shown:bg-transparent peer-placeholder-shown:text-sm'
-        htmlFor={name}
-      >
-        {label}
-      </label>
+
       {error?.message ? (
         <p className='text-error'>{error.message}</p>
       ) : (

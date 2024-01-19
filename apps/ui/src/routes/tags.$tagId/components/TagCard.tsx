@@ -17,7 +17,7 @@ export const TagCard = () => {
   return (
     <div className='dsy-card bg-base-200'>
       <div className='dsy-card-body'>
-        <h2 className='dsy-card-title text-primary'>{tag.name}</h2>
+        <h1 className='dsy-card-title text-secondary'>{tag.name}</h1>
         <p>{tag.description}</p>
         <div className='dsy-card-actions justify-end'>
           <button

@@ -40,31 +40,33 @@ export const Table = <TData, TColumns extends ColumnDef<TData, any>[]>({
 
                 return (
                   <th key={header.id} className='uppercase'>
-                    {header.isPlaceholder ? null : (
-                      <div
-                        {...{
-                          className: header.column.getCanSort()
-                            ? 'cursor-pointer select-none'
-                            : '',
-                          onClick: header.column.getToggleSortingHandler(),
-                        }}
-                        aria-hidden='true'
-                      >
-                        {flexRender(
+                    {
+                      // eslint-disable-next-line no-nested-ternary
+                      header.isPlaceholder ? null : header.column.getCanSort() ? (
+                        <button
+                          onClick={header.column.getToggleSortingHandler()}
+                        >
+                          {flexRender(
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
+
+                          {
+                            // eslint-disable-next-line no-nested-ternary
+                            sort === false ? null : sort === 'asc' ? (
+                              <ArrowUpWideNarrowIcon className='inline h-4 w-4' />
+                            ) : (
+                              <ArrowDownWideNarrowIcon className='inline h-4 w-4' />
+                            )
+                          }
+                        </button>
+                      ) : (
+                        flexRender(
                           header.column.columnDef.header,
                           header.getContext()
-                        )}
-
-                        {
-                          // eslint-disable-next-line no-nested-ternary
-                          sort === false ? null : sort === 'asc' ? (
-                            <ArrowUpWideNarrowIcon className='inline h-4 w-4' />
-                          ) : (
-                            <ArrowDownWideNarrowIcon className='inline h-4 w-4' />
-                          )
-                        }
-                      </div>
-                    )}
+                        )
+                      )
+                    }
                   </th>
                 );
               })}
@@ -82,22 +84,6 @@ export const Table = <TData, TColumns extends ColumnDef<TData, any>[]>({
             </tr>
           ))}
         </tbody>
-        <tfoot>
-          {table.getFooterGroups().map((footerGroup) => (
-            <tr key={footerGroup.id}>
-              {footerGroup.headers.map((header) => (
-                <th key={header.id}>
-                  {header.isPlaceholder
-                    ? null
-                    : flexRender(
-                        header.column.columnDef.footer,
-                        header.getContext()
-                      )}
-                </th>
-              ))}
-            </tr>
-          ))}
-        </tfoot>
       </table>
     </div>
   );

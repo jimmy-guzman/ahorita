@@ -8,8 +8,7 @@
     "clean": "rimraf .turbo node_modules dist",
     "dev": "bun run --hot src/index.ts",
     "lint": "eslint .",
-    "start": "bun src/index.ts",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "preview": "bun src/index.ts",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

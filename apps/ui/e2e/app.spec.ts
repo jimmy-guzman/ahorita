@@ -1,5 +1,13 @@
+import AxeBuilder from '@axe-core/playwright';
 import { faker } from '@faker-js/faker';
+import type { Page } from '@playwright/test';
 import { expect, test } from '@playwright/test';
+
+const getAxeViolations = async (page: Page) => {
+  const { violations } = await new AxeBuilder({ page }).analyze();
+
+  return violations;
+};
 
 test('should have title', async ({ page }) => {
   await page.goto('/');
@@ -35,11 +43,15 @@ test('should create tag and task', async ({ page }) => {
 
   await page.goto('/');
 
+  expect(await getAxeViolations(page)).toEqual([]);
+
   await page.getByRole('link', { name: 'Get Started' }).click();
 
   await expect(
-    page.getByRole('heading', { name: 'Add Your New Tag', level: 3 })
+    page.getByRole('heading', { name: 'Add Your New Tag', level: 1 })
   ).toBeVisible();
+
+  expect(await getAxeViolations(page)).toEqual([]);
 
   await page.getByRole('textbox', { name: "Your Tag's Name?" }).fill(randomTag);
   await page
@@ -48,15 +60,19 @@ test('should create tag and task', async ({ page }) => {
 
   await page.getByRole('button', { name: 'Add Tag' }).click();
 
-  expect(
-    page.getByRole('heading', { name: randomTag, level: 2 })
+  await expect(
+    page.getByRole('heading', { name: randomTag, level: 1 })
   ).toBeVisible();
+
+  expect(await getAxeViolations(page)).toEqual([]);
 
   await page.getByRole('link', { name: 'Add Task' }).click();
 
   await expect(
-    page.getByRole('heading', { name: 'Add Your New Task', level: 3 })
+    page.getByRole('heading', { name: 'Add Your New Task', level: 2 })
   ).toBeVisible();
+
+  expect(await getAxeViolations(page)).toEqual([]);
 
   await page
     .getByRole('textbox', { name: "Your Task's Name?" })
@@ -67,6 +83,8 @@ test('should create tag and task', async ({ page }) => {
   await expect(page.getByRole('link', { name: '1 Task' })).toBeVisible();
 
   await expect(page.getByText(randomTask)).toBeVisible();
+
+  expect(await getAxeViolations(page)).toEqual([]);
 
   await expect(page.getByRole('cell', { name: 'no' })).toBeVisible();
 
@@ -83,6 +101,6 @@ test('should create tag and task', async ({ page }) => {
   await expect(page.getByRole('link', { name: randomTag })).not.toBeVisible();
 
   await expect(
-    page.getByRole('heading', { name: 'Add Your New Tag', level: 3 })
+    page.getByRole('heading', { name: 'Add Your New Tag', level: 1 })
   ).toBeVisible();
 });

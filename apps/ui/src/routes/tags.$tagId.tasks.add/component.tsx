@@ -15,8 +15,8 @@ export default function Component() {
 
   return (
     <div className='flex w-full flex-col gap-8'>
-      <div className='prose lg:prose-xl dsy-prose'>
-        <h3>Add Your New Task</h3>
+      <div className='prose dsy-prose'>
+        <h2>Add Your New Task</h2>
       </div>
       <form
         className='flex flex-col gap-2'

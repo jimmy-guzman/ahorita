@@ -12,8 +12,8 @@ export default function AddTag() {
 
   return (
     <div className='flex w-full flex-col gap-8'>
-      <div className='prose lg:prose-xl dsy-prose'>
-        <h3>Add Your New Tag</h3>
+      <div className='prose dsy-prose'>
+        <h1>Add Your New Tag</h1>
       </div>
       <form
         className='flex flex-col gap-2'

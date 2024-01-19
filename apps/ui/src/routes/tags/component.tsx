@@ -13,7 +13,7 @@ export default function Tags() {
       <input id='my-drawer-3' type='checkbox' className='dsy-drawer-toggle' />
       <div className='dsy-drawer-content flex flex-col'>
         <div className='max-w-[100vw] px-6 pb-16 xl:pr-2'>
-          <div className='dsy-navbar w-full'>
+          <nav className='dsy-navbar w-full'>
             <div className='flex-none lg:hidden'>
               <label
                 htmlFor='my-drawer-3'
@@ -39,17 +39,19 @@ export default function Tags() {
                 API Docs <ExternalLinkIcon className='h-4 w-4 lg:h-4 lg:w-4' />
               </a>
             </div>
-          </div>
-          <Outlet />
+          </nav>
+          <main>
+            <Outlet />
+          </main>
         </div>
       </div>
-      <div className='dsy-drawer-side'>
+      <aside className='dsy-drawer-side'>
         <label
           htmlFor='my-drawer-3'
           aria-label='close sidebar'
           className='dsy-drawer-overlay'
         />
-        <aside className='bg-base-100'>
+        <div className='bg-base-100'>
           <Link
             to='/'
             className='dsy-btn dsy-btn-ghost from-primary to-secondary dsy-btn-lg hidden bg-gradient-to-r bg-clip-text text-lg normal-case text-transparent md:text-3xl lg:flex'
@@ -57,7 +59,7 @@ export default function Tags() {
             ahorita
           </Link>
           <ul className='dsy-menu bg-base-100 h-dvh w-56'>
-            <h2 className='dsy-menu-title uppercase'>Tags</h2>
+            <li className='dsy-menu-title text-primary uppercase'>Tags</li>
             <li>
               <Link to='/tags/add' activeProps={{ className: 'dsy-active' }}>
                 Add New <ListPlusIcon className='text-accent h-5 w-5' />
@@ -75,8 +77,8 @@ export default function Tags() {
               </li>
             ))}
           </ul>
-        </aside>
-      </div>
+        </div>
+      </aside>
     </div>
   );
 }

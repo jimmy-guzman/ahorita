@@ -52,6 +52,7 @@ export const TasksTableNameCell = ({
       {info.getValue()}
       <button
         className='dsy-btn dsy-btn-neutral dsy-btn-xs'
+        aria-label={`edit ${info.getValue()}`}
         onClick={() => {
           setIsEditEnabled((prev) => !prev);
         }}

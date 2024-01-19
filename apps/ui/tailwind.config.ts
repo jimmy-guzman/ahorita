@@ -8,7 +8,7 @@ export default {
     extend: {},
   },
   daisyui: {
-    themes: ['dark'],
+    themes: ['night'],
     prefix: 'dsy-',
     logs: false,
   },

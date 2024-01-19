@@ -6,7 +6,7 @@ export default function Home() {
       <div className='dsy-hero -mt-16 min-h-screen'>
         <div className='dsy-hero-content'>
           <div className='flex flex-col gap-4'>
-            <span className='text-gray-500'>
+            <span className='text-base-content'>
               &quot;Ahorita&quot; translates to &quot;now&quot; in Spanish and
               it was used when we weren&apos;t really going{' '}
               <strong className='text-accent'>to do</strong> something in my
