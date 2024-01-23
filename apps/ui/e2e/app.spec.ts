@@ -1,9 +1,8 @@
 import AxeBuilder from '@axe-core/playwright';
 import { faker } from '@faker-js/faker';
-import type { Page } from '@playwright/test';
 import { expect, test } from '@playwright/test';
 
-const getAxeViolations = async (page: Page) => {
+const getAxeViolations = async (page: AxeBuilder['page']) => {
   const { violations } = await new AxeBuilder({ page }).analyze();
 
   return violations;
