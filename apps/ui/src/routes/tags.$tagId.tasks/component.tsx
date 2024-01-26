@@ -1,5 +1,5 @@
 import { useSuspenseQuery } from '@tanstack/react-query';
-import { RouteApi } from '@tanstack/react-router';
+import { getRouteApi } from '@tanstack/react-router';
 import { FormProvider, useFieldArray } from 'react-hook-form';
 
 import { Table } from '@/components/Table';
@@ -8,7 +8,7 @@ import { useTasksForm } from '@/hooks/forms/useTasksForm';
 
 import { columns } from './components/TaskTable.columns';
 
-const routeApi = new RouteApi({ id: '/tags/$tagId/tasks' });
+const routeApi = getRouteApi('/tags/$tagId/tasks');
 
 export default function TasksByTag() {
   const { tagId } = routeApi.useParams();

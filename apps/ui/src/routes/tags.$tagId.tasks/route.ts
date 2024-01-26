@@ -1,10 +1,10 @@
-import { lazyRouteComponent, Route } from '@tanstack/react-router';
+import { createRoute, lazyRouteComponent } from '@tanstack/react-router';
 
 import { tasksByTagQueryOptions } from '@/hooks/api/useTasksByTag';
 
 import { tagRoute } from '../tags.$tagId/route';
 
-export const tasksByTagRoute = new Route({
+export const tasksByTagRoute = createRoute({
   getParentRoute: () => tagRoute,
   path: 'tasks',
   component: lazyRouteComponent(() => import('./component')),

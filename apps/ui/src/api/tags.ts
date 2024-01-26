@@ -1,12 +1,12 @@
 import type { Schema } from './ahorita';
-import { ahoritaFetch } from './ahorita';
+import { api } from './ahorita';
 
 export const getTags = async () => {
-  const { error, data } = await ahoritaFetch('/tags', { method: 'GET' });
+  const { error, data } = await api('/tags', {
+    method: 'GET',
+  });
 
-  if (error) {
-    throw new Error(error.value);
-  }
+  if (error) throw new Error(error.value);
 
   return data;
 };
@@ -14,14 +14,12 @@ export const getTags = async () => {
 export const createTag = async ({
   body,
 }: Pick<Schema['/tags']['post'], 'body'>) => {
-  const { error, data } = await ahoritaFetch('/tags', {
+  const { error, data } = await api('/tags', {
     method: 'POST',
     body,
   });
 
-  if (error) {
-    throw new Error(error.value);
-  }
+  if (error) throw new Error(error.value);
 
   return data;
 };
@@ -29,14 +27,12 @@ export const createTag = async ({
 export const getTag = async ({
   params,
 }: Pick<Schema['/tags/:id']['get'], 'params'>) => {
-  const { error, data } = await ahoritaFetch('/tags/:id', {
+  const { error, data } = await api('/tags/:id', {
     method: 'GET',
     params,
   });
 
-  if (error) {
-    throw new Error(error.value);
-  }
+  if (error) throw new Error(error.value);
 
   return data;
 };
@@ -44,14 +40,12 @@ export const getTag = async ({
 export const deleteTag = async ({
   params,
 }: Pick<Schema['/tags/:id']['delete'], 'params'>) => {
-  const { error, data } = await ahoritaFetch('/tags/:id', {
+  const { error, data } = await api('/tags/:id', {
     method: 'DELETE',
     params,
   });
 
-  if (error) {
-    throw new Error(error.value);
-  }
+  if (error) throw new Error(error.value);
 
   return data;
 };
@@ -59,14 +53,12 @@ export const deleteTag = async ({
 export const getTasksByTagId = async ({
   params,
 }: Pick<Schema['/tags/:id/tasks']['get'], 'params'>) => {
-  const { error, data } = await ahoritaFetch('/tags/:id/tasks', {
+  const { error, data } = await api('/tags/:id/tasks', {
     method: 'GET',
     params,
   });
 
-  if (error) {
-    throw new Error(error.value);
-  }
+  if (error) throw new Error(error.value);
 
   return data;
 };
@@ -75,15 +67,13 @@ export const addTaskByTagId = async ({
   params,
   body,
 }: Pick<Schema['/tags/:id/tasks']['post'], 'body' | 'params'>) => {
-  const { error, data } = await ahoritaFetch('/tags/:id/tasks', {
+  const { error, data } = await api('/tags/:id/tasks', {
     method: 'POST',
     params,
     body,
   });
 
-  if (error) {
-    throw new Error(error.value);
-  }
+  if (error) throw new Error(error.value);
 
   return data;
 };

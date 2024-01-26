@@ -7,7 +7,6 @@
   ],
   "scripts": {
     "build": "turbo run build",
-    "preview": "turbo run preview",
     "check": "turbo run lint typecheck build",
     "clean": "turbo clean",
     "db:push": "turbo run db:push",
@@ -19,6 +18,7 @@
     "generate": "turbo run generate",
     "lint": "turbo run lint",
     "lint:fix": "turbo run lint -- --fix",
+    "preview": "turbo run preview",
     "typecheck": "turbo run typecheck"
   },
   "devDependencies": {

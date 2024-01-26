@@ -1,11 +1,11 @@
-import { RouteApi, useNavigate } from '@tanstack/react-router';
+import { getRouteApi, useNavigate } from '@tanstack/react-router';
 import { ListPlusIcon } from 'lucide-react';
 
 import { TextInput } from '@/components/TextInput';
 import { useAddTaskByTagId } from '@/hooks/api/useAddTask';
 import { useAddTaskForm } from '@/hooks/forms/useAddTaskForm';
 
-const routeApi = new RouteApi({ id: '/tags/$tagId/tasks/add' });
+const routeApi = getRouteApi('/tags/$tagId/tasks/add');
 
 export default function Component() {
   const { tagId } = routeApi.useParams();
