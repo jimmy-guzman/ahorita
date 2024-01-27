@@ -10,7 +10,15 @@ module.exports = {
   rules: {
     'new-cap': [
       'error',
-      { capIsNewExceptions: ['Transform', 'Decode', 'Encode', 'Partial'] },
+      {
+        capIsNewExceptions: [
+          'Transform',
+          'Decode',
+          'Encode',
+          'Partial',
+          'Pick',
+        ],
+      },
     ],
   },
 };

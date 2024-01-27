@@ -36,7 +36,7 @@ export const tags = new Elysia()
           });
         },
         {
-          body: t.Object({ name: t.String(), description: t.String() }),
+          body: t.Pick(TagDto, ['name', 'description']),
           response: TagDto,
         }
       )
@@ -75,12 +75,9 @@ export const tags = new Elysia()
       .get(
         '/:id/tasks',
         async ({ params: { id } }) => {
-          const { tasks } = await prisma.tag.findUniqueOrThrow({
-            where: { id },
-            include: { tasks: true },
+          return prisma.task.findMany({
+            where: { tags: { some: { id } } },
           });
-
-          return tasks;
         },
         {
           params: t.Object({ id: t.String() }),
@@ -99,9 +96,7 @@ export const tags = new Elysia()
         },
         {
           params: t.Object({ id: t.String() }),
-          body: t.Object({
-            name: t.String(),
-          }),
+          body: t.Pick(TaskDto, ['name']),
           response: TaskDto,
         }
       )

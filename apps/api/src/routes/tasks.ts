@@ -1,77 +1,26 @@
 import { prisma } from '@ahorita/db';
-import { Elysia, NotFoundError, t } from 'elysia';
+import { Elysia, t } from 'elysia';
 
 import { TaskDto } from '../models/tasks';
 
 const Params = t.Object({ id: t.String() });
 
-export const tasks = new Elysia()
-  // eslint-disable-next-line max-lines-per-function
-  .group('/tasks', { detail: { tags: ['Tasks'] } }, (app) =>
+export const tasks = new Elysia().group(
+  '/tasks',
+  { detail: { tags: ['Tasks'] } },
+  (app) =>
     app
-      .get('', async () => prisma.task.findMany(), {
-        response: t.Array(TaskDto),
-      })
-      .get(
-        '/:id',
-        async ({ params: { id } }) => {
-          const todo = await prisma.task.findUnique({ where: { id } });
-
-          if (!todo) {
-            throw new NotFoundError(`tasks not found`);
-          }
-
-          return todo;
-        },
-        {
-          params: Params,
-          response: TaskDto,
-        }
-      )
       .patch(
         '/:id',
         async ({ params: { id }, body }) => {
           return prisma.task.update({ where: { id }, data: body });
         },
         {
-          body: t.Partial(
-            t.Object({
-              name: t.String(),
-              completed: t.Boolean(),
-            })
-          ),
+          body: t.Partial(t.Pick(TaskDto, ['name', 'completed'])),
           params: Params,
           response: TaskDto,
         }
       )
-      .patch(
-        '/:id/tags',
-        async ({ params: { id }, body }) => {
-          return prisma.task.update({
-            where: { id },
-            data: {
-              tags: {
-                set: body,
-              },
-            },
-          });
-        },
-        {
-          body: t.Array(
-            t.Object({
-              id: t.String(),
-            })
-          ),
-          params: Params,
-          response: TaskDto,
-        }
-      )
-      .post('', async ({ body }) => prisma.task.create({ data: body }), {
-        body: t.Object({
-          name: t.String(),
-        }),
-        response: TaskDto,
-      })
       .delete(
         '/:id',
         async ({ params: { id } }) => prisma.task.delete({ where: { id } }),
@@ -80,4 +29,4 @@ export const tasks = new Elysia()
           response: TaskDto,
         }
       )
-  );
+);

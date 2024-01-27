@@ -8,8 +8,8 @@ import { tasks } from './routes/tasks';
 
 const app = new Elysia()
   .use(
-    // TODO: remove casting when @elysiajs/cors uses latest elysia deps
-    cors({ methods: ['GET', 'POST', 'PATCH', 'DELETE'] }) as unknown as Elysia
+    // @ts-expect-error remove casting when @elysiajs/cors uses latest elysia deps
+    cors({ methods: ['GET', 'POST', 'PATCH', 'DELETE'] })
   )
   .use(
     swagger({
