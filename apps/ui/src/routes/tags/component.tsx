@@ -2,7 +2,7 @@ import { useSuspenseQuery } from '@tanstack/react-query';
 import { Link, Outlet } from '@tanstack/react-router';
 import { ExternalLinkIcon, ListPlusIcon, MenuIcon } from 'lucide-react';
 
-import { tagsQueryOptions } from '@/hooks/api/useQueryTags';
+import { tagsQueryOptions } from '@/api/queryTags';
 
 // eslint-disable-next-line max-lines-per-function
 export default function Tags() {

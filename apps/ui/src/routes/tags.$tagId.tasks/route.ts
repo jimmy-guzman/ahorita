@@ -1,6 +1,6 @@
 import { createRoute, lazyRouteComponent } from '@tanstack/react-router';
 
-import { tasksByTagQueryOptions } from '@/hooks/api/useTasksByTag';
+import { tasksByTagQueryOptions } from '@/api/queryTasksByTag';
 
 import { tagRoute } from '../tags.$tagId/route';
 

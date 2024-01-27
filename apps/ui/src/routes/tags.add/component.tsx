@@ -1,12 +1,13 @@
+import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from '@tanstack/react-router';
 import { ListPlusIcon } from 'lucide-react';
 
+import { addTagMutationOptions } from '@/api/addTag';
 import { TextInput } from '@/components/TextInput';
-import { useAddTag } from '@/hooks/api/useAddTag';
 import { useAddTagForm } from '@/hooks/forms/useAddTagForm';
 
 export default function AddTag() {
-  const { mutate, isPending } = useAddTag();
+  const { mutate, isPending } = useMutation(addTagMutationOptions);
   const { handleSubmit, control } = useAddTagForm();
   const navigate = useNavigate();
 

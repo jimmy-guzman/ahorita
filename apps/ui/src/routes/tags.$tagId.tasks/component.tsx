@@ -2,8 +2,8 @@ import { useSuspenseQuery } from '@tanstack/react-query';
 import { getRouteApi } from '@tanstack/react-router';
 import { FormProvider, useFieldArray } from 'react-hook-form';
 
+import { tasksByTagQueryOptions } from '@/api/queryTasksByTag';
 import { Table } from '@/components/Table';
-import { tasksByTagQueryOptions } from '@/hooks/api/useTasksByTag';
 import { useTasksForm } from '@/hooks/forms/useTasksForm';
 
 import { columns } from './components/TaskTable.columns';

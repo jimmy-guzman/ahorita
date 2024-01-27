@@ -1,8 +1,9 @@
+import { useMutation } from '@tanstack/react-query';
 import type { CellContext } from '@tanstack/react-table';
 import { BanIcon, PencilIcon, SaveIcon } from 'lucide-react';
 import { useState } from 'react';
 
-import { useEditTask } from '@/hooks/api/useEditTask';
+import { editTaskMutationOptions } from '@/api/editTask';
 import type { TaskWithId } from '@/hooks/forms/useTasksForm';
 import { useTasksFormContext } from '@/hooks/forms/useTasksForm';
 
@@ -14,7 +15,7 @@ export const TasksTableNameCell = ({
 }) => {
   const [isEditEnabled, setIsEditEnabled] = useState(false);
   const { getValues, register } = useTasksFormContext();
-  const editMutation = useEditTask();
+  const editMutation = useMutation(editTaskMutationOptions);
 
   return isEditEnabled ? (
     <div className='dsy-join'>

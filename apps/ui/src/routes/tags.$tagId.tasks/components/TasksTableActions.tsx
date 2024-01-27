@@ -1,8 +1,9 @@
+import { useMutation } from '@tanstack/react-query';
 import type { CellContext } from '@tanstack/react-table';
 import { CheckSquareIcon, SquareIcon, Trash2Icon } from 'lucide-react';
 
-import { useDeleteTask } from '@/hooks/api/useDeleteTask';
-import { useEditTask } from '@/hooks/api/useEditTask';
+import { deleteTaskMutationOptions } from '@/api/deleteTask';
+import { editTaskMutationOptions } from '@/api/editTask';
 import type { TaskWithId } from '@/hooks/forms/useTasksForm';
 
 export const TasksTableActions = ({
@@ -12,8 +13,8 @@ export const TasksTableActions = ({
 }: {
   info: CellContext<TaskWithId, unknown>;
 }) => {
-  const deleteMutation = useDeleteTask();
-  const editMutation = useEditTask();
+  const deleteMutation = useMutation(deleteTaskMutationOptions);
+  const editMutation = useMutation(editTaskMutationOptions);
 
   return (
     <div className='flex gap-2'>

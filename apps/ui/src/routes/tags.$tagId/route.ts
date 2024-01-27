@@ -1,6 +1,6 @@
 import { createRoute, lazyRouteComponent } from '@tanstack/react-router';
 
-import { tagQueryOptions } from '@/hooks/api/useTag';
+import { tagQueryOptions } from '@/api/queryTag';
 
 import { tagsRoute } from '../tags/route';
 import { Pending } from './pending';

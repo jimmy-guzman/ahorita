@@ -1,6 +1,6 @@
 import { createRoute, lazyRouteComponent } from '@tanstack/react-router';
 
-import { tagsQueryOptions } from '@/hooks/api/useQueryTags';
+import { tagsQueryOptions } from '@/api/queryTags';
 import { rootRoute } from '@/routes/_root';
 
 export const tagsRoute = createRoute({

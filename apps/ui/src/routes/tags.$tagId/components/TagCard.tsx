@@ -1,17 +1,17 @@
-import { useSuspenseQuery } from '@tanstack/react-query';
+import { useMutation, useSuspenseQuery } from '@tanstack/react-query';
 import { Link, useNavigate } from '@tanstack/react-router';
 import { getRouteApi } from '@tanstack/react-router';
 import { EyeIcon, ListPlusIcon, Trash2Icon } from 'lucide-react';
 
-import { useDeleteTag } from '@/hooks/api/useDeleteTag';
-import { tagQueryOptions } from '@/hooks/api/useTag';
+import { deleteTagMutationOptions } from '@/api/deleteTag';
+import { tagQueryOptions } from '@/api/queryTag';
 
 const routeApi = getRouteApi('/tags/$tagId');
 
 export const TagCard = () => {
   const { tagId } = routeApi.useParams();
   const { data: tag } = useSuspenseQuery(tagQueryOptions(tagId));
-  const { mutate, isPending } = useDeleteTag();
+  const { mutate, isPending } = useMutation(deleteTagMutationOptions);
   const navigate = useNavigate();
 
   return (

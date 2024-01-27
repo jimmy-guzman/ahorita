@@ -1,17 +1,12 @@
 import './index.css';
 
-import {
-  MutationCache,
-  QueryCache,
-  QueryClient,
-  QueryClientProvider,
-} from '@tanstack/react-query';
+import { QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { createRouter, RouterProvider } from '@tanstack/react-router';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { toast } from 'react-hot-toast';
 
+import { queryClient } from './queryClient';
 import { rootRoute } from './routes/_root';
 import { indexRoute } from './routes/index/route';
 import { addTaskByTagRoute } from './routes/tags.$tagId.tasks.add/route';
@@ -19,19 +14,6 @@ import { tasksByTagRoute } from './routes/tags.$tagId.tasks/route';
 import { tagRoute } from './routes/tags.$tagId/route';
 import { addTagRoute } from './routes/tags.add/route';
 import { tagsRoute } from './routes/tags/route';
-
-const queryCache = new QueryCache({
-  onError: (error) => toast.error(`Something went wrong: ${error.message}`),
-});
-
-const mutationCache = new MutationCache({
-  onError: (error) => toast.error(`Something went wrong: ${error.message}`),
-});
-
-const queryClient = new QueryClient({
-  queryCache,
-  mutationCache,
-});
 
 const routeTree = rootRoute.addChildren([
   indexRoute,
