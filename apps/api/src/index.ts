@@ -7,7 +7,10 @@ import { tags } from './routes/tags';
 import { tasks } from './routes/tasks';
 
 const app = new Elysia()
-  .use(cors({ methods: ['GET', 'POST', 'PATCH', 'DELETE'] }))
+  .use(
+    // TODO: remove casting when @elysiajs/cors uses latest elysia deps
+    cors({ methods: ['GET', 'POST', 'PATCH', 'DELETE'] }) as unknown as Elysia
+  )
   .use(
     swagger({
       path: '/docs',

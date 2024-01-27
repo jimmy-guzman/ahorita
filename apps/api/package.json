@@ -14,8 +14,8 @@
   "dependencies": {
     "@ahorita/db": "workspace:*",
     "@elysiajs/cors": "0.8.0",
-    "@elysiajs/swagger": "0.8.3",
-    "elysia": "0.8.8",
+    "@elysiajs/swagger": "0.8.5",
+    "elysia": "0.8.14",
     "picocolors": "1.0.0"
   },
   "devDependencies": {

@@ -6,11 +6,12 @@ import { TaskDto } from '../models/tasks';
 const Params = t.Object({ id: t.String() });
 
 export const tasks = new Elysia()
-  .model({ tasks: t.Array(TaskDto), task: TaskDto })
   // eslint-disable-next-line max-lines-per-function
   .group('/tasks', { detail: { tags: ['Tasks'] } }, (app) =>
     app
-      .get('', async () => prisma.task.findMany(), { response: 'tasks' })
+      .get('', async () => prisma.task.findMany(), {
+        response: t.Array(TaskDto),
+      })
       .get(
         '/:id',
         async ({ params: { id } }) => {
@@ -24,7 +25,7 @@ export const tasks = new Elysia()
         },
         {
           params: Params,
-          response: 'task',
+          response: TaskDto,
         }
       )
       .patch(
@@ -40,7 +41,7 @@ export const tasks = new Elysia()
             })
           ),
           params: Params,
-          response: 'task',
+          response: TaskDto,
         }
       )
       .patch(
@@ -62,21 +63,21 @@ export const tasks = new Elysia()
             })
           ),
           params: Params,
-          response: 'task',
+          response: TaskDto,
         }
       )
       .post('', async ({ body }) => prisma.task.create({ data: body }), {
         body: t.Object({
           name: t.String(),
         }),
-        response: 'task',
+        response: TaskDto,
       })
       .delete(
         '/:id',
         async ({ params: { id } }) => prisma.task.delete({ where: { id } }),
         {
           params: Params,
-          response: 'task',
+          response: TaskDto,
         }
       )
   );

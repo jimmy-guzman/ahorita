@@ -5,7 +5,6 @@ import { TagDto } from '../models/tags';
 import { TaskDto } from '../models/tasks';
 
 export const tags = new Elysia()
-  .model({ tags: t.Array(TagDto), tag: TagDto, tasks: t.Array(TaskDto) })
   // eslint-disable-next-line max-lines-per-function
   .group('/tags', { detail: { tags: ['Tags'] } }, (app) =>
     app
@@ -21,7 +20,7 @@ export const tags = new Elysia()
           });
         },
         {
-          response: 'tags',
+          response: t.Array(TagDto),
         }
       )
       .post(
@@ -38,7 +37,7 @@ export const tags = new Elysia()
         },
         {
           body: t.Object({ name: t.String(), description: t.String() }),
-          response: 'tag',
+          response: TagDto,
         }
       )
       .get(
@@ -85,7 +84,7 @@ export const tags = new Elysia()
         },
         {
           params: t.Object({ id: t.String() }),
-          response: 'tasks',
+          response: t.Array(TaskDto),
         }
       )
       .post(
