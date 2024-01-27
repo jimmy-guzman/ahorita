@@ -18,17 +18,14 @@ export default function AddTag() {
       <form
         className='flex flex-col gap-2'
         onSubmit={handleSubmit((body) => {
-          mutate(
-            { body },
-            {
-              onSuccess(tag) {
-                return navigate({
-                  to: '/tags/$tagId',
-                  params: { tagId: tag.id },
-                });
-              },
-            }
-          );
+          mutate(body, {
+            onSuccess(tag) {
+              return navigate({
+                to: '/tags/$tagId',
+                params: { tagId: tag.id },
+              });
+            },
+          });
         })}
       >
         <TextInput control={control} name='name' label="Your tag's name?" />

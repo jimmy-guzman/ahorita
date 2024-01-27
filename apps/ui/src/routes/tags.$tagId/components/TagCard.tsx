@@ -24,14 +24,11 @@ export const TagCard = () => {
             className='dsy-btn dsy-btn-sm dsy-btn-neutral'
             disabled={isPending}
             onClick={() => {
-              mutate(
-                { params: { id: tagId } },
-                {
-                  onSuccess() {
-                    return navigate({ to: '/tags/add' });
-                  },
-                }
-              );
+              mutate(tagId, {
+                onSuccess() {
+                  return navigate({ to: '/tags/add' });
+                },
+              });
             }}
           >
             Delete Tag <Trash2Icon />

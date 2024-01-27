@@ -47,9 +47,7 @@ export const TasksTableActions = ({
       <button
         aria-label={`Delete ${task.name}`}
         className='dsy-btn dsy-btn-square dsy-join-item dsy-btn-sm dsy-btn-neutral'
-        onClick={() => {
-          deleteMutation.mutate({ params: task });
-        }}
+        onClick={() => deleteMutation.mutate(task.id)}
       >
         <Trash2Icon className='align-baseline' />
       </button>
