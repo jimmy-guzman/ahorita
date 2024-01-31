@@ -58,7 +58,7 @@ export default function Tags() {
           >
             ahorita
           </Link>
-          <ul className='dsy-menu bg-base-100 h-dvh w-56'>
+          <ul className='dsy-menu bg-base-100 min-h-screen w-56'>
             <li className='dsy-menu-title text-primary uppercase'>Tags</li>
             <li>
               <Link to='/tags/add' activeProps={{ className: 'dsy-active' }}>
