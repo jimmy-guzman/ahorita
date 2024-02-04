@@ -1,0 +1,6 @@
+pre-commit:
+  parallel: true
+  commands:
+    format:
+      glob: '*.{css,html,json,cjs,mjs,js,jsx,ts,tsx,yaml,yml.md}'
+      run: bunx prettier --write {staged_files}

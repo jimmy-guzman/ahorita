@@ -19,12 +19,14 @@
     "lint": "turbo run lint",
     "lint:fix": "turbo run lint -- --fix",
     "preview": "turbo run preview",
-    "typecheck": "turbo run typecheck"
+    "typecheck": "turbo run typecheck",
+    "postinstall": "lefthook install"
   },
   "devDependencies": {
     "bun-types": "1.0.25",
     "eslint": "8.56.0",
     "gitzy": "4.0.0",
+    "lefthook": "1.6.1",
     "prettier": "3.2.4",
     "prettier-plugin-tailwindcss": "0.5.11",
     "turbo": "1.11.3"
