@@ -31,5 +31,5 @@
     "prettier-plugin-tailwindcss": "0.5.11",
     "turbo": "1.12.2"
   },
-  "packageManager": "bun@1.0.25"
+  "packageManager": "bun@1.0.26"
 }

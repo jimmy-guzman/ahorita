@@ -3,4 +3,4 @@ pre-commit:
   commands:
     format:
       glob: '*.{css,html,json,cjs,mjs,js,jsx,ts,tsx,yaml,yml.md}'
-      run: bunx prettier --write {staged_files}
+      run: bunx prettier --write {staged_files} && git add {staged_files}
