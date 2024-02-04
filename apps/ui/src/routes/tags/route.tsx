@@ -1,11 +1,12 @@
 import { useSuspenseQuery } from '@tanstack/react-query';
+import { createFileRoute } from '@tanstack/react-router';
 import { Link, Outlet } from '@tanstack/react-router';
 import { ExternalLinkIcon, ListPlusIcon, MenuIcon } from 'lucide-react';
 
 import { tagsQueryOptions } from '@/api/queryTags';
 
 // eslint-disable-next-line max-lines-per-function
-export default function Tags() {
+const Tags = () => {
   const { data: tags } = useSuspenseQuery(tagsQueryOptions);
 
   return (
@@ -81,4 +82,11 @@ export default function Tags() {
       </aside>
     </div>
   );
-}
+};
+
+export const Route = createFileRoute('/tags')({
+  component: Tags,
+  loader: async ({ context: { queryClient } }) => {
+    await queryClient.ensureQueryData(tagsQueryOptions);
+  },
+});

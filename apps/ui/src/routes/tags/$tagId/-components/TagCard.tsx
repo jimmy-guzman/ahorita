@@ -35,7 +35,7 @@ export const TagCard = () => {
           </button>
           <Link
             className='dsy-btn dsy-btn-secondary dsy-btn-sm'
-            to='/tags/$tagId/tasks/add'
+            to='/tags/$tagId/add-task'
             params={{ tagId }}
             activeProps={{ className: 'dsy-btn-active' }}
           >

@@ -1,4 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
+import { createFileRoute } from '@tanstack/react-router';
 import { getRouteApi, useNavigate } from '@tanstack/react-router';
 import { ListPlusIcon } from 'lucide-react';
 
@@ -6,9 +7,9 @@ import { addTaskByTagIdMutationOptions } from '@/api/addTask';
 import { TextInput } from '@/components/TextInput';
 import { useAddTaskForm } from '@/hooks/forms/useAddTaskForm';
 
-const routeApi = getRouteApi('/tags/$tagId/tasks/add');
+const routeApi = getRouteApi('/tags/$tagId/add-task');
 
-export default function Component() {
+const Component = () => {
   const { tagId } = routeApi.useParams();
   const { handleSubmit, control } = useAddTaskForm();
   const { mutate, isPending } = useMutation(addTaskByTagIdMutationOptions);
@@ -44,4 +45,8 @@ export default function Component() {
       </form>
     </div>
   );
-}
+};
+
+export const Route = createFileRoute('/tags/$tagId/add-task')({
+  component: Component,
+});

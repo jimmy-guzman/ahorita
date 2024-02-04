@@ -1,6 +1,6 @@
-import { Link } from '@tanstack/react-router';
+import { createFileRoute, Link } from '@tanstack/react-router';
 
-export default function Home() {
+const Home = () => {
   return (
     <main>
       <div className='dsy-hero -mt-16 min-h-screen'>
@@ -29,4 +29,6 @@ export default function Home() {
       </div>
     </main>
   );
-}
+};
+
+export const Route = createFileRoute('/')({ component: Home });
