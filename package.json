@@ -27,9 +27,9 @@
     "eslint": "8.56.0",
     "gitzy": "4.0.0",
     "lefthook": "1.6.1",
-    "prettier": "3.2.4",
+    "prettier": "3.2.5",
     "prettier-plugin-tailwindcss": "0.5.11",
-    "turbo": "1.11.3"
+    "turbo": "1.12.2"
   },
   "packageManager": "bun@1.0.25"
 }
