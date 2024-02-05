@@ -16,11 +16,11 @@
     "e2e:ui": "turbo run e2e -- --ui",
     "format": "prettier --write .",
     "generate": "turbo run generate",
+    "postinstall": "lefthook install",
     "lint": "turbo run lint",
     "lint:fix": "turbo run lint -- --fix",
     "preview": "turbo run preview",
-    "typecheck": "turbo run typecheck",
-    "postinstall": "lefthook install"
+    "typecheck": "turbo run typecheck"
   },
   "devDependencies": {
     "bun-types": "1.0.25",
