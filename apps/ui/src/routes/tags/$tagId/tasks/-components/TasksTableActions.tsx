@@ -4,15 +4,25 @@ import { CheckSquareIcon, SquareIcon, Trash2Icon } from 'lucide-react';
 
 import { deleteTaskMutationOptions } from '@/api/deleteTask';
 import { editTaskMutationOptions } from '@/api/editTask';
-import type { TaskWithId } from '@/hooks/forms/useTasksForm';
+
+interface TaskTableActionsProps {
+  info: CellContext<
+    {
+      id: string;
+      name: string;
+      completed: boolean;
+      createdAt: Date;
+      updatedAt: Date;
+    },
+    unknown
+  >;
+}
 
 export const TasksTableActions = ({
   info: {
     row: { original: task },
   },
-}: {
-  info: CellContext<TaskWithId, unknown>;
-}) => {
+}: TaskTableActionsProps) => {
   const deleteMutation = useMutation(deleteTaskMutationOptions);
   const editMutation = useMutation(editTaskMutationOptions);
 

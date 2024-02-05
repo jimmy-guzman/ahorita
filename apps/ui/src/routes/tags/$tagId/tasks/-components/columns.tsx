@@ -1,13 +1,17 @@
 import { createColumnHelper } from '@tanstack/react-table';
 import { formatDistanceToNowStrict } from 'date-fns';
 
-import type { TaskWithId } from '@/hooks/forms/useTasksForm';
-
 import { TasksTableActions } from './TasksTableActions';
 import { TasksTableCompletedCell } from './TasksTableCompletedCell';
 import { TasksTableNameCell } from './TasksTableNameCell';
 
-const columnHelper = createColumnHelper<TaskWithId>();
+const columnHelper = createColumnHelper<{
+  id: string;
+  name: string;
+  completed: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+}>();
 
 export const columns = [
   columnHelper.accessor('name', {

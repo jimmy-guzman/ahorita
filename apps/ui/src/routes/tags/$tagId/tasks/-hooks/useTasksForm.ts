@@ -1,7 +1,6 @@
 import { typeboxResolver } from '@hookform/resolvers/typebox';
 import type { Static } from '@sinclair/typebox';
 import { Type } from '@sinclair/typebox';
-import type { FieldArrayWithId } from 'react-hook-form';
 import { useForm, useFormContext } from 'react-hook-form';
 
 const schema = Type.Object({
@@ -17,8 +16,6 @@ const schema = Type.Object({
 });
 
 type FormValues = Static<typeof schema>;
-
-export type TaskWithId = FieldArrayWithId<FormValues, 'tasks', 'key'>;
 
 export const useTasksFormContext = useFormContext<FormValues>;
 

@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from '@tanstack/react-router';
 
-const Home = () => {
+const Index = () => {
   return (
     <main>
       <div className='dsy-hero -mt-16 min-h-screen'>
@@ -31,4 +31,4 @@ const Home = () => {
   );
 };
 
-export const Route = createFileRoute('/')({ component: Home });
+export const Route = createFileRoute('/')({ component: Index });

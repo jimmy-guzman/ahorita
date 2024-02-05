@@ -4,14 +4,23 @@ import { BanIcon, PencilIcon, SaveIcon } from 'lucide-react';
 import { useState } from 'react';
 
 import { editTaskMutationOptions } from '@/api/editTask';
-import type { TaskWithId } from '@/hooks/forms/useTasksForm';
-import { useTasksFormContext } from '@/hooks/forms/useTasksForm';
+
+import { useTasksFormContext } from '../-hooks/useTasksForm';
 
 // eslint-disable-next-line max-lines-per-function
 export const TasksTableNameCell = ({
   info,
 }: {
-  info: CellContext<TaskWithId, string>;
+  info: CellContext<
+    {
+      id: string;
+      name: string;
+      completed: boolean;
+      createdAt: Date;
+      updatedAt: Date;
+    },
+    string
+  >;
 }) => {
   const [isEditEnabled, setIsEditEnabled] = useState(false);
   const { getValues, register } = useTasksFormContext();

@@ -1,17 +1,29 @@
+import { typeboxResolver } from '@hookform/resolvers/typebox';
+import type { Static } from '@sinclair/typebox';
+import { Type } from '@sinclair/typebox';
 import { useMutation } from '@tanstack/react-query';
 import { createFileRoute } from '@tanstack/react-router';
 import { getRouteApi, useNavigate } from '@tanstack/react-router';
 import { ListPlusIcon } from 'lucide-react';
+import { useForm } from 'react-hook-form';
 
 import { addTaskByTagIdMutationOptions } from '@/api/addTask';
 import { TextInput } from '@/components/TextInput';
-import { useAddTaskForm } from '@/hooks/forms/useAddTaskForm';
 
 const routeApi = getRouteApi('/tags/$tagId/add-task');
 
-const Component = () => {
+const schema = Type.Object({
+  name: Type.String({ minLength: 1 }),
+});
+
+const AddTask = () => {
   const { tagId } = routeApi.useParams();
-  const { handleSubmit, control } = useAddTaskForm();
+  const { handleSubmit, control } = useForm<Static<typeof schema>>({
+    resolver: typeboxResolver(schema),
+    defaultValues: {
+      name: '',
+    },
+  });
   const { mutate, isPending } = useMutation(addTaskByTagIdMutationOptions);
   const navigate = useNavigate();
 
@@ -48,5 +60,5 @@ const Component = () => {
 };
 
 export const Route = createFileRoute('/tags/$tagId/add-task')({
-  component: Component,
+  component: AddTask,
 });

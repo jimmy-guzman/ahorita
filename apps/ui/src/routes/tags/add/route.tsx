@@ -1,15 +1,29 @@
+import { typeboxResolver } from '@hookform/resolvers/typebox';
+import type { Static } from '@sinclair/typebox';
+import { Type } from '@sinclair/typebox';
 import { useMutation } from '@tanstack/react-query';
 import { createFileRoute } from '@tanstack/react-router';
 import { useNavigate } from '@tanstack/react-router';
 import { ListPlusIcon } from 'lucide-react';
+import { useForm } from 'react-hook-form';
 
 import { addTagMutationOptions } from '@/api/addTag';
 import { TextInput } from '@/components/TextInput';
-import { useAddTagForm } from '@/hooks/forms/useAddTagForm';
 
-const AddTag = () => {
+const schema = Type.Object({
+  name: Type.String({ minLength: 1 }),
+  description: Type.String({ minLength: 1 }),
+});
+
+const AddTagForm = () => {
   const { mutate, isPending } = useMutation(addTagMutationOptions);
-  const { handleSubmit, control } = useAddTagForm();
+  const { handleSubmit, control } = useForm<Static<typeof schema>>({
+    resolver: typeboxResolver(schema),
+    defaultValues: {
+      name: '',
+      description: '',
+    },
+  });
   const navigate = useNavigate();
 
   return (
@@ -46,4 +60,4 @@ const AddTag = () => {
   );
 };
 
-export const Route = createFileRoute('/tags/add')({ component: AddTag });
+export const Route = createFileRoute('/tags/add')({ component: AddTagForm });
