@@ -6,7 +6,7 @@
       "dependsOn": ["^topo"]
     },
     "build": {
-      "dependsOn": ["^build"],
+      "dependsOn": ["^build", "generate"],
       "outputs": ["dist/**"]
     },
     "lint": { "dependsOn": ["topo"] },
@@ -19,6 +19,7 @@
       "persistent": true
     },
     "dev": {
+      "dependsOn": ["db:push"],
       "cache": false,
       "persistent": true
     },

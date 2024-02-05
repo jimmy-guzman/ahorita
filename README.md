@@ -24,6 +24,14 @@ Then you can finally install dependencies, by running the following:
 bun install
 ```
 
-## 🧞 Available Tasks
+Then get started with environment, by running the following:
 
-## 💡 Recommendations
+```
+cp .env.example .env
+```
+
+Then you start running things, by running the following:
+
+```
+bun dev
+```
