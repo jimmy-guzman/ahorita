@@ -5,26 +5,27 @@
     ".": "./src/index.ts"
   },
   "scripts": {
+    "build": "bun build ./src/index.ts --outdir ./dist --target=bun --minify",
     "clean": "rimraf .turbo node_modules dist",
     "db:push": "drizzle-kit push:sqlite",
     "db:studio": "drizzle-kit studio",
     "dev": "bun run --hot src/index.ts",
     "lint": "eslint .",
-    "preview": "bun src/index.ts",
+    "preview": "bun run dist/index.js",
     "setup": "drizzle-kit push:sqlite",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@elysiajs/cors": "0.8.0",
     "@elysiajs/swagger": "0.8.5",
-    "drizzle-orm": "^0.29.3",
+    "drizzle-orm": "0.29.3",
     "elysia": "0.8.16",
-    "nanoid": "^5.0.5",
+    "nanoid": "5.0.5",
     "picocolors": "1.0.0"
   },
   "devDependencies": {
-    "better-sqlite3": "^9.4.0",
-    "drizzle-kit": "^0.20.14",
+    "better-sqlite3": "9.4.0",
+    "drizzle-kit": "0.20.14",
     "eslint-config-ahorita": "workspace:*",
     "rimraf": "5.0.5",
     "tsconfig": "workspace:*"
