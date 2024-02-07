@@ -1,11 +1,13 @@
-import { prisma } from '@ahorita/db';
-import { Elysia, t } from 'elysia';
+import { eq } from 'drizzle-orm';
+import { Elysia, NotFoundError, t } from 'elysia';
 
+import { db } from '../db';
 import { TaskDto } from '../models/tasks';
+import { tasks } from '../schema';
 
 const Params = t.Object({ id: t.String() });
 
-export const tasks = new Elysia().group(
+export const tasksRoutes = new Elysia().group(
   '/tasks',
   { detail: { tags: ['Tasks'] } },
   (app) =>
@@ -13,7 +15,17 @@ export const tasks = new Elysia().group(
       .patch(
         '/:id',
         async ({ params: { id }, body }) => {
-          return prisma.task.update({ where: { id }, data: body });
+          const [task] = await db
+            .update(tasks)
+            .set(body)
+            .where(eq(tasks.id, id))
+            .returning();
+
+          if (!task) {
+            throw NotFoundError;
+          }
+
+          return task;
         },
         {
           body: t.Partial(t.Pick(TaskDto, ['name', 'completed'])),
@@ -23,7 +35,18 @@ export const tasks = new Elysia().group(
       )
       .delete(
         '/:id',
-        async ({ params: { id } }) => prisma.task.delete({ where: { id } }),
+        async ({ params: { id } }) => {
+          const [task] = await db
+            .delete(tasks)
+            .where(eq(tasks.id, id))
+            .returning();
+
+          if (!task) {
+            throw NotFoundError;
+          }
+
+          return task;
+        },
         {
           params: Params,
           response: TaskDto,

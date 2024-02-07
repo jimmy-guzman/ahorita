@@ -3,10 +3,11 @@ import swagger from '@elysiajs/swagger';
 import { Elysia } from 'elysia';
 import { cyan } from 'picocolors';
 
-import { tags } from './routes/tags';
-import { tasks } from './routes/tasks';
+import { tagsRoute } from './routes/tags';
+import { tasksRoutes } from './routes/tasks';
 
 const app = new Elysia()
+  // @ts-expect-error TODO: remove once @elysiajs/eden is bumped
   .use(cors({ methods: ['GET', 'POST', 'PATCH', 'DELETE'] }))
   .use(
     swagger({
@@ -26,8 +27,8 @@ const app = new Elysia()
 
     return undefined;
   })
-  .use(tasks)
-  .use(tags)
+  .use(tasksRoutes)
+  .use(tagsRoute)
   .listen(3000, ({ hostname, port }) => {
     // eslint-disable-next-line no-console
     console.log(`🚀 Running at ${cyan(`http://${hostname}:${port}/docs`)}`);

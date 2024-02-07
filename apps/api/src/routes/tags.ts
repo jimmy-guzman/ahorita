@@ -1,23 +1,26 @@
-import { prisma } from '@ahorita/db';
-import { Elysia, t } from 'elysia';
+import { eq } from 'drizzle-orm';
+import { Elysia, InternalServerError, NotFoundError, t } from 'elysia';
 
+import { db } from '../db';
 import { TagDto } from '../models/tags';
 import { TaskDto } from '../models/tasks';
+import { tags, tasks } from '../schema';
 
-export const tags = new Elysia()
+export const tagsRoute = new Elysia()
   // eslint-disable-next-line max-lines-per-function
   .group('/tags', { detail: { tags: ['Tags'] } }, (app) =>
     app
       .get(
         '',
         async () => {
-          return prisma.tag.findMany({
-            include: {
-              _count: {
-                select: { tasks: true },
-              },
-            },
+          const results = await db.query.tags.findMany({
+            with: { tasks: true },
           });
+
+          return results.map(({ tasks: _tasks, ...tag }) => ({
+            ...tag,
+            _count: { tasks: _tasks.length },
+          }));
         },
         {
           response: t.Array(TagDto),
@@ -26,14 +29,11 @@ export const tags = new Elysia()
       .post(
         '',
         async ({ body }) => {
-          return prisma.tag.create({
-            data: body,
-            include: {
-              _count: {
-                select: { tasks: true },
-              },
-            },
-          });
+          const [tag] = await db.insert(tags).values(body).returning();
+
+          if (!tag) throw InternalServerError;
+
+          return { ...tag, _count: { tasks: 0 } };
         },
         {
           body: t.Pick(TagDto, ['name', 'description']),
@@ -42,15 +42,19 @@ export const tags = new Elysia()
       )
       .get(
         '/:id',
-        async ({ params: { id } }) =>
-          prisma.tag.findUniqueOrThrow({
-            where: { id },
-            include: {
-              _count: {
-                select: { tasks: true },
-              },
-            },
-          }),
+        async ({ params: { id } }) => {
+          const [tag] = await db.query.tags.findMany({
+            where: eq(tags.id, id),
+            with: { tasks: true },
+            limit: 1,
+          });
+
+          if (!tag) throw NotFoundError;
+
+          const { tasks: _tasks, ...rest } = tag;
+
+          return { ...rest, _count: { tasks: _tasks.length } };
+        },
         {
           params: t.Object({ id: t.String() }),
           response: TagDto,
@@ -58,15 +62,22 @@ export const tags = new Elysia()
       )
       .delete(
         '/:id',
-        async ({ params: { id } }) =>
-          prisma.tag.delete({
-            where: { id },
-            include: {
-              _count: {
-                select: { tasks: true },
-              },
-            },
-          }),
+        async ({ params: { id } }) => {
+          const result = await db.transaction(async (tx) => {
+            const [tag] = await tx
+              .delete(tags)
+              .where(eq(tags.id, id))
+              .returning();
+
+            if (!tag) throw NotFoundError;
+
+            await tx.delete(tasks).where(eq(tasks.tagId, id));
+
+            return tag;
+          });
+
+          return { ...result, _count: { tasks: 0 } };
+        },
         {
           params: t.Object({ id: t.String() }),
           response: TagDto,
@@ -75,9 +86,7 @@ export const tags = new Elysia()
       .get(
         '/:id/tasks',
         async ({ params: { id } }) => {
-          return prisma.task.findMany({
-            where: { tags: { some: { id } } },
-          });
+          return db.query.tasks.findMany({ where: eq(tasks.tagId, id) });
         },
         {
           params: t.Object({ id: t.String() }),
@@ -87,12 +96,14 @@ export const tags = new Elysia()
       .post(
         '/:id/tasks',
         async ({ params: { id }, body }) => {
-          return prisma.task.create({
-            data: {
-              ...body,
-              tags: { connect: { id } },
-            },
-          });
+          const [task] = await db
+            .insert(tasks)
+            .values({ ...body, tagId: id })
+            .returning();
+
+          if (!task) throw InternalServerError;
+
+          return task;
         },
         {
           params: t.Object({ id: t.String() }),

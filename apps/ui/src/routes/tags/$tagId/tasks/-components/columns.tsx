@@ -7,10 +7,11 @@ import { TasksTableNameCell } from './TasksTableNameCell';
 
 const columnHelper = createColumnHelper<{
   id: string;
+  tagId: string;
   name: string;
   completed: boolean;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: string;
+  updatedAt: string;
 }>();
 
 export const columns = [

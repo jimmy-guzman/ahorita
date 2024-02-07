@@ -9,10 +9,11 @@ interface TaskTableActionsProps {
   info: CellContext<
     {
       id: string;
+      tagId: string;
       name: string;
       completed: boolean;
-      createdAt: Date;
-      updatedAt: Date;
+      createdAt: string;
+      updatedAt: string;
     },
     unknown
   >;

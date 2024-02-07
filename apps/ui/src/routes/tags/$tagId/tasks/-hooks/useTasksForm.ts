@@ -7,10 +7,11 @@ const schema = Type.Object({
   tasks: Type.Array(
     Type.Object({
       name: Type.String({ minLength: 1 }),
-      createdAt: Type.Date(),
-      updatedAt: Type.Date(),
+      createdAt: Type.String(),
+      updatedAt: Type.String(),
       completed: Type.Boolean(),
       id: Type.String(),
+      tagId: Type.String(),
     })
   ),
 });

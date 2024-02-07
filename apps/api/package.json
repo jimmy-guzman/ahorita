@@ -6,19 +6,25 @@
   },
   "scripts": {
     "clean": "rimraf .turbo node_modules dist",
+    "setup": "drizzle-kit push:sqlite",
     "dev": "bun run --hot src/index.ts",
     "lint": "eslint .",
     "preview": "bun src/index.ts",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "db:push": "drizzle-kit push:sqlite",
+    "db:studio": "drizzle-kit studio"
   },
   "dependencies": {
-    "@ahorita/db": "workspace:*",
     "@elysiajs/cors": "0.8.0",
     "@elysiajs/swagger": "0.8.5",
-    "elysia": "0.8.15",
+    "drizzle-orm": "^0.29.3",
+    "elysia": "0.8.16",
+    "nanoid": "^5.0.5",
     "picocolors": "1.0.0"
   },
   "devDependencies": {
+    "better-sqlite3": "^9.4.0",
+    "drizzle-kit": "^0.20.14",
     "eslint-config-ahorita": "workspace:*",
     "rimraf": "5.0.5",
     "tsconfig": "workspace:*"
