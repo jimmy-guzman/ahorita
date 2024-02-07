@@ -2,7 +2,17 @@
 
 > Another task management application built for the sake of playing with new technologies.
 
-## 🐣 Features
+## 🐣 Technologies
+
+- [Bun](https://bun.sh/)
+- [Turborepo](https://turbo.build/repo)
+- [TypeScript](https://www.typescriptlang.org)
+- [React](https://react.dev/)
+- [TailwindCSS](https://tailwindcss.com/)
+- [Vite](https://vitejs.dev/)
+- [Playwright](https://playwright.dev/)
+- [ElysiaJS](https://elysiajs.com/)
+- [Drizzle ORM](https://orm.drizzle.team/)
 
 ## 🏁 Getting Started
 
