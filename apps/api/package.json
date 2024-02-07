@@ -6,13 +6,13 @@
   },
   "scripts": {
     "clean": "rimraf .turbo node_modules dist",
-    "setup": "drizzle-kit push:sqlite",
+    "db:push": "drizzle-kit push:sqlite",
+    "db:studio": "drizzle-kit studio",
     "dev": "bun run --hot src/index.ts",
     "lint": "eslint .",
     "preview": "bun src/index.ts",
-    "typecheck": "tsc --noEmit",
-    "db:push": "drizzle-kit push:sqlite",
-    "db:studio": "drizzle-kit studio"
+    "setup": "drizzle-kit push:sqlite",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@elysiajs/cors": "0.8.0",
