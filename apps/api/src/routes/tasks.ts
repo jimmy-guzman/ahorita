@@ -17,7 +17,7 @@ export const tasksRoutes = new Elysia().group(
         async ({ params: { id }, body }) => {
           const [task] = await db
             .update(tasks)
-            .set(body)
+            .set({ ...body, updatedAt: new Date().toISOString() })
             .where(eq(tasks.id, id))
             .returning();
 
