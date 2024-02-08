@@ -85,11 +85,11 @@ test('should create tag and task', async ({ page }) => {
 
   expect(await getAxeViolations(page)).toEqual([]);
 
-  await expect(page.getByRole('cell', { name: 'no' })).toBeVisible();
+  await expect(page.getByRole('cell', { name: 'Todo' })).toBeVisible();
 
   await page.getByRole('button', { name: `Complete ${randomTask}` }).click();
 
-  await expect(page.getByRole('cell', { name: 'yes' })).toBeVisible();
+  await expect(page.getByRole('cell', { name: 'Done' })).toBeVisible();
 
   await page.getByRole('button', { name: `Delete ${randomTask}` }).click();
 

@@ -10,6 +10,7 @@
     "e2e": "playwright test",
     "lint": "eslint .",
     "preview": "vite preview",
+    "test": "vitest",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
@@ -37,6 +38,9 @@
     "@tanstack/react-query-devtools": "5.18.1",
     "@tanstack/router-devtools": "1.15.22",
     "@tanstack/router-vite-plugin": "1.15.22",
+    "@testing-library/jest-dom": "6.4.2",
+    "@testing-library/react": "14.2.1",
+    "@testing-library/user-event": "14.5.2",
     "@types/node": "20.11.16",
     "@types/react": "18.2.55",
     "@types/react-dom": "18.2.19",
@@ -44,11 +48,13 @@
     "autoprefixer": "10.4.17",
     "daisyui": "4.6.2",
     "eslint-config-ahorita": "workspace:*",
+    "happy-dom": "13.3.8",
     "postcss": "8.4.35",
     "rimraf": "5.0.5",
     "tailwindcss": "3.4.1",
     "tsconfig": "workspace:*",
     "typescript": "5.3.3",
-    "vite": "5.0.12"
+    "vite": "5.0.12",
+    "vitest": "1.2.2"
   }
 }
