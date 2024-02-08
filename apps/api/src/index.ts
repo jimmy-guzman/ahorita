@@ -7,7 +7,6 @@ import { tagsRoute } from './routes/tags';
 import { tasksRoutes } from './routes/tasks';
 
 const app = new Elysia()
-  // @ts-expect-error TODO: remove once @elysiajs/eden is bumped
   .use(cors({ methods: ['GET', 'POST', 'PATCH', 'DELETE'] }))
   .use(
     swagger({
