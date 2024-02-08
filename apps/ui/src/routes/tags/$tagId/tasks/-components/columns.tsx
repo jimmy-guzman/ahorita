@@ -9,7 +9,7 @@ const columnHelper = createColumnHelper<{
   id: string;
   tagId: string;
   name: string;
-  completed: boolean;
+  status: 'BACKLOG' | 'CANCELED' | 'DONE' | 'IN_PROGRESS' | 'TODO';
   createdAt: string;
   updatedAt: string;
 }>();
@@ -19,7 +19,7 @@ export const columns = [
     header: 'Task',
     cell: (info) => <TasksTableNameCell info={info} />,
   }),
-  columnHelper.accessor('completed', {
+  columnHelper.accessor('status', {
     header: 'Completed',
     cell: (info) => <TasksTableCompletedCell info={info} />,
   }),

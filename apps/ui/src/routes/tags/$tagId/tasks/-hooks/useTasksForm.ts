@@ -9,7 +9,13 @@ const schema = Type.Object({
       name: Type.String({ minLength: 1 }),
       createdAt: Type.String(),
       updatedAt: Type.String(),
-      completed: Type.Boolean(),
+      status: Type.Union([
+        Type.Literal('BACKLOG'),
+        Type.Literal('TODO'),
+        Type.Literal('IN_PROGRESS'),
+        Type.Literal('DONE'),
+        Type.Literal('CANCELED'),
+      ]),
       id: Type.String(),
       tagId: Type.String(),
     })

@@ -19,6 +19,7 @@
     "noFallthroughCasesInSwitch": true,
 
     "useUnknownInCatchVariables": true,
+    "noUncheckedIndexedAccess": true,
     "noPropertyAccessFromIndexSignature": false
   },
   "exclude": ["node_modules"]

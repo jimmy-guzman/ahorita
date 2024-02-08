@@ -6,4 +6,7 @@ import * as schema from './schema';
 
 const sqlite = new Database(Bun.env.DATABASE_URL);
 
-export const db = drizzle(sqlite, { schema });
+export const db = drizzle(sqlite, {
+  schema,
+  logger: Bun.env.QUERY_LOGGING === 'true',
+});

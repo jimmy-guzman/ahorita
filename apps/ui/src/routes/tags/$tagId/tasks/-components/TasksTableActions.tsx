@@ -11,7 +11,7 @@ interface TaskTableActionsProps {
       id: string;
       tagId: string;
       name: string;
-      completed: boolean;
+      status: 'BACKLOG' | 'CANCELED' | 'DONE' | 'IN_PROGRESS' | 'TODO';
       createdAt: string;
       updatedAt: string;
     },
@@ -29,14 +29,14 @@ export const TasksTableActions = ({
 
   return (
     <div className='flex gap-2'>
-      {task.completed ? (
+      {task.status === 'DONE' ? (
         <button
           aria-label={`Complete ${task.name}`}
           className='dsy-btn dsy-btn-square dsy-join-item dsy-btn-sm dsy-btn-success'
           onClick={() => {
             editMutation.mutate({
               params: { id: task.id },
-              body: { completed: false },
+              body: { status: 'TODO' },
             });
           }}
         >
@@ -49,7 +49,7 @@ export const TasksTableActions = ({
           onClick={() => {
             editMutation.mutate({
               params: { id: task.id },
-              body: { completed: true },
+              body: { status: 'DONE' },
             });
           }}
         >

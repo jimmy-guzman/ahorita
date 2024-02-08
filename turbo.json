@@ -19,14 +19,13 @@
       "persistent": true
     },
     "dev": {
-      "dependsOn": ["db:push"],
       "cache": false,
       "persistent": true
     },
     "clean": {
       "cache": false
     },
-    "db:push": {},
+    "db:push": { "cache": false },
     "db:seed": {},
     "db:studio": {}
   }

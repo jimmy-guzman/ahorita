@@ -17,6 +17,8 @@ module.exports = {
           'Encode',
           'Partial',
           'Pick',
+          'Union',
+          'Literal',
         ],
       },
     ],

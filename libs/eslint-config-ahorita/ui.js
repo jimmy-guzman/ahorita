@@ -17,6 +17,20 @@ module.exports = {
       { allowConstantExport: true },
     ],
     'react/jsx-curly-brace-presence': ['error', 'never'],
+    'new-cap': [
+      'error',
+      {
+        capIsNewExceptions: [
+          'Transform',
+          'Decode',
+          'Encode',
+          'Partial',
+          'Pick',
+          'Union',
+          'Literal',
+        ],
+      },
+    ],
   },
   overrides: [
     {

@@ -1,5 +1,5 @@
 import { relations, sql } from 'drizzle-orm';
-import { integer, sqliteTable, text } from 'drizzle-orm/sqlite-core';
+import { sqliteTable, text } from 'drizzle-orm/sqlite-core';
 import { nanoid } from 'nanoid';
 
 export const tags = sqliteTable('tags', {
@@ -21,7 +21,11 @@ export const tasks = sqliteTable('tasks', {
     .$defaultFn(() => nanoid())
     .primaryKey(),
   name: text('name').notNull(),
-  completed: integer('completed', { mode: 'boolean' }).default(false).notNull(),
+  status: text('status', {
+    enum: ['BACKLOG', 'TODO', 'IN_PROGRESS', 'DONE', 'CANCELED'],
+  })
+    .default('TODO')
+    .notNull(),
   createdAt: text('createdAt')
     .default(sql`CURRENT_TIMESTAMP`)
     .notNull(),

@@ -40,6 +40,12 @@ Then get started with environment, by running the following:
 cp .env.example .env
 ```
 
+Then to push your schema changes directly to the database, by running the following:
+
+```
+bun db:push
+```
+
 Then you start running things, by running the following:
 
 ```
