@@ -13,6 +13,9 @@
 - [Playwright](https://playwright.dev/)
 - [ElysiaJS](https://elysiajs.com/)
 - [Drizzle ORM](https://orm.drizzle.team/)
+- [Biome](https://biomejs.dev/)
+- [lefthook](https://github.com/evilmartians/lefthook)
+- [GitHub Actions](https://github.com/features/actions)
 
 ## 🏁 Getting Started
 
@@ -22,7 +25,7 @@ This project uses [bun](https://bun.sh/) so please [install](https://bun.sh/docs
 curl -fsSL https://bun.sh/install | bash
 ```
 
-or if you have already have it installed you update, by running the following:
+or if you have already have it installed you can update, by running the following:
 
 ```
 bun upgrade
