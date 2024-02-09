@@ -1,4 +1,4 @@
-import type { Api } from "@/api/client";
+import type { API } from "@/api/client";
 import { api } from "@/api/client";
 import { mutationOptions } from "@/api/mutationOptions";
 import { queryClient } from "@/queryClient";
@@ -9,7 +9,7 @@ export const editTaskMutationOptions = mutationOptions({
 	mutationFn: async ({
 		params,
 		body,
-	}: Pick<Api["/tasks/:id"]["patch"], "body" | "params">) => {
+	}: Pick<API["/tasks/:id"]["patch"], "body" | "params">) => {
 		const res = await api.tasks[params.id as ":id"].patch(body);
 
 		if (res.error) throw new Error(res.error.value);

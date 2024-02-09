@@ -28,7 +28,16 @@
 	"editor.formatOnSave": true,
 	"css.lint.unknownAtRules": "ignore",
 	"editor.defaultFormatter": "biomejs.biome",
-	"tailwindCSS.experimental.classRegex": [
+	"[yaml]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[html]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[markdown]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"TailwindCSS.experimental.classRegex": [
 		["clsx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
 	],
 	"javascript.updateImportsOnFileMove.enabled": "always",

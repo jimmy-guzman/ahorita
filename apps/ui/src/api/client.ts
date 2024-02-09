@@ -3,4 +3,4 @@ import { edenTreaty } from "@elysiajs/eden";
 
 export const api = edenTreaty<App>(import.meta.env.VITE_AHORITA_API_ORIGIN);
 
-export type Api = App["schema"];
+export type API = App["schema"];
