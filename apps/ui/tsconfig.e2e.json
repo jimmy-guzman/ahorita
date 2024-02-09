@@ -1,18 +1,18 @@
 {
-  "compilerOptions": {
-    "composite": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "target": "es2022",
-    "allowJs": true,
-    "resolveJsonModule": true,
-    "moduleDetection": "force",
-    "isolatedModules": true,
-    "strict": true,
-    "noUncheckedIndexedAccess": true,
-    "moduleResolution": "Bundler",
-    "module": "ESNext",
-    "lib": ["es2022", "dom", "dom.iterable"]
-  },
-  "include": ["e2e"]
+	"compilerOptions": {
+		"composite": true,
+		"esModuleInterop": true,
+		"skipLibCheck": true,
+		"target": "es2022",
+		"allowJs": true,
+		"resolveJsonModule": true,
+		"moduleDetection": "force",
+		"isolatedModules": true,
+		"strict": true,
+		"noUncheckedIndexedAccess": true,
+		"moduleResolution": "Bundler",
+		"module": "ESNext",
+		"lib": ["es2022", "dom", "dom.iterable"]
+	},
+	"include": ["e2e"]
 }

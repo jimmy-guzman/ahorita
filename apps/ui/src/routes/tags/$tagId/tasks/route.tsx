@@ -1,31 +1,31 @@
-import { useSuspenseQuery } from '@tanstack/react-query';
-import { createFileRoute } from '@tanstack/react-router';
-import { getRouteApi } from '@tanstack/react-router';
-import { FormProvider } from 'react-hook-form';
+import { useSuspenseQuery } from "@tanstack/react-query";
+import { createFileRoute } from "@tanstack/react-router";
+import { getRouteApi } from "@tanstack/react-router";
+import { FormProvider } from "react-hook-form";
 
-import { tasksByTagQueryOptions } from '@/api/queryTasksByTag';
-import { Table } from '@/components/Table';
-import { useTasksForm } from '@/routes/tags/$tagId/tasks/-hooks/useTasksForm';
+import { tasksByTagQueryOptions } from "@/api/queryTasksByTag";
+import { Table } from "@/components/Table";
+import { useTasksForm } from "@/routes/tags/$tagId/tasks/-hooks/useTasksForm";
 
-import { columns } from './-components/columns';
+import { columns } from "./-components/columns";
 
-const routeApi = getRouteApi('/tags/$tagId/tasks');
+const routeApi = getRouteApi("/tags/$tagId/tasks");
 
 const TasksByTag = () => {
-  const { tagId } = routeApi.useParams();
-  const { data: tasks } = useSuspenseQuery(tasksByTagQueryOptions(tagId));
-  const form = useTasksForm(tasks);
+	const { tagId } = routeApi.useParams();
+	const { data: tasks } = useSuspenseQuery(tasksByTagQueryOptions(tagId));
+	const form = useTasksForm(tasks);
 
-  return (
-    <FormProvider {...form}>
-      <Table data={tasks} columns={columns} />
-    </FormProvider>
-  );
+	return (
+		<FormProvider {...form}>
+			<Table data={tasks} columns={columns} />
+		</FormProvider>
+	);
 };
 
-export const Route = createFileRoute('/tags/$tagId/tasks')({
-  component: TasksByTag,
-  loader: async ({ context: { queryClient }, params }) => {
-    await queryClient.ensureQueryData(tasksByTagQueryOptions(params.tagId));
-  },
+export const Route = createFileRoute("/tags/$tagId/tasks")({
+	component: TasksByTag,
+	loader: async ({ context: { queryClient }, params }) => {
+		await queryClient.ensureQueryData(tasksByTagQueryOptions(params.tagId));
+	},
 });

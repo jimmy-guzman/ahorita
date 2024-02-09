@@ -1,39 +1,36 @@
 {
-  "cSpell.words": [
-    "ahorita",
-    "bunx",
-    "clsx",
-    "daisyui",
-    "elysia",
-    "elysiajs",
-    "gitzy",
-    "headlessui",
-    "hono",
-    "hookform",
-    "lefthook",
-    "lucide",
-    "npkill",
-    "outdir",
-    "picocolors",
-    "tailwindcss",
-    "tanstack",
-    "textbox",
-    "todos",
-    "topo",
-    "Turborepo",
-    "typebox",
-    "typecheck"
-  ],
-  "editor.formatOnSave": true,
-  "css.lint.unknownAtRules": "ignore",
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "eslint.workingDirectories": [
-    { "pattern": "./apps/*" },
-    { "pattern": "./libs/*" }
-  ],
-  "tailwindCSS.experimental.classRegex": [
-    ["clsx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
-  ],
-  "javascript.updateImportsOnFileMove.enabled": "always",
-  "typescript.updateImportsOnFileMove.enabled": "always"
+	"cSpell.words": [
+		"ahorita",
+		"biomejs",
+		"bunx",
+		"clsx",
+		"daisyui",
+		"elysia",
+		"elysiajs",
+		"gitzy",
+		"headlessui",
+		"hono",
+		"hookform",
+		"lefthook",
+		"lucide",
+		"npkill",
+		"outdir",
+		"picocolors",
+		"tailwindcss",
+		"tanstack",
+		"textbox",
+		"todos",
+		"topo",
+		"Turborepo",
+		"typebox",
+		"typecheck"
+	],
+	"editor.formatOnSave": true,
+	"css.lint.unknownAtRules": "ignore",
+	"editor.defaultFormatter": "biomejs.biome",
+	"tailwindCSS.experimental.classRegex": [
+		["clsx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
+	],
+	"javascript.updateImportsOnFileMove.enabled": "always",
+	"typescript.updateImportsOnFileMove.enabled": "always"
 }
