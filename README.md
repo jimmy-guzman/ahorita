@@ -9,6 +9,7 @@
 - [TypeScript](https://www.typescriptlang.org)
 - [React](https://react.dev/)
 - [TailwindCSS](https://tailwindcss.com/)
+- [daisyUi](https://daisyui.com/)
 - [Vite](https://vitejs.dev/)
 - [Playwright](https://playwright.dev/)
 - [ElysiaJS](https://elysiajs.com/)
