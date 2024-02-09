@@ -17,7 +17,7 @@ const cellsByStatus = {
 		</span>
 	),
 	TODO: (
-		<span className="text-warning">
+		<span className="text-accent">
 			<CircleIcon className={ICON_CLASS} /> Todo
 		</span>
 	),

@@ -51,7 +51,7 @@ const AddTask = () => {
 				<TextInput control={control} name="name" label="Your task's name?" />
 				<div className="flex justify-end">
 					<button
-						type="button"
+						type="submit"
 						className="dsy-btn dsy-btn-primary"
 						disabled={isPending}
 					>

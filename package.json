@@ -7,7 +7,7 @@
 	],
 	"scripts": {
 		"build": "turbo run build",
-		"check": "turbo run format lint typecheck build",
+		"check": "turbo run format lint typecheck test build",
 		"clean": "turbo clean",
 		"db:push": "turbo run db:push",
 		"db:studio": "turbo run db:studio",

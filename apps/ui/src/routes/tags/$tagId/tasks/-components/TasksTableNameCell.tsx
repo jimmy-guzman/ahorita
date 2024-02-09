@@ -16,6 +16,7 @@ export const TasksTableNameCell = ({
 			tagId: string;
 			name: string;
 			status: "BACKLOG" | "CANCELED" | "DONE" | "IN_PROGRESS" | "TODO";
+			priority: "LOW" | "MEDIUM" | "HIGH";
 			createdAt: string;
 			updatedAt: string;
 		},

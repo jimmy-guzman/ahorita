@@ -4,6 +4,10 @@ import { nanoid } from "nanoid";
 
 const now = () => new Date().toISOString();
 
+const statuses = <const>["BACKLOG", "TODO", "IN_PROGRESS", "DONE", "CANCELED"];
+
+const priorities = <const>["LOW", "MEDIUM", "HIGH"];
+
 export const tags = sqliteTable("tags", {
 	id: text("id")
 		.$default(() => nanoid())
@@ -19,11 +23,8 @@ export const tasks = sqliteTable("tasks", {
 		.$default(() => nanoid())
 		.primaryKey(),
 	name: text("name").notNull(),
-	status: text("status", {
-		enum: ["BACKLOG", "TODO", "IN_PROGRESS", "DONE", "CANCELED"],
-	})
-		.default("TODO")
-		.notNull(),
+	status: text("status", { enum: statuses }).default("TODO").notNull(),
+	priority: text("priority", { enum: priorities }).default("MEDIUM").notNull(),
 	createdAt: text("createdAt").$default(now).notNull(),
 	updatedAt: text("updatedAt").$default(now).notNull(),
 

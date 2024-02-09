@@ -10,6 +10,7 @@ export const TaskDto = t.Object({
 		t.Literal("DONE"),
 		t.Literal("CANCELED"),
 	]),
+	priority: t.Union([t.Literal("LOW"), t.Literal("MEDIUM"), t.Literal("HIGH")]),
 	createdAt: t.String(),
 	updatedAt: t.String(),
 	tagId: t.String(),
