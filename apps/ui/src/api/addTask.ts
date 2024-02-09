@@ -1,4 +1,4 @@
-import type { Api } from "@/api/client";
+import type { API } from "@/api/client";
 import { api } from "@/api/client";
 import { mutationOptions } from "@/api/mutationOptions";
 import { queryClient } from "@/queryClient";
@@ -9,7 +9,7 @@ export const addTaskByTagIdMutationOptions = mutationOptions({
 	mutationFn: async ({
 		params,
 		body,
-	}: Pick<Api["/tags/:id/tasks"]["post"], "body" | "params">) => {
+	}: Pick<API["/tags/:id/tasks"]["post"], "body" | "params">) => {
 		const res = await api.tags[params.id as ":id"].tasks.post(body);
 
 		if (res.error) throw new Error(res.error.value);
