@@ -14,14 +14,6 @@ runs:
       with:
         bun-version: ${{ inputs.bun-version }}
 
-    - name: 🏗 Setup bun cache
-      uses: actions/cache@v4
-      with:
-        path: ~/.bun/install/cache
-        key: ${{ runner.os }}-${{ matrix.bun }}-bun-${{ hashFiles('**/bun.lockb') }}
-        restore-keys: |
-          ${{ runner.os }}-${{ matrix.bun }}-bun-
-
     - name: 📦 Install deps
       run: bun install
       shell: bash
