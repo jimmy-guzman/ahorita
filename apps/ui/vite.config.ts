@@ -1,12 +1,13 @@
-import path from "node:path";
+import path from "path";
 
 import { TanStackRouterVite } from "@tanstack/router-vite-plugin";
 import react from "@vitejs/plugin-react-swc";
 import { defineConfig } from "vite";
+
 import { configDefaults } from "vitest/config";
 
 // https://vitejs.dev/config/
-export default defineConfig({
+export default defineConfig(() => ({
   plugins: [react(), TanStackRouterVite()],
   resolve: { alias: { "@": path.resolve(__dirname, "./src") } },
   test: {
@@ -15,4 +16,4 @@ export default defineConfig({
     exclude: [...configDefaults.exclude, "e2e/*"],
     setupFiles: "./src/test/setup.ts",
   },
-});
+}));
