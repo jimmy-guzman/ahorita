@@ -12,6 +12,7 @@
 		"hono",
 		"hookform",
 		"lefthook",
+		"lockb",
 		"lucide",
 		"npkill",
 		"outdir",
@@ -38,5 +39,8 @@
 		"editor.defaultFormatter": "esbenp.prettier-vscode"
 	},
 	"javascript.updateImportsOnFileMove.enabled": "always",
-	"typescript.updateImportsOnFileMove.enabled": "always"
+	"typescript.updateImportsOnFileMove.enabled": "always",
+	"editor.codeActionsOnSave": {
+		"source.organizeImports.biome": "always"
+	}
 }

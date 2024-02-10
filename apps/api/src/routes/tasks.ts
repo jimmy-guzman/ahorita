@@ -28,7 +28,7 @@ export const tasksRoutes = new Elysia().group(
 					return task;
 				},
 				{
-					body: t.Partial(t.Pick(TaskDto, ["name", "status"])),
+					body: t.Partial(t.Pick(TaskDto, ["name", "status", "priority"])),
 					params: Params,
 					response: TaskDto,
 				},

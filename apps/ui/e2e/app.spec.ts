@@ -86,7 +86,15 @@ test("should create tag and task", async ({ page }) => {
 
 	await expect(page.getByRole("cell", { name: "Todo" })).toBeVisible();
 
-	await page.getByRole("button", { name: `Complete ${randomTask}` }).click();
+	const row = page.getByRole("row", {
+		name: `${randomTask} Todo Medium Open Menu`,
+	});
+
+	await row.getByRole("button", { name: "Open menu" }).click();
+
+	await row.getByText("Status").click();
+
+	await row.getByRole("button", { name: "Done" }).click();
 
 	await expect(page.getByRole("cell", { name: "Done" })).toBeVisible();
 

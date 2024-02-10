@@ -1,9 +1,8 @@
 import { createColumnHelper } from "@tanstack/react-table";
-import { formatDistanceToNowStrict } from "date-fns";
 
-import { TasksTableActions } from "./TasksTableActions";
 import { TasksTableNameCell } from "./TasksTableNameCell";
 import { TasksTablePriorityCell } from "./TasksTablePriorityCell";
+import { TasksTableRowActions } from "./TasksTableRowActions";
 import { TasksTableStatusCell } from "./TasksTableStatusCell";
 
 const columnHelper = createColumnHelper<{
@@ -29,16 +28,9 @@ export const columns = [
 		header: "Priority",
 		cell: (info) => <TasksTablePriorityCell priority={info.getValue()} />,
 	}),
-	columnHelper.accessor("createdAt", {
-		header: "Created At",
-		cell: (info) => `${formatDistanceToNowStrict(info.getValue())} ago`,
-	}),
-	columnHelper.accessor("updatedAt", {
-		header: "Updated At",
-		cell: (info) => `${formatDistanceToNowStrict(info.getValue())} ago`,
-	}),
 	columnHelper.display({
-		header: "Actions",
-		cell: (info) => <TasksTableActions info={info} />,
+		id: "actions",
+		header: () => <span className="sr-only">Actions</span>,
+		cell: (info) => <TasksTableRowActions task={info.row.original} />,
 	}),
 ];

@@ -6,19 +6,19 @@ type Priority = "LOW" | "MEDIUM" | "HIGH";
 
 const cellsByPriority = {
 	LOW: (
-		<span className="text-info">
+		<>
 			<ArrowDownIcon className={ICON_CLASS} /> Low
-		</span>
+		</>
 	),
 	MEDIUM: (
-		<span className="text-accent">
+		<>
 			<ArrowRightIcon className={ICON_CLASS} /> Medium
-		</span>
+		</>
 	),
 	HIGH: (
-		<span className="text-error">
+		<>
 			<ArrowUpIcon className={ICON_CLASS} /> High
-		</span>
+		</>
 	),
 } satisfies Record<Priority, JSX.Element>;
 
