@@ -12,20 +12,20 @@ import { columns } from "./-components/columns";
 const routeApi = getRouteApi("/tags/$tagId/tasks");
 
 const TasksByTag = () => {
-	const { tagId } = routeApi.useParams();
-	const { data: tasks } = useSuspenseQuery(tasksByTagQueryOptions(tagId));
-	const form = useTasksForm(tasks);
+  const { tagId } = routeApi.useParams();
+  const { data: tasks } = useSuspenseQuery(tasksByTagQueryOptions(tagId));
+  const form = useTasksForm(tasks);
 
-	return (
-		<FormProvider {...form}>
-			<Table data={tasks} columns={columns} />
-		</FormProvider>
-	);
+  return (
+    <FormProvider {...form}>
+      <Table data={tasks} columns={columns} />
+    </FormProvider>
+  );
 };
 
 export const Route = createFileRoute("/tags/$tagId/tasks")({
-	component: TasksByTag,
-	loader: async ({ context: { queryClient }, params }) => {
-		await queryClient.ensureQueryData(tasksByTagQueryOptions(params.tagId));
-	},
+  component: TasksByTag,
+  loader: async ({ context: { queryClient }, params }) => {
+    await queryClient.ensureQueryData(tasksByTagQueryOptions(params.tagId));
+  },
 });

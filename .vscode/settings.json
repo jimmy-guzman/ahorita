@@ -1,46 +1,46 @@
 {
-	"cSpell.words": [
-		"ahorita",
-		"biomejs",
-		"bunx",
-		"clsx",
-		"daisyui",
-		"elysia",
-		"elysiajs",
-		"gitzy",
-		"headlessui",
-		"hono",
-		"hookform",
-		"lefthook",
-		"lockb",
-		"lucide",
-		"npkill",
-		"outdir",
-		"picocolors",
-		"tailwindcss",
-		"tanstack",
-		"textbox",
-		"todos",
-		"topo",
-		"Turborepo",
-		"typebox",
-		"typecheck"
-	],
-	"editor.formatOnSave": true,
-	"css.lint.unknownAtRules": "ignore",
-	"editor.defaultFormatter": "biomejs.biome",
-	"[yaml]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
-	},
-	"[html]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
-	},
-	"[markdown]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
-	},
-	"javascript.updateImportsOnFileMove.enabled": "always",
-	"typescript.updateImportsOnFileMove.enabled": "always",
-	"editor.codeActionsOnSave": {
-		"source.organizeImports.biome": "always"
-	}
+  "cSpell.words": [
+    "ahorita",
+    "biomejs",
+    "bunx",
+    "clsx",
+    "daisyui",
+    "elysia",
+    "elysiajs",
+    "gitzy",
+    "headlessui",
+    "hono",
+    "hookform",
+    "lefthook",
+    "lockb",
+    "lucide",
+    "npkill",
+    "outdir",
+    "picocolors",
+    "tailwindcss",
+    "tanstack",
+    "textbox",
+    "todos",
+    "topo",
+    "Turborepo",
+    "typebox",
+    "typecheck"
+  ],
+  "editor.formatOnSave": true,
+  "css.lint.unknownAtRules": "ignore",
+  "editor.defaultFormatter": "biomejs.biome",
+  "[yaml]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "editor.codeActionsOnSave": {
+    "source.organizeImports.biome": "always"
+  }
 }
