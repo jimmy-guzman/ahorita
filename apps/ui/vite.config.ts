@@ -7,12 +7,12 @@ import { configDefaults } from "vitest/config";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-	plugins: [react(), TanStackRouterVite()],
-	resolve: { alias: { "@": path.resolve(__dirname, "./src") } },
-	test: {
-		environment: "happy-dom",
-		globals: true,
-		exclude: [...configDefaults.exclude, "e2e/*"],
-		setupFiles: "./src/test/setup.ts",
-	},
+  plugins: [react(), TanStackRouterVite()],
+  resolve: { alias: { "@": path.resolve(__dirname, "./src") } },
+  test: {
+    environment: "happy-dom",
+    globals: true,
+    exclude: [...configDefaults.exclude, "e2e/*"],
+    setupFiles: "./src/test/setup.ts",
+  },
 });

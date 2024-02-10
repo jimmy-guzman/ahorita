@@ -1,18 +1,22 @@
 {
-	"$schema": "https://biomejs.dev/schemas/1.5.3/schema.json",
-	"files": {
-		"ignore": ["dist", "playwright-report", "test-results", "routeTree.gen.ts"]
-	},
-	"organizeImports": {
-		"enabled": true
-	},
-	"linter": {
-		"enabled": true,
-		"rules": {
-			"recommended": true,
-			"nursery": {
-				"useSortedClasses": "error"
-			}
-		}
-	}
+  "$schema": "https://biomejs.dev/schemas/1.5.3/schema.json",
+  "files": {
+    "ignore": ["dist", "playwright-report", "test-results", "routeTree.gen.ts"]
+  },
+  "organizeImports": {
+    "enabled": true
+  },
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space"
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "nursery": {
+        "useSortedClasses": "error"
+      }
+    }
+  }
 }
