@@ -11,12 +11,12 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as TagsRouteImport } from './routes/tags/route.tsx'
-import { Route as IndexImport } from './routes/index.tsx'
-import { Route as TagsAddRouteImport } from './routes/tags/add/route.tsx'
-import { Route as TagsTagIdRouteImport } from './routes/tags/$tagId/route.tsx'
-import { Route as TagsTagIdTasksRouteImport } from './routes/tags/$tagId/tasks/route.tsx'
-import { Route as TagsTagIdAddTaskRouteImport } from './routes/tags/$tagId/add-task/route.tsx'
+import { Route as TagsRouteImport } from './routes/tags/route'
+import { Route as IndexImport } from './routes/index'
+import { Route as TagsAddRouteImport } from './routes/tags/add/route'
+import { Route as TagsTagIdRouteImport } from './routes/tags/$tagId/route'
+import { Route as TagsTagIdTasksRouteImport } from './routes/tags/$tagId/tasks/route'
+import { Route as TagsTagIdAddTaskRouteImport } from './routes/tags/$tagId/add-task/route'
 
 // Create/Update Routes
 
