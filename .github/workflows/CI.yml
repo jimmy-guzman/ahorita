@@ -1,6 +1,10 @@
-name: pull_request
+name: CI
 
-on: [pull_request]
+on:
+  push:
+    branches: [ $default-branch ]
+  pull_request:
+    types: [opened, reopened]
 
 jobs:
   validate:
