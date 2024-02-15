@@ -19,7 +19,6 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@elysiajs/bearer": "0.8.0",
     "@elysiajs/cors": "0.8.0",
     "@elysiajs/swagger": "0.8.5",
     "@lucia-auth/adapter-sqlite": "3.0.0",

@@ -1,4 +1,3 @@
-import bearer from "@elysiajs/bearer";
 import { eq } from "drizzle-orm";
 import { Elysia, t } from "elysia";
 import { generateId } from "lucia";
@@ -8,7 +7,6 @@ import { db } from "../db";
 import { userTable } from "../schemas";
 
 export const authRoutes = new Elysia({ prefix: "/auth" })
-  .use(bearer())
   .post(
     "/login",
     async ({ set, body: { username, password }, cookie }) => {
@@ -107,48 +105,6 @@ export const authRoutes = new Elysia({ prefix: "/auth" })
       });
     },
     {
-      detail: { tags: ["Auth"] },
-    },
-  )
-  .get(
-    "/validate",
-    async ({ request, cookie }) => {
-      const cookieHeader = request.headers.get("Cookie") ?? "";
-
-      const sessionId = lucia.readSessionCookie(cookieHeader);
-
-      if (!sessionId) {
-        return {
-          isAuthenticated: false,
-        };
-      }
-
-      const { session } = await lucia.validateSession(sessionId);
-
-      if (session?.fresh) {
-        const sessionCookie = lucia.createSessionCookie(session.id);
-
-        cookie[sessionCookie.name]?.set({
-          value: sessionCookie.value,
-          ...sessionCookie.attributes,
-        });
-      }
-
-      if (!session) {
-        const sessionCookie = lucia.createBlankSessionCookie();
-
-        cookie[sessionCookie.name]?.set({
-          value: sessionCookie.value,
-          ...sessionCookie.attributes,
-        });
-      }
-
-      return { isAuthenticated: true };
-    },
-    {
-      response: t.Object({
-        isAuthenticated: t.Boolean(),
-      }),
       detail: { tags: ["Auth"] },
     },
   );
