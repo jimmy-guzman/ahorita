@@ -6,7 +6,5 @@ export const TagDto = t.Object({
   description: t.String(),
   createdAt: t.String(),
   updatedAt: t.String(),
-  _count: t.Object({
-    tasks: t.Number(),
-  }),
+  userId: t.String(),
 });

@@ -9,15 +9,20 @@ const columnHelper = createColumnHelper<{
   id: string;
   tagId: string;
   name: string;
-  status: "BACKLOG" | "CANCELED" | "DONE" | "IN_PROGRESS" | "TODO";
+  status: "BACKLOG" | "TODO" | "IN_PROGRESS" | "DONE" | "CANCELED";
   priority: "LOW" | "MEDIUM" | "HIGH";
   createdAt: string;
   updatedAt: string;
+  userId: string;
 }>();
 
 export const columns = [
+  columnHelper.accessor("id", {
+    header: "Id",
+    cell: (info) => info.getValue(),
+  }),
   columnHelper.accessor("name", {
-    header: "Task",
+    header: "Title",
     cell: (info) => <TasksTableNameCell info={info} />,
   }),
   columnHelper.accessor("status", {

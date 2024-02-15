@@ -2,26 +2,23 @@ import { eq } from "drizzle-orm";
 import { Elysia, InternalServerError, NotFoundError, t } from "elysia";
 
 import { db } from "../db";
+import { auth } from "../middleware/auth";
 import { TagDto } from "../models/tags";
 import { TaskDto } from "../models/tasks";
-import { tags, tasks } from "../schema";
+import { tagsTable, tasksTable } from "../schemas";
 
-export const tagsRoute = new Elysia().group(
-  "/tags",
-  { detail: { tags: ["Tags"] } },
-  (app) =>
+export const tagsRoute = new Elysia()
+  .use(auth)
+  .group("/tags", { detail: { tags: ["Tags"] } }, (app) =>
     app
       .get(
         "",
-        async () => {
-          const results = await db.query.tags.findMany({
-            with: { tasks: true },
-          });
+        async ({ user }) => {
+          const userId = user?.id ?? "";
 
-          return results.map(({ tasks: _tasks, ...tag }) => ({
-            ...tag,
-            _count: { tasks: _tasks.length },
-          }));
+          return db.query.tagsTable.findMany({
+            where: eq(tagsTable.userId, userId),
+          });
         },
         {
           response: t.Array(TagDto),
@@ -29,12 +26,17 @@ export const tagsRoute = new Elysia().group(
       )
       .post(
         "",
-        async ({ body }) => {
-          const [tag] = await db.insert(tags).values(body).returning();
+        async ({ body, user }) => {
+          const userId = user?.id ?? "";
+
+          const [tag] = await db
+            .insert(tagsTable)
+            .values({ ...body, userId })
+            .returning();
 
           if (!tag) throw InternalServerError;
 
-          return { ...tag, _count: { tasks: 0 } };
+          return tag;
         },
         {
           body: t.Pick(TagDto, ["name", "description"]),
@@ -44,17 +46,14 @@ export const tagsRoute = new Elysia().group(
       .get(
         "/:id",
         async ({ params: { id } }) => {
-          const [tag] = await db.query.tags.findMany({
-            where: eq(tags.id, id),
-            with: { tasks: true },
+          const [tag] = await db.query.tagsTable.findMany({
+            where: eq(tagsTable.id, id),
             limit: 1,
           });
 
           if (!tag) throw NotFoundError;
 
-          const { tasks: _tasks, ...rest } = tag;
-
-          return { ...rest, _count: { tasks: _tasks.length } };
+          return tag;
         },
         {
           params: t.Object({ id: t.String() }),
@@ -64,20 +63,20 @@ export const tagsRoute = new Elysia().group(
       .delete(
         "/:id",
         async ({ params: { id } }) => {
-          const result = await db.transaction(async (tx) => {
+          const tag = await db.transaction(async (tx) => {
             const [tag] = await tx
-              .delete(tags)
-              .where(eq(tags.id, id))
+              .delete(tagsTable)
+              .where(eq(tagsTable.id, id))
               .returning();
 
             if (!tag) throw NotFoundError;
 
-            await tx.delete(tasks).where(eq(tasks.tagId, id));
+            await tx.delete(tasksTable).where(eq(tasksTable.tagId, id));
 
             return tag;
           });
 
-          return { ...result, _count: { tasks: 0 } };
+          return tag;
         },
         {
           params: t.Object({ id: t.String() }),
@@ -87,7 +86,9 @@ export const tagsRoute = new Elysia().group(
       .get(
         "/:id/tasks",
         async ({ params: { id } }) => {
-          return db.query.tasks.findMany({ where: eq(tasks.tagId, id) });
+          return db.query.tasksTable.findMany({
+            where: eq(tasksTable.tagId, id),
+          });
         },
         {
           params: t.Object({ id: t.String() }),
@@ -96,10 +97,12 @@ export const tagsRoute = new Elysia().group(
       )
       .post(
         "/:id/tasks",
-        async ({ params: { id }, body }) => {
+        async ({ user, params: { id }, body }) => {
+          const userId = user?.id ?? "";
+
           const [task] = await db
-            .insert(tasks)
-            .values({ ...body, tagId: id })
+            .insert(tasksTable)
+            .values({ ...body, tagId: id, userId })
             .returning();
 
           if (!task) throw InternalServerError;
@@ -112,4 +115,4 @@ export const tagsRoute = new Elysia().group(
           response: TaskDto,
         },
       ),
-);
+  );

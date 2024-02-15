@@ -1,6 +1,7 @@
 import { relations } from "drizzle-orm";
 import { sqliteTable, text } from "drizzle-orm/sqlite-core";
-import { nanoid } from "nanoid";
+import { customAlphabet } from "nanoid";
+import { userTable } from ".";
 
 const now = () => new Date().toISOString();
 
@@ -8,7 +9,10 @@ const statuses = <const>["BACKLOG", "TODO", "IN_PROGRESS", "DONE", "CANCELED"];
 
 const priorities = <const>["LOW", "MEDIUM", "HIGH"];
 
-export const tags = sqliteTable("tags", {
+// cspell:disable-next-line
+const nanoid = customAlphabet("6T9834PX7JACKVERYMNDBUHWLFGQ", 4);
+
+export const tagsTable = sqliteTable("tags", {
   id: text("id")
     .$default(() => nanoid())
     .primaryKey(),
@@ -16,9 +20,13 @@ export const tags = sqliteTable("tags", {
   description: text("description").notNull(),
   createdAt: text("createdAt").$default(now).notNull(),
   updatedAt: text("updatedAt").$default(now).notNull(),
+
+  userId: text("userId")
+    .references(() => userTable.id, { onDelete: "cascade" })
+    .notNull(),
 });
 
-export const tasks = sqliteTable("tasks", {
+export const tasksTable = sqliteTable("tasks", {
   id: text("id")
     .$default(() => nanoid())
     .primaryKey(),
@@ -29,17 +37,20 @@ export const tasks = sqliteTable("tasks", {
   updatedAt: text("updatedAt").$default(now).notNull(),
 
   tagId: text("tagId")
-    .references(() => tags.id, { onDelete: "cascade" })
+    .references(() => tagsTable.id, { onDelete: "cascade" })
+    .notNull(),
+  userId: text("userId")
+    .references(() => userTable.id, { onDelete: "cascade" })
     .notNull(),
 });
 
-export const tagsRelations = relations(tags, ({ many }) => ({
-  tasks: many(tasks),
+export const tagsRelations = relations(tagsTable, ({ many }) => ({
+  tasks: many(tasksTable),
 }));
 
-export const tasksRelations = relations(tasks, ({ one }) => ({
-  tag: one(tags, {
-    fields: [tasks.tagId],
-    references: [tags.id],
+export const tasksRelations = relations(tasksTable, ({ one }) => ({
+  tag: one(tagsTable, {
+    fields: [tasksTable.tagId],
+    references: [tagsTable.id],
   }),
 }));

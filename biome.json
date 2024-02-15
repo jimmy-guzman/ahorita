@@ -1,7 +1,13 @@
 {
   "$schema": "https://biomejs.dev/schemas/1.5.3/schema.json",
   "files": {
-    "ignore": ["dist", "playwright-report", "test-results", "routeTree.gen.ts"]
+    "ignore": [
+      "dist",
+      "playwright-report",
+      "test-results",
+      "routeTree.gen.ts",
+      "e2e/.auth/user.json"
+    ]
   },
   "organizeImports": {
     "enabled": true

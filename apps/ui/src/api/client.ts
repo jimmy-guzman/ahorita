@@ -1,6 +1,10 @@
 import type { App } from "@ahorita/api";
 import { edenTreaty } from "@elysiajs/eden";
 
-export const api = edenTreaty<App>(import.meta.env.VITE_AHORITA_API_ORIGIN);
+export const api = edenTreaty<App>(import.meta.env.VITE_AHORITA_API_ORIGIN, {
+  $fetch: {
+    credentials: "include",
+  },
+});
 
 export type API = App["schema"];
