@@ -1,9 +1,11 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
-import { Link, Outlet } from "@tanstack/react-router";
+import { Link, Outlet, redirect } from "@tanstack/react-router";
 import { ExternalLinkIcon, ListPlusIcon, MenuIcon } from "lucide-react";
 
+import { api } from "@/api/client";
 import { tagsQueryOptions } from "@/api/queryTags";
+import { Logout } from "@/components/Logout";
 
 const Tags = () => {
   const { data: tags } = useSuspenseQuery(tagsQueryOptions);
@@ -29,15 +31,16 @@ const Tags = () => {
             >
               ahorita
             </Link>
-            <div className="dsy-navbar-start hidden lg:flex" />
+            <div className="dsy-navbar-start" />
             <div className="dsy-navbar-end">
               <a
                 className="dsy-btn dsy-btn-ghost dsy-btn-xs lg:dsy-btn-md"
                 href={`${import.meta.env.VITE_AHORITA_API_ORIGIN}/docs`}
                 target="__blank"
               >
-                API Docs <ExternalLinkIcon className="h-4 w-4 lg:h-4 lg:w-4" />
+                API Docs <ExternalLinkIcon className="h-4 w-4" />
               </a>
+              <Logout />
             </div>
           </nav>
           <main>
@@ -85,6 +88,22 @@ const Tags = () => {
 
 export const Route = createFileRoute("/tags")({
   component: Tags,
+  beforeLoad: async ({ location, context }) => {
+    const response = await context.queryClient.fetchQuery({
+      queryKey: ["isAuthenticated"],
+      queryFn: async () => api.auth.validate.get(),
+      staleTime: Infinity,
+    });
+
+    if (!response.data?.isAuthenticated) {
+      throw redirect({
+        to: "/login",
+        search: {
+          redirect: location.href,
+        },
+      });
+    }
+  },
   loader: async ({ context: { queryClient } }) => {
     await queryClient.ensureQueryData(tagsQueryOptions);
   },

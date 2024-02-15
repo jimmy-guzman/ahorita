@@ -17,9 +17,14 @@ const TasksByTag = () => {
   const form = useTasksForm(tasks);
 
   return (
-    <FormProvider {...form}>
-      <Table data={tasks} columns={columns} />
-    </FormProvider>
+    <div className="flex w-full flex-col gap-8">
+      <div className="prose dsy-prose">
+        <h2>Your Tasks</h2>
+      </div>
+      <FormProvider {...form}>
+        <Table data={tasks} columns={columns} />
+      </FormProvider>
+    </div>
   );
 };
 

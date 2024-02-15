@@ -11,6 +11,8 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as SignupImport } from './routes/signup'
+import { Route as LoginImport } from './routes/login'
 import { Route as TagsRouteImport } from './routes/tags/route'
 import { Route as IndexImport } from './routes/index'
 import { Route as TagsAddRouteImport } from './routes/tags/add/route'
@@ -19,6 +21,16 @@ import { Route as TagsTagIdTasksRouteImport } from './routes/tags/$tagId/tasks/r
 import { Route as TagsTagIdAddTaskRouteImport } from './routes/tags/$tagId/add-task/route'
 
 // Create/Update Routes
+
+const SignupRoute = SignupImport.update({
+  path: '/signup',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const LoginRoute = LoginImport.update({
+  path: '/login',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const TagsRouteRoute = TagsRouteImport.update({
   path: '/tags',
@@ -62,6 +74,14 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TagsRouteImport
       parentRoute: typeof rootRoute
     }
+    '/login': {
+      preLoaderRoute: typeof LoginImport
+      parentRoute: typeof rootRoute
+    }
+    '/signup': {
+      preLoaderRoute: typeof SignupImport
+      parentRoute: typeof rootRoute
+    }
     '/tags/$tagId': {
       preLoaderRoute: typeof TagsTagIdRouteImport
       parentRoute: typeof TagsRouteImport
@@ -92,6 +112,8 @@ export const routeTree = rootRoute.addChildren([
     ]),
     TagsAddRouteRoute,
   ]),
+  LoginRoute,
+  SignupRoute,
 ])
 
 /* prettier-ignore-end */

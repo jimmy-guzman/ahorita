@@ -27,3 +27,4 @@ dist
 # playwright
 playwright-report
 test-results
+**/e2e/.auth

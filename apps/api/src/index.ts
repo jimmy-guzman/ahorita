@@ -3,11 +3,17 @@ import swagger from "@elysiajs/swagger";
 import { Elysia } from "elysia";
 import { cyan } from "picocolors";
 
+import { authRoutes } from "./routes/auth";
 import { tagsRoute } from "./routes/tags";
 import { tasksRoutes } from "./routes/tasks";
 
 const app = new Elysia()
-  .use(cors({ methods: ["GET", "POST", "PATCH", "DELETE"] }))
+  .use(
+    cors({
+      methods: ["GET", "POST", "PATCH", "DELETE"],
+      allowedHeaders: "content-type",
+    }),
+  )
   .use(
     swagger({
       path: "/docs",
@@ -17,15 +23,7 @@ const app = new Elysia()
       exclude: ["/docs", "/docs/json"],
     }),
   )
-  .onError(({ code, error, set }) => {
-    if (code === "NOT_FOUND") {
-      set.status = error.status;
-
-      return { status: error.status, code, message: error.message };
-    }
-
-    return undefined;
-  })
+  .use(authRoutes)
   .use(tasksRoutes)
   .use(tagsRoute)
   .listen(3000, ({ hostname, port }) => {

@@ -57,7 +57,7 @@ const TagDetails = () => {
               activeOptions={{ exact: true }}
               activeProps={{ className: "dsy-btn-active" }}
             >
-              {tag._count.tasks} Tasks <EyeIcon />
+              View Tasks <EyeIcon />
             </Link>
           </div>
         </div>

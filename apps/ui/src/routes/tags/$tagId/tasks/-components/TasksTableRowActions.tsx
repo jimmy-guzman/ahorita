@@ -47,7 +47,11 @@ export const TasksTableRowActions = ({ task }: TaskTableActionsProps) => {
         <MenuIcon />
         <span className="sr-only">Open menu</span>
       </div>
-      <ul className="dsy-dropdown-content dsy-menu z-[1] w-52 rounded-box bg-base-100 p-2 shadow">
+      <ul
+        aria-label={`${task.name} actions`}
+        className="dsy-dropdown-content dsy-menu z-[1] w-52 rounded-box bg-base-100 p-2 shadow"
+      >
+        <li className="dsy-menu-title">{task.name}</li>
         <li>
           <details>
             <summary>Status</summary>
