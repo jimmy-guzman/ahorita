@@ -2,15 +2,15 @@ import { eq } from "drizzle-orm";
 import { Elysia, NotFoundError, t } from "elysia";
 
 import { db } from "../db";
+import { auth } from "../middleware/auth";
 import { TaskDto } from "../models/tasks";
 import { tasksTable } from "../schemas";
 
 const Params = t.Object({ id: t.String() });
 
-export const tasksRoutes = new Elysia().group(
-  "/tasks",
-  { detail: { tags: ["Tasks"] } },
-  (app) =>
+export const tasksRoutes = new Elysia()
+  .use(auth)
+  .group("/tasks", { detail: { tags: ["Tasks"] } }, (app) =>
     app
       .patch(
         "/:id",
@@ -52,4 +52,4 @@ export const tasksRoutes = new Elysia().group(
           response: TaskDto,
         },
       ),
-);
+  );

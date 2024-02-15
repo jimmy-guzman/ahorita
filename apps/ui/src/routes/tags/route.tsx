@@ -90,12 +90,12 @@ export const Route = createFileRoute("/tags")({
   component: Tags,
   beforeLoad: async ({ location, context }) => {
     const response = await context.queryClient.fetchQuery({
-      queryKey: ["isAuthenticated"],
-      queryFn: async () => api.auth.validate.get(),
+      queryKey: ["users", "me"],
+      queryFn: async () => api.users.me.get(),
       staleTime: Infinity,
     });
 
-    if (!response.data?.isAuthenticated) {
+    if (!response.data?.user) {
       throw redirect({
         to: "/login",
         search: {
