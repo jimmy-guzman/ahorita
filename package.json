@@ -26,9 +26,9 @@
   "devDependencies": {
     "@biomejs/biome": "nightly",
     "@types/bun": "1.0.5",
-    "gitzy": "4.0.0",
+    "gitzy": "5.2.0",
     "lefthook": "1.6.1",
-    "turbo": "1.12.3"
+    "turbo": "1.12.4"
   },
   "packageManager": "bun@1.0.26"
 }
