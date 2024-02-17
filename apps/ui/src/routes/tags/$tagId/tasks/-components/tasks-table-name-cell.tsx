@@ -3,9 +3,9 @@ import type { CellContext } from "@tanstack/react-table";
 import { BanIcon, PencilIcon, SaveIcon } from "lucide-react";
 import { useState } from "react";
 
-import { editTaskMutationOptions } from "@/api/editTask";
+import { editTaskMutationOptions } from "@/api/edit-task";
 
-import { useTasksFormContext } from "../-hooks/useTasksForm";
+import { useTasksFormContext } from "../-hooks/use-tasks-form";
 
 export const TasksTableNameCell = ({
   info,

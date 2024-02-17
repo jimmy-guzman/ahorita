@@ -1,9 +1,9 @@
 import type { API } from "@/api/client";
 import { api } from "@/api/client";
-import { mutationOptions } from "@/api/mutationOptions";
-import { queryClient } from "@/queryClient";
+import { mutationOptions } from "@/api/mutation-options";
+import { queryClient } from "@/query-client";
 
-import { tagsQueryOptions } from "./queryTags";
+import { tagsQueryOptions } from "./query-tags";
 
 export const editTaskMutationOptions = mutationOptions({
   mutationFn: async ({

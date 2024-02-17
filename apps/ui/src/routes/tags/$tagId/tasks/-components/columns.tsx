@@ -1,9 +1,9 @@
 import { createColumnHelper } from "@tanstack/react-table";
 
-import { TasksTableNameCell } from "./TasksTableNameCell";
-import { TasksTablePriorityCell } from "./TasksTablePriorityCell";
-import { TasksTableRowActions } from "./TasksTableRowActions";
-import { TasksTableStatusCell } from "./TasksTableStatusCell";
+import { TasksTableNameCell } from "./tasks-table-name-cell";
+import { TasksTablePriorityCell } from "./tasks-table-priority-cell";
+import { TasksTableRowActions } from "./tasks-table-row-actions";
+import { TasksTableStatusCell } from "./tasks-table-status-cell";
 
 const columnHelper = createColumnHelper<{
   id: string;

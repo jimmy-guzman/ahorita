@@ -3,9 +3,9 @@ import { createFileRoute } from "@tanstack/react-router";
 import { getRouteApi } from "@tanstack/react-router";
 import { FormProvider } from "react-hook-form";
 
-import { tasksByTagQueryOptions } from "@/api/queryTasksByTag";
-import { Table } from "@/components/Table";
-import { useTasksForm } from "@/routes/tags/$tagId/tasks/-hooks/useTasksForm";
+import { tasksByTagQueryOptions } from "@/api/query-tasks-by-tag";
+import { Table } from "@/components/table";
+import { useTasksForm } from "@/routes/tags/$tagId/tasks/-hooks/use-tasks-form";
 
 import { columns } from "./-components/columns";
 

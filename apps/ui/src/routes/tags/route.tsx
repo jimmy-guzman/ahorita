@@ -4,8 +4,8 @@ import { Link, Outlet, redirect } from "@tanstack/react-router";
 import { ExternalLinkIcon, ListPlusIcon, MenuIcon } from "lucide-react";
 
 import { api } from "@/api/client";
-import { tagsQueryOptions } from "@/api/queryTags";
-import { Logout } from "@/components/Logout";
+import { tagsQueryOptions } from "@/api/query-tags";
+import { Logout } from "@/components/logout";
 
 const Tags = () => {
   const { data: tags } = useSuspenseQuery(tagsQueryOptions);

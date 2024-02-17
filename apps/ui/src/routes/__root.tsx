@@ -2,7 +2,7 @@ import type { QueryClient } from "@tanstack/react-query";
 import { Outlet, createRootRouteWithContext } from "@tanstack/react-router";
 import { Suspense, lazy } from "react";
 
-import { Toaster } from "@/components/Toaster";
+import { Toaster } from "@/components/toaster";
 
 const RouterDevTools = import.meta.env.DEV
   ? lazy(() =>

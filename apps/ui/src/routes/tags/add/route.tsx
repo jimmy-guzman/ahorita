@@ -7,8 +7,8 @@ import { useNavigate } from "@tanstack/react-router";
 import { ListPlusIcon } from "lucide-react";
 import { useForm } from "react-hook-form";
 
-import { addTagMutationOptions } from "@/api/addTag";
-import { TextInput } from "@/components/TextInput";
+import { addTagMutationOptions } from "@/api/add-tag";
+import { TextInput } from "@/components/text-input";
 
 const schema = Type.Object({
   name: Type.String({ minLength: 1 }),
