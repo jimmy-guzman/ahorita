@@ -1,6 +1,6 @@
 import { api } from "@/api/client";
-import { PasswordInput } from "@/components/PasswordInput";
-import { TextInput } from "@/components/TextInput";
+import { PasswordInput } from "@/components/password-input";
+import { TextInput } from "@/components/text-input";
 import { typeboxResolver } from "@hookform/resolvers/typebox";
 import { type Static, Type } from "@sinclair/typebox";
 import { Value } from "@sinclair/typebox/value";

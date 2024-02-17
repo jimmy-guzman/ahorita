@@ -1,6 +1,6 @@
 import { render, screen } from "@/test/utils";
 
-import { TasksTablePriorityCell } from "./TasksTablePriorityCell";
+import { TasksTablePriorityCell } from "./tasks-table-priority-cell";
 
 describe("<TasksTablePriorityCell />", () => {
   it.each([

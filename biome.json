@@ -5,7 +5,7 @@
       "dist",
       "playwright-report",
       "test-results",
-      "routeTree.gen.ts",
+      "*.gen.*",
       "e2e/.auth/user.json"
     ]
   },
@@ -21,7 +21,11 @@
     "rules": {
       "recommended": true,
       "nursery": {
-        "useSortedClasses": "error"
+        "useSortedClasses": "error",
+        "useFilenamingConvention": {
+          "level": "error",
+          "options": { "filenameCases": ["kebab-case"] }
+        }
       }
     }
   }

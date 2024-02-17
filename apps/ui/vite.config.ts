@@ -8,7 +8,10 @@ import { configDefaults } from "vitest/config";
 
 // https://vitejs.dev/config/
 export default defineConfig(() => ({
-  plugins: [react(), TanStackRouterVite()],
+  plugins: [
+    react(),
+    TanStackRouterVite({ generatedRouteTree: "./src/route-tree.gen.ts" }),
+  ],
   resolve: { alias: { "@": path.resolve(__dirname, "./src") } },
   test: {
     environment: "happy-dom",

@@ -1,8 +1,8 @@
 import type { API } from "@/api/client";
 import { api } from "@/api/client";
-import { mutationOptions } from "@/api/mutationOptions";
-import { tagsQueryOptions } from "@/api/queryTags";
-import { queryClient } from "@/queryClient";
+import { mutationOptions } from "@/api/mutation-options";
+import { tagsQueryOptions } from "@/api/query-tags";
+import { queryClient } from "@/query-client";
 
 export const addTagMutationOptions = mutationOptions({
   mutationFn: async (body: API["/tags"]["post"]["body"]) => {

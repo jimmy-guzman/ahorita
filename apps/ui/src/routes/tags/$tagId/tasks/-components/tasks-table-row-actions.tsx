@@ -1,8 +1,8 @@
 import { useMutation } from "@tanstack/react-query";
 import { MenuIcon, TrashIcon } from "lucide-react";
 
-import { deleteTaskMutationOptions } from "@/api/deleteTask";
-import { editTaskMutationOptions } from "@/api/editTask";
+import { deleteTaskMutationOptions } from "@/api/delete-task";
+import { editTaskMutationOptions } from "@/api/edit-task";
 
 type Status = "BACKLOG" | "CANCELED" | "DONE" | "IN_PROGRESS" | "TODO";
 type Priority = "LOW" | "MEDIUM" | "HIGH";

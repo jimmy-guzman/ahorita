@@ -5,8 +5,8 @@ import { getRouteApi } from "@tanstack/react-router";
 import { formatDistanceToNowStrict } from "date-fns";
 import { EyeIcon, ListPlusIcon, Trash2Icon } from "lucide-react";
 
-import { deleteTagMutationOptions } from "@/api/deleteTag";
-import { tagQueryOptions } from "@/api/queryTag";
+import { deleteTagMutationOptions } from "@/api/delete-tag";
+import { tagQueryOptions } from "@/api/query-tag";
 
 const routeApi = getRouteApi("/tags/$tagId");
 

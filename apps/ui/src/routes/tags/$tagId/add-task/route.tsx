@@ -7,8 +7,8 @@ import { getRouteApi, useNavigate } from "@tanstack/react-router";
 import { ListPlusIcon } from "lucide-react";
 import { useForm } from "react-hook-form";
 
-import { addTaskByTagIdMutationOptions } from "@/api/addTask";
-import { TextInput } from "@/components/TextInput";
+import { addTaskByTagIdMutationOptions } from "@/api/add-task";
+import { TextInput } from "@/components/text-input";
 
 const routeApi = getRouteApi("/tags/$tagId/add-task");
 

@@ -1,6 +1,6 @@
 import { render, screen } from "@/test/utils";
 
-import { TasksTableStatusCell } from "./TasksTableStatusCell";
+import { TasksTableStatusCell } from "./tasks-table-status-cell";
 
 describe("<TasksTableStatusCell />", () => {
   it.each([
