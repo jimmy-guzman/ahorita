@@ -4,7 +4,7 @@ import { generateId } from "lucia";
 import { Argon2id } from "oslo/password";
 import { lucia } from "../auth";
 import { db } from "../db";
-import { userTable } from "../schemas";
+import { users } from "../schemas";
 
 export const authRoutes = new Elysia({ prefix: "/auth" })
   .post(
@@ -12,8 +12,8 @@ export const authRoutes = new Elysia({ prefix: "/auth" })
     async ({ set, body: { username, password }, cookie }) => {
       const [existingUser] = await db
         .select()
-        .from(userTable)
-        .where(eq(userTable.username, username));
+        .from(users)
+        .where(eq(users.username, username));
 
       if (!existingUser) {
         set.status = 401;
@@ -55,7 +55,7 @@ export const authRoutes = new Elysia({ prefix: "/auth" })
       const userId = generateId(15);
 
       await db
-        .insert(userTable)
+        .insert(users)
         .values({ username, password: hashedPassword, id: userId });
 
       const session = await lucia.createSession(userId, {});

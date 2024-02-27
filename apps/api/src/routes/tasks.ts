@@ -4,7 +4,7 @@ import { Elysia, NotFoundError, t } from "elysia";
 import { db } from "../db";
 import { auth } from "../middleware/auth";
 import { TaskDto } from "../models/tasks";
-import { tasksTable } from "../schemas";
+import { tasks } from "../schemas";
 
 const Params = t.Object({ id: t.String() });
 
@@ -16,9 +16,9 @@ export const tasksRoutes = new Elysia()
         "/:id",
         async ({ params: { id }, body }) => {
           const [task] = await db
-            .update(tasksTable)
+            .update(tasks)
             .set({ ...body, updatedAt: new Date().toISOString() })
-            .where(eq(tasksTable.id, id))
+            .where(eq(tasks.id, id))
             .returning();
 
           if (!task) {
@@ -37,8 +37,8 @@ export const tasksRoutes = new Elysia()
         "/:id",
         async ({ params: { id } }) => {
           const [task] = await db
-            .delete(tasksTable)
-            .where(eq(tasksTable.id, id))
+            .delete(tasks)
+            .where(eq(tasks.id, id))
             .returning();
 
           if (!task) {
