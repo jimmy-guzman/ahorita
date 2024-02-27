@@ -5,7 +5,7 @@ import { db } from "../db";
 import { auth } from "../middleware/auth";
 import { TagDto } from "../models/tags";
 import { TaskDto } from "../models/tasks";
-import { tagsTable, tasksTable } from "../schemas";
+import { tags, tasks } from "../schemas";
 
 export const tagsRoute = new Elysia()
   .use(auth)
@@ -16,8 +16,8 @@ export const tagsRoute = new Elysia()
         async ({ user }) => {
           const userId = user?.id ?? "";
 
-          return db.query.tagsTable.findMany({
-            where: eq(tagsTable.userId, userId),
+          return db.query.tags.findMany({
+            where: eq(tags.userId, userId),
           });
         },
         {
@@ -30,7 +30,7 @@ export const tagsRoute = new Elysia()
           const userId = user?.id ?? "";
 
           const [tag] = await db
-            .insert(tagsTable)
+            .insert(tags)
             .values({ ...body, userId })
             .returning();
 
@@ -46,8 +46,8 @@ export const tagsRoute = new Elysia()
       .get(
         "/:id",
         async ({ params: { id } }) => {
-          const [tag] = await db.query.tagsTable.findMany({
-            where: eq(tagsTable.id, id),
+          const [tag] = await db.query.tags.findMany({
+            where: eq(tags.id, id),
             limit: 1,
           });
 
@@ -65,13 +65,13 @@ export const tagsRoute = new Elysia()
         async ({ params: { id } }) => {
           const tag = await db.transaction(async (tx) => {
             const [tag] = await tx
-              .delete(tagsTable)
-              .where(eq(tagsTable.id, id))
+              .delete(tags)
+              .where(eq(tags.id, id))
               .returning();
 
             if (!tag) throw NotFoundError;
 
-            await tx.delete(tasksTable).where(eq(tasksTable.tagId, id));
+            await tx.delete(tasks).where(eq(tasks.tagId, id));
 
             return tag;
           });
@@ -86,8 +86,8 @@ export const tagsRoute = new Elysia()
       .get(
         "/:id/tasks",
         async ({ params: { id } }) => {
-          return db.query.tasksTable.findMany({
-            where: eq(tasksTable.tagId, id),
+          return db.query.tasks.findMany({
+            where: eq(tasks.tagId, id),
           });
         },
         {
@@ -101,7 +101,7 @@ export const tagsRoute = new Elysia()
           const userId = user?.id ?? "";
 
           const [task] = await db
-            .insert(tasksTable)
+            .insert(tasks)
             .values({ ...body, tagId: id, userId })
             .returning();
 
