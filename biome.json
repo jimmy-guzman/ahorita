@@ -6,7 +6,8 @@
       "playwright-report",
       "test-results",
       "*.gen.*",
-      "e2e/.auth/user.json"
+      "e2e/.auth/user.json",
+      "vite.config.ts.timestamp-*.mjs"
     ]
   },
   "organizeImports": {
