@@ -38,15 +38,11 @@ export const TasksTableRowActions = ({ task }: TaskTableActionsProps) => {
   const editMutation = useMutation(editTaskMutationOptions);
 
   return (
-    <div className="dsy-dropdown dsy-dropdown-end">
-      <div
-        tabIndex={0}
-        role="button"
-        className="dsy-btn dsy-btn-ghost dsy-btn-sm"
-      >
+    <details className="dsy-dropdown dsy-dropdown-end">
+      <summary className="dsy-btn dsy-btn-ghost dsy-btn-sm">
         <MenuIcon />
         <span className="sr-only">Open menu</span>
-      </div>
+      </summary>
       <ul
         aria-label={`${task.name} actions`}
         className="dsy-dropdown-content dsy-menu z-[1] w-52 rounded-box bg-base-100 p-2 shadow"
@@ -116,6 +112,6 @@ export const TasksTableRowActions = ({ task }: TaskTableActionsProps) => {
           </button>
         </li>
       </ul>
-    </div>
+    </details>
   );
 };

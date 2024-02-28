@@ -64,7 +64,7 @@ test("should create tag and task", async ({ page }) => {
 
   expect(await getAxeViolations(page)).toEqual([]);
 
-  await page.getByRole("link", { name: "Add Task" }).click();
+  await page.getByRole("button", { name: "Add Task" }).click();
 
   await expect(
     page.getByRole("heading", { name: "Add Your New Task", level: 2 }),
@@ -76,7 +76,9 @@ test("should create tag and task", async ({ page }) => {
     .getByRole("textbox", { name: "Your Task's Name?" })
     .fill(randomTask);
 
-  await page.getByRole("button", { name: "Add Task" }).click();
+  await page.getByRole("button", { name: "Submit" }).click();
+
+  await page.getByRole("link", { name: "View Tasks" }).click();
 
   await expect(
     page.getByRole("heading", { name: "Your Tasks", level: 2 }),
@@ -94,17 +96,19 @@ test("should create tag and task", async ({ page }) => {
 
   await row.getByRole("button", { name: "Open menu" }).click();
 
-  await row.getByText("Status").click();
+  const actions = row.getByRole("list", { name: `${randomTask} actions` });
 
-  await row.getByRole("button", { name: "Done" }).click();
+  await actions.getByText("Status").click();
 
-  await expect(page.getByRole("cell", { name: "Done" })).toBeVisible();
+  await actions.getByRole("button", { name: "Done" }).click();
+
+  await expect(
+    page.getByRole("row", { name: `${randomTask} Done Medium Open Menu` }),
+  ).toBeVisible();
 
   await page.getByRole("button", { name: `Delete ${randomTask}` }).click();
 
-  await expect(
-    row.getByRole("list", { name: `${randomTask} actions` }),
-  ).not.toBeVisible();
+  await expect(actions).not.toBeVisible();
 
   await expect(page.getByRole("cell", { name: randomTask })).not.toBeVisible();
 
