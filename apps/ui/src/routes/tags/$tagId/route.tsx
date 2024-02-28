@@ -3,10 +3,11 @@ import { Outlet, createFileRoute } from "@tanstack/react-router";
 import { Link, useNavigate } from "@tanstack/react-router";
 import { getRouteApi } from "@tanstack/react-router";
 import { formatDistanceToNowStrict } from "date-fns";
-import { EyeIcon, ListPlusIcon, Trash2Icon } from "lucide-react";
+import { EyeIcon, Trash2Icon } from "lucide-react";
 
 import { deleteTagMutationOptions } from "@/api/delete-tag";
 import { tagQueryOptions } from "@/api/query-tag";
+import { AddTask } from "@/components/add-task";
 
 const routeApi = getRouteApi("/tags/$tagId");
 
@@ -42,14 +43,7 @@ const TagDetails = () => {
             >
               Delete Tag <Trash2Icon />
             </button>
-            <Link
-              className="dsy-btn dsy-btn-secondary dsy-btn-sm"
-              to="/tags/$tagId/add-task"
-              params={{ tagId }}
-              activeProps={{ className: "dsy-btn-active" }}
-            >
-              Add Task <ListPlusIcon />
-            </Link>
+            <AddTask />
             <Link
               className="dsy-btn dsy-btn-primary dsy-btn-sm"
               to="/tags/$tagId/tasks"

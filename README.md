@@ -38,7 +38,13 @@ Then you can finally install dependencies, by running the following:
 bun install
 ```
 
-Then get started with environment, by running the following:
+And to download new browsers for Playwright, run the following command:
+
+```
+bunx playwright install
+```
+
+Then setup environment variables, by running the following:
 
 ```
 cp .env.example .env

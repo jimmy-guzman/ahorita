@@ -18,7 +18,6 @@ import { Route as IndexImport } from './routes/index'
 import { Route as TagsAddRouteImport } from './routes/tags/add/route'
 import { Route as TagsTagIdRouteImport } from './routes/tags/$tagId/route'
 import { Route as TagsTagIdTasksRouteImport } from './routes/tags/$tagId/tasks/route'
-import { Route as TagsTagIdAddTaskRouteImport } from './routes/tags/$tagId/add-task/route'
 
 // Create/Update Routes
 
@@ -57,11 +56,6 @@ const TagsTagIdTasksRouteRoute = TagsTagIdTasksRouteImport.update({
   getParentRoute: () => TagsTagIdRouteRoute,
 } as any)
 
-const TagsTagIdAddTaskRouteRoute = TagsTagIdAddTaskRouteImport.update({
-  path: '/add-task',
-  getParentRoute: () => TagsTagIdRouteRoute,
-} as any)
-
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -90,10 +84,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TagsAddRouteImport
       parentRoute: typeof TagsRouteImport
     }
-    '/tags/$tagId/add-task': {
-      preLoaderRoute: typeof TagsTagIdAddTaskRouteImport
-      parentRoute: typeof TagsTagIdRouteImport
-    }
     '/tags/$tagId/tasks': {
       preLoaderRoute: typeof TagsTagIdTasksRouteImport
       parentRoute: typeof TagsTagIdRouteImport
@@ -106,10 +96,7 @@ declare module '@tanstack/react-router' {
 export const routeTree = rootRoute.addChildren([
   IndexRoute,
   TagsRouteRoute.addChildren([
-    TagsTagIdRouteRoute.addChildren([
-      TagsTagIdAddTaskRouteRoute,
-      TagsTagIdTasksRouteRoute,
-    ]),
+    TagsTagIdRouteRoute.addChildren([TagsTagIdTasksRouteRoute]),
     TagsAddRouteRoute,
   ]),
   LoginRoute,
