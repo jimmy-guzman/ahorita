@@ -8,19 +8,26 @@ import { useForm } from "react-hook-form";
 
 import { addTaskByTagIdMutationOptions } from "@/api/add-task";
 import { TextInput } from "@/components/text-input";
+import { priorities } from "@/constants/tasks";
 import { useRef } from "react";
+import { Select } from "./select";
 
 const routeApi = getRouteApi("/tags/$tagId");
 
 const schema = Type.Object({
   name: Type.String({ minLength: 1 }),
+  priority: Type.Union([
+    Type.Literal("LOW"),
+    Type.Literal("MEDIUM"),
+    Type.Literal("HIGH"),
+  ]),
 });
 
 export const AddTask = () => {
   const { tagId } = routeApi.useParams();
   const { handleSubmit, control, reset } = useForm<Static<typeof schema>>({
     resolver: typeboxResolver(schema),
-    defaultValues: { name: "" },
+    defaultValues: { name: "", priority: "MEDIUM" },
   });
   const { mutate, isPending } = useMutation(addTaskByTagIdMutationOptions);
   const dialogRef = useRef<HTMLDialogElement>(null);
@@ -59,6 +66,17 @@ export const AddTask = () => {
                 name="name"
                 label="Your task's name?"
               />
+              <Select
+                control={control}
+                name="priority"
+                label="Your task's priority?"
+              >
+                {priorities.map(({ label, priority }) => (
+                  <option key={priority} value={priority}>
+                    {label}
+                  </option>
+                ))}
+              </Select>
               <div className="dsy-modal-action gap-2">
                 <button
                   type="button"
