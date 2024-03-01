@@ -111,7 +111,7 @@ export const tagsRoute = new Elysia()
         },
         {
           params: t.Object({ id: t.String() }),
-          body: t.Pick(TaskDto, ["name", "priority"]),
+          body: t.Pick(TaskDto, ["name", "priority", "dueAt"]),
           response: TaskDto,
         },
       ),

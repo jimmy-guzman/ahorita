@@ -1,9 +1,11 @@
+import { addMonths } from "date-fns";
 import { relations } from "drizzle-orm";
 import { sqliteTable, text } from "drizzle-orm/sqlite-core";
 import { customAlphabet } from "nanoid";
 import { users } from "./users";
 
 const now = () => new Date().toISOString();
+const dueDate = () => addMonths(new Date(), 1).toISOString();
 
 const statuses = <const>["BACKLOG", "TODO", "IN_PROGRESS", "DONE", "CANCELED"];
 
@@ -35,6 +37,7 @@ export const tasks = sqliteTable("task", {
   priority: text("priority", { enum: priorities }).default("MEDIUM").notNull(),
   createdAt: text("created_at").$default(now).notNull(),
   updatedAt: text("updated_at").$default(now).notNull(),
+  dueAt: text("due_at").$default(dueDate).notNull(),
 
   tagId: text("tag_id")
     .references(() => tags.id, { onDelete: "cascade" })
