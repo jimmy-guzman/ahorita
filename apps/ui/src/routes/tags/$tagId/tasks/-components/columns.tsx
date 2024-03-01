@@ -1,5 +1,6 @@
 import { createColumnHelper } from "@tanstack/react-table";
 
+import { formatDistanceToNowStrict } from "date-fns";
 import { TasksTableNameCell } from "./tasks-table-name-cell";
 import { TasksTablePriorityCell } from "./tasks-table-priority-cell";
 import { TasksTableRowActions } from "./tasks-table-row-actions";
@@ -13,6 +14,7 @@ const columnHelper = createColumnHelper<{
   priority: "LOW" | "MEDIUM" | "HIGH";
   createdAt: string;
   updatedAt: string;
+  dueAt: string;
   userId: string;
 }>();
 
@@ -32,6 +34,10 @@ export const columns = [
   columnHelper.accessor("priority", {
     header: "Priority",
     cell: (info) => <TasksTablePriorityCell priority={info.getValue()} />,
+  }),
+  columnHelper.accessor("dueAt", {
+    header: "Due",
+    cell: (info) => `in ${formatDistanceToNowStrict(info.getValue())}`,
   }),
   columnHelper.display({
     id: "actions",

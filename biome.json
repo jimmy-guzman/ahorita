@@ -21,6 +21,7 @@
     "enabled": true,
     "rules": {
       "recommended": true,
+      "style": { "useFragmentSyntax": "error" },
       "nursery": {
         "useSortedClasses": "error",
         "useFilenamingConvention": {

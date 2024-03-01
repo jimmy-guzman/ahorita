@@ -19,6 +19,7 @@ export const TasksTableNameCell = ({
       priority: "LOW" | "MEDIUM" | "HIGH";
       createdAt: string;
       updatedAt: string;
+      dueAt: string;
       userId: string;
     },
     string
