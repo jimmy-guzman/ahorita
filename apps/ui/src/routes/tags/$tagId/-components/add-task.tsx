@@ -11,10 +11,9 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
 import { addTaskByTagIdMutationOptions } from "@/api/add-task";
+import { Select } from "@/components/select";
 import { TextInput } from "@/components/text-input";
 import { priorities } from "@/constants/tasks";
-
-import { Select } from "./select";
 
 const routeApi = getRouteApi("/tags/$tagId");
 

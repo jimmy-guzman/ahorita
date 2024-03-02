@@ -62,7 +62,7 @@ const Tags = () => {
             ahorita
           </Link>
           <ul className="dsy-menu min-h-screen w-56 bg-base-100">
-            <li className="dsy-menu-title text-primary uppercase">Tags</li>
+            <li className="dsy-menu-title text-primary uppercase">All</li>
             <li>
               <Link to="/tags/add" activeProps={{ className: "dsy-active" }}>
                 Add New <ListPlusIcon className="h-5 w-5 text-accent" />

@@ -7,7 +7,8 @@ import { EyeIcon, Trash2Icon } from "lucide-react";
 
 import { deleteTagMutationOptions } from "@/api/delete-tag";
 import { tagQueryOptions } from "@/api/query-tag";
-import { AddTask } from "@/components/add-task";
+
+import { AddTask } from "./-components/add-task";
 
 const routeApi = getRouteApi("/tags/$tagId");
 

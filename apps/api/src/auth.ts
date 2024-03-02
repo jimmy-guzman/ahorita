@@ -1,6 +1,6 @@
 import { BunSQLiteAdapter } from "@lucia-auth/adapter-sqlite";
-
 import { Lucia } from "lucia";
+
 import { sqlite } from "./db";
 
 const adapter = new BunSQLiteAdapter(sqlite, {
