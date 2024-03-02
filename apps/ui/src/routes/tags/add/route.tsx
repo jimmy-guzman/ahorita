@@ -3,9 +3,9 @@ import type { Static } from "@sinclair/typebox";
 import { Type } from "@sinclair/typebox";
 import { useMutation } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
-import { useNavigate } from "@tanstack/react-router";
 import { ListPlusIcon } from "lucide-react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
 
 import { addTagMutationOptions } from "@/api/add-tag";
 import { TextInput } from "@/components/text-input";
@@ -17,14 +17,13 @@ const schema = Type.Object({
 
 const AddTagForm = () => {
   const { mutate, isPending } = useMutation(addTagMutationOptions);
-  const { handleSubmit, control } = useForm<Static<typeof schema>>({
+  const { handleSubmit, control, reset } = useForm<Static<typeof schema>>({
     resolver: typeboxResolver(schema),
     defaultValues: {
       name: "",
       description: "",
     },
   });
-  const navigate = useNavigate();
 
   return (
     <div className="flex w-full flex-col gap-8">
@@ -35,11 +34,9 @@ const AddTagForm = () => {
         className="flex flex-col gap-2"
         onSubmit={handleSubmit((body) => {
           mutate(body, {
-            onSuccess(tag) {
-              return navigate({
-                to: "/tags/$tagId",
-                params: { tagId: tag.id },
-              });
+            onSuccess: () => {
+              reset();
+              toast.success("Tag has been added");
             },
           });
         })}

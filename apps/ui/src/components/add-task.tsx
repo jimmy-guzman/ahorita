@@ -8,6 +8,7 @@ import { addMonths, formatISO9075 } from "date-fns";
 import { ListPlusIcon } from "lucide-react";
 import { useRef } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
 
 import { addTaskByTagIdMutationOptions } from "@/api/add-task";
 import { TextInput } from "@/components/text-input";
@@ -73,6 +74,7 @@ export const AddTask = () => {
                     onSuccess() {
                       reset();
                       dialogRef.current?.close();
+                      toast.success("Task has been added");
                     },
                   },
                 );
