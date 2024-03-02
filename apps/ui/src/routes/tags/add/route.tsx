@@ -5,7 +5,7 @@ import { useMutation } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import { ListPlusIcon } from "lucide-react";
 import { useForm } from "react-hook-form";
-import { toast } from "react-hot-toast";
+import { toast } from "sonner";
 
 import { addTagMutationOptions } from "@/api/add-tag";
 import { TextInput } from "@/components/text-input";
