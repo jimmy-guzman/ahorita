@@ -1,4 +1,4 @@
-import { render, screen } from "@/test/utils";
+import { render, screen } from "@/testing/utils";
 
 import { TasksTableStatusCell } from "./tasks-table-status-cell";
 

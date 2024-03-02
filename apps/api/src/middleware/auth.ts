@@ -1,7 +1,7 @@
 import { Elysia } from "elysia";
 import { verifyRequestOrigin } from "lucia";
-
 import type { Session, User } from "lucia";
+
 import { lucia } from "../auth";
 
 export const auth = new Elysia().derive(
