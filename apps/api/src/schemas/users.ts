@@ -1,8 +1,8 @@
 import { relations } from "drizzle-orm";
-import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
+import { pgTable, text, timestamp } from "drizzle-orm/pg-core";
 import { groups, tasks } from "./tasks";
 
-export const users = sqliteTable("user", {
+export const users = pgTable("user", {
   id: text("id").notNull().primaryKey(),
   username: text("username").unique(),
   password: text("password").notNull(),
@@ -14,15 +14,15 @@ export const usersRelations = relations(users, ({ many }) => ({
   tasks: many(tasks),
 }));
 
-export const sessions = sqliteTable("session", {
+export const sessions = pgTable("session", {
   id: text("id").notNull().primaryKey(),
-  userId: text("user_id", { length: 255 })
+  userId: text("user_id")
     .notNull()
-    .references(() => users.id, {
-      onUpdate: "cascade",
-      onDelete: "cascade",
-    }),
-  expiresAt: integer("expires_at").notNull(),
+    .references(() => users.id),
+  expiresAt: timestamp("expires_at", {
+    withTimezone: true,
+    mode: "date",
+  }).notNull(),
 });
 
 export const sessionsRelations = relations(sessions, ({ one }) => ({

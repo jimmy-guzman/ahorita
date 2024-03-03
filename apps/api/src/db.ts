@@ -1,11 +1,15 @@
-import { Database } from "bun:sqlite";
-import { drizzle } from "drizzle-orm/bun-sqlite";
+import { neon } from "@neondatabase/serverless";
+import { drizzle } from "drizzle-orm/neon-http";
 
 import * as schema from "./schemas";
 
-export const sqlite = new Database(Bun.env.DATABASE_URL);
+if (!Bun.env.DATABASE_URL) {
+  throw new Error("Missing DATABASE_URL");
+}
 
-export const db = drizzle(sqlite, {
+export const sql = neon<boolean, boolean>(Bun.env.DATABASE_URL);
+
+export const db = drizzle(sql, {
   logger: Bun.env.QUERY_LOGGING === "true",
   schema,
 });

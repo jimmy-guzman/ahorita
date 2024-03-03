@@ -1,12 +1,11 @@
-import { BunSQLiteAdapter } from "@lucia-auth/adapter-sqlite";
+import { DrizzlePostgreSQLAdapter } from "@lucia-auth/adapter-drizzle";
+
 import { Lucia } from "lucia";
 
-import { sqlite } from "./db";
+import { db } from "./db";
+import { sessions, users } from "./schemas";
 
-const adapter = new BunSQLiteAdapter(sqlite, {
-  user: "user",
-  session: "session",
-});
+const adapter = new DrizzlePostgreSQLAdapter(db, sessions, users);
 
 export const lucia = new Lucia(adapter, {
   sessionCookie: {
