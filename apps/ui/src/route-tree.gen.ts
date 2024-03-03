@@ -15,7 +15,7 @@ import { Route as SignupImport } from './routes/signup'
 import { Route as LoginImport } from './routes/login'
 import { Route as GroupsRouteImport } from './routes/groups/route'
 import { Route as IndexImport } from './routes/index'
-import { Route as GroupsAddRouteImport } from './routes/groups/add/route'
+import { Route as GroupsNewRouteImport } from './routes/groups/new/route'
 import { Route as GroupsGroupIdRouteImport } from './routes/groups/$groupId/route'
 import { Route as GroupsGroupIdTasksRouteImport } from './routes/groups/$groupId/tasks/route'
 import { Route as GroupsGroupIdTasksIndexImport } from './routes/groups/$groupId/tasks/index'
@@ -43,8 +43,8 @@ const IndexRoute = IndexImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const GroupsAddRouteRoute = GroupsAddRouteImport.update({
-  path: '/add',
+const GroupsNewRouteRoute = GroupsNewRouteImport.update({
+  path: '/new',
   getParentRoute: () => GroupsRouteRoute,
 } as any)
 
@@ -94,8 +94,8 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GroupsGroupIdRouteImport
       parentRoute: typeof GroupsRouteImport
     }
-    '/groups/add': {
-      preLoaderRoute: typeof GroupsAddRouteImport
+    '/groups/new': {
+      preLoaderRoute: typeof GroupsNewRouteImport
       parentRoute: typeof GroupsRouteImport
     }
     '/groups/$groupId/tasks': {
@@ -124,7 +124,7 @@ export const routeTree = rootRoute.addChildren([
         GroupsGroupIdTasksIndexRoute,
       ]),
     ]),
-    GroupsAddRouteRoute,
+    GroupsNewRouteRoute,
   ]),
   LoginRoute,
   SignupRoute,

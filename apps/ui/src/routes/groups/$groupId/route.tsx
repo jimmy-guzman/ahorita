@@ -66,7 +66,7 @@ const GroupDetails = () => {
               onClick={() => {
                 deleteGroup(groupId, {
                   onSuccess() {
-                    return navigate({ to: "/groups/add" });
+                    return navigate({ to: "/groups/new" });
                   },
                 });
               }}

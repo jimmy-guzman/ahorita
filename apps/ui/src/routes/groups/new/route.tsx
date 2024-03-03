@@ -7,7 +7,7 @@ import { ListPlusIcon } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
-import { addGroupMutationOptions } from "@/api/add-group";
+import { createGroupOptions } from "@/api/create-group";
 import { TextInput } from "@/components/text-input";
 
 const schema = Type.Object({
@@ -15,8 +15,8 @@ const schema = Type.Object({
   description: Type.String({ minLength: 1 }),
 });
 
-const AddGroupForm = () => {
-  const { mutate, isPending } = useMutation(addGroupMutationOptions);
+const CreateGroupForm = () => {
+  const { mutate, isPending } = useMutation(createGroupOptions);
   const { handleSubmit, control, reset } = useForm<Static<typeof schema>>({
     resolver: typeboxResolver(schema),
     defaultValues: {
@@ -28,7 +28,7 @@ const AddGroupForm = () => {
   return (
     <div className="flex w-full flex-col gap-8">
       <div className="prose dsy-prose">
-        <h1>Add Your New Group</h1>
+        <h1>Create New Group</h1>
       </div>
       <form
         className="flex flex-col gap-2"
@@ -36,7 +36,7 @@ const AddGroupForm = () => {
           mutate(body, {
             onSuccess: () => {
               reset();
-              toast.success("Group has been added");
+              toast.success("Group has been created");
             },
           });
         })}
@@ -53,7 +53,7 @@ const AddGroupForm = () => {
             className="dsy-btn dsy-btn-primary"
             disabled={isPending}
           >
-            Add Group <ListPlusIcon />
+            Create New Group <ListPlusIcon />
           </button>
         </div>
       </form>
@@ -61,6 +61,6 @@ const AddGroupForm = () => {
   );
 };
 
-export const Route = createFileRoute("/groups/add")({
-  component: AddGroupForm,
+export const Route = createFileRoute("/groups/new")({
+  component: CreateGroupForm,
 });
