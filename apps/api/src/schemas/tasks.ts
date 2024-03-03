@@ -1,5 +1,5 @@
 import { relations, sql } from "drizzle-orm";
-import { pgTable, text, timestamp } from "drizzle-orm/pg-core";
+import { boolean, pgTable, text, timestamp } from "drizzle-orm/pg-core";
 
 import { nanoid } from "../utils";
 import { users } from "./users";
@@ -12,16 +12,11 @@ export const groups = pgTable("group", {
   id: text("id").$default(nanoid).primaryKey(),
   name: text("name").unique().notNull(),
   description: text("description").notNull(),
-  createdAt: timestamp("created_at", {
-    withTimezone: true,
-    mode: "string",
-  })
+  isFavorite: boolean("is_favorite").default(false).notNull(),
+  createdAt: timestamp("created_at", { withTimezone: true, mode: "string" })
     .defaultNow()
     .notNull(),
-  updatedAt: timestamp("updated_at", {
-    withTimezone: true,
-    mode: "string",
-  })
+  updatedAt: timestamp("updated_at", { withTimezone: true, mode: "string" })
     .defaultNow()
     .notNull(),
 
@@ -35,22 +30,13 @@ export const tasks = pgTable("task", {
   name: text("name").notNull(),
   status: text("status", { enum: statuses }).default("TODO").notNull(),
   priority: text("priority", { enum: priorities }).default("MEDIUM").notNull(),
-  createdAt: timestamp("created_at", {
-    withTimezone: true,
-    mode: "string",
-  })
+  createdAt: timestamp("created_at", { withTimezone: true, mode: "string" })
     .defaultNow()
     .notNull(),
-  updatedAt: timestamp("updated_at", {
-    withTimezone: true,
-    mode: "string",
-  })
+  updatedAt: timestamp("updated_at", { withTimezone: true, mode: "string" })
     .defaultNow()
     .notNull(),
-  dueAt: timestamp("due_at", {
-    withTimezone: true,
-    mode: "string",
-  })
+  dueAt: timestamp("due_at", { withTimezone: true, mode: "string" })
     .default(sql`now() + INTERVAL '1 MONTHS'`)
     .notNull(),
 

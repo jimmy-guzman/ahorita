@@ -3,9 +3,10 @@ import { Outlet, createFileRoute } from "@tanstack/react-router";
 import { Link, useNavigate } from "@tanstack/react-router";
 import { getRouteApi } from "@tanstack/react-router";
 import { formatDistanceToNowStrict } from "date-fns";
-import { EyeIcon, Trash2Icon } from "lucide-react";
+import { EyeIcon, StarIcon, StarOffIcon, Trash2Icon } from "lucide-react";
 
-import { deleteGroupMutationOptions } from "@/api/delete-group";
+import { deleteGroupOptions } from "@/api/delete-group";
+import { editGroupOptions } from "@/api/edit-group";
 import { groupQueryOptions } from "@/api/query-group";
 
 const routeApi = getRouteApi("/groups/$groupId");
@@ -13,14 +14,44 @@ const routeApi = getRouteApi("/groups/$groupId");
 const GroupDetails = () => {
   const { groupId } = routeApi.useParams();
   const { data: group } = useSuspenseQuery(groupQueryOptions(groupId));
-  const { mutate, isPending } = useMutation(deleteGroupMutationOptions);
+  const { mutate: deleteGroup, isPending } = useMutation(deleteGroupOptions);
+  const { mutate: editGroup } = useMutation(editGroupOptions);
   const navigate = useNavigate();
 
   return (
     <section className="flex w-full flex-col gap-4">
       <div className="dsy-card bg-base-200">
         <div className="dsy-card-body">
-          <h1 className="dsy-card-title text-secondary">{group.name}</h1>
+          <h1 className="dsy-card-title text-secondary">
+            {group.name}
+            {group.isFavorite ? (
+              <button
+                type="button"
+                className="dsy-btn dsy-btn-ghost dsy-btn-circle"
+                onClick={() =>
+                  editGroup({
+                    params: { id: groupId },
+                    body: { isFavorite: false },
+                  })
+                }
+              >
+                <StarIcon />
+              </button>
+            ) : (
+              <button
+                type="button"
+                className="dsy-btn dsy-btn-ghost dsy-btn-circle"
+                onClick={() =>
+                  editGroup({
+                    params: { id: groupId },
+                    body: { isFavorite: true },
+                  })
+                }
+              >
+                <StarOffIcon />
+              </button>
+            )}
+          </h1>
           <p>{group.description}</p>
           <div className="grid justify-items-end text-info italic">
             <span>
@@ -30,10 +61,10 @@ const GroupDetails = () => {
           <div className="dsy-card-actions justify-end">
             <button
               type="button"
-              className="dsy-btn dsy-btn-neutral"
+              className="dsy-btn dsy-btn-neutral dsy-btn-sm"
               disabled={isPending}
               onClick={() => {
-                mutate(groupId, {
+                deleteGroup(groupId, {
                   onSuccess() {
                     return navigate({ to: "/groups/add" });
                   },
@@ -43,7 +74,7 @@ const GroupDetails = () => {
               Delete Group <Trash2Icon />
             </button>
             <Link
-              className="dsy-btn dsy-btn-primary"
+              className="dsy-btn dsy-btn-primary dsy-btn-sm"
               to="/groups/$groupId/tasks"
               params={{ groupId }}
               activeOptions={{ exact: true }}

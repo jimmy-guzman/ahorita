@@ -1,13 +1,16 @@
+import type { API } from "@/api/client";
 import { api } from "@/api/client";
 import { mutationOptions } from "@/api/mutation-options";
 import { queryClient } from "@/query-client";
 
-import { groupQueryOptions } from "./query-group";
 import { groupsQueryOptions } from "./query-groups";
 
-export const deleteGroupOptions = mutationOptions({
-  mutationFn: async (id: string) => {
-    const res = await api.groups[id as ":id"].delete();
+export const editGroupOptions = mutationOptions({
+  mutationFn: async ({
+    params,
+    body,
+  }: Pick<API["/groups/:id"]["patch"], "body" | "params">) => {
+    const res = await api.groups[params.id as ":id"].patch(body);
 
     if (res.error) throw new Error(res.error.value);
 
@@ -16,8 +19,7 @@ export const deleteGroupOptions = mutationOptions({
   onMutate: async () => {
     await queryClient.cancelQueries(groupsQueryOptions);
   },
-  onSuccess: async (_response, id) => {
-    queryClient.removeQueries(groupQueryOptions(id));
+  onSuccess: async () => {
     await queryClient.invalidateQueries(groupsQueryOptions);
   },
 });

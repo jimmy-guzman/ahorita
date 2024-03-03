@@ -6,6 +6,7 @@ import { auth } from "../middleware/auth";
 import { GroupDto } from "../models/groups";
 import { TaskDto } from "../models/tasks";
 import { groups, tasks } from "../schemas";
+import { nowAsISO } from "../utils";
 
 export const groupsRoute = new Elysia()
   .use(auth)
@@ -57,6 +58,25 @@ export const groupsRoute = new Elysia()
         },
         {
           params: t.Object({ id: t.String() }),
+          response: GroupDto,
+        },
+      )
+      .patch(
+        "/:id",
+        async ({ params: { id }, body }) => {
+          const [group] = await db
+            .update(groups)
+            .set({ ...body, updatedAt: nowAsISO() })
+            .where(eq(groups.id, id))
+            .returning();
+
+          if (!group) throw NotFoundError;
+
+          return group;
+        },
+        {
+          params: t.Object({ id: t.String() }),
+          body: t.Partial(t.Pick(GroupDto, ["description", "isFavorite"])),
           response: GroupDto,
         },
       )
