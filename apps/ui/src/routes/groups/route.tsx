@@ -62,23 +62,39 @@ const Groups = () => {
             ahorita
           </Link>
           <ul className="dsy-menu min-h-screen w-56 bg-base-100">
-            <li className="dsy-menu-title text-primary uppercase">All</li>
             <li>
               <Link to="/groups/add" activeProps={{ className: "dsy-active" }}>
                 Add New <ListPlusIcon className="h-5 w-5 text-accent" />
               </Link>
             </li>
-            {groups.map(({ id: groupId, name }) => (
-              <li key={groupId}>
-                <Link
-                  to="/groups/$groupId"
-                  params={{ groupId }}
-                  activeProps={{ className: "dsy-active" }}
-                >
-                  {name}
-                </Link>
-              </li>
-            ))}
+            <li className="dsy-menu-title text-primary uppercase">Favorites</li>
+            {groups
+              .filter((group) => group.isFavorite)
+              .map(({ id: groupId, name }) => (
+                <li key={groupId}>
+                  <Link
+                    to="/groups/$groupId"
+                    params={{ groupId }}
+                    activeProps={{ className: "dsy-active" }}
+                  >
+                    {name}
+                  </Link>
+                </li>
+              ))}
+            <li className="dsy-menu-title text-primary uppercase">More</li>
+            {groups
+              .filter((group) => !group.isFavorite)
+              .map(({ id: groupId, name }) => (
+                <li key={groupId}>
+                  <Link
+                    to="/groups/$groupId"
+                    params={{ groupId }}
+                    activeProps={{ className: "dsy-active" }}
+                  >
+                    {name}
+                  </Link>
+                </li>
+              ))}
           </ul>
         </div>
       </aside>
