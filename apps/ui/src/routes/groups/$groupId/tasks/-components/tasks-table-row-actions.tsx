@@ -13,7 +13,7 @@ import {
 interface TaskTableActionsProps {
   task: {
     id: string;
-    tagId: string;
+    groupId: string;
     name: string;
     status: Status;
     priority: Priority;

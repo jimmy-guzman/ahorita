@@ -9,7 +9,7 @@ const statuses = <const>["BACKLOG", "TODO", "IN_PROGRESS", "DONE", "CANCELED"];
 
 const priorities = <const>["LOW", "MEDIUM", "HIGH"];
 
-export const tags = sqliteTable("tag", {
+export const groups = sqliteTable("group", {
   id: text("id").$default(nanoid).primaryKey(),
   name: text("name").unique().notNull(),
   description: text("description").notNull(),
@@ -30,21 +30,21 @@ export const tasks = sqliteTable("task", {
   updatedAt: text("updated_at").$default(nowAsISO).notNull(),
   dueAt: text("due_at").$default(dueDateAsISO).notNull(),
 
-  tagId: text("tag_id")
-    .references(() => tags.id, { onDelete: "cascade" })
+  groupId: text("group_id")
+    .references(() => groups.id, { onDelete: "cascade" })
     .notNull(),
   userId: text("user_id")
     .references(() => users.id, { onDelete: "cascade" })
     .notNull(),
 });
 
-export const tagsRelations = relations(tags, ({ many }) => ({
+export const groupsRelations = relations(groups, ({ many }) => ({
   tasks: many(tasks),
 }));
 
 export const tasksRelations = relations(tasks, ({ one }) => ({
-  tag: one(tags, {
-    fields: [tasks.tagId],
-    references: [tags.id],
+  group: one(groups, {
+    fields: [tasks.groupId],
+    references: [groups.id],
   }),
 }));

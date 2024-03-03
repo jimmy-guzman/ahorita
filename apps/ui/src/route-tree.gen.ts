@@ -13,11 +13,11 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as SignupImport } from './routes/signup'
 import { Route as LoginImport } from './routes/login'
-import { Route as TagsRouteImport } from './routes/tags/route'
+import { Route as GroupsRouteImport } from './routes/groups/route'
 import { Route as IndexImport } from './routes/index'
-import { Route as TagsAddRouteImport } from './routes/tags/add/route'
-import { Route as TagsTagIdRouteImport } from './routes/tags/$tagId/route'
-import { Route as TagsTagIdTasksRouteImport } from './routes/tags/$tagId/tasks/route'
+import { Route as GroupsAddRouteImport } from './routes/groups/add/route'
+import { Route as GroupsGroupIdRouteImport } from './routes/groups/$groupId/route'
+import { Route as GroupsGroupIdTasksRouteImport } from './routes/groups/$groupId/tasks/route'
 
 // Create/Update Routes
 
@@ -31,8 +31,8 @@ const LoginRoute = LoginImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const TagsRouteRoute = TagsRouteImport.update({
-  path: '/tags',
+const GroupsRouteRoute = GroupsRouteImport.update({
+  path: '/groups',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -41,19 +41,19 @@ const IndexRoute = IndexImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const TagsAddRouteRoute = TagsAddRouteImport.update({
+const GroupsAddRouteRoute = GroupsAddRouteImport.update({
   path: '/add',
-  getParentRoute: () => TagsRouteRoute,
+  getParentRoute: () => GroupsRouteRoute,
 } as any)
 
-const TagsTagIdRouteRoute = TagsTagIdRouteImport.update({
-  path: '/$tagId',
-  getParentRoute: () => TagsRouteRoute,
+const GroupsGroupIdRouteRoute = GroupsGroupIdRouteImport.update({
+  path: '/$groupId',
+  getParentRoute: () => GroupsRouteRoute,
 } as any)
 
-const TagsTagIdTasksRouteRoute = TagsTagIdTasksRouteImport.update({
+const GroupsGroupIdTasksRouteRoute = GroupsGroupIdTasksRouteImport.update({
   path: '/tasks',
-  getParentRoute: () => TagsTagIdRouteRoute,
+  getParentRoute: () => GroupsGroupIdRouteRoute,
 } as any)
 
 // Populate the FileRoutesByPath interface
@@ -64,8 +64,8 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
-    '/tags': {
-      preLoaderRoute: typeof TagsRouteImport
+    '/groups': {
+      preLoaderRoute: typeof GroupsRouteImport
       parentRoute: typeof rootRoute
     }
     '/login': {
@@ -76,17 +76,17 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SignupImport
       parentRoute: typeof rootRoute
     }
-    '/tags/$tagId': {
-      preLoaderRoute: typeof TagsTagIdRouteImport
-      parentRoute: typeof TagsRouteImport
+    '/groups/$groupId': {
+      preLoaderRoute: typeof GroupsGroupIdRouteImport
+      parentRoute: typeof GroupsRouteImport
     }
-    '/tags/add': {
-      preLoaderRoute: typeof TagsAddRouteImport
-      parentRoute: typeof TagsRouteImport
+    '/groups/add': {
+      preLoaderRoute: typeof GroupsAddRouteImport
+      parentRoute: typeof GroupsRouteImport
     }
-    '/tags/$tagId/tasks': {
-      preLoaderRoute: typeof TagsTagIdTasksRouteImport
-      parentRoute: typeof TagsTagIdRouteImport
+    '/groups/$groupId/tasks': {
+      preLoaderRoute: typeof GroupsGroupIdTasksRouteImport
+      parentRoute: typeof GroupsGroupIdRouteImport
     }
   }
 }
@@ -95,9 +95,9 @@ declare module '@tanstack/react-router' {
 
 export const routeTree = rootRoute.addChildren([
   IndexRoute,
-  TagsRouteRoute.addChildren([
-    TagsTagIdRouteRoute.addChildren([TagsTagIdTasksRouteRoute]),
-    TagsAddRouteRoute,
+  GroupsRouteRoute.addChildren([
+    GroupsGroupIdRouteRoute.addChildren([GroupsGroupIdTasksRouteRoute]),
+    GroupsAddRouteRoute,
   ]),
   LoginRoute,
   SignupRoute,

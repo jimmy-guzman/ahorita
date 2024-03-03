@@ -17,7 +17,7 @@ const schema = Type.Object({
         Type.Literal("CANCELED"),
       ]),
       id: Type.String(),
-      tagId: Type.String(),
+      groupId: Type.String(),
     }),
   ),
 });

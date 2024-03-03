@@ -10,12 +10,12 @@ import { useRef } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
-import { addTaskByTagIdMutationOptions } from "@/api/add-task";
+import { addTaskByGroupIdMutationOptions } from "@/api/add-task";
 import { Select } from "@/components/select";
 import { TextInput } from "@/components/text-input";
 import { priorities } from "@/constants/tasks";
 
-const routeApi = getRouteApi("/tags/$tagId");
+const routeApi = getRouteApi("/groups/$groupId");
 
 const schema = Type.Object({
   name: Type.String({ minLength: 1 }),
@@ -28,7 +28,7 @@ const schema = Type.Object({
 });
 
 export const AddTask = () => {
-  const { tagId } = routeApi.useParams();
+  const { groupId } = routeApi.useParams();
   const {
     handleSubmit,
     control,
@@ -43,7 +43,7 @@ export const AddTask = () => {
       dueAt: addMonths(new Date(), 1).toISOString(),
     },
   });
-  const { mutate, isPending } = useMutation(addTaskByTagIdMutationOptions);
+  const { mutate, isPending } = useMutation(addTaskByGroupIdMutationOptions);
   const dialogRef = useRef<HTMLDialogElement>(null);
 
   return (
@@ -67,7 +67,7 @@ export const AddTask = () => {
                 mutate(
                   {
                     body,
-                    params: { id: tagId },
+                    params: { id: groupId },
                   },
                   {
                     onSuccess() {

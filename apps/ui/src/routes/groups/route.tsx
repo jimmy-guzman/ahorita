@@ -4,11 +4,11 @@ import { Link, Outlet, redirect } from "@tanstack/react-router";
 import { ExternalLinkIcon, ListPlusIcon, MenuIcon } from "lucide-react";
 
 import { api } from "@/api/client";
-import { tagsQueryOptions } from "@/api/query-tags";
+import { groupsQueryOptions } from "@/api/query-groups";
 import { Logout } from "@/components/logout";
 
-const Tags = () => {
-  const { data: tags } = useSuspenseQuery(tagsQueryOptions);
+const Groups = () => {
+  const { data: groups } = useSuspenseQuery(groupsQueryOptions);
 
   return (
     <div className="dsy-drawer lg:dsy-drawer-open">
@@ -64,15 +64,15 @@ const Tags = () => {
           <ul className="dsy-menu min-h-screen w-56 bg-base-100">
             <li className="dsy-menu-title text-primary uppercase">All</li>
             <li>
-              <Link to="/tags/add" activeProps={{ className: "dsy-active" }}>
+              <Link to="/groups/add" activeProps={{ className: "dsy-active" }}>
                 Add New <ListPlusIcon className="h-5 w-5 text-accent" />
               </Link>
             </li>
-            {tags.map(({ id: tagId, name }) => (
-              <li key={tagId}>
+            {groups.map(({ id: groupId, name }) => (
+              <li key={groupId}>
                 <Link
-                  to="/tags/$tagId"
-                  params={{ tagId }}
+                  to="/groups/$groupId"
+                  params={{ groupId }}
                   activeProps={{ className: "dsy-active" }}
                 >
                   {name}
@@ -86,8 +86,8 @@ const Tags = () => {
   );
 };
 
-export const Route = createFileRoute("/tags")({
-  component: Tags,
+export const Route = createFileRoute("/groups")({
+  component: Groups,
   beforeLoad: async ({ location, context }) => {
     const response = await context.queryClient.fetchQuery({
       queryKey: ["users", "me"],
@@ -105,6 +105,6 @@ export const Route = createFileRoute("/tags")({
     }
   },
   loader: async ({ context: { queryClient } }) => {
-    await queryClient.ensureQueryData(tagsQueryOptions);
+    await queryClient.ensureQueryData(groupsQueryOptions);
   },
 });
