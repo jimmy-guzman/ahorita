@@ -4,7 +4,7 @@ import { mutationOptions } from "@/api/mutation-options";
 import { groupsQueryOptions } from "@/api/query-groups";
 import { queryClient } from "@/query-client";
 
-export const addGroupMutationOptions = mutationOptions({
+export const createGroupOptions = mutationOptions({
   mutationFn: async (body: API["/groups"]["post"]["body"]) => {
     const res = await api.groups.post(body);
 

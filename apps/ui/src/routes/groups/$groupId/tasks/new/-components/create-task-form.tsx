@@ -8,7 +8,7 @@ import { addMonths, formatISO9075 } from "date-fns";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
-import { addTaskByGroupIdMutationOptions } from "@/api/add-task";
+import { createTaskByGroupIdOptions } from "@/api/create-task";
 import { Select } from "@/components/select";
 import { TextInput } from "@/components/text-input";
 import { priorities } from "@/constants/tasks";
@@ -26,7 +26,7 @@ const schema = Type.Object({
   dueAt: Type.String(),
 });
 
-export const AddTask = () => {
+export const CreateTaskForm = () => {
   const { groupId } = routeApi.useParams();
   const {
     handleSubmit,
@@ -44,7 +44,7 @@ export const AddTask = () => {
       }),
     },
   });
-  const { mutate, isPending } = useMutation(addTaskByGroupIdMutationOptions);
+  const { mutate, isPending } = useMutation(createTaskByGroupIdOptions);
 
   return (
     <div className="flex w-full flex-col gap-4">
@@ -62,7 +62,7 @@ export const AddTask = () => {
             {
               onSuccess() {
                 reset();
-                toast.success("Task has been added");
+                toast.success("Task has been created");
               },
             },
           );

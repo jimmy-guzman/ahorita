@@ -63,8 +63,8 @@ const Groups = () => {
           </Link>
           <ul className="dsy-menu min-h-screen w-56 bg-base-100">
             <li>
-              <Link to="/groups/add" activeProps={{ className: "dsy-active" }}>
-                Add New <ListPlusIcon className="h-5 w-5 text-accent" />
+              <Link to="/groups/new" activeProps={{ className: "dsy-active" }}>
+                New Group <ListPlusIcon className="h-5 w-5 text-accent" />
               </Link>
             </li>
             <li className="dsy-menu-title text-primary uppercase">Favorites</li>
