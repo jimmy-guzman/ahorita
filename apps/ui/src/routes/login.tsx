@@ -22,7 +22,7 @@ const routeApi = getRouteApi("/login");
 
 export const Login = () => {
   const search = routeApi.useSearch();
-  const navigate = useNavigate();
+  const navigate = useNavigate({ from: routeApi.id });
   const { handleSubmit, control } = useForm<Static<typeof schema>>({
     resolver: typeboxResolver(schema),
     defaultValues: {
@@ -40,7 +40,7 @@ export const Login = () => {
       return res.data;
     },
     onSuccess: async () => {
-      await navigate({ to: search.redirect ?? "/" });
+      await navigate({ to: search.redirect });
     },
   });
 
@@ -90,7 +90,7 @@ export const Login = () => {
 };
 
 const searchSchema = Type.Object({
-  redirect: Type.Optional(Type.String()),
+  redirect: Type.Optional(Type.String({ default: "/" })),
 });
 
 export const Route = createFileRoute("/login")({

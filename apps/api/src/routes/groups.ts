@@ -82,6 +82,7 @@ export const groupsRoute = new Elysia()
         async ({ params: { id } }) => {
           return db.query.tasks.findMany({
             where: eq(tasks.groupId, id),
+            orderBy: (tasks, { asc }) => [asc(tasks.dueAt)],
           });
         },
         {

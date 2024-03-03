@@ -18,6 +18,8 @@ import { Route as IndexImport } from './routes/index'
 import { Route as GroupsAddRouteImport } from './routes/groups/add/route'
 import { Route as GroupsGroupIdRouteImport } from './routes/groups/$groupId/route'
 import { Route as GroupsGroupIdTasksRouteImport } from './routes/groups/$groupId/tasks/route'
+import { Route as GroupsGroupIdTasksIndexImport } from './routes/groups/$groupId/tasks/index'
+import { Route as GroupsGroupIdTasksNewRouteImport } from './routes/groups/$groupId/tasks/new/route'
 
 // Create/Update Routes
 
@@ -56,6 +58,18 @@ const GroupsGroupIdTasksRouteRoute = GroupsGroupIdTasksRouteImport.update({
   getParentRoute: () => GroupsGroupIdRouteRoute,
 } as any)
 
+const GroupsGroupIdTasksIndexRoute = GroupsGroupIdTasksIndexImport.update({
+  path: '/',
+  getParentRoute: () => GroupsGroupIdTasksRouteRoute,
+} as any)
+
+const GroupsGroupIdTasksNewRouteRoute = GroupsGroupIdTasksNewRouteImport.update(
+  {
+    path: '/new',
+    getParentRoute: () => GroupsGroupIdTasksRouteRoute,
+  } as any,
+)
+
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -88,6 +102,14 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GroupsGroupIdTasksRouteImport
       parentRoute: typeof GroupsGroupIdRouteImport
     }
+    '/groups/$groupId/tasks/new': {
+      preLoaderRoute: typeof GroupsGroupIdTasksNewRouteImport
+      parentRoute: typeof GroupsGroupIdTasksRouteImport
+    }
+    '/groups/$groupId/tasks/': {
+      preLoaderRoute: typeof GroupsGroupIdTasksIndexImport
+      parentRoute: typeof GroupsGroupIdTasksRouteImport
+    }
   }
 }
 
@@ -96,7 +118,12 @@ declare module '@tanstack/react-router' {
 export const routeTree = rootRoute.addChildren([
   IndexRoute,
   GroupsRouteRoute.addChildren([
-    GroupsGroupIdRouteRoute.addChildren([GroupsGroupIdTasksRouteRoute]),
+    GroupsGroupIdRouteRoute.addChildren([
+      GroupsGroupIdTasksRouteRoute.addChildren([
+        GroupsGroupIdTasksNewRouteRoute,
+        GroupsGroupIdTasksIndexRoute,
+      ]),
+    ]),
     GroupsAddRouteRoute,
   ]),
   LoginRoute,
