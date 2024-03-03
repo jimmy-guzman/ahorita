@@ -62,13 +62,21 @@ export const tasks = pgTable("task", {
     .notNull(),
 });
 
-export const groupsRelations = relations(groups, ({ many }) => ({
+export const groupsRelations = relations(groups, ({ many, one }) => ({
   tasks: many(tasks),
+  user: one(users, {
+    fields: [groups.userId],
+    references: [users.id],
+  }),
 }));
 
 export const tasksRelations = relations(tasks, ({ one }) => ({
   group: one(groups, {
     fields: [tasks.groupId],
     references: [groups.id],
+  }),
+  user: one(users, {
+    fields: [tasks.userId],
+    references: [users.id],
   }),
 }));
