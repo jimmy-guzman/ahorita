@@ -1,12 +1,12 @@
+import type { API } from "@/api/client";
 import { api } from "@/api/client";
 import { mutationOptions } from "@/api/mutation-options";
+import { groupsQueryOptions } from "@/api/query-groups";
 import { queryClient } from "@/query-client";
 
-import { groupsQueryOptions } from "./query-groups";
-
-export const deleteTaskMutationOptions = mutationOptions({
-  mutationFn: async (id: string) => {
-    const res = await api.tasks[id as ":id"].delete();
+export const addGroupMutationOptions = mutationOptions({
+  mutationFn: async (body: API["/groups"]["post"]["body"]) => {
+    const res = await api.groups.post(body);
 
     if (res.error) throw new Error(res.error.value);
 

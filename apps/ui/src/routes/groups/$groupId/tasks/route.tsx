@@ -3,17 +3,17 @@ import { createFileRoute } from "@tanstack/react-router";
 import { getRouteApi } from "@tanstack/react-router";
 import { FormProvider } from "react-hook-form";
 
-import { tasksByTagQueryOptions } from "@/api/query-tasks-by-tag";
+import { tasksByGroupQueryOptions } from "@/api/query-tasks-by-group";
 import { Table } from "@/components/table";
-import { useTasksForm } from "@/routes/tags/$tagId/tasks/-hooks/use-tasks-form";
+import { useTasksForm } from "@/routes/groups/$groupId/tasks/-hooks/use-tasks-form";
 
 import { columns } from "./-components/columns";
 
-const routeApi = getRouteApi("/tags/$tagId/tasks");
+const routeApi = getRouteApi("/groups/$groupId/tasks");
 
-const TasksByTag = () => {
-  const { tagId } = routeApi.useParams();
-  const { data: tasks } = useSuspenseQuery(tasksByTagQueryOptions(tagId));
+const TasksByGroup = () => {
+  const { groupId } = routeApi.useParams();
+  const { data: tasks } = useSuspenseQuery(tasksByGroupQueryOptions(groupId));
   const form = useTasksForm(tasks);
 
   return (
@@ -28,9 +28,9 @@ const TasksByTag = () => {
   );
 };
 
-export const Route = createFileRoute("/tags/$tagId/tasks")({
-  component: TasksByTag,
+export const Route = createFileRoute("/groups/$groupId/tasks")({
+  component: TasksByGroup,
   loader: async ({ context: { queryClient }, params }) => {
-    await queryClient.ensureQueryData(tasksByTagQueryOptions(params.tagId));
+    await queryClient.ensureQueryData(tasksByGroupQueryOptions(params.groupId));
   },
 });

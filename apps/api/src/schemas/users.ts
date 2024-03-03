@@ -1,6 +1,6 @@
 import { relations } from "drizzle-orm";
 import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
-import { tags, tasks } from "./tasks";
+import { groups, tasks } from "./tasks";
 
 export const users = sqliteTable("user", {
   id: text("id").notNull().primaryKey(),
@@ -10,7 +10,7 @@ export const users = sqliteTable("user", {
 
 export const usersRelations = relations(users, ({ many }) => ({
   session: many(sessions),
-  tags: many(tags),
+  groups: many(groups),
   tasks: many(tasks),
 }));
 

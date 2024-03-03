@@ -3,25 +3,25 @@ import { Elysia, InternalServerError, NotFoundError, t } from "elysia";
 
 import { db } from "../db";
 import { auth } from "../middleware/auth";
-import { TagDto } from "../models/tags";
+import { GroupDto } from "../models/groups";
 import { TaskDto } from "../models/tasks";
-import { tags, tasks } from "../schemas";
+import { groups, tasks } from "../schemas";
 
-export const tagsRoute = new Elysia()
+export const groupsRoute = new Elysia()
   .use(auth)
-  .group("/tags", { detail: { tags: ["Tags"] } }, (app) =>
+  .group("/groups", { detail: { tags: ["Groups"] } }, (app) =>
     app
       .get(
         "",
         async ({ user }) => {
           const userId = user?.id ?? "";
 
-          return db.query.tags.findMany({
-            where: eq(tags.userId, userId),
+          return db.query.groups.findMany({
+            where: eq(groups.userId, userId),
           });
         },
         {
-          response: t.Array(TagDto),
+          response: t.Array(GroupDto),
         },
       )
       .post(
@@ -29,65 +29,65 @@ export const tagsRoute = new Elysia()
         async ({ body, user }) => {
           const userId = user?.id ?? "";
 
-          const [tag] = await db
-            .insert(tags)
+          const [group] = await db
+            .insert(groups)
             .values({ ...body, userId })
             .returning();
 
-          if (!tag) throw InternalServerError;
+          if (!group) throw InternalServerError;
 
-          return tag;
+          return group;
         },
         {
-          body: t.Pick(TagDto, ["name", "description"]),
-          response: TagDto,
+          body: t.Pick(GroupDto, ["name", "description"]),
+          response: GroupDto,
         },
       )
       .get(
         "/:id",
         async ({ params: { id } }) => {
-          const [tag] = await db.query.tags.findMany({
-            where: eq(tags.id, id),
+          const [group] = await db.query.groups.findMany({
+            where: eq(groups.id, id),
             limit: 1,
           });
 
-          if (!tag) throw NotFoundError;
+          if (!group) throw NotFoundError;
 
-          return tag;
+          return group;
         },
         {
           params: t.Object({ id: t.String() }),
-          response: TagDto,
+          response: GroupDto,
         },
       )
       .delete(
         "/:id",
         async ({ params: { id } }) => {
-          const tag = await db.transaction(async (tx) => {
-            const [tag] = await tx
-              .delete(tags)
-              .where(eq(tags.id, id))
+          const group = await db.transaction(async (tx) => {
+            const [group] = await tx
+              .delete(groups)
+              .where(eq(groups.id, id))
               .returning();
 
-            if (!tag) throw NotFoundError;
+            if (!group) throw NotFoundError;
 
-            await tx.delete(tasks).where(eq(tasks.tagId, id));
+            await tx.delete(tasks).where(eq(tasks.groupId, id));
 
-            return tag;
+            return group;
           });
 
-          return tag;
+          return group;
         },
         {
           params: t.Object({ id: t.String() }),
-          response: TagDto,
+          response: GroupDto,
         },
       )
       .get(
         "/:id/tasks",
         async ({ params: { id } }) => {
           return db.query.tasks.findMany({
-            where: eq(tasks.tagId, id),
+            where: eq(tasks.groupId, id),
           });
         },
         {
@@ -102,7 +102,7 @@ export const tagsRoute = new Elysia()
 
           const [task] = await db
             .insert(tasks)
-            .values({ ...body, tagId: id, userId })
+            .values({ ...body, groupId: id, userId })
             .returning();
 
           if (!task) throw InternalServerError;

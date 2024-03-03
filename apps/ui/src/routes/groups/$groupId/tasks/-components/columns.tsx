@@ -8,7 +8,7 @@ import { TasksTableStatusCell } from "./tasks-table-status-cell";
 
 const columnHelper = createColumnHelper<{
   id: string;
-  tagId: string;
+  groupId: string;
   name: string;
   status: "BACKLOG" | "TODO" | "IN_PROGRESS" | "DONE" | "CANCELED";
   priority: "LOW" | "MEDIUM" | "HIGH";

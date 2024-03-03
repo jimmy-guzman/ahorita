@@ -2,11 +2,11 @@ import { queryOptions } from "@tanstack/react-query";
 
 import { api } from "@/api/client";
 
-export const tagQueryOptions = (id: string) => {
+export const groupQueryOptions = (id: string) => {
   return queryOptions({
-    queryKey: ["tags", id] as const,
+    queryKey: ["groups", id] as const,
     queryFn: async () => {
-      const res = await api.tags[id as ":id"].get();
+      const res = await api.groups[id as ":id"].get();
 
       if (res.error) throw new Error(res.error.value);
 

@@ -3,7 +3,7 @@ import { api } from "@/api/client";
 import { mutationOptions } from "@/api/mutation-options";
 import { queryClient } from "@/query-client";
 
-import { tagsQueryOptions } from "./query-tags";
+import { groupsQueryOptions } from "./query-groups";
 
 export const editTaskMutationOptions = mutationOptions({
   mutationFn: async ({
@@ -17,9 +17,9 @@ export const editTaskMutationOptions = mutationOptions({
     return res.data;
   },
   onMutate: async () => {
-    await queryClient.cancelQueries(tagsQueryOptions);
+    await queryClient.cancelQueries(groupsQueryOptions);
   },
   onSuccess: async () => {
-    await queryClient.invalidateQueries(tagsQueryOptions);
+    await queryClient.invalidateQueries(groupsQueryOptions);
   },
 });

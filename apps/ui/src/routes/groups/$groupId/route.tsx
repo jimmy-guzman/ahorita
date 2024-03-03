@@ -5,28 +5,28 @@ import { getRouteApi } from "@tanstack/react-router";
 import { formatDistanceToNowStrict } from "date-fns";
 import { EyeIcon, Trash2Icon } from "lucide-react";
 
-import { deleteTagMutationOptions } from "@/api/delete-tag";
-import { tagQueryOptions } from "@/api/query-tag";
+import { deleteGroupMutationOptions } from "@/api/delete-group";
+import { groupQueryOptions } from "@/api/query-group";
 
 import { AddTask } from "./-components/add-task";
 
-const routeApi = getRouteApi("/tags/$tagId");
+const routeApi = getRouteApi("/groups/$groupId");
 
-const TagDetails = () => {
-  const { tagId } = routeApi.useParams();
-  const { data: tag } = useSuspenseQuery(tagQueryOptions(tagId));
-  const { mutate, isPending } = useMutation(deleteTagMutationOptions);
+const GroupDetails = () => {
+  const { groupId } = routeApi.useParams();
+  const { data: group } = useSuspenseQuery(groupQueryOptions(groupId));
+  const { mutate, isPending } = useMutation(deleteGroupMutationOptions);
   const navigate = useNavigate();
 
   return (
     <section className="flex w-full flex-col gap-4">
       <div className="dsy-card bg-base-200">
         <div className="dsy-card-body">
-          <h1 className="dsy-card-title text-secondary">{tag.name}</h1>
-          <p>{tag.description}</p>
+          <h1 className="dsy-card-title text-secondary">{group.name}</h1>
+          <p>{group.description}</p>
           <div className="grid justify-items-end text-info italic">
             <span>
-              Last updated {formatDistanceToNowStrict(tag.createdAt)} ago
+              Last updated {formatDistanceToNowStrict(group.createdAt)} ago
             </span>
           </div>
           <div className="dsy-card-actions justify-end">
@@ -35,20 +35,20 @@ const TagDetails = () => {
               className="dsy-btn dsy-btn-sm dsy-btn-neutral"
               disabled={isPending}
               onClick={() => {
-                mutate(tagId, {
+                mutate(groupId, {
                   onSuccess() {
-                    return navigate({ to: "/tags/add" });
+                    return navigate({ to: "/groups/add" });
                   },
                 });
               }}
             >
-              Delete Tag <Trash2Icon />
+              Delete Group <Trash2Icon />
             </button>
             <AddTask />
             <Link
               className="dsy-btn dsy-btn-primary dsy-btn-sm"
-              to="/tags/$tagId/tasks"
-              params={{ tagId }}
+              to="/groups/$groupId/tasks"
+              params={{ groupId }}
               activeOptions={{ exact: true }}
               activeProps={{ className: "dsy-btn-active" }}
             >
@@ -62,9 +62,9 @@ const TagDetails = () => {
   );
 };
 
-export const Route = createFileRoute("/tags/$tagId")({
-  component: TagDetails,
+export const Route = createFileRoute("/groups/$groupId")({
+  component: GroupDetails,
   loader: async ({ context: { queryClient }, params }) => {
-    await queryClient.ensureQueryData(tagQueryOptions(params.tagId));
+    await queryClient.ensureQueryData(groupQueryOptions(params.groupId));
   },
 });
