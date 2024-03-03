@@ -1,12 +1,14 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
 
 import { LogOutIcon } from "lucide-react";
 
 import { api } from "@/api/client";
+import { meQueryOptions } from "@/api/query-me";
 
 export const Logout = () => {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
   const { mutate } = useMutation({
     mutationFn: async () => {
@@ -15,6 +17,9 @@ export const Logout = () => {
       if (res.error) throw new Error(res.error.value);
 
       return res.data;
+    },
+    onMutate: async () => {
+      queryClient.removeQueries(meQueryOptions);
     },
     onSuccess: async () => {
       await navigate({ to: "/login" });
