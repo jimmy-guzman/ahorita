@@ -63,18 +63,12 @@ export const groupsRoute = new Elysia()
       .delete(
         "/:id",
         async ({ params: { id } }) => {
-          const group = await db.transaction(async (tx) => {
-            const [group] = await tx
-              .delete(groups)
-              .where(eq(groups.id, id))
-              .returning();
+          const [group] = await db
+            .delete(groups)
+            .where(eq(groups.id, id))
+            .returning();
 
-            if (!group) throw NotFoundError;
-
-            await tx.delete(tasks).where(eq(tasks.groupId, id));
-
-            return group;
-          });
+          if (!group) throw NotFoundError;
 
           return group;
         },

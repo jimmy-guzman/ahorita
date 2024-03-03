@@ -5,6 +5,7 @@ import { queryClient } from "@/query-client";
 
 import { groupsQueryOptions } from "./query-groups";
 
+// TODO: only invalidate tasks
 export const editTaskMutationOptions = mutationOptions({
   mutationFn: async ({
     params,

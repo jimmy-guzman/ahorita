@@ -6,6 +6,8 @@
 
 - [Bun](https://bun.sh/)
 - [Turborepo](https://turbo.build/repo)
+- [Biome](https://biomejs.dev/)
+- [lefthook](https://github.com/evilmartians/lefthook)
 - [TypeScript](https://www.typescriptlang.org)
 - [React](https://react.dev/)
 - [TailwindCSS](https://tailwindcss.com/)
@@ -14,8 +16,8 @@
 - [Playwright](https://playwright.dev/)
 - [ElysiaJS](https://elysiajs.com/)
 - [Drizzle ORM](https://orm.drizzle.team/)
-- [Biome](https://biomejs.dev/)
-- [lefthook](https://github.com/evilmartians/lefthook)
+- [Neon](https://neon.tech/)
+- [Lucia](https://lucia-auth.com/)
 - [GitHub Actions](https://github.com/features/actions)
 
 ## 🏁 Getting Started

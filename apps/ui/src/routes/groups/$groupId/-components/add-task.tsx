@@ -40,7 +40,9 @@ export const AddTask = () => {
     defaultValues: {
       name: "",
       priority: "MEDIUM",
-      dueAt: addMonths(new Date(), 1).toISOString(),
+      dueAt: formatISO9075(addMonths(new Date(), 1), {
+        representation: "date",
+      }),
     },
   });
   const { mutate, isPending } = useMutation(addTaskByGroupIdMutationOptions);
@@ -96,7 +98,7 @@ export const AddTask = () => {
                 ))}
               </Select>
               <div className="dsy-form-control">
-                <label className="dsy-label" htmlFor={"dueAt"}>
+                <label className="dsy-label" htmlFor="dueAt">
                   <span className="dsy-label-text">When is your task due?</span>
                 </label>
                 <input
@@ -105,9 +107,7 @@ export const AddTask = () => {
                   className="dsy-input dsy-input-bordered w-full"
                   id="name"
                   min={formatISO9075(new Date(), { representation: "date" })}
-                  {...register("dueAt", {
-                    setValueAs: (value) => new Date(value).toISOString(),
-                  })}
+                  {...register("dueAt")}
                 />
                 <ErrorMessage
                   errors={errors}
