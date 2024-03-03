@@ -1,6 +1,8 @@
 import { api } from "@/api/client";
+import { meQueryOptions } from "@/api/query-me";
 import { PasswordInput } from "@/components/password-input";
 import { TextInput } from "@/components/text-input";
+import { queryClient } from "@/query-client";
 import { typeboxResolver } from "@hookform/resolvers/typebox";
 import { type Static, Type } from "@sinclair/typebox";
 import { Value } from "@sinclair/typebox/value";
@@ -40,6 +42,7 @@ export const Login = () => {
       return res.data;
     },
     onSuccess: async () => {
+      await queryClient.fetchQuery(meQueryOptions);
       await navigate({ to: search.redirect });
     },
   });

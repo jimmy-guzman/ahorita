@@ -3,8 +3,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Link, Outlet, redirect } from "@tanstack/react-router";
 import { ExternalLinkIcon, ListPlusIcon, MenuIcon } from "lucide-react";
 
-import { api } from "@/api/client";
 import { groupsQueryOptions } from "@/api/query-groups";
+import { meQueryOptions } from "@/api/query-me";
 import { Logout } from "@/components/logout";
 
 const Groups = () => {
@@ -90,8 +90,7 @@ export const Route = createFileRoute("/groups")({
   component: Groups,
   beforeLoad: async ({ location, context }) => {
     const response = await context.queryClient.fetchQuery({
-      queryKey: ["users", "me"],
-      queryFn: async () => api.users.me.get(),
+      ...meQueryOptions,
       staleTime: Infinity,
     });
 
