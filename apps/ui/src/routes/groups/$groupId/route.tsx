@@ -8,8 +8,6 @@ import { EyeIcon, Trash2Icon } from "lucide-react";
 import { deleteGroupMutationOptions } from "@/api/delete-group";
 import { groupQueryOptions } from "@/api/query-group";
 
-import { AddTask } from "./-components/add-task";
-
 const routeApi = getRouteApi("/groups/$groupId");
 
 const GroupDetails = () => {
@@ -32,7 +30,7 @@ const GroupDetails = () => {
           <div className="dsy-card-actions justify-end">
             <button
               type="button"
-              className="dsy-btn dsy-btn-sm dsy-btn-neutral"
+              className="dsy-btn dsy-btn-neutral"
               disabled={isPending}
               onClick={() => {
                 mutate(groupId, {
@@ -44,15 +42,14 @@ const GroupDetails = () => {
             >
               Delete Group <Trash2Icon />
             </button>
-            <AddTask />
             <Link
-              className="dsy-btn dsy-btn-primary dsy-btn-sm"
+              className="dsy-btn dsy-btn-primary"
               to="/groups/$groupId/tasks"
               params={{ groupId }}
               activeOptions={{ exact: true }}
               activeProps={{ className: "dsy-btn-active" }}
             >
-              View Tasks <EyeIcon />
+              Tasks <EyeIcon />
             </Link>
           </div>
         </div>
