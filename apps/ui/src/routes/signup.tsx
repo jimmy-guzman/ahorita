@@ -49,16 +49,8 @@ export const SignUp = () => {
             onSubmit={handleSubmit((values) => mutate(values))}
           >
             <legend>Create your account</legend>
-            <TextInput
-              control={control}
-              name="username"
-              label="Your username?"
-            />
-            <PasswordInput
-              control={control}
-              name="password"
-              label="Your password?"
-            />
+            <TextInput control={control} name="username" label="Username" />
+            <PasswordInput control={control} name="password" label="Password" />
             <div className="dsy-form-control mt-6">
               <button type="submit" className="dsy-btn dsy-btn-primary">
                 Sign Up
