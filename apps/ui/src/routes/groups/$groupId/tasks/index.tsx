@@ -21,7 +21,7 @@ const TasksByGroup = () => {
     <div className="flex flex-col gap-8 md:container md:mx-auto md:px-8">
       <div className="flex justify-between">
         <div className="prose dsy-prose">
-          <h2>Your Tasks</h2>
+          <h2>Tasks</h2>
         </div>
         <Link
           className="dsy-btn dsy-btn-accent"

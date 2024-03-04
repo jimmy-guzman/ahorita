@@ -41,12 +41,8 @@ const CreateGroupForm = () => {
           });
         })}
       >
-        <TextInput control={control} name="name" label="Your group's name?" />
-        <TextInput
-          control={control}
-          name="description"
-          label="Your group's description?"
-        />
+        <TextInput control={control} name="name" label="Name" />
+        <TextInput control={control} name="description" label="Description" />
         <div className="flex justify-end">
           <button
             type="submit"

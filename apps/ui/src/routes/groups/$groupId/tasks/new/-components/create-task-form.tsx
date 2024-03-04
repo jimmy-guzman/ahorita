@@ -14,7 +14,7 @@ import { TextInput } from "@/components/text-input";
 import { priorities } from "@/constants/tasks";
 import { ListPlusIcon } from "lucide-react";
 
-const routeApi = getRouteApi("/groups/$groupId/tasks");
+const routeApi = getRouteApi("/groups/$groupId/tasks/new");
 
 const schema = Type.Object({
   name: Type.String({ minLength: 1 }),
@@ -69,12 +69,8 @@ export const CreateTaskForm = () => {
         })}
       >
         <div className="flex flex-col gap-2">
-          <TextInput control={control} name="name" label="Your task's name?" />
-          <Select
-            control={control}
-            name="priority"
-            label="Your task's priority?"
-          >
+          <TextInput control={control} name="name" label="Name" />
+          <Select control={control} name="priority" label="Priority">
             {priorities.map(({ label, priority }) => (
               <option key={priority} value={priority}>
                 {label}
@@ -83,11 +79,10 @@ export const CreateTaskForm = () => {
           </Select>
           <div className="dsy-form-control">
             <label className="dsy-label" htmlFor="dueAt">
-              <span className="dsy-label-text">When is your task due?</span>
+              <span className="dsy-label-text">Due Date</span>
             </label>
             <input
               type="date"
-              placeholder="When is your task due?"
               className="dsy-input dsy-input-bordered w-full"
               id="name"
               min={formatISO9075(new Date(), { representation: "date" })}
@@ -103,11 +98,7 @@ export const CreateTaskForm = () => {
           </div>
         </div>
         <div className="flex justify-end gap-2">
-          <Link
-            from="/groups/$groupId/tasks/new"
-            to="../"
-            className="dsy-btn dsy-btn-neutral"
-          >
+          <Link from={routeApi.id} to="../" className="dsy-btn dsy-btn-neutral">
             Cancel
           </Link>
           <button
