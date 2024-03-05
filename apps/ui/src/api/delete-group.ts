@@ -1,8 +1,9 @@
+import { toast } from "sonner";
+
 import { api } from "@/api/client";
 import { mutationOptions } from "@/api/mutation-options";
 import { queryClient } from "@/query-client";
 
-import { groupQueryOptions } from "./query-group";
 import { groupsQueryOptions } from "./query-groups";
 
 export const deleteGroupOptions = mutationOptions({
@@ -17,7 +18,10 @@ export const deleteGroupOptions = mutationOptions({
     await queryClient.cancelQueries(groupsQueryOptions);
   },
   onSuccess: async (_response, id) => {
-    queryClient.removeQueries(groupQueryOptions(id));
-    await queryClient.invalidateQueries(groupsQueryOptions);
+    queryClient.setQueryData(groupsQueryOptions.queryKey, (oldGroups) => {
+      return oldGroups?.filter((oldGroup) => oldGroup.id !== id);
+    });
+
+    toast.success("Group has been deleted");
   },
 });
