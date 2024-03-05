@@ -19,10 +19,6 @@ const columnHelper = createColumnHelper<{
 }>();
 
 export const columns = [
-  columnHelper.accessor("id", {
-    header: "Id",
-    cell: (info) => info.getValue(),
-  }),
   columnHelper.accessor("name", {
     header: "Title",
     cell: (info) => <TasksTableNameCell info={info} />,
