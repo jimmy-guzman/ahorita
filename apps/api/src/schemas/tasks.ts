@@ -12,6 +12,7 @@ export const groups = pgTable("group", {
   id: text("id").$default(nanoid).primaryKey(),
   name: text("name").unique().notNull(),
   description: text("description").notNull(),
+  icon: text("icon"),
   isFavorite: boolean("is_favorite").default(false).notNull(),
   createdAt: timestamp("created_at", { withTimezone: true, mode: "string" })
     .defaultNow()

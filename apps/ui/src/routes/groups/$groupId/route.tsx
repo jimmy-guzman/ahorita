@@ -23,7 +23,7 @@ const GroupDetails = () => {
       <div className="dsy-card bg-base-200">
         <div className="dsy-card-body">
           <h1 className="dsy-card-title text-secondary">
-            {group.name}
+            {group.icon && <span>{group.icon}</span>} {group.name}
             {group.isFavorite ? (
               <button
                 type="button"

@@ -27,7 +27,7 @@
     "@biomejs/biome": "nightly",
     "@types/bun": "1.0.8",
     "gitzy": "5.2.0",
-    "lefthook": "1.6.4",
+    "lefthook": "1.6.5",
     "turbo": "1.12.4"
   }
 }

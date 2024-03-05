@@ -40,7 +40,7 @@ export const groupsRoute = new Elysia()
           return group;
         },
         {
-          body: t.Pick(GroupDto, ["name", "description"]),
+          body: t.Pick(GroupDto, ["name", "description", "icon"]),
           response: GroupDto,
         },
       )

@@ -6,6 +6,7 @@ import { ExternalLinkIcon, ListPlusIcon, MenuIcon } from "lucide-react";
 import { groupsQueryOptions } from "@/api/query-groups";
 import { meQueryOptions } from "@/api/query-me";
 import { Logout } from "@/components/logout";
+import { GroupsMenuItem } from "./-components/groups-menu-item";
 
 const Groups = () => {
   const { data: groups } = useSuspenseQuery(groupsQueryOptions);
@@ -70,29 +71,17 @@ const Groups = () => {
             <li className="dsy-menu-title text-primary uppercase">Favorites</li>
             {groups
               .filter((group) => group.isFavorite)
-              .map(({ id: groupId, name }) => (
+              .map(({ id: groupId, name, icon }) => (
                 <li key={groupId}>
-                  <Link
-                    to="/groups/$groupId"
-                    params={{ groupId }}
-                    activeProps={{ className: "dsy-active" }}
-                  >
-                    {name}
-                  </Link>
+                  <GroupsMenuItem groupId={groupId} name={name} icon={icon} />
                 </li>
               ))}
             <li className="dsy-menu-title text-primary uppercase">More</li>
             {groups
               .filter((group) => !group.isFavorite)
-              .map(({ id: groupId, name }) => (
+              .map(({ id: groupId, name, icon }) => (
                 <li key={groupId}>
-                  <Link
-                    to="/groups/$groupId"
-                    params={{ groupId }}
-                    activeProps={{ className: "dsy-active" }}
-                  >
-                    {name}
-                  </Link>
+                  <GroupsMenuItem groupId={groupId} name={name} icon={icon} />
                 </li>
               ))}
           </ul>

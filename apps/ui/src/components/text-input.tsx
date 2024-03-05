@@ -13,6 +13,7 @@ interface TextFieldProps<T extends FieldValues> extends UseControllerProps<T> {
    */
   label: string;
   placeholder?: string;
+  className?: string;
 }
 
 /**
@@ -28,6 +29,7 @@ export const TextInput = <T extends FieldValues>({
   defaultValue,
   label,
   placeholder,
+  className,
 }: TextFieldProps<T>) => {
   const {
     field,
@@ -41,7 +43,7 @@ export const TextInput = <T extends FieldValues>({
   });
 
   return (
-    <div className="dsy-form-control">
+    <div className={clsx("dsy-form-control", className)}>
       <label className="dsy-label" htmlFor={name}>
         <span className="dsy-label-text">{label}</span>
       </label>
