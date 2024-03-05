@@ -26,6 +26,21 @@ export const groups = pgTable("group", {
     .notNull(),
 });
 
+export const labels = pgTable("label", {
+  id: text("id").$default(nanoid).primaryKey(),
+  name: text("name").unique().notNull(),
+  createdAt: timestamp("created_at", { withTimezone: true, mode: "string" })
+    .defaultNow()
+    .notNull(),
+  updatedAt: timestamp("updated_at", { withTimezone: true, mode: "string" })
+    .defaultNow()
+    .notNull(),
+
+  userId: text("user_id")
+    .references(() => users.id, { onDelete: "cascade" })
+    .notNull(),
+});
+
 export const tasks = pgTable("task", {
   id: text("id").$default(nanoid).primaryKey(),
   name: text("name").notNull(),
@@ -41,6 +56,7 @@ export const tasks = pgTable("task", {
     .default(sql`now() + INTERVAL '1 MONTHS'`)
     .notNull(),
 
+  labelId: text("label_id").references(() => labels.id),
   groupId: text("group_id")
     .references(() => groups.id, { onDelete: "cascade" })
     .notNull(),
@@ -57,10 +73,22 @@ export const groupsRelations = relations(groups, ({ many, one }) => ({
   }),
 }));
 
+export const labelsRelations = relations(labels, ({ many, one }) => ({
+  tasks: many(tasks),
+  user: one(users, {
+    fields: [labels.userId],
+    references: [users.id],
+  }),
+}));
+
 export const tasksRelations = relations(tasks, ({ one }) => ({
   group: one(groups, {
     fields: [tasks.groupId],
     references: [groups.id],
+  }),
+  label: one(labels, {
+    fields: [tasks.labelId],
+    references: [labels.id],
   }),
   user: one(users, {
     fields: [tasks.userId],
