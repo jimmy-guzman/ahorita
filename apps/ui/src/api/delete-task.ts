@@ -1,8 +1,7 @@
 import { api } from "@/api/client";
 import { mutationOptions } from "@/api/mutation-options";
 import { queryClient } from "@/query-client";
-
-import { groupsQueryOptions } from "./query-groups";
+import { tasksByGroupQueryOptions } from "./query-tasks-by-group";
 
 export const deleteTaskMutationOptions = mutationOptions({
   mutationFn: async (id: string) => {
@@ -12,10 +11,7 @@ export const deleteTaskMutationOptions = mutationOptions({
 
     return res.data;
   },
-  onMutate: async () => {
-    await queryClient.cancelQueries(groupsQueryOptions);
-  },
-  onSuccess: async () => {
-    await queryClient.invalidateQueries(groupsQueryOptions);
+  onSuccess: async ({ groupId }) => {
+    await queryClient.invalidateQueries(tasksByGroupQueryOptions(groupId));
   },
 });

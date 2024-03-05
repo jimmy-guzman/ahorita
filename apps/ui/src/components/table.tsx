@@ -30,7 +30,7 @@ export const Table = <TData, TColumns extends ColumnDef<TData, any>[]>({
   });
 
   return (
-    <div className="overflow-x-auto">
+    <div className="h-svh overflow-x-auto">
       <table className="dsy-table dsy-table-pin-rows md:dsy-table-md dsy-table-xs">
         <thead>
           {table.getHeaderGroups().map((headerGroup) => (
