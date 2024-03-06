@@ -56,7 +56,7 @@ export const tasks = pgTable("task", {
     .default(sql`now() + INTERVAL '1 MONTHS'`)
     .notNull(),
 
-  labelId: text("label_id").references(() => labels.id),
+  label: text("label_id").references(() => labels.name),
   groupId: text("group_id")
     .references(() => groups.id, { onDelete: "cascade" })
     .notNull(),
@@ -87,8 +87,8 @@ export const tasksRelations = relations(tasks, ({ one }) => ({
     references: [groups.id],
   }),
   label: one(labels, {
-    fields: [tasks.labelId],
-    references: [labels.id],
+    fields: [tasks.label],
+    references: [labels.name],
   }),
   user: one(users, {
     fields: [tasks.userId],
