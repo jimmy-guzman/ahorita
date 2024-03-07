@@ -1,10 +1,7 @@
 {
   "name": "ahorita",
   "private": true,
-  "workspaces": [
-    "apps/*",
-    "libs/*"
-  ],
+  "workspaces": ["backend", "frontend"],
   "scripts": {
     "build": "turbo run build",
     "check": "turbo run format lint typecheck test build",
