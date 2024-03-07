@@ -1,7 +1,10 @@
 {
   "name": "ahorita",
   "private": true,
-  "workspaces": ["backend", "frontend"],
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
   "scripts": {
     "build": "turbo run build",
     "check": "turbo run format lint typecheck test build",
@@ -21,7 +24,7 @@
     "typecheck": "turbo run typecheck"
   },
   "devDependencies": {
-    "@biomejs/biome": "nightly",
+    "@biomejs/biome": "1.5.3",
     "@types/bun": "1.0.8",
     "gitzy": "5.2.0",
     "lefthook": "1.6.5",
