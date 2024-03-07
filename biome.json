@@ -21,7 +21,14 @@
     "enabled": true,
     "rules": {
       "recommended": true,
-      "style": { "useFragmentSyntax": "error" }
+      "style": { "useFragmentSyntax": "error" },
+      "nursery": {
+        "useSortedClasses": "error",
+        "useFilenamingConvention": {
+          "level": "error",
+          "options": { "filenameCases": ["kebab-case"] }
+        }
+      }
     }
   }
 }
