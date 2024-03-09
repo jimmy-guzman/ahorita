@@ -4,16 +4,26 @@
 
 ## 🐣 Technologies
 
+### Tooling
+
 - [Bun](https://bun.sh/)
 - [Turborepo](https://turbo.build/repo)
 - [Biome](https://biomejs.dev/)
 - [lefthook](https://github.com/evilmartians/lefthook)
-- [TypeScript](https://www.typescriptlang.org)
+- [Playwright](https://playwright.dev/)
+
+### Frontend
+
 - [React](https://react.dev/)
+- [TanStack Router](https://tanstack.com/router/v1/)
+- [TanStack Query](https://tanstack.com/query/latest/)
 - [TailwindCSS](https://tailwindcss.com/)
 - [daisyUi](https://daisyui.com/)
+- [React Hook Form](https://www.react-hook-form.com/)
 - [Vite](https://vitejs.dev/)
-- [Playwright](https://playwright.dev/)
+
+### Backend
+
 - [ElysiaJS](https://elysiajs.com/)
 - [Drizzle ORM](https://orm.drizzle.team/)
 - [Neon](https://neon.tech/)
