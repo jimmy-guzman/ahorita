@@ -2,7 +2,6 @@ import { useMutation, useSuspenseQuery } from "@tanstack/react-query";
 import { Outlet, createFileRoute } from "@tanstack/react-router";
 import { Link, useNavigate } from "@tanstack/react-router";
 import { getRouteApi } from "@tanstack/react-router";
-import { formatDistanceToNowStrict } from "date-fns";
 import { EyeIcon, StarIcon, StarOffIcon, Trash2Icon } from "lucide-react";
 
 import { deleteGroupOptions } from "@/api/delete-group";
@@ -53,11 +52,6 @@ const GroupDetails = () => {
             )}
           </h1>
           <p>{group.description}</p>
-          <div className="grid justify-items-end text-info italic">
-            <span>
-              Last updated {formatDistanceToNowStrict(group.createdAt)} ago
-            </span>
-          </div>
           <div className="dsy-card-actions justify-end">
             <button
               type="button"
@@ -74,7 +68,7 @@ const GroupDetails = () => {
               Delete Group <Trash2Icon />
             </button>
             <Link
-              className="dsy-btn dsy-btn-primary dsy-btn-sm"
+              className="dsy-btn dsy-btn-accent dsy-btn-sm"
               to="/groups/$groupId/tasks"
               params={{ groupId }}
               activeOptions={{ exact: true }}

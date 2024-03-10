@@ -91,7 +91,7 @@ export const CreateGroupForm = () => {
         <div className="flex justify-end">
           <button
             type="submit"
-            className="dsy-btn dsy-btn-primary"
+            className="dsy-btn dsy-btn-accent"
             disabled={isPending}
           >
             Create New Group <ListPlusIcon />
