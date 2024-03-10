@@ -12,7 +12,7 @@ import { createTaskByGroupIdOptions } from "@/api/create-task";
 import { Select } from "@/components/select";
 import { TextInput } from "@/components/text-input";
 import { priorities } from "@/constants/tasks";
-import { ListPlusIcon } from "lucide-react";
+import { PlusIcon } from "lucide-react";
 
 const routeApi = getRouteApi("/groups/$groupId/tasks/new");
 
@@ -106,7 +106,7 @@ export const CreateTaskForm = () => {
             className="dsy-btn dsy-btn-accent"
             disabled={isPending}
           >
-            Create New Task <ListPlusIcon />
+            Create New Task <PlusIcon />
           </button>
         </div>
       </form>
