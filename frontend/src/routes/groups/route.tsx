@@ -36,7 +36,7 @@ const Groups = () => {
             <div className="dsy-navbar-end">
               <a
                 className="dsy-btn dsy-btn-ghost dsy-btn-xs lg:dsy-btn-md"
-                href={`${import.meta.env.VITE_AHORITA_API_ORIGIN}/docs`}
+                href={`${import.meta.env.VITE_SERVER_DOMAIN}/docs`}
                 target="__blank"
               >
                 API Docs <ExternalLinkIcon className="h-4 w-4" />

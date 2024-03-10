@@ -35,10 +35,12 @@ export const columns = [
   columnHelper.accessor("dueAt", {
     header: "Due",
     cell: (info) => `in ${formatDistanceToNowStrict(info.getValue())}`,
+    enableGlobalFilter: false,
   }),
   columnHelper.display({
     id: "actions",
     header: () => <span className="sr-only">Actions</span>,
     cell: (info) => <TasksTableRowActions task={info.row.original} />,
+    enableGlobalFilter: false,
   }),
 ];
