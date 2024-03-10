@@ -10,6 +10,8 @@ import {
   statuses,
 } from "@/constants/tasks";
 
+import { RenameTaskAction } from "./rename-task-action";
+
 interface TaskTableActionsProps {
   task: {
     id: string;
@@ -88,6 +90,9 @@ export const TasksTableRowActions = ({ task }: TaskTableActionsProps) => {
           </details>
         </li>
         <div className="dsy-divider my-1" />
+        <li>
+          <RenameTaskAction name={task.name} id={task.id} />
+        </li>
         <li>
           <button
             type="button"

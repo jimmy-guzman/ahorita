@@ -1,7 +1,6 @@
 import { createColumnHelper } from "@tanstack/react-table";
-
 import { formatDistanceToNowStrict } from "date-fns";
-import { TasksTableNameCell } from "./tasks-table-name-cell";
+
 import { TasksTablePriorityCell } from "./tasks-table-priority-cell";
 import { TasksTableRowActions } from "./tasks-table-row-actions";
 import { TasksTableStatusCell } from "./tasks-table-status-cell";
@@ -21,8 +20,8 @@ const columnHelper = createColumnHelper<{
 
 export const columns = [
   columnHelper.accessor("name", {
-    header: "Title",
-    cell: (info) => <TasksTableNameCell info={info} />,
+    header: "Name",
+    cell: (info) => info.getValue(),
   }),
   columnHelper.accessor("label", {
     header: "Label",

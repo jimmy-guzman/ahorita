@@ -1,3 +1,5 @@
+import { toast } from "sonner";
+
 import type { API } from "@/api/client";
 import { api } from "@/api/client";
 import { mutationOptions } from "@/api/mutation-options";
@@ -18,5 +20,7 @@ export const editTaskMutationOptions = mutationOptions({
   },
   onSuccess: async ({ groupId }) => {
     await queryClient.invalidateQueries(tasksByGroupQueryOptions(groupId));
+
+    toast.success("Task has been edited");
   },
 });
