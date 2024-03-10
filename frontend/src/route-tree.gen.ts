@@ -41,7 +41,7 @@ const LoginRoute = LoginImport.update({
 const GroupsRouteRoute = GroupsRouteImport.update({
   path: '/groups',
   getParentRoute: () => rootRoute,
-} as any)
+} as any).lazy(() => import('./routes/groups/route.lazy').then((d) => d.Route))
 
 const IndexRoute = IndexImport.update({
   path: '/',
