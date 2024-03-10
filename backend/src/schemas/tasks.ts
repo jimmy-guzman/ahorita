@@ -1,12 +1,8 @@
 import { relations, sql } from "drizzle-orm";
-import { boolean, pgTable, text, timestamp } from "drizzle-orm/pg-core";
+import { boolean, pgEnum, pgTable, text, timestamp } from "drizzle-orm/pg-core";
 
 import { nanoid } from "../utils";
 import { users } from "./users";
-
-const statuses = <const>["BACKLOG", "TODO", "IN_PROGRESS", "DONE", "CANCELED"];
-
-const priorities = <const>["LOW", "MEDIUM", "HIGH"];
 
 export const groups = pgTable("group", {
   id: text("id").$default(nanoid).primaryKey(),
@@ -41,11 +37,21 @@ export const labels = pgTable("label", {
     .notNull(),
 });
 
+export const priorityEnum = pgEnum("priority", ["LOW", "MEDIUM", "HIGH"]);
+
+export const statusEnum = pgEnum("status", [
+  "BACKLOG",
+  "TODO",
+  "IN_PROGRESS",
+  "DONE",
+  "CANCELED",
+]);
+
 export const tasks = pgTable("task", {
   id: text("id").$default(nanoid).primaryKey(),
   name: text("name").notNull(),
-  status: text("status", { enum: statuses }).default("TODO").notNull(),
-  priority: text("priority", { enum: priorities }).default("MEDIUM").notNull(),
+  status: statusEnum("status").default("TODO").notNull(),
+  priority: priorityEnum("priority").default("MEDIUM").notNull(),
   createdAt: timestamp("created_at", { withTimezone: true, mode: "string" })
     .defaultNow()
     .notNull(),

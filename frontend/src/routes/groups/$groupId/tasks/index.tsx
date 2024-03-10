@@ -7,7 +7,7 @@ import { tasksByGroupQueryOptions } from "@/api/query-tasks-by-group";
 import { Table } from "@/components/table";
 import { useTasksForm } from "@/routes/groups/$groupId/tasks/-hooks/use-tasks-form";
 
-import { ListPlusIcon } from "lucide-react";
+import { PlusIcon } from "lucide-react";
 import { columns } from "./-components/columns";
 
 const routeApi = getRouteApi("/groups/$groupId/tasks");
@@ -24,11 +24,11 @@ const TasksByGroup = () => {
           <h2>Tasks</h2>
         </div>
         <Link
-          className="dsy-btn dsy-btn-accent"
+          className="dsy-btn dsy-btn-accent dsy-btn-sm"
           to="/groups/$groupId/tasks/new"
           params={{ groupId }}
         >
-          New Task <ListPlusIcon />
+          New Task <PlusIcon />
         </Link>
       </div>
       <FormProvider {...form}>
