@@ -5,7 +5,6 @@ import { cyan } from "picocolors";
 
 import { authRoutes } from "./routes/auth";
 import { groupsRoute } from "./routes/groups";
-import { labelsRoutes } from "./routes/labels";
 import { tasksRoutes } from "./routes/tasks";
 import { usersRoutes } from "./routes/users";
 
@@ -26,7 +25,6 @@ const app = new Elysia()
     }),
   )
   .use(authRoutes)
-  .use(labelsRoutes)
   .use(tasksRoutes)
   .use(groupsRoute)
   .use(usersRoutes)

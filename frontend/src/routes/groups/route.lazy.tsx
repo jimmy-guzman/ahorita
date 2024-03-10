@@ -33,7 +33,7 @@ const Groups = () => {
               ahorita
             </Link>
             <div className="dsy-navbar-start" />
-            <div className="dsy-navbar-end">
+            <div className="dsy-navbar-end hidden gap-1 sm:flex">
               <a
                 className="dsy-btn dsy-btn-ghost dsy-btn-xs lg:dsy-btn-md"
                 href={`${import.meta.env.VITE_SERVER_DOMAIN}/docs`}

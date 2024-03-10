@@ -36,7 +36,7 @@ const TasksByGroup = () => {
           data={tasks}
           columns={columns}
           enableGlobalFiltering
-          globalFilterPlaceholder="Filter Tasks"
+          globalFilterPlaceholder="Filter Tasks..."
         />
       </FormProvider>
     </div>

@@ -59,7 +59,7 @@ export function Table<TData, TColumns extends ColumnDef<TData, any>[]>({
     <div className="flex flex-col gap-4">
       {enableGlobalFiltering && (
         <div className="flex gap-2">
-          <label className="dsy-input dsy-input-bordered dsy-input-sm flex w-full items-center gap-2 lg:w-1/2 sm:w-1/2 xl:w-1/4">
+          <label className="dsy-input dsy-input-sm flex w-full items-center gap-2 lg:w-1/2 sm:w-1/2 xl:w-1/4">
             <input
               type="text"
               className="grow"

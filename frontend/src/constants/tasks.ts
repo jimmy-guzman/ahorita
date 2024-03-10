@@ -14,3 +14,5 @@ export const priorities = [
   { priority: "MEDIUM" as const, label: "Medium" },
   { priority: "HIGH" as const, label: "High" },
 ] satisfies { priority: Priority; label: string }[];
+
+export const labels = ["Feature", "Documentation", "Bug"];

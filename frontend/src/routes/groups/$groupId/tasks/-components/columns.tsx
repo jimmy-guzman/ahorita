@@ -12,7 +12,7 @@ const columnHelper = createColumnHelper<{
   name: string;
   status: "BACKLOG" | "TODO" | "IN_PROGRESS" | "DONE" | "CANCELED";
   priority: "LOW" | "MEDIUM" | "HIGH";
-  label: string | null;
+  label: "Feature" | "Bug" | "Documentation";
   createdAt: string;
   updatedAt: string;
   dueAt: string;
@@ -23,6 +23,12 @@ export const columns = [
   columnHelper.accessor("name", {
     header: "Title",
     cell: (info) => <TasksTableNameCell info={info} />,
+  }),
+  columnHelper.accessor("label", {
+    header: "Label",
+    cell: (info) => (
+      <span className="dsy-badge dsy-badge-neutral">{info.getValue()}</span>
+    ),
   }),
   columnHelper.accessor("status", {
     header: "Status",
