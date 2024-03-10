@@ -4,6 +4,7 @@
     "biomejs",
     "bunx",
     "clsx",
+    "cmyk",
     "daisyui",
     "elysia",
     "elysiajs",
@@ -18,6 +19,7 @@
     "neondatabase",
     "npkill",
     "outdir",
+    "partialize",
     "picocolors",
     "sonner",
     "tailwindcss",
@@ -27,7 +29,9 @@
     "topo",
     "Turborepo",
     "typebox",
-    "typecheck"
+    "typecheck",
+    "Uncurried",
+    "zustand"
   ],
   "css.lint.unknownAtRules": "ignore",
   "javascript.updateImportsOnFileMove.enabled": "always",
