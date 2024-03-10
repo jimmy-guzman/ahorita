@@ -6,33 +6,37 @@
 
 ### Tooling
 
-- [Bun](https://bun.sh/)
+- [Bun](https://bun.sh)
 - [Turborepo](https://turbo.build/repo)
-- [Biome](https://biomejs.dev/)
+- [Biome](https://biomejs.dev)
 - [lefthook](https://github.com/evilmartians/lefthook)
-- [Playwright](https://playwright.dev/)
+- [Playwright](https://playwright.dev)
+- [GitHub Actions](https://github.com/features/actions)
 
 ### Frontend
 
-- [React](https://react.dev/)
-- [TanStack Router](https://tanstack.com/router/v1/)
-- [TanStack Query](https://tanstack.com/query/latest/)
-- [TailwindCSS](https://tailwindcss.com/)
-- [daisyUi](https://daisyui.com/)
-- [React Hook Form](https://www.react-hook-form.com/)
-- [Vite](https://vitejs.dev/)
+- [React](https://react.dev)
+- [TanStack Router](https://tanstack.com/router/v1)
+- [TanStack Query](https://tanstack.com/query/latest)
+- [TanStack Table](https://tanstack.com/table/latest)
+- [React Hook Form](https://www.react-hook-form.com)
+- [Zustand](https://zustand-demo.pmnd.rs)
+- [Sonner](https://sonner.emilkowal.ski)
+- [TailwindCSS](https://tailwindcss.com)
+- [daisyUI](https://daisyui.com)
+- [Lucide](https://lucide.dev)
+- [Vite](https://vitejs.dev)
 
 ### Backend
 
-- [ElysiaJS](https://elysiajs.com/)
-- [Drizzle ORM](https://orm.drizzle.team/)
-- [Neon](https://neon.tech/)
-- [Lucia](https://lucia-auth.com/)
-- [GitHub Actions](https://github.com/features/actions)
+- [ElysiaJS](https://elysiajs.com)
+- [Drizzle ORM](https://orm.drizzle.team)
+- [Neon](https://neon.tech)
+- [Lucia](https://lucia-auth.com)
 
 ## 🏁 Getting Started
 
-This project uses [bun](https://bun.sh/) so please [install](https://bun.sh/docs/installation) it to get started. You can do so, by running the following:
+This project uses [bun](https://bun.sh) so please [install](https://bun.sh/docs/installation) it to get started. You can do so, by running the following:
 
 ```
 curl -fsSL https://bun.sh/install | bash
