@@ -1,5 +1,5 @@
 {
-  "include": ["src"],
+  "include": ["src", "__mocks__"],
   "compilerOptions": {
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "target": "ESNext",

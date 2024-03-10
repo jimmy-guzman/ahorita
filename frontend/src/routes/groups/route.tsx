@@ -6,6 +6,7 @@ import { ExternalLinkIcon, ListPlusIcon, MenuIcon } from "lucide-react";
 import { groupsQueryOptions } from "@/api/query-groups";
 import { meQueryOptions } from "@/api/query-me";
 import { Logout } from "@/components/logout";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { GroupsMenuItem } from "./-components/groups-menu-item";
 
 const Groups = () => {
@@ -42,6 +43,7 @@ const Groups = () => {
                 API Docs <ExternalLinkIcon className="h-4 w-4" />
               </a>
               <Logout />
+              <ThemeToggle lightTheme="cmyk" />
             </div>
           </nav>
           <main>
