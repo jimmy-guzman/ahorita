@@ -52,7 +52,7 @@ export const SignUp = () => {
             <TextInput control={control} name="username" label="Username" />
             <PasswordInput control={control} name="password" label="Password" />
             <div className="dsy-form-control mt-6">
-              <button type="submit" className="dsy-btn dsy-btn-primary">
+              <button type="submit" className="dsy-btn dsy-btn-accent">
                 Sign Up
               </button>
             </div>

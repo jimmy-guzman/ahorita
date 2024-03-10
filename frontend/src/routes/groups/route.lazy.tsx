@@ -69,7 +69,9 @@ const Groups = () => {
                 New Group <ListPlusIcon className="h-5 w-5 text-accent" />
               </Link>
             </li>
-            <li className="dsy-menu-title text-primary uppercase">Favorites</li>
+            <li className="dsy-menu-title text-secondary uppercase">
+              Favorites
+            </li>
             {groups
               .filter((group) => group.isFavorite)
               .map(({ id: groupId, name, icon }) => (
@@ -77,7 +79,7 @@ const Groups = () => {
                   <GroupsMenuItem groupId={groupId} name={name} icon={icon} />
                 </li>
               ))}
-            <li className="dsy-menu-title text-primary uppercase">More</li>
+            <li className="dsy-menu-title text-secondary uppercase">More</li>
             {groups
               .filter((group) => !group.isFavorite)
               .map(({ id: groupId, name, icon }) => (

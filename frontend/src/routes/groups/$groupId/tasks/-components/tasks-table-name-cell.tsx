@@ -49,7 +49,7 @@ export const TasksTableNameCell = ({
       </button>
       <button
         type="button"
-        className="dsy-join-item dsy-btn dsy-btn-sm dsy-btn-secondary"
+        className="dsy-join-item dsy-btn dsy-btn-sm dsy-btn-accent"
         onClick={() => {
           editMutation.mutate({
             params: {

@@ -43,7 +43,7 @@ export const Login = () => {
     },
     onSuccess: async () => {
       await queryClient.fetchQuery(meQueryOptions);
-      await navigate({ to: search.redirect });
+      await navigate({ to: search.redirect ?? "/" });
     },
   });
 
@@ -64,7 +64,7 @@ export const Login = () => {
             <TextInput control={control} name="username" label="Username" />
             <PasswordInput control={control} name="password" label="Password" />
             <div className="dsy-form-control mt-6">
-              <button type="submit" className="dsy-btn dsy-btn-primary">
+              <button type="submit" className="dsy-btn dsy-btn-accent">
                 Login
               </button>
             </div>
