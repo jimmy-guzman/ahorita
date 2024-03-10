@@ -11,7 +11,11 @@ export const TaskDto = t.Object({
     t.Literal("CANCELED"),
   ]),
   priority: t.Union([t.Literal("LOW"), t.Literal("MEDIUM"), t.Literal("HIGH")]),
-  label: t.Union([t.String(), t.Null()]),
+  label: t.Union([
+    t.Literal("Feature"),
+    t.Literal("Bug"),
+    t.Literal("Documentation"),
+  ]),
   createdAt: t.String(),
   updatedAt: t.String(),
   dueAt: t.String(),

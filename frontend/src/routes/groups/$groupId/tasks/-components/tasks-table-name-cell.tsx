@@ -17,7 +17,7 @@ export const TasksTableNameCell = ({
       name: string;
       status: "BACKLOG" | "TODO" | "IN_PROGRESS" | "DONE" | "CANCELED";
       priority: "LOW" | "MEDIUM" | "HIGH";
-      label: string | null;
+      label: "Feature" | "Bug" | "Documentation";
       createdAt: string;
       updatedAt: string;
       dueAt: string;

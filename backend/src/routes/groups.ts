@@ -126,7 +126,7 @@ export const groupsRoute = new Elysia()
         },
         {
           params: t.Object({ id: t.String() }),
-          body: t.Pick(TaskDto, ["name", "priority", "dueAt"]),
+          body: t.Pick(TaskDto, ["name", "priority", "dueAt", "label"]),
           response: TaskDto,
         },
       ),

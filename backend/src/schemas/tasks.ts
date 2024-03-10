@@ -22,20 +22,7 @@ export const groups = pgTable("group", {
     .notNull(),
 });
 
-export const labels = pgTable("label", {
-  id: text("id").$default(nanoid).primaryKey(),
-  name: text("name").unique().notNull(),
-  createdAt: timestamp("created_at", { withTimezone: true, mode: "string" })
-    .defaultNow()
-    .notNull(),
-  updatedAt: timestamp("updated_at", { withTimezone: true, mode: "string" })
-    .defaultNow()
-    .notNull(),
-
-  userId: text("user_id")
-    .references(() => users.id, { onDelete: "cascade" })
-    .notNull(),
-});
+export const labelEnum = pgEnum("label", ["Feature", "Bug", "Documentation"]);
 
 export const priorityEnum = pgEnum("priority", ["LOW", "MEDIUM", "HIGH"]);
 
@@ -52,6 +39,7 @@ export const tasks = pgTable("task", {
   name: text("name").notNull(),
   status: statusEnum("status").default("TODO").notNull(),
   priority: priorityEnum("priority").default("MEDIUM").notNull(),
+  label: labelEnum("label").default("Feature").notNull(),
   createdAt: timestamp("created_at", { withTimezone: true, mode: "string" })
     .defaultNow()
     .notNull(),
@@ -61,8 +49,6 @@ export const tasks = pgTable("task", {
   dueAt: timestamp("due_at", { withTimezone: true, mode: "string" })
     .default(sql`now() + INTERVAL '1 MONTHS'`)
     .notNull(),
-
-  label: text("label_id").references(() => labels.name),
   groupId: text("group_id")
     .references(() => groups.id, { onDelete: "cascade" })
     .notNull(),
@@ -79,22 +65,10 @@ export const groupsRelations = relations(groups, ({ many, one }) => ({
   }),
 }));
 
-export const labelsRelations = relations(labels, ({ many, one }) => ({
-  tasks: many(tasks),
-  user: one(users, {
-    fields: [labels.userId],
-    references: [users.id],
-  }),
-}));
-
 export const tasksRelations = relations(tasks, ({ one }) => ({
   group: one(groups, {
     fields: [tasks.groupId],
     references: [groups.id],
-  }),
-  label: one(labels, {
-    fields: [tasks.label],
-    references: [labels.name],
   }),
   user: one(users, {
     fields: [tasks.userId],
