@@ -18,7 +18,7 @@ const TasksByGroup = () => {
   const form = useTasksForm(tasks);
 
   return (
-    <div className="flex flex-col gap-8 md:container md:mx-auto md:px-8">
+    <div className="flex flex-col gap-4 md:container md:mx-auto md:px-8">
       <div className="flex justify-between">
         <div className="prose dsy-prose">
           <h2>Tasks</h2>
@@ -32,7 +32,12 @@ const TasksByGroup = () => {
         </Link>
       </div>
       <FormProvider {...form}>
-        <Table data={tasks} columns={columns} />
+        <Table
+          data={tasks}
+          columns={columns}
+          enableGlobalFiltering
+          globalFilterPlaceholder="Filter Tasks"
+        />
       </FormProvider>
     </div>
   );

@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { MenuIcon, TrashIcon } from "lucide-react";
+import { EllipsisIcon, TrashIcon } from "lucide-react";
 
 import { deleteTaskMutationOptions } from "@/api/delete-task";
 import { editTaskMutationOptions } from "@/api/edit-task";
@@ -29,7 +29,7 @@ export const TasksTableRowActions = ({ task }: TaskTableActionsProps) => {
   return (
     <details className="dsy-dropdown dsy-dropdown-end">
       <summary className="dsy-btn dsy-btn-ghost dsy-btn-sm">
-        <MenuIcon />
+        <EllipsisIcon />
         <span className="sr-only">Open menu</span>
       </summary>
       <ul
