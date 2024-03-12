@@ -1,7 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
-import { EllipsisIcon, TrashIcon } from "lucide-react";
+import { EllipsisIcon } from "lucide-react";
 
-import { deleteTaskMutationOptions } from "@/api/delete-task";
 import { editTaskMutationOptions } from "@/api/edit-task";
 import {
   type Priority,
@@ -11,6 +10,7 @@ import {
   statuses,
 } from "@/constants/tasks";
 
+import { DeleteTaskAction } from "./delete-task-action";
 import { RenameTaskAction } from "./rename-task-action";
 
 interface TaskTableActionsProps {
@@ -27,7 +27,6 @@ interface TaskTableActionsProps {
 }
 
 export const TasksTableRowActions = ({ task }: TaskTableActionsProps) => {
-  const deleteMutation = useMutation(deleteTaskMutationOptions);
   const editMutation = useMutation(editTaskMutationOptions);
 
   return (
@@ -121,16 +120,7 @@ export const TasksTableRowActions = ({ task }: TaskTableActionsProps) => {
           <RenameTaskAction name={task.name} id={task.id} />
         </li>
         <li>
-          <button
-            type="button"
-            aria-label={`Delete ${task.name}`}
-            onClick={() => deleteMutation.mutate(task.id)}
-          >
-            Delete
-            <span className="dsy-badge dsy-badge-ghost">
-              <TrashIcon className="h-4 w-4" />
-            </span>
-          </button>
+          <DeleteTaskAction name={task.name} id={task.id} />
         </li>
       </ul>
     </details>
