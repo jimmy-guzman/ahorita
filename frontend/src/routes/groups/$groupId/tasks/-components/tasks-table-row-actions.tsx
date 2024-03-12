@@ -6,6 +6,7 @@ import { editTaskMutationOptions } from "@/api/edit-task";
 import {
   type Priority,
   type Status,
+  labels,
   priorities,
   statuses,
 } from "@/constants/tasks";
@@ -19,6 +20,7 @@ interface TaskTableActionsProps {
     name: string;
     status: Status;
     priority: Priority;
+    label: "Feature" | "Bug" | "Documentation";
     createdAt: string;
     updatedAt: string;
   };
@@ -81,6 +83,31 @@ export const TasksTableRowActions = ({ task }: TaskTableActionsProps) => {
                   >
                     {label}
                     {task.priority === priority && (
+                      <span className="dsy-badge dsy-badge-xs dsy-badge-info" />
+                    )}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </details>
+        </li>
+        <li>
+          <details>
+            <summary>Label</summary>
+            <ul>
+              {labels.map((label) => (
+                <li key={label}>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      editMutation.mutate({
+                        params: { id: task.id },
+                        body: { label },
+                      });
+                    }}
+                  >
+                    {label}
+                    {task.label === label && (
                       <span className="dsy-badge dsy-badge-xs dsy-badge-info" />
                     )}
                   </button>
