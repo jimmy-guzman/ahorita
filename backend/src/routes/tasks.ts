@@ -30,7 +30,7 @@ export const tasksRoutes = new Elysia()
         },
         {
           body: t.Partial(
-            t.Pick(TaskDto, ["name", "status", "priority", "labelId"]),
+            t.Pick(TaskDto, ["name", "status", "priority", "label"]),
           ),
           params: Params,
           response: TaskDto,
