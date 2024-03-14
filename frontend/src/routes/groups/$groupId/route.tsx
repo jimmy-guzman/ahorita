@@ -1,21 +1,19 @@
 import { useMutation, useSuspenseQuery } from "@tanstack/react-query";
 import { Outlet, createFileRoute } from "@tanstack/react-router";
-import { Link, useNavigate } from "@tanstack/react-router";
+import { Link } from "@tanstack/react-router";
 import { getRouteApi } from "@tanstack/react-router";
-import { EyeIcon, StarIcon, StarOffIcon, Trash2Icon } from "lucide-react";
+import { EyeIcon, StarIcon, StarOffIcon } from "lucide-react";
 
-import { deleteGroupOptions } from "@/api/delete-group";
 import { editGroupOptions } from "@/api/edit-group";
 import { groupQueryOptions } from "@/api/query-group";
+import { DeleteGroup } from "./-components/delete-group";
 
 const routeApi = getRouteApi("/groups/$groupId");
 
 const GroupDetails = () => {
   const { groupId } = routeApi.useParams();
   const { data: group } = useSuspenseQuery(groupQueryOptions(groupId));
-  const { mutate: deleteGroup, isPending } = useMutation(deleteGroupOptions);
   const { mutate: editGroup } = useMutation(editGroupOptions);
-  const navigate = useNavigate();
 
   return (
     <section className="flex w-full flex-col gap-4">
@@ -53,20 +51,7 @@ const GroupDetails = () => {
           </h1>
           <p>{group.description}</p>
           <div className="dsy-card-actions justify-end">
-            <button
-              type="button"
-              className="dsy-btn dsy-btn-neutral dsy-btn-sm"
-              disabled={isPending}
-              onClick={() => {
-                deleteGroup(groupId, {
-                  onSuccess() {
-                    return navigate({ to: "/groups/new" });
-                  },
-                });
-              }}
-            >
-              Delete Group <Trash2Icon />
-            </button>
+            <DeleteGroup />
             <Link
               className="dsy-btn dsy-btn-accent dsy-btn-sm"
               to="/groups/$groupId/tasks"
