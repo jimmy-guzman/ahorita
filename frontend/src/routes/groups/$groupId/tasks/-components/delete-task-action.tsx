@@ -1,10 +1,9 @@
+import * as AlertDialog from "@radix-ui/react-alert-dialog";
 import { useMutation } from "@tanstack/react-query";
 import { TrashIcon } from "lucide-react";
 
 import { deleteTaskMutationOptions } from "@/api/delete-task";
-
-import { Dialog } from "@/components/dialog";
-import { useDialog } from "@/hooks/use-dialog";
+import { useState } from "react";
 
 interface DeleteTaskActionProps {
   name: string;
@@ -12,45 +11,53 @@ interface DeleteTaskActionProps {
 }
 
 export const DeleteTaskAction = ({ name, id }: DeleteTaskActionProps) => {
-  const { mutateAsync } = useMutation(deleteTaskMutationOptions);
-  const { ref, show, close } = useDialog();
+  const { mutate } = useMutation(deleteTaskMutationOptions);
+  const [open, setOpen] = useState(false);
 
   return (
-    <>
-      <button
-        type="button"
-        aria-label={`Delete ${name}`}
-        onClick={() => show()}
-      >
-        Delete
-        <span className="dsy-badge dsy-badge-ghost">
-          <TrashIcon className="h-4 w-4" />
-        </span>
-      </button>
-      <Dialog ref={ref}>
-        <form
-          onSubmit={async (event) => {
-            event.preventDefault();
-
-            await mutateAsync(id);
-            close();
-          }}
+    <AlertDialog.Root open={open} onOpenChange={setOpen}>
+      <AlertDialog.Trigger asChild>
+        <button
+          type="button"
+          aria-label={`Delete ${name}`}
+          onClick={() => setOpen(true)}
         >
-          <h3>Are You Sure?</h3>
-          <div className="dsy-modal-action">
-            <button
-              type="button"
-              className="dsy-btn dsy-btn-outline"
-              onClick={() => close()}
-            >
-              No
-            </button>
-            <button type="submit" className="dsy-btn dsy-btn-neutral">
-              Yes
-            </button>
+          Delete
+          <span className="dsy-badge dsy-badge-ghost">
+            <TrashIcon className="h-4 w-4" />
+          </span>
+        </button>
+      </AlertDialog.Trigger>
+      <AlertDialog.Portal>
+        <AlertDialog.Overlay />
+        <AlertDialog.Content asChild>
+          <div className="dsy-modal dsy-modal-open">
+            <div className="dsy-modal-box">
+              <form
+                onSubmit={async (event) => {
+                  event.preventDefault();
+
+                  mutate(id, { onSuccess: () => setOpen(false) });
+                }}
+              >
+                <AlertDialog.Title>Are You Sure?</AlertDialog.Title>
+                <div className="dsy-modal-action">
+                  <button
+                    type="button"
+                    className="dsy-btn dsy-btn-neutral"
+                    onClick={() => setOpen(false)}
+                  >
+                    Cancel
+                  </button>
+                  <button type="submit" className="dsy-btn dsy-btn-error">
+                    Yes, delete task
+                  </button>
+                </div>
+              </form>
+            </div>
           </div>
-        </form>
-      </Dialog>
-    </>
+        </AlertDialog.Content>
+      </AlertDialog.Portal>
+    </AlertDialog.Root>
   );
 };
