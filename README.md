@@ -23,6 +23,7 @@
 - [Zustand](https://zustand-demo.pmnd.rs)
 - [Sonner](https://sonner.emilkowal.ski)
 - [TailwindCSS](https://tailwindcss.com)
+- [Radix Primitives](https://www.radix-ui.com/primitives)
 - [daisyUI](https://daisyui.com)
 - [Lucide](https://lucide.dev)
 - [Vite](https://vitejs.dev)
