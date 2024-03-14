@@ -1,13 +1,13 @@
 import { typeboxResolver } from "@hookform/resolvers/typebox";
+import * as Dialog from "@radix-ui/react-dialog";
 import { type Static, Type } from "@sinclair/typebox";
 import { useMutation } from "@tanstack/react-query";
-import { PencilIcon, SaveIcon } from "lucide-react";
+import { PencilIcon, SaveIcon, XIcon } from "lucide-react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 import { editTaskMutationOptions } from "@/api/edit-task";
-import { Dialog } from "@/components/dialog";
 import { TextInput } from "@/components/text-input";
-import { useDialog } from "@/hooks/use-dialog";
 
 const schema = Type.Object({
   name: Type.String({ minLength: 1 }),
@@ -19,46 +19,59 @@ interface RenameTaskActionProps {
 }
 
 export const RenameTaskAction = ({ name, id }: RenameTaskActionProps) => {
-  const editMutation = useMutation(editTaskMutationOptions);
-  const { ref, show, close } = useDialog();
+  const { mutate } = useMutation(editTaskMutationOptions);
+  const [open, setOpen] = useState(false);
   const form = useForm<Static<typeof schema>>({
     resolver: typeboxResolver(schema),
     values: { name },
   });
 
   return (
-    <>
-      <button type="button" onClick={() => show()}>
-        Rename
-        <span className="dsy-badge dsy-badge-ghost">
-          <PencilIcon className="h-4 w-4" />
-        </span>
-      </button>
-      <Dialog ref={ref}>
-        <h3 className="font-bold text-lg">Rename The Task</h3>
-        <form
-          onSubmit={form.handleSubmit((values) => {
-            editMutation.mutate(
-              { params: { id }, body: values },
-              { onSuccess: () => close() },
-            );
-          })}
-        >
-          <TextInput control={form.control} name="name" label="Name" />
-          <div className="dsy-modal-action">
-            <button
-              type="button"
-              className="dsy-btn dsy-btn-outline"
-              onClick={() => close()}
-            >
-              Cancel
-            </button>
-            <button type="submit" className="dsy-btn dsy-btn-neutral">
-              Save <SaveIcon />
-            </button>
+    <Dialog.Root open={open} onOpenChange={setOpen}>
+      <Dialog.Trigger asChild>
+        <button type="button" onClick={() => setOpen(true)}>
+          Rename
+          <span className="dsy-badge dsy-badge-ghost">
+            <PencilIcon className="h-4 w-4" />
+          </span>
+        </button>
+      </Dialog.Trigger>
+      <Dialog.Portal>
+        <Dialog.Overlay />
+        <Dialog.Content asChild>
+          <div className="dsy-modal dsy-modal-open">
+            <div className="dsy-modal-box">
+              <Dialog.Close asChild>
+                <button
+                  type="button"
+                  className="dsy-btn dsy-btn-sm dsy-btn-circle dsy-btn-ghost absolute top-2 right-2"
+                  aria-label="Close"
+                >
+                  <XIcon />
+                </button>
+              </Dialog.Close>
+              <Dialog.Title className="font-bold text-lg">
+                Rename The Task
+              </Dialog.Title>
+              <form
+                onSubmit={form.handleSubmit((values) => {
+                  mutate(
+                    { params: { id }, body: values },
+                    { onSuccess: () => setOpen(false) },
+                  );
+                })}
+              >
+                <TextInput control={form.control} name="name" label="Name" />
+                <div className="dsy-modal-action">
+                  <button type="submit" className="dsy-btn dsy-btn-neutral">
+                    Save <SaveIcon />
+                  </button>
+                </div>
+              </form>
+            </div>
           </div>
-        </form>
-      </Dialog>
-    </>
+        </Dialog.Content>
+      </Dialog.Portal>
+    </Dialog.Root>
   );
 };
