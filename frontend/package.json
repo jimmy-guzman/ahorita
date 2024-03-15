@@ -20,6 +20,7 @@
     "@elysiajs/eden": "0.8.1",
     "@hookform/error-message": "2.0.1",
     "@hookform/resolvers": "3.3.4",
+    "@iconify/react": "4.1.1",
     "@radix-ui/react-alert-dialog": "1.0.5",
     "@radix-ui/react-dialog": "1.0.5",
     "@sinclair/typebox": "0.32.15",

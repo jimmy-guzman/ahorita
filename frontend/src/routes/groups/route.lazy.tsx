@@ -1,12 +1,13 @@
+import { Icon } from "@iconify/react";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { createLazyFileRoute } from "@tanstack/react-router";
 import { Link, Outlet } from "@tanstack/react-router";
-import { ExternalLinkIcon, ListPlusIcon, MenuIcon } from "lucide-react";
+import { ListPlusIcon, MenuIcon } from "lucide-react";
 
 import { groupsQueryOptions } from "@/api/query-groups";
-import { Logout } from "@/components/logout";
-import { ThemeToggle } from "@/components/theme-toggle";
+
 import { GroupsMenuItem } from "./-components/groups-menu-item";
+import { ProfileDropdown } from "./-components/profile-dropdown";
 
 const Groups = () => {
   const { data: groups } = useSuspenseQuery(groupsQueryOptions);
@@ -33,16 +34,23 @@ const Groups = () => {
               ahorita
             </Link>
             <div className="dsy-navbar-start" />
-            <div className="dsy-navbar-end hidden gap-1 sm:flex">
+            <div className="dsy-navbar-end hidden sm:flex">
+              <a
+                className="dsy-btn dsy-btn-ghost dsy-btn-xs lg:dsy-btn-md"
+                href="https://github.com/jimmy-guzman/ahorita"
+                target="__blank"
+              >
+                GitHub <Icon icon="simple-icons:github" className="text-base" />
+              </a>
               <a
                 className="dsy-btn dsy-btn-ghost dsy-btn-xs lg:dsy-btn-md"
                 href={`${import.meta.env.VITE_SERVER_DOMAIN}/docs`}
                 target="__blank"
               >
-                API Docs <ExternalLinkIcon className="h-4 w-4" />
+                API
+                <Icon icon="lucide:external-link" className="text-base" />
               </a>
-              <Logout />
-              <ThemeToggle lightTheme="cmyk" />
+              <ProfileDropdown />
             </div>
           </nav>
           <main>

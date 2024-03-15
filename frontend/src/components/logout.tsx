@@ -1,7 +1,6 @@
+import { Icon } from "@iconify/react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
-
-import { LogOutIcon } from "lucide-react";
 
 import { api } from "@/api/client";
 import { meQueryOptions } from "@/api/query-me";
@@ -27,12 +26,8 @@ export const Logout = () => {
   });
 
   return (
-    <button
-      type="button"
-      className="dsy-btn dsy-btn-ghost dsy-btn-xs lg:dsy-btn-md"
-      onClick={() => mutate()}
-    >
-      Logout <LogOutIcon className="h-4 w-4" />
+    <button type="button" className="justify-between" onClick={() => mutate()}>
+      Logout <Icon icon="lucide:log-out" className="text-base" />
     </button>
   );
 };
