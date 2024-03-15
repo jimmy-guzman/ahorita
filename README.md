@@ -61,6 +61,15 @@ And to download new browsers for Playwright, run the following command:
 bunx playwright install
 ```
 
+And to create a [neon branch](https://neon.tech/docs/introduction/branching#development), run the following:
+
+```
+brew install neonctl
+neonctl auth
+neonctl branches create --name dev/[your name]
+neonctl branches list
+```
+
 Then setup environment variables, by running the following:
 
 ```
