@@ -7,15 +7,14 @@
   "scripts": {
     "build": "bun build ./src/index.ts --outdir ./dist --target=bun --minify",
     "clean": "rimraf .turbo node_modules dist",
-    "db:push": "drizzle-kit push:pg",
-    "db:studio": "drizzle-kit studio",
-    "dev": "bun run --hot src/index.ts",
+    "db:push": "dotenv-run -- drizzle-kit push:pg",
+    "db:studio": "dotenv-run -- drizzle-kit studio",
+    "dev": "dotenv-run -- bun run --hot src/index.ts",
     "format": "biome format .",
     "format:fix": "biome format --write .",
     "lint": "biome lint .",
     "lint:fix": "biome lint --apply .",
-    "preview": "bun run dist/index.js",
-    "setup": "drizzle-kit push:pg",
+    "preview": "dotenv-run -- bun run dist/index.js",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

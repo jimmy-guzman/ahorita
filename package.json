@@ -25,6 +25,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "1.5.3-nightly.69f9031",
+    "@dotenv-run/cli": "1.3.5",
     "@types/bun": "1.0.8",
     "gitzy": "5.2.0",
     "lefthook": "1.6.6",
