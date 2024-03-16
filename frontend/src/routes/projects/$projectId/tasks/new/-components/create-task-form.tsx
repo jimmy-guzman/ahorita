@@ -5,7 +5,7 @@ import { Type } from "@sinclair/typebox";
 import { useMutation } from "@tanstack/react-query";
 import { Link, getRouteApi } from "@tanstack/react-router";
 import { addMonths, formatISO9075 } from "date-fns";
-import { PlusIcon } from "lucide-react";
+import { ListPlusIcon } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
@@ -126,7 +126,7 @@ export const CreateTaskForm = () => {
             className="dsy-btn dsy-btn-accent"
             disabled={isPending}
           >
-            Create New Task <PlusIcon />
+            New Task <ListPlusIcon />
           </button>
         </div>
       </form>

@@ -1,7 +1,7 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { Link, createFileRoute } from "@tanstack/react-router";
 import { getRouteApi } from "@tanstack/react-router";
-import { PlusIcon } from "lucide-react";
+import { ListPlusIcon } from "lucide-react";
 
 import { tasksByProjectQueryOptions } from "@/api/query-tasks-by-project";
 import { Table } from "@/components/table";
@@ -27,7 +27,7 @@ const TasksByProject = () => {
           to="/projects/$projectId/tasks/new"
           params={{ projectId }}
         >
-          New Task <PlusIcon />
+          New Task <ListPlusIcon />
         </Link>
       </div>
       <Table

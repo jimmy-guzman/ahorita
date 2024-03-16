@@ -1,7 +1,7 @@
 import { typeboxResolver } from "@hookform/resolvers/typebox";
 import { type Static, Type } from "@sinclair/typebox";
 import { useMutation } from "@tanstack/react-query";
-import { ListPlusIcon } from "lucide-react";
+import { FolderPlusIcon } from "lucide-react";
 import { Controller, useForm } from "react-hook-form";
 import { toast } from "sonner";
 
@@ -64,7 +64,7 @@ export const CreateProjectForm = () => {
             className="dsy-btn dsy-btn-accent"
             disabled={isPending}
           >
-            Create New Project <ListPlusIcon />
+            New Project <FolderPlusIcon />
           </button>
         </div>
       </form>

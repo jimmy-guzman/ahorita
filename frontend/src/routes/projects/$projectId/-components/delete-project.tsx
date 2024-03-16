@@ -1,7 +1,7 @@
 import * as AlertDialog from "@radix-ui/react-alert-dialog";
 import { useMutation } from "@tanstack/react-query";
 import { getRouteApi, useNavigate } from "@tanstack/react-router";
-import { Trash2Icon } from "lucide-react";
+import { FolderMinusIcon } from "lucide-react";
 import { useState } from "react";
 
 import { deleteProjectOptions } from "@/api/delete-project";
@@ -22,7 +22,7 @@ export const DeleteProject = () => {
           className="dsy-btn dsy-btn-neutral dsy-btn-sm"
           onClick={() => setOpen(true)}
         >
-          Delete Project <Trash2Icon />
+          Delete <FolderMinusIcon />
         </button>
       </AlertDialog.Trigger>
       <AlertDialog.Portal>

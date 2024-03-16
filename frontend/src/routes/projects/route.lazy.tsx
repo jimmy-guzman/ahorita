@@ -2,7 +2,7 @@ import { Icon } from "@iconify/react";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { createLazyFileRoute } from "@tanstack/react-router";
 import { Link, Outlet } from "@tanstack/react-router";
-import { ListPlusIcon, MenuIcon } from "lucide-react";
+import { FolderPlusIcon, MenuIcon } from "lucide-react";
 
 import { projectsQueryOptions } from "@/api/query-projects";
 import { Logout } from "@/components/logout";
@@ -78,7 +78,7 @@ const Projects = () => {
                 to="/projects/new"
                 activeProps={{ className: "dsy-active" }}
               >
-                New Project <ListPlusIcon className="h-5 w-5 text-accent" />
+                New Project <FolderPlusIcon className="h-5 w-5 text-accent" />
               </Link>
             </li>
             <li className="dsy-menu-title text-secondary uppercase">
