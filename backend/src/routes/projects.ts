@@ -3,26 +3,26 @@ import { Elysia, InternalServerError, NotFoundError, t } from "elysia";
 
 import { db } from "../db";
 import { auth } from "../middleware/auth";
-import { GroupDto } from "../models/groups";
+import { ProjectDto } from "../models/projects";
 import { TaskDto } from "../models/tasks";
-import { groups, tasks } from "../schemas";
+import { projects, tasks } from "../schemas";
 import { nowAsISO } from "../utils";
 
-export const groupsRoute = new Elysia()
+export const projectsRoute = new Elysia()
   .use(auth)
-  .group("/groups", { detail: { tags: ["Groups"] } }, (app) =>
+  .group("/groups", { detail: { tags: ["Projects"] } }, (app) =>
     app
       .get(
         "",
         async ({ user }) => {
           const userId = user?.id ?? "";
 
-          return db.query.groups.findMany({
-            where: eq(groups.userId, userId),
+          return db.query.projects.findMany({
+            where: eq(projects.userId, userId),
           });
         },
         {
-          response: t.Array(GroupDto),
+          response: t.Array(ProjectDto),
         },
       )
       .post(
@@ -30,73 +30,73 @@ export const groupsRoute = new Elysia()
         async ({ body, user }) => {
           const userId = user?.id ?? "";
 
-          const [group] = await db
-            .insert(groups)
+          const [project] = await db
+            .insert(projects)
             .values({ ...body, userId })
             .returning();
 
-          if (!group) throw InternalServerError;
+          if (!project) throw InternalServerError;
 
-          return group;
+          return project;
         },
         {
-          body: t.Pick(GroupDto, ["name", "description", "icon"]),
-          response: GroupDto,
+          body: t.Pick(ProjectDto, ["name", "description", "icon"]),
+          response: ProjectDto,
         },
       )
       .get(
         "/:id",
         async ({ params: { id } }) => {
-          const [group] = await db.query.groups.findMany({
-            where: eq(groups.id, id),
+          const [project] = await db.query.projects.findMany({
+            where: eq(projects.id, id),
             limit: 1,
           });
 
-          if (!group) throw NotFoundError;
+          if (!project) throw NotFoundError;
 
-          return group;
+          return project;
         },
         {
           params: t.Object({ id: t.String() }),
-          response: GroupDto,
+          response: ProjectDto,
         },
       )
       .patch(
         "/:id",
         async ({ params: { id }, body }) => {
-          const [group] = await db
-            .update(groups)
+          const [project] = await db
+            .update(projects)
             .set({ ...body, updatedAt: nowAsISO() })
-            .where(eq(groups.id, id))
+            .where(eq(projects.id, id))
             .returning();
 
-          if (!group) throw NotFoundError;
+          if (!project) throw NotFoundError;
 
-          return group;
+          return project;
         },
         {
           params: t.Object({ id: t.String() }),
           body: t.Partial(
-            t.Pick(GroupDto, ["description", "isFavorite", "name", "icon"]),
+            t.Pick(ProjectDto, ["description", "isFavorite", "name", "icon"]),
           ),
-          response: GroupDto,
+          response: ProjectDto,
         },
       )
       .delete(
         "/:id",
         async ({ params: { id } }) => {
-          const [group] = await db
-            .delete(groups)
-            .where(eq(groups.id, id))
+          const [project] = await db
+            .delete(projects)
+            .where(eq(projects.id, id))
             .returning();
 
-          if (!group) throw NotFoundError;
+          if (!project) throw NotFoundError;
 
-          return group;
+          return project;
         },
         {
           params: t.Object({ id: t.String() }),
-          response: GroupDto,
+          response: ProjectDto,
         },
       )
       .get(

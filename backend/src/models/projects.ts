@@ -1,6 +1,6 @@
 import { t } from "elysia";
 
-export const GroupDto = t.Object({
+export const ProjectDto = t.Object({
   id: t.String(),
   name: t.String(),
   description: t.String(),
