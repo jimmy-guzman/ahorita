@@ -3,7 +3,7 @@ import * as Dialog from "@radix-ui/react-dialog";
 import { type Static, Type } from "@sinclair/typebox";
 import { useMutation, useSuspenseQuery } from "@tanstack/react-query";
 import { getRouteApi } from "@tanstack/react-router";
-import { PencilIcon, SaveIcon, XIcon } from "lucide-react";
+import { FolderPenIcon, SaveIcon, XIcon } from "lucide-react";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 
@@ -41,7 +41,7 @@ export const EditProject = () => {
     <Dialog.Root open={open} onOpenChange={setOpen}>
       <Dialog.Trigger asChild>
         <button type="button" className="dsy-btn dsy-btn-secondary dsy-btn-sm">
-          Edit Project <PencilIcon />
+          Edit <FolderPenIcon />
         </button>
       </Dialog.Trigger>
       <Dialog.Portal>

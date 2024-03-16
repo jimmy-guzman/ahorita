@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { ListChecksIcon } from "lucide-react";
+import { FolderIcon } from "lucide-react";
 
 export const ProjectsMenuItem = ({
   projectId,
@@ -12,8 +12,7 @@ export const ProjectsMenuItem = ({
       params={{ projectId }}
       activeProps={{ className: "dsy-active" }}
     >
-      {icon ? <span>{icon}</span> : <ListChecksIcon className="h-4 w-4" />}{" "}
-      {name}
+      {icon ? <span>{icon}</span> : <FolderIcon className="h-4 w-4" />} {name}
     </Link>
   );
 };

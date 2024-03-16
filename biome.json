@@ -25,7 +25,9 @@
         "useFragmentSyntax": "error",
         "useFilenamingConvention": {
           "level": "error",
-          "options": { "filenameCases": ["kebab-case"] }
+          "options": {
+            "filenameCases": ["kebab-case"]
+          }
         },
         "noShoutyConstants": "error",
         "useBlockStatements": "error",

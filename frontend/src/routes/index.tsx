@@ -1,4 +1,5 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
+import { FoldersIcon } from "lucide-react";
 
 const Index = () => {
   return (
@@ -21,7 +22,7 @@ const Index = () => {
             </p>
             <div className="flex justify-end">
               <Link to="/projects/new" className="dsy-btn dsy-btn-accent">
-                Get Started
+                Get Started <FoldersIcon />
               </Link>
             </div>
           </div>
