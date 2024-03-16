@@ -4,7 +4,7 @@ import { Elysia } from "elysia";
 import { cyan } from "picocolors";
 
 import { authRoutes } from "./routes/auth";
-import { groupsRoute } from "./routes/groups";
+import { projectsRoute } from "./routes/projects";
 import { tasksRoutes } from "./routes/tasks";
 import { usersRoutes } from "./routes/users";
 
@@ -26,7 +26,7 @@ const app = new Elysia()
   )
   .use(authRoutes)
   .use(tasksRoutes)
-  .use(groupsRoute)
+  .use(projectsRoute)
   .use(usersRoutes)
   .listen(3000, ({ hostname, port }) => {
     console.log(`🚀 Running at ${cyan(`http://${hostname}:${port}/docs`)}`);
