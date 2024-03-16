@@ -4,11 +4,11 @@ import { createLazyFileRoute } from "@tanstack/react-router";
 import { Link, Outlet } from "@tanstack/react-router";
 import { ListPlusIcon, MenuIcon } from "lucide-react";
 
-import { groupsQueryOptions } from "@/api/query-groups";
-
+import { groupsQueryOptions } from "@/api/query-projects";
 import { Logout } from "@/components/logout";
 import { ThemeToggle } from "@/components/theme-toggle";
-import { GroupsMenuItem } from "./-components/groups-menu-item";
+
+import { GroupsMenuItem } from "./-components/projects-menu-item";
 
 const Groups = () => {
   const { data: groups } = useSuspenseQuery(groupsQueryOptions);

@@ -1,10 +1,11 @@
+import { toast } from "sonner";
+
 import type { API } from "@/api/client";
 import { api } from "@/api/client";
 import { mutationOptions } from "@/api/mutation-options";
 import { queryClient } from "@/query-client";
 
-import { toast } from "sonner";
-import { groupsQueryOptions } from "./query-groups";
+import { groupsQueryOptions } from "./query-projects";
 
 export const editGroupOptions = mutationOptions({
   mutationFn: async ({

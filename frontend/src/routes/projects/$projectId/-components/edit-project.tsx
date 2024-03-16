@@ -7,8 +7,8 @@ import { PencilIcon, SaveIcon, XIcon } from "lucide-react";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 
-import { editGroupOptions } from "@/api/edit-group";
-import { groupQueryOptions } from "@/api/query-group";
+import { editGroupOptions } from "@/api/edit-project";
+import { groupQueryOptions } from "@/api/query-project";
 import { EmojiPicker } from "@/components/emoji-picker";
 import { TextInput } from "@/components/text-input";
 

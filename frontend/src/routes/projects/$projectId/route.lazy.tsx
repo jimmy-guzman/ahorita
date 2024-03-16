@@ -4,11 +4,11 @@ import { Link } from "@tanstack/react-router";
 import { getRouteApi } from "@tanstack/react-router";
 import { EyeIcon, StarIcon, StarOffIcon } from "lucide-react";
 
-import { editGroupOptions } from "@/api/edit-group";
-import { groupQueryOptions } from "@/api/query-group";
+import { editGroupOptions } from "@/api/edit-project";
+import { groupQueryOptions } from "@/api/query-project";
 
-import { DeleteGroup } from "./-components/delete-group";
-import { EditGroup } from "./-components/edit-group";
+import { DeleteGroup } from "./-components/delete-project";
+import { EditGroup } from "./-components/edit-project";
 
 const routeApi = getRouteApi("/projects/$projectId");
 

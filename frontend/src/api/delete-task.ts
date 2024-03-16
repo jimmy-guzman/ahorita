@@ -2,7 +2,7 @@ import { api } from "@/api/client";
 import { mutationOptions } from "@/api/mutation-options";
 import { queryClient } from "@/query-client";
 import { toast } from "sonner";
-import { tasksByGroupQueryOptions } from "./query-tasks-by-group";
+import { tasksByGroupQueryOptions } from "./query-tasks-by-project";
 
 export const deleteTaskMutationOptions = mutationOptions({
   mutationFn: async (id: string) => {
