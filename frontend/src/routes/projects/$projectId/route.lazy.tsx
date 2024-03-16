@@ -4,31 +4,31 @@ import { Link } from "@tanstack/react-router";
 import { getRouteApi } from "@tanstack/react-router";
 import { EyeIcon, StarIcon, StarOffIcon } from "lucide-react";
 
-import { editGroupOptions } from "@/api/edit-project";
-import { groupQueryOptions } from "@/api/query-project";
+import { editProjectOptions } from "@/api/edit-project";
+import { projectQueryOptions } from "@/api/query-project";
 
-import { DeleteGroup } from "./-components/delete-project";
-import { EditGroup } from "./-components/edit-project";
+import { DeleteProject } from "./-components/delete-project";
+import { EditProject } from "./-components/edit-project";
 
 const routeApi = getRouteApi("/projects/$projectId");
 
-const GroupDetails = () => {
+const ProjectDetails = () => {
   const { projectId } = routeApi.useParams();
-  const { data: group } = useSuspenseQuery(groupQueryOptions(projectId));
-  const { mutate: editGroup } = useMutation(editGroupOptions);
+  const { data: project } = useSuspenseQuery(projectQueryOptions(projectId));
+  const { mutate: editProject } = useMutation(editProjectOptions);
 
   return (
     <section className="flex w-full flex-col gap-4">
       <div className="dsy-card bg-base-200">
         <div className="dsy-card-body">
           <h1 className="dsy-card-title text-secondary">
-            {group.icon && <span>{group.icon}</span>} {group.name}
-            {group.isFavorite ? (
+            {project.icon && <span>{project.icon}</span>} {project.name}
+            {project.isFavorite ? (
               <button
                 type="button"
                 className="dsy-btn dsy-btn-ghost dsy-btn-circle"
                 onClick={() =>
-                  editGroup({
+                  editProject({
                     params: { id: projectId },
                     body: { isFavorite: false },
                   })
@@ -41,7 +41,7 @@ const GroupDetails = () => {
                 type="button"
                 className="dsy-btn dsy-btn-ghost dsy-btn-circle"
                 onClick={() =>
-                  editGroup({
+                  editProject({
                     params: { id: projectId },
                     body: { isFavorite: true },
                   })
@@ -51,10 +51,10 @@ const GroupDetails = () => {
               </button>
             )}
           </h1>
-          <p>{group.description}</p>
+          <p>{project.description}</p>
           <div className="dsy-card-actions justify-end">
-            <DeleteGroup />
-            <EditGroup />
+            <DeleteProject />
+            <EditProject />
             <Link
               className="dsy-btn dsy-btn-primary dsy-btn-sm"
               to="/projects/$projectId/tasks"
@@ -73,5 +73,5 @@ const GroupDetails = () => {
 };
 
 export const Route = createLazyFileRoute("/projects/$projectId")({
-  component: GroupDetails,
+  component: ProjectDetails,
 });

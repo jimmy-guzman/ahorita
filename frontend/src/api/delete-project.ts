@@ -4,9 +4,9 @@ import { api } from "@/api/client";
 import { mutationOptions } from "@/api/mutation-options";
 import { queryClient } from "@/query-client";
 
-import { groupsQueryOptions } from "./query-projects";
+import { projectsQueryOptions } from "./query-projects";
 
-export const deleteGroupOptions = mutationOptions({
+export const deleteProjectOptions = mutationOptions({
   mutationFn: async (id: string) => {
     const res = await api.groups[id as ":id"].delete();
 
@@ -15,11 +15,11 @@ export const deleteGroupOptions = mutationOptions({
     return res.data;
   },
   onMutate: async () => {
-    await queryClient.cancelQueries(groupsQueryOptions);
+    await queryClient.cancelQueries(projectsQueryOptions);
   },
   onSuccess: async (_response, id) => {
-    queryClient.setQueryData(groupsQueryOptions.queryKey, (oldGroups) => {
-      return oldGroups?.filter((oldGroup) => oldGroup.id !== id);
+    queryClient.setQueryData(projectsQueryOptions.queryKey, (oldProjects) => {
+      return oldProjects?.filter((oldProject) => oldProject.id !== id);
     });
 
     toast.success("Project has been deleted");

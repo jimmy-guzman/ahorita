@@ -2,9 +2,9 @@ import { queryOptions } from "@tanstack/react-query";
 
 import { api } from "@/api/client";
 
-export const tasksByGroupQueryOptions = (id: string) => {
+export const tasksByProjectQueryOptions = (id: string) => {
   return queryOptions({
-    queryKey: ["groups", id, "tasks"] as const,
+    queryKey: ["projects", id, "tasks"] as const,
     queryFn: async () => {
       const res = await api.groups[id as ":id"].tasks.get();
 

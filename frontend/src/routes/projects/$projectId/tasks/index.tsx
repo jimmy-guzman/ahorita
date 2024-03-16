@@ -3,16 +3,18 @@ import { Link, createFileRoute } from "@tanstack/react-router";
 import { getRouteApi } from "@tanstack/react-router";
 import { PlusIcon } from "lucide-react";
 
-import { tasksByGroupQueryOptions } from "@/api/query-tasks-by-project";
+import { tasksByProjectQueryOptions } from "@/api/query-tasks-by-project";
 import { Table } from "@/components/table";
 
 import { columns } from "./-components/columns";
 
 const routeApi = getRouteApi("/projects/$projectId/tasks");
 
-const TasksByGroup = () => {
+const TasksByProject = () => {
   const { projectId } = routeApi.useParams();
-  const { data: tasks } = useSuspenseQuery(tasksByGroupQueryOptions(projectId));
+  const { data: tasks } = useSuspenseQuery(
+    tasksByProjectQueryOptions(projectId),
+  );
 
   return (
     <div className="flex flex-col gap-4 md:container md:mx-auto md:px-8">
@@ -39,10 +41,10 @@ const TasksByGroup = () => {
 };
 
 export const Route = createFileRoute("/projects/$projectId/tasks/")({
-  component: TasksByGroup,
+  component: TasksByProject,
   loader: async ({ context: { queryClient }, params }) => {
     await queryClient.ensureQueryData(
-      tasksByGroupQueryOptions(params.projectId),
+      tasksByProjectQueryOptions(params.projectId),
     );
   },
 });

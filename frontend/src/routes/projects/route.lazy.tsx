@@ -4,14 +4,14 @@ import { createLazyFileRoute } from "@tanstack/react-router";
 import { Link, Outlet } from "@tanstack/react-router";
 import { ListPlusIcon, MenuIcon } from "lucide-react";
 
-import { groupsQueryOptions } from "@/api/query-projects";
+import { projectsQueryOptions } from "@/api/query-projects";
 import { Logout } from "@/components/logout";
 import { ThemeToggle } from "@/components/theme-toggle";
 
-import { GroupsMenuItem } from "./-components/projects-menu-item";
+import { ProjectsMenuItem } from "./-components/projects-menu-item";
 
-const Groups = () => {
-  const { data: groups } = useSuspenseQuery(groupsQueryOptions);
+const Projects = () => {
+  const { data: projects } = useSuspenseQuery(projectsQueryOptions);
 
   return (
     <div className="dsy-drawer lg:dsy-drawer-open">
@@ -84,11 +84,11 @@ const Groups = () => {
             <li className="dsy-menu-title text-secondary uppercase">
               Favorites
             </li>
-            {groups
-              .filter((group) => group.isFavorite)
+            {projects
+              .filter((project) => project.isFavorite)
               .map(({ id: projectId, name, icon }) => (
                 <li key={projectId}>
-                  <GroupsMenuItem
+                  <ProjectsMenuItem
                     projectId={projectId}
                     name={name}
                     icon={icon}
@@ -96,11 +96,11 @@ const Groups = () => {
                 </li>
               ))}
             <li className="dsy-menu-title text-secondary uppercase">More</li>
-            {groups
-              .filter((group) => !group.isFavorite)
+            {projects
+              .filter((project) => !project.isFavorite)
               .map(({ id: projectId, name, icon }) => (
                 <li key={projectId}>
-                  <GroupsMenuItem
+                  <ProjectsMenuItem
                     projectId={projectId}
                     name={name}
                     icon={icon}
@@ -115,5 +115,5 @@ const Groups = () => {
 };
 
 export const Route = createLazyFileRoute("/projects")({
-  component: Groups,
+  component: Projects,
 });

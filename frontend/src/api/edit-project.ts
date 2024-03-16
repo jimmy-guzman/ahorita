@@ -5,9 +5,9 @@ import { api } from "@/api/client";
 import { mutationOptions } from "@/api/mutation-options";
 import { queryClient } from "@/query-client";
 
-import { groupsQueryOptions } from "./query-projects";
+import { projectsQueryOptions } from "./query-projects";
 
-export const editGroupOptions = mutationOptions({
+export const editProjectOptions = mutationOptions({
   mutationFn: async ({
     params,
     body,
@@ -19,10 +19,10 @@ export const editGroupOptions = mutationOptions({
     return res.data;
   },
   onMutate: async () => {
-    await queryClient.cancelQueries(groupsQueryOptions);
+    await queryClient.cancelQueries(projectsQueryOptions);
   },
   onSuccess: async () => {
-    await queryClient.invalidateQueries(groupsQueryOptions);
+    await queryClient.invalidateQueries(projectsQueryOptions);
 
     toast.success("Project has been edited");
   },

@@ -9,7 +9,7 @@ import { PlusIcon } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
-import { createTaskByGroupIdOptions } from "@/api/create-task";
+import { createTaskByProjectIdOptions } from "@/api/create-task";
 import { Select } from "@/components/select";
 import { TextInput } from "@/components/text-input";
 import { labels, priorities } from "@/constants/tasks";
@@ -50,7 +50,7 @@ export const CreateTaskForm = () => {
       }),
     },
   });
-  const { mutate, isPending } = useMutation(createTaskByGroupIdOptions);
+  const { mutate, isPending } = useMutation(createTaskByProjectIdOptions);
 
   return (
     <div className="flex w-full flex-col gap-4">
