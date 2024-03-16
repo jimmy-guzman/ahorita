@@ -19,6 +19,6 @@ export const TaskDto = t.Object({
   createdAt: t.String(),
   updatedAt: t.String(),
   dueAt: t.String(),
-  groupId: t.String(),
+  projectId: t.String(),
   userId: t.String(),
 });

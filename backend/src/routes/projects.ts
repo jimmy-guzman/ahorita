@@ -103,7 +103,7 @@ export const projectsRoute = new Elysia()
         "/:id/tasks",
         async ({ params: { id } }) => {
           return db.query.tasks.findMany({
-            where: eq(tasks.groupId, id),
+            where: eq(tasks.projectId, id),
             orderBy: (tasks, { desc }) => desc(tasks.createdAt),
           });
         },
@@ -119,7 +119,7 @@ export const projectsRoute = new Elysia()
 
           const [task] = await db
             .insert(tasks)
-            .values({ ...body, groupId: id, userId })
+            .values({ ...body, projectId: id, userId })
             .returning();
 
           if (!task) throw InternalServerError;
