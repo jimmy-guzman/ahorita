@@ -58,7 +58,9 @@ const GroupsNewRouteLazyRoute = GroupsNewRouteLazyImport.update({
 const GroupsGroupIdRouteRoute = GroupsGroupIdRouteImport.update({
   path: '/$groupId',
   getParentRoute: () => GroupsRouteRoute,
-} as any)
+} as any).lazy(() =>
+  import('./routes/groups/$groupId/route.lazy').then((d) => d.Route),
+)
 
 const GroupsGroupIdTasksRouteRoute = GroupsGroupIdTasksRouteImport.update({
   path: '/tasks',

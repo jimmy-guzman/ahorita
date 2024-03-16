@@ -1,13 +1,13 @@
-import { createGroupOptions } from "@/api/create-group";
-import { TextInput } from "@/components/text-input";
 import { typeboxResolver } from "@hookform/resolvers/typebox";
 import { type Static, Type } from "@sinclair/typebox";
 import { useMutation } from "@tanstack/react-query";
-import EmojiPicker, { Theme, EmojiStyle } from "emoji-picker-react";
-import { ListPlusIcon, MinusIcon } from "lucide-react";
-import { useRef } from "react";
+import { ListPlusIcon } from "lucide-react";
 import { Controller, useForm } from "react-hook-form";
 import { toast } from "sonner";
+
+import { createGroupOptions } from "@/api/create-group";
+import { EmojiPicker } from "@/components/emoji-picker";
+import { TextInput } from "@/components/text-input";
 
 const schema = Type.Object({
   name: Type.String({ minLength: 1 }),
@@ -25,7 +25,6 @@ export const CreateGroupForm = () => {
       icon: null,
     },
   });
-  const iconDropdownRef = useRef<HTMLDetailsElement>(null);
 
   return (
     <div className="flex w-full flex-col gap-8">
@@ -48,36 +47,7 @@ export const CreateGroupForm = () => {
             control={control}
             name="icon"
             render={({ field: { onChange, value } }) => (
-              <div className="dsy-join">
-                <details className="dsy-dropdown" ref={iconDropdownRef}>
-                  <summary className="dsy-btn dsy-join-item rounded-md">
-                    {value ?? "Add Icon"}
-                  </summary>
-                  <EmojiPicker
-                    className="dsy-dropdown-content"
-                    theme={Theme.AUTO}
-                    emojiStyle={EmojiStyle.NATIVE}
-                    previewConfig={{ defaultCaption: "Choose your icon" }}
-                    onEmojiClick={(event) => {
-                      onChange(event.emoji);
-
-                      if (iconDropdownRef.current) {
-                        iconDropdownRef.current.removeAttribute("open");
-                      }
-                    }}
-                  />
-                </details>
-                <div className="dsy-tooltip" data-tip="Remove Icon">
-                  <button
-                    type="button"
-                    className="dsy-join-item dsy-btn"
-                    disabled={!value}
-                    onClick={() => onChange(null)}
-                  >
-                    <MinusIcon />
-                  </button>
-                </div>
-              </div>
+              <EmojiPicker value={value} onChange={onChange} />
             )}
           />
           <TextInput
