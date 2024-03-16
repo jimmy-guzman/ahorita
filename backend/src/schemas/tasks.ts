@@ -4,7 +4,7 @@ import { boolean, pgEnum, pgTable, text, timestamp } from "drizzle-orm/pg-core";
 import { nanoid } from "../utils";
 import { users } from "./users";
 
-export const projects = pgTable("group", {
+export const projects = pgTable("project", {
   id: text("id").$default(nanoid).primaryKey(),
   name: text("name").unique().notNull(),
   description: text("description").notNull(),
@@ -49,7 +49,7 @@ export const tasks = pgTable("task", {
   dueAt: timestamp("due_at", { withTimezone: true, mode: "string" })
     .default(sql`now() + INTERVAL '1 MONTHS'`)
     .notNull(),
-  groupId: text("group_id")
+  projectId: text("project_id")
     .references(() => projects.id, { onDelete: "cascade" })
     .notNull(),
   userId: text("user_id")
@@ -57,7 +57,7 @@ export const tasks = pgTable("task", {
     .notNull(),
 });
 
-export const groupsRelations = relations(projects, ({ many, one }) => ({
+export const projectsRelations = relations(projects, ({ many, one }) => ({
   tasks: many(tasks),
   user: one(users, {
     fields: [projects.userId],
@@ -66,8 +66,8 @@ export const groupsRelations = relations(projects, ({ many, one }) => ({
 }));
 
 export const tasksRelations = relations(tasks, ({ one }) => ({
-  group: one(projects, {
-    fields: [tasks.groupId],
+  project: one(projects, {
+    fields: [tasks.projectId],
     references: [projects.id],
   }),
   user: one(users, {

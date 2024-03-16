@@ -16,7 +16,7 @@ import { RenameTaskAction } from "./rename-task-action";
 interface TaskTableActionsProps {
   task: {
     id: string;
-    groupId: string;
+    projectId: string;
     name: string;
     status: Status;
     priority: Priority;

@@ -18,7 +18,7 @@ export const editTaskMutationOptions = mutationOptions({
 
     return res.data;
   },
-  onSuccess: async ({ groupId: projectId }) => {
+  onSuccess: async ({ projectId }) => {
     await queryClient.invalidateQueries(tasksByProjectQueryOptions(projectId));
 
     toast.success("Task has been edited");
