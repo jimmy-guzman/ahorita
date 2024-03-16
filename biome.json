@@ -21,13 +21,32 @@
     "enabled": true,
     "rules": {
       "recommended": true,
-      "style": { "useFragmentSyntax": "error" },
-      "nursery": {
-        "useSortedClasses": "error",
+      "style": {
+        "useFragmentSyntax": "error",
         "useFilenamingConvention": {
           "level": "error",
           "options": { "filenameCases": ["kebab-case"] }
-        }
+        },
+        "noShoutyConstants": "error",
+        "useBlockStatements": "error",
+        "useForOf": "error"
+      },
+      "complexity": {
+        "useSimplifiedLogicExpression": "error"
+      },
+      "correctness": {
+        "noUnusedImports": "error",
+        "useHookAtTopLevel": "error"
+      },
+      "suspicious": {
+        "noConsoleLog": "error",
+        "noEmptyBlockStatements": "error",
+        "useAwait": "error"
+      },
+      "nursery": {
+        "useSortedClasses": "error",
+        "noSemicolonInJsx": "error",
+        "noUselessTernary": "error"
       }
     }
   }

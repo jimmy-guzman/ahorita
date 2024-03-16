@@ -60,7 +60,7 @@ describe("<Table />", () => {
     expect(screen.getAllByRole("row")).toHaveLength(2);
   });
 
-  it("should render filter with placeholder text", async () => {
+  it("should render filter with placeholder text", () => {
     render(
       <Table
         data={[

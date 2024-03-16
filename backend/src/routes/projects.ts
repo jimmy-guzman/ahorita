@@ -17,7 +17,7 @@ export const projectsRoute = new Elysia()
         async ({ user }) => {
           const userId = user?.id ?? "";
 
-          return db.query.projects.findMany({
+          return await db.query.projects.findMany({
             where: eq(projects.userId, userId),
           });
         },
@@ -35,7 +35,9 @@ export const projectsRoute = new Elysia()
             .values({ ...body, userId })
             .returning();
 
-          if (!project) throw InternalServerError;
+          if (!project) {
+            throw InternalServerError;
+          }
 
           return project;
         },
@@ -52,7 +54,9 @@ export const projectsRoute = new Elysia()
             limit: 1,
           });
 
-          if (!project) throw NotFoundError;
+          if (!project) {
+            throw NotFoundError;
+          }
 
           return project;
         },
@@ -70,7 +74,9 @@ export const projectsRoute = new Elysia()
             .where(eq(projects.id, id))
             .returning();
 
-          if (!project) throw NotFoundError;
+          if (!project) {
+            throw NotFoundError;
+          }
 
           return project;
         },
@@ -90,7 +96,9 @@ export const projectsRoute = new Elysia()
             .where(eq(projects.id, id))
             .returning();
 
-          if (!project) throw NotFoundError;
+          if (!project) {
+            throw NotFoundError;
+          }
 
           return project;
         },
@@ -122,7 +130,9 @@ export const projectsRoute = new Elysia()
             .values({ ...body, projectId: id, userId })
             .returning();
 
-          if (!task) throw InternalServerError;
+          if (!task) {
+            throw InternalServerError;
+          }
 
           return task;
         },

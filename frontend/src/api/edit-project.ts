@@ -14,7 +14,9 @@ export const editProjectOptions = mutationOptions({
   }: Pick<API["/projects/:id"]["patch"], "body" | "params">) => {
     const res = await api.projects[params.id as ":id"].patch(body);
 
-    if (res.error) throw new Error(res.error.value);
+    if (res.error) {
+      throw new Error(res.error.value);
+    }
 
     return res.data;
   },

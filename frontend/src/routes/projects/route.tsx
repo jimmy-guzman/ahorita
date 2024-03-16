@@ -8,7 +8,7 @@ export const Route = createFileRoute("/projects")({
   beforeLoad: async ({ location, context }) => {
     const response = await context.queryClient.fetchQuery({
       ...meQueryOptions,
-      staleTime: Infinity,
+      staleTime: Number.POSITIVE_INFINITY,
     });
 
     if (!response.data?.user) {

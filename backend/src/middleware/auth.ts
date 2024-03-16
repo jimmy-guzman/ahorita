@@ -17,11 +17,12 @@ export const auth = new Elysia().derive(
       // NOTE: You may need to use `X-Forwarded-Host` instead
       const hostHeader = context.request.headers.get("Host");
 
-      if (
-        !originHeader ||
-        !hostHeader ||
-        !verifyRequestOrigin(originHeader, [hostHeader])
-      ) {
+      const hasValidOrigin =
+        originHeader &&
+        hostHeader &&
+        verifyRequestOrigin(originHeader, [hostHeader]);
+
+      if (!hasValidOrigin) {
         return {
           user: null,
           session: null,

@@ -31,7 +31,7 @@ export const DeleteProject = () => {
           <div className="dsy-modal dsy-modal-open">
             <div className="dsy-modal-box">
               <form
-                onSubmit={async (event) => {
+                onSubmit={(event) => {
                   event.preventDefault();
 
                   mutate(projectId, {

@@ -8,7 +8,9 @@ export const deleteTaskMutationOptions = mutationOptions({
   mutationFn: async (id: string) => {
     const res = await api.tasks[id as ":id"].delete();
 
-    if (res.error) throw new Error(res.error.value);
+    if (res.error) {
+      throw new Error(res.error.value);
+    }
 
     return res.data;
   },

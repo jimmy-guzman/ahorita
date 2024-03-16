@@ -29,6 +29,7 @@ const app = new Elysia()
   .use(projectsRoute)
   .use(usersRoutes)
   .listen(3000, ({ hostname, port }) => {
+    // biome-ignore lint/suspicious/noConsoleLog: elysia does not provide a logger
     console.log(`🚀 Running at ${cyan(`http://${hostname}:${port}/docs`)}`);
   });
 
