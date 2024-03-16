@@ -1,5 +1,5 @@
 import { useAppActions, useAppLightMode } from "@/stores/app";
-import { type Theme } from "daisyui";
+import type { Theme } from "daisyui";
 import { MoonIcon, SunIcon } from "lucide-react";
 
 export const ThemeToggle = ({ lightTheme }: { lightTheme: Theme }) => {

@@ -7,7 +7,9 @@ export const projectsQueryOptions = queryOptions({
   queryFn: async () => {
     const res = await api.projects.get();
 
-    if (res.error) throw new Error(res.error.value);
+    if (res.error) {
+      throw new Error(res.error.value);
+    }
 
     return res.data;
   },

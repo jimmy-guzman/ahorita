@@ -12,7 +12,9 @@ export const createTaskByProjectIdOptions = mutationOptions({
   }: Pick<API["/projects/:id/tasks"]["post"], "body" | "params">) => {
     const res = await api.projects[params.id as ":id"].tasks.post(body);
 
-    if (res.error) throw new Error(res.error.value);
+    if (res.error) {
+      throw new Error(res.error.value);
+    }
 
     return res.data;
   },

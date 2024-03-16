@@ -13,11 +13,13 @@ export const Logout = () => {
     mutationFn: async () => {
       const res = await api.auth.logout.post();
 
-      if (res.error) throw new Error(res.error.value);
+      if (res.error) {
+        throw new Error(res.error.value);
+      }
 
       return res.data;
     },
-    onMutate: async () => {
+    onMutate: () => {
       queryClient.removeQueries(meQueryOptions);
     },
     onSuccess: async () => {

@@ -16,19 +16,19 @@ import { useState } from "react";
 
 import { fuzzyFilter } from "./filters";
 
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+// biome-ignore lint/suspicious/noExplicitAny: unknown does not work with @tanstack/react-table
 export function Table<TData, TColumns extends ColumnDef<TData, any>[]>(props: {
   data: TData[];
   columns: TColumns;
   globalFilterPlaceholder?: string;
   enableGlobalFiltering: boolean;
 }): JSX.Element;
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+// biome-ignore lint/suspicious/noExplicitAny: unknown does not work with @tanstack/react-table
 export function Table<TData, TColumns extends ColumnDef<TData, any>[]>(props: {
   data: TData[];
   columns: TColumns;
 }): JSX.Element;
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+// biome-ignore lint/suspicious/noExplicitAny: unknown does not work with @tanstack/react-table
 export function Table<TData, TColumns extends ColumnDef<TData, any>[]>({
   data,
   columns,

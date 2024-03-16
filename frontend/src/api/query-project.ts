@@ -8,7 +8,9 @@ export const projectQueryOptions = (id: string) => {
     queryFn: async () => {
       const res = await api.projects[id as ":id"].get();
 
-      if (res.error) throw new Error(res.error.value);
+      if (res.error) {
+        throw new Error(res.error.value);
+      }
 
       return res.data;
     },

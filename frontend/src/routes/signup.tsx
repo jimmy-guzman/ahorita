@@ -26,7 +26,9 @@ export const SignUp = () => {
     mutationFn: async (user: Static<typeof schema>) => {
       const res = await api.auth.signup.post(user);
 
-      if (res.error) throw new Error(res.error.value);
+      if (res.error) {
+        throw new Error(res.error.value);
+      }
 
       return res.data;
     },

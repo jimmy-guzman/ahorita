@@ -10,7 +10,9 @@ export const deleteProjectOptions = mutationOptions({
   mutationFn: async (id: string) => {
     const res = await api.projects[id as ":id"].delete();
 
-    if (res.error) throw new Error(res.error.value);
+    if (res.error) {
+      throw new Error(res.error.value);
+    }
 
     return res.data;
   },
