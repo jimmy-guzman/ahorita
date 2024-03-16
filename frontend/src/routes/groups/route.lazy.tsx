@@ -18,7 +18,7 @@ const Groups = () => {
       <input id="my-drawer-3" type="checkbox" className="dsy-drawer-toggle" />
       <div className="dsy-drawer-content flex flex-col">
         <div className="max-w-[100vw] px-6 pb-16 xl:pr-2">
-          <nav className="dsy-navbar w-full">
+          <nav className="dsy-navbar static w-full lg:sticky lg:top-0 lg:z-30 lg:shadow-sm lg:backdrop-blur">
             <div className="flex-none lg:hidden">
               <label
                 htmlFor="my-drawer-3"
@@ -59,7 +59,7 @@ const Groups = () => {
           </main>
         </div>
       </div>
-      <aside className="dsy-drawer-side">
+      <aside className="dsy-drawer-side z-30">
         <label
           htmlFor="my-drawer-3"
           aria-label="close sidebar"
