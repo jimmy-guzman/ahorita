@@ -29,7 +29,7 @@ export const CreateGroupForm = () => {
   return (
     <div className="flex w-full flex-col gap-8">
       <div className="prose dsy-prose">
-        <h1>Create New Group</h1>
+        <h1>Create New Project</h1>
       </div>
       <form
         className="flex flex-col gap-2"
@@ -37,7 +37,7 @@ export const CreateGroupForm = () => {
           mutate(body, {
             onSuccess: () => {
               reset();
-              toast.success("Group has been created");
+              toast.success("Project has been created");
             },
           });
         })}
@@ -64,7 +64,7 @@ export const CreateGroupForm = () => {
             className="dsy-btn dsy-btn-accent"
             disabled={isPending}
           >
-            Create New Group <ListPlusIcon />
+            Create New Project <ListPlusIcon />
           </button>
         </div>
       </form>

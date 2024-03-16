@@ -8,11 +8,11 @@ import { Table } from "@/components/table";
 
 import { columns } from "./-components/columns";
 
-const routeApi = getRouteApi("/groups/$groupId/tasks");
+const routeApi = getRouteApi("/projects/$projectId/tasks");
 
 const TasksByGroup = () => {
-  const { groupId } = routeApi.useParams();
-  const { data: tasks } = useSuspenseQuery(tasksByGroupQueryOptions(groupId));
+  const { projectId } = routeApi.useParams();
+  const { data: tasks } = useSuspenseQuery(tasksByGroupQueryOptions(projectId));
 
   return (
     <div className="flex flex-col gap-4 md:container md:mx-auto md:px-8">
@@ -22,8 +22,8 @@ const TasksByGroup = () => {
         </div>
         <Link
           className="dsy-btn dsy-btn-accent dsy-btn-sm"
-          to="/groups/$groupId/tasks/new"
-          params={{ groupId }}
+          to="/projects/$projectId/tasks/new"
+          params={{ projectId }}
         >
           New Task <PlusIcon />
         </Link>
@@ -38,9 +38,11 @@ const TasksByGroup = () => {
   );
 };
 
-export const Route = createFileRoute("/groups/$groupId/tasks/")({
+export const Route = createFileRoute("/projects/$projectId/tasks/")({
   component: TasksByGroup,
   loader: async ({ context: { queryClient }, params }) => {
-    await queryClient.ensureQueryData(tasksByGroupQueryOptions(params.groupId));
+    await queryClient.ensureQueryData(
+      tasksByGroupQueryOptions(params.projectId),
+    );
   },
 });

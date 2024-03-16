@@ -74,8 +74,11 @@ const Groups = () => {
           </Link>
           <ul className="dsy-menu min-h-screen w-56 bg-base-100">
             <li>
-              <Link to="/groups/new" activeProps={{ className: "dsy-active" }}>
-                New Group <ListPlusIcon className="h-5 w-5 text-accent" />
+              <Link
+                to="/projects/new"
+                activeProps={{ className: "dsy-active" }}
+              >
+                New Project <ListPlusIcon className="h-5 w-5 text-accent" />
               </Link>
             </li>
             <li className="dsy-menu-title text-secondary uppercase">
@@ -83,17 +86,25 @@ const Groups = () => {
             </li>
             {groups
               .filter((group) => group.isFavorite)
-              .map(({ id: groupId, name, icon }) => (
-                <li key={groupId}>
-                  <GroupsMenuItem groupId={groupId} name={name} icon={icon} />
+              .map(({ id: projectId, name, icon }) => (
+                <li key={projectId}>
+                  <GroupsMenuItem
+                    projectId={projectId}
+                    name={name}
+                    icon={icon}
+                  />
                 </li>
               ))}
             <li className="dsy-menu-title text-secondary uppercase">More</li>
             {groups
               .filter((group) => !group.isFavorite)
-              .map(({ id: groupId, name, icon }) => (
-                <li key={groupId}>
-                  <GroupsMenuItem groupId={groupId} name={name} icon={icon} />
+              .map(({ id: projectId, name, icon }) => (
+                <li key={projectId}>
+                  <GroupsMenuItem
+                    projectId={projectId}
+                    name={name}
+                    icon={icon}
+                  />
                 </li>
               ))}
           </ul>
@@ -103,6 +114,6 @@ const Groups = () => {
   );
 };
 
-export const Route = createLazyFileRoute("/groups")({
+export const Route = createLazyFileRoute("/projects")({
   component: Groups,
 });

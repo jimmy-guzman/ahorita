@@ -22,6 +22,6 @@ export const deleteGroupOptions = mutationOptions({
       return oldGroups?.filter((oldGroup) => oldGroup.id !== id);
     });
 
-    toast.success("Group has been deleted");
+    toast.success("Project has been deleted");
   },
 });

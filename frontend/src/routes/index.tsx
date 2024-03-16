@@ -20,7 +20,7 @@ const Index = () => {
               with new technologies.
             </p>
             <div className="flex justify-end">
-              <Link to="/groups/new" className="dsy-btn dsy-btn-accent">
+              <Link to="/projects/new" className="dsy-btn dsy-btn-accent">
                 Get Started
               </Link>
             </div>

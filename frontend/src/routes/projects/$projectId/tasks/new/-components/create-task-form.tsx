@@ -14,7 +14,7 @@ import { Select } from "@/components/select";
 import { TextInput } from "@/components/text-input";
 import { labels, priorities } from "@/constants/tasks";
 
-const routeApi = getRouteApi("/groups/$groupId/tasks/new");
+const routeApi = getRouteApi("/projects/$projectId/tasks/new");
 
 const schema = Type.Object({
   name: Type.String({ minLength: 1 }),
@@ -32,7 +32,7 @@ const schema = Type.Object({
 });
 
 export const CreateTaskForm = () => {
-  const { groupId } = routeApi.useParams();
+  const { projectId } = routeApi.useParams();
   const {
     handleSubmit,
     control,
@@ -63,7 +63,7 @@ export const CreateTaskForm = () => {
           mutate(
             {
               body,
-              params: { id: groupId },
+              params: { id: projectId },
             },
             {
               onSuccess() {

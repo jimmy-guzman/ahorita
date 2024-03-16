@@ -6,10 +6,10 @@ import { useState } from "react";
 
 import { deleteGroupOptions } from "@/api/delete-group";
 
-const routeApi = getRouteApi("/groups/$groupId");
+const routeApi = getRouteApi("/projects/$projectId");
 
 export const DeleteGroup = () => {
-  const { groupId } = routeApi.useParams();
+  const { projectId } = routeApi.useParams();
   const { mutate } = useMutation(deleteGroupOptions);
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
@@ -22,7 +22,7 @@ export const DeleteGroup = () => {
           className="dsy-btn dsy-btn-neutral dsy-btn-sm"
           onClick={() => setOpen(true)}
         >
-          Delete Group <Trash2Icon />
+          Delete Project <Trash2Icon />
         </button>
       </AlertDialog.Trigger>
       <AlertDialog.Portal>
@@ -34,11 +34,11 @@ export const DeleteGroup = () => {
                 onSubmit={async (event) => {
                   event.preventDefault();
 
-                  mutate(groupId, {
+                  mutate(projectId, {
                     onSuccess: async () => {
                       setOpen(false);
 
-                      await navigate({ to: "/groups/new" });
+                      await navigate({ to: "/projects/new" });
                     },
                   });
                 }}
@@ -53,7 +53,7 @@ export const DeleteGroup = () => {
                     Cancel
                   </button>
                   <button type="submit" className="dsy-btn dsy-btn-error">
-                    Yes, delete group
+                    Yes, delete project
                   </button>
                 </div>
               </form>

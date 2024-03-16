@@ -23,6 +23,6 @@ export const editGroupOptions = mutationOptions({
   onSuccess: async () => {
     await queryClient.invalidateQueries(groupsQueryOptions);
 
-    toast.success("Group has been edited");
+    toast.success("Project has been edited");
   },
 });

@@ -10,11 +10,11 @@ import { groupQueryOptions } from "@/api/query-group";
 import { DeleteGroup } from "./-components/delete-group";
 import { EditGroup } from "./-components/edit-group";
 
-const routeApi = getRouteApi("/groups/$groupId");
+const routeApi = getRouteApi("/projects/$projectId");
 
 const GroupDetails = () => {
-  const { groupId } = routeApi.useParams();
-  const { data: group } = useSuspenseQuery(groupQueryOptions(groupId));
+  const { projectId } = routeApi.useParams();
+  const { data: group } = useSuspenseQuery(groupQueryOptions(projectId));
   const { mutate: editGroup } = useMutation(editGroupOptions);
 
   return (
@@ -29,7 +29,7 @@ const GroupDetails = () => {
                 className="dsy-btn dsy-btn-ghost dsy-btn-circle"
                 onClick={() =>
                   editGroup({
-                    params: { id: groupId },
+                    params: { id: projectId },
                     body: { isFavorite: false },
                   })
                 }
@@ -42,7 +42,7 @@ const GroupDetails = () => {
                 className="dsy-btn dsy-btn-ghost dsy-btn-circle"
                 onClick={() =>
                   editGroup({
-                    params: { id: groupId },
+                    params: { id: projectId },
                     body: { isFavorite: true },
                   })
                 }
@@ -57,8 +57,8 @@ const GroupDetails = () => {
             <EditGroup />
             <Link
               className="dsy-btn dsy-btn-primary dsy-btn-sm"
-              to="/groups/$groupId/tasks"
-              params={{ groupId }}
+              to="/projects/$projectId/tasks"
+              params={{ projectId }}
               activeOptions={{ exact: true }}
               activeProps={{ className: "dsy-btn-active" }}
             >
@@ -72,6 +72,6 @@ const GroupDetails = () => {
   );
 };
 
-export const Route = createLazyFileRoute("/groups/$groupId")({
+export const Route = createLazyFileRoute("/projects/$projectId")({
   component: GroupDetails,
 });
