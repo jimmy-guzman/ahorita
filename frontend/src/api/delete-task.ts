@@ -1,15 +1,17 @@
+import { toast } from "sonner";
+
 import { api } from "@/api/client";
 import { mutationOptions } from "@/api/mutation-options";
 import { queryClient } from "@/query-client";
-import { toast } from "sonner";
+
 import { tasksByProjectQueryOptions } from "./query-tasks-by-project";
 
 export const deleteTaskMutationOptions = mutationOptions({
   mutationFn: async (id: string) => {
-    const res = await api.tasks[id as ":id"].delete();
+    const res = await api.tasks({ id }).delete();
 
     if (res.error) {
-      throw new Error(res.error.value);
+      throw res.error;
     }
 
     return res.data;

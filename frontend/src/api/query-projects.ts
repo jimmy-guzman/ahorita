@@ -8,7 +8,7 @@ export const projectsQueryOptions = queryOptions({
     const res = await api.projects.get();
 
     if (res.error) {
-      throw new Error(res.error.value);
+      throw res.error;
     }
 
     return res.data;

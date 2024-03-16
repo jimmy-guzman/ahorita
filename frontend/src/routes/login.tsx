@@ -38,7 +38,7 @@ export const Login = () => {
       const res = await api.auth.login.post(user);
 
       if (res.error) {
-        throw new Error(res.error.value);
+        throw res.error;
       }
 
       return res.data;

@@ -8,10 +8,10 @@ import { projectsQueryOptions } from "./query-projects";
 
 export const deleteProjectOptions = mutationOptions({
   mutationFn: async (id: string) => {
-    const res = await api.projects[id as ":id"].delete();
+    const res = await api.projects({ id }).delete();
 
     if (res.error) {
-      throw new Error(res.error.value);
+      throw res.error;
     }
 
     return res.data;
