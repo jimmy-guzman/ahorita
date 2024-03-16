@@ -17,7 +17,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@elysiajs/eden": "1.0.0-rc.5",
+    "@elysiajs/eden": "1.0.0",
     "@hookform/error-message": "2.0.1",
     "@hookform/resolvers": "3.3.4",
     "@iconify/react": "4.1.1",
