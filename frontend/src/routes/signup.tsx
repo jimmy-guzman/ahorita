@@ -1,11 +1,12 @@
-import { api } from "@/api/client";
-import { PasswordInput } from "@/components/password-input";
-import { TextInput } from "@/components/text-input";
 import { typeboxResolver } from "@hookform/resolvers/typebox";
 import { type Static, Type } from "@sinclair/typebox";
 import { useMutation } from "@tanstack/react-query";
 import { Link, createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useForm } from "react-hook-form";
+
+import { api } from "@/api/client";
+import { PasswordInput } from "@/components/password-input";
+import { TextInput } from "@/components/text-input";
 
 const schema = Type.Object({
   username: Type.String({ minLength: 1, pattern: "^[a-zA-Z0-9]+$" }),
@@ -27,7 +28,7 @@ export const SignUp = () => {
       const res = await api.auth.signup.post(user);
 
       if (res.error) {
-        throw new Error(res.error.value);
+        throw res.error;
       }
 
       return res.data;

@@ -14,7 +14,7 @@ export const Logout = () => {
       const res = await api.auth.logout.post();
 
       if (res.error) {
-        throw new Error(res.error.value);
+        throw res.error;
       }
 
       return res.data;

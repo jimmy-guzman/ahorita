@@ -12,7 +12,9 @@ const app = new Elysia()
   .use(
     cors({
       methods: ["GET", "POST", "PATCH", "DELETE"],
-      allowedHeaders: "content-type",
+      allowedHeaders: "Content-Type",
+      // TODO: revisit when https://github.com/elysiajs/elysia-cors/issues/41 is addressed
+      origin: /localhost.*/,
     }),
   )
   .use(

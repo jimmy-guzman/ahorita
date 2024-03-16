@@ -11,11 +11,11 @@ export const editProjectOptions = mutationOptions({
   mutationFn: async ({
     params,
     body,
-  }: Pick<API["/projects/:id"]["patch"], "body" | "params">) => {
-    const res = await api.projects[params.id as ":id"].patch(body);
+  }: Pick<API["projects"][":id"]["patch"], "body" | "params">) => {
+    const res = await api.projects(params).patch(body);
 
     if (res.error) {
-      throw new Error(res.error.value);
+      throw res.error;
     }
 
     return res.data;

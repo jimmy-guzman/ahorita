@@ -11,11 +11,11 @@ export const editTaskMutationOptions = mutationOptions({
   mutationFn: async ({
     params,
     body,
-  }: Pick<API["/tasks/:id"]["patch"], "body" | "params">) => {
-    const res = await api.tasks[params.id as ":id"].patch(body);
+  }: Pick<API["tasks"][":id"]["patch"], "body" | "params">) => {
+    const res = await api.tasks(params).patch(body);
 
     if (res.error) {
-      throw new Error(res.error.value);
+      throw res.error;
     }
 
     return res.data;

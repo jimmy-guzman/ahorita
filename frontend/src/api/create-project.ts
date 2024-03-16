@@ -5,11 +5,11 @@ import { projectsQueryOptions } from "@/api/query-projects";
 import { queryClient } from "@/query-client";
 
 export const createProjectOptions = mutationOptions({
-  mutationFn: async (body: API["/projects"]["post"]["body"]) => {
+  mutationFn: async (body: API["projects"]["post"]["body"]) => {
     const res = await api.projects.post(body);
 
     if (res.error) {
-      throw new Error(res.error.value);
+      throw res.error;
     }
 
     return res.data;
