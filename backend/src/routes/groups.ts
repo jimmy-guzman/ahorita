@@ -76,7 +76,9 @@ export const groupsRoute = new Elysia()
         },
         {
           params: t.Object({ id: t.String() }),
-          body: t.Partial(t.Pick(GroupDto, ["description", "isFavorite"])),
+          body: t.Partial(
+            t.Pick(GroupDto, ["description", "isFavorite", "name", "icon"]),
+          ),
           response: GroupDto,
         },
       )

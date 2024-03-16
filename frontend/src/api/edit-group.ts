@@ -3,6 +3,7 @@ import { api } from "@/api/client";
 import { mutationOptions } from "@/api/mutation-options";
 import { queryClient } from "@/query-client";
 
+import { toast } from "sonner";
 import { groupsQueryOptions } from "./query-groups";
 
 export const editGroupOptions = mutationOptions({
@@ -21,5 +22,7 @@ export const editGroupOptions = mutationOptions({
   },
   onSuccess: async () => {
     await queryClient.invalidateQueries(groupsQueryOptions);
+
+    toast.success("Group has been edited");
   },
 });
