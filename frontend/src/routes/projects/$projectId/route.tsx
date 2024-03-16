@@ -1,8 +1,8 @@
 import { groupQueryOptions } from "@/api/query-group";
 import { createFileRoute } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/groups/$groupId")({
+export const Route = createFileRoute("/projects/$projectId")({
   loader: async ({ context: { queryClient }, params }) => {
-    await queryClient.ensureQueryData(groupQueryOptions(params.groupId));
+    await queryClient.ensureQueryData(groupQueryOptions(params.projectId));
   },
 });

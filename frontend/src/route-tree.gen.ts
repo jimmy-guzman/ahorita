@@ -15,16 +15,16 @@ import { createFileRoute } from '@tanstack/react-router'
 import { Route as rootRoute } from './routes/__root'
 import { Route as SignupImport } from './routes/signup'
 import { Route as LoginImport } from './routes/login'
-import { Route as GroupsRouteImport } from './routes/groups/route'
+import { Route as ProjectsRouteImport } from './routes/projects/route'
 import { Route as IndexImport } from './routes/index'
-import { Route as GroupsGroupIdRouteImport } from './routes/groups/$groupId/route'
-import { Route as GroupsGroupIdTasksRouteImport } from './routes/groups/$groupId/tasks/route'
-import { Route as GroupsGroupIdTasksIndexImport } from './routes/groups/$groupId/tasks/index'
-import { Route as GroupsGroupIdTasksNewRouteImport } from './routes/groups/$groupId/tasks/new/route'
+import { Route as ProjectsProjectIdRouteImport } from './routes/projects/$projectId/route'
+import { Route as ProjectsProjectIdTasksRouteImport } from './routes/projects/$projectId/tasks/route'
+import { Route as ProjectsProjectIdTasksIndexImport } from './routes/projects/$projectId/tasks/index'
+import { Route as ProjectsProjectIdTasksNewRouteImport } from './routes/projects/$projectId/tasks/new/route'
 
 // Create Virtual Routes
 
-const GroupsNewRouteLazyImport = createFileRoute('/groups/new')()
+const ProjectsNewRouteLazyImport = createFileRoute('/projects/new')()
 
 // Create/Update Routes
 
@@ -38,46 +38,49 @@ const LoginRoute = LoginImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const GroupsRouteRoute = GroupsRouteImport.update({
-  path: '/groups',
+const ProjectsRouteRoute = ProjectsRouteImport.update({
+  path: '/projects',
   getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/groups/route.lazy').then((d) => d.Route))
+} as any).lazy(() =>
+  import('./routes/projects/route.lazy').then((d) => d.Route),
+)
 
 const IndexRoute = IndexImport.update({
   path: '/',
   getParentRoute: () => rootRoute,
 } as any)
 
-const GroupsNewRouteLazyRoute = GroupsNewRouteLazyImport.update({
+const ProjectsNewRouteLazyRoute = ProjectsNewRouteLazyImport.update({
   path: '/new',
-  getParentRoute: () => GroupsRouteRoute,
+  getParentRoute: () => ProjectsRouteRoute,
 } as any).lazy(() =>
-  import('./routes/groups/new/route.lazy').then((d) => d.Route),
+  import('./routes/projects/new/route.lazy').then((d) => d.Route),
 )
 
-const GroupsGroupIdRouteRoute = GroupsGroupIdRouteImport.update({
-  path: '/$groupId',
-  getParentRoute: () => GroupsRouteRoute,
+const ProjectsProjectIdRouteRoute = ProjectsProjectIdRouteImport.update({
+  path: '/$projectId',
+  getParentRoute: () => ProjectsRouteRoute,
 } as any).lazy(() =>
-  import('./routes/groups/$groupId/route.lazy').then((d) => d.Route),
+  import('./routes/projects/$projectId/route.lazy').then((d) => d.Route),
 )
 
-const GroupsGroupIdTasksRouteRoute = GroupsGroupIdTasksRouteImport.update({
-  path: '/tasks',
-  getParentRoute: () => GroupsGroupIdRouteRoute,
-} as any)
+const ProjectsProjectIdTasksRouteRoute =
+  ProjectsProjectIdTasksRouteImport.update({
+    path: '/tasks',
+    getParentRoute: () => ProjectsProjectIdRouteRoute,
+  } as any)
 
-const GroupsGroupIdTasksIndexRoute = GroupsGroupIdTasksIndexImport.update({
-  path: '/',
-  getParentRoute: () => GroupsGroupIdTasksRouteRoute,
-} as any)
+const ProjectsProjectIdTasksIndexRoute =
+  ProjectsProjectIdTasksIndexImport.update({
+    path: '/',
+    getParentRoute: () => ProjectsProjectIdTasksRouteRoute,
+  } as any)
 
-const GroupsGroupIdTasksNewRouteRoute = GroupsGroupIdTasksNewRouteImport.update(
-  {
+const ProjectsProjectIdTasksNewRouteRoute =
+  ProjectsProjectIdTasksNewRouteImport.update({
     path: '/new',
-    getParentRoute: () => GroupsGroupIdTasksRouteRoute,
-  } as any,
-)
+    getParentRoute: () => ProjectsProjectIdTasksRouteRoute,
+  } as any)
 
 // Populate the FileRoutesByPath interface
 
@@ -87,8 +90,8 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
-    '/groups': {
-      preLoaderRoute: typeof GroupsRouteImport
+    '/projects': {
+      preLoaderRoute: typeof ProjectsRouteImport
       parentRoute: typeof rootRoute
     }
     '/login': {
@@ -99,25 +102,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SignupImport
       parentRoute: typeof rootRoute
     }
-    '/groups/$groupId': {
-      preLoaderRoute: typeof GroupsGroupIdRouteImport
-      parentRoute: typeof GroupsRouteImport
+    '/projects/$projectId': {
+      preLoaderRoute: typeof ProjectsProjectIdRouteImport
+      parentRoute: typeof ProjectsRouteImport
     }
-    '/groups/new': {
-      preLoaderRoute: typeof GroupsNewRouteLazyImport
-      parentRoute: typeof GroupsRouteImport
+    '/projects/new': {
+      preLoaderRoute: typeof ProjectsNewRouteLazyImport
+      parentRoute: typeof ProjectsRouteImport
     }
-    '/groups/$groupId/tasks': {
-      preLoaderRoute: typeof GroupsGroupIdTasksRouteImport
-      parentRoute: typeof GroupsGroupIdRouteImport
+    '/projects/$projectId/tasks': {
+      preLoaderRoute: typeof ProjectsProjectIdTasksRouteImport
+      parentRoute: typeof ProjectsProjectIdRouteImport
     }
-    '/groups/$groupId/tasks/new': {
-      preLoaderRoute: typeof GroupsGroupIdTasksNewRouteImport
-      parentRoute: typeof GroupsGroupIdTasksRouteImport
+    '/projects/$projectId/tasks/new': {
+      preLoaderRoute: typeof ProjectsProjectIdTasksNewRouteImport
+      parentRoute: typeof ProjectsProjectIdTasksRouteImport
     }
-    '/groups/$groupId/tasks/': {
-      preLoaderRoute: typeof GroupsGroupIdTasksIndexImport
-      parentRoute: typeof GroupsGroupIdTasksRouteImport
+    '/projects/$projectId/tasks/': {
+      preLoaderRoute: typeof ProjectsProjectIdTasksIndexImport
+      parentRoute: typeof ProjectsProjectIdTasksRouteImport
     }
   }
 }
@@ -126,14 +129,14 @@ declare module '@tanstack/react-router' {
 
 export const routeTree = rootRoute.addChildren([
   IndexRoute,
-  GroupsRouteRoute.addChildren([
-    GroupsGroupIdRouteRoute.addChildren([
-      GroupsGroupIdTasksRouteRoute.addChildren([
-        GroupsGroupIdTasksNewRouteRoute,
-        GroupsGroupIdTasksIndexRoute,
+  ProjectsRouteRoute.addChildren([
+    ProjectsProjectIdRouteRoute.addChildren([
+      ProjectsProjectIdTasksRouteRoute.addChildren([
+        ProjectsProjectIdTasksNewRouteRoute,
+        ProjectsProjectIdTasksIndexRoute,
       ]),
     ]),
-    GroupsNewRouteLazyRoute,
+    ProjectsNewRouteLazyRoute,
   ]),
   LoginRoute,
   SignupRoute,

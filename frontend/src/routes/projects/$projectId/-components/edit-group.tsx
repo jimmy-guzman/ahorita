@@ -12,7 +12,7 @@ import { groupQueryOptions } from "@/api/query-group";
 import { EmojiPicker } from "@/components/emoji-picker";
 import { TextInput } from "@/components/text-input";
 
-const routeApi = getRouteApi("/groups/$groupId");
+const routeApi = getRouteApi("/projects/$projectId");
 
 const schema = Type.Object({
   name: Type.String({ minLength: 1 }),
@@ -22,8 +22,8 @@ const schema = Type.Object({
 });
 
 export const EditGroup = () => {
-  const { groupId } = routeApi.useParams();
-  const { data: group } = useSuspenseQuery(groupQueryOptions(groupId));
+  const { projectId } = routeApi.useParams();
+  const { data: group } = useSuspenseQuery(groupQueryOptions(projectId));
   const { mutate } = useMutation(editGroupOptions);
   const [open, setOpen] = useState(false);
 
@@ -41,7 +41,7 @@ export const EditGroup = () => {
     <Dialog.Root open={open} onOpenChange={setOpen}>
       <Dialog.Trigger asChild>
         <button type="button" className="dsy-btn dsy-btn-secondary dsy-btn-sm">
-          Edit Group <PencilIcon />
+          Edit Project <PencilIcon />
         </button>
       </Dialog.Trigger>
       <Dialog.Portal>
@@ -59,12 +59,12 @@ export const EditGroup = () => {
                 </button>
               </Dialog.Close>
               <Dialog.Title className="font-bold text-lg">
-                Edit Group
+                Edit Project
               </Dialog.Title>
               <form
                 onSubmit={form.handleSubmit((values) => {
                   mutate(
-                    { params: { id: groupId }, body: values },
+                    { params: { id: projectId }, body: values },
                     { onSuccess: () => setOpen(false) },
                   );
                 })}
