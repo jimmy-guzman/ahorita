@@ -63,7 +63,7 @@ export const CreateTaskForm = () => {
           mutate(
             {
               body,
-              params: { id: projectId },
+              params: { projectId },
             },
             {
               onSuccess() {

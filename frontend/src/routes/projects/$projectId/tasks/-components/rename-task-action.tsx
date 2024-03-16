@@ -15,10 +15,10 @@ const schema = Type.Object({
 
 interface RenameTaskActionProps {
   name: string;
-  id: string;
+  taskId: string;
 }
 
-export const RenameTaskAction = ({ name, id }: RenameTaskActionProps) => {
+export const RenameTaskAction = ({ name, taskId }: RenameTaskActionProps) => {
   const { mutate } = useMutation(editTaskMutationOptions);
   const [open, setOpen] = useState(false);
   const form = useForm<Static<typeof schema>>({
@@ -56,7 +56,7 @@ export const RenameTaskAction = ({ name, id }: RenameTaskActionProps) => {
               <form
                 onSubmit={form.handleSubmit((values) => {
                   mutate(
-                    { params: { id }, body: values },
+                    { params: { taskId }, body: values },
                     { onSuccess: () => setOpen(false) },
                   );
                 })}

@@ -29,7 +29,7 @@ export const ProjectDetails = () => {
                 className="dsy-btn dsy-btn-ghost dsy-btn-circle"
                 onClick={() =>
                   editProject({
-                    params: { id: projectId },
+                    params: { projectId },
                     body: { isFavorite: false },
                   })
                 }
@@ -42,7 +42,7 @@ export const ProjectDetails = () => {
                 className="dsy-btn dsy-btn-ghost dsy-btn-circle"
                 onClick={() =>
                   editProject({
-                    params: { id: projectId },
+                    params: { projectId },
                     body: { isFavorite: true },
                   })
                 }

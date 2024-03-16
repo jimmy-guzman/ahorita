@@ -7,10 +7,10 @@ import { useState } from "react";
 
 interface DeleteTaskActionProps {
   name: string;
-  id: string;
+  taskId: string;
 }
 
-export const DeleteTaskAction = ({ name, id }: DeleteTaskActionProps) => {
+export const DeleteTaskAction = ({ name, taskId }: DeleteTaskActionProps) => {
   const { mutate } = useMutation(deleteTaskMutationOptions);
   const [open, setOpen] = useState(false);
 
@@ -37,7 +37,7 @@ export const DeleteTaskAction = ({ name, id }: DeleteTaskActionProps) => {
                 onSubmit={async (event) => {
                   event.preventDefault();
 
-                  mutate(id, { onSuccess: () => setOpen(false) });
+                  mutate(taskId, { onSuccess: () => setOpen(false) });
                 }}
               >
                 <AlertDialog.Title>Are You Sure?</AlertDialog.Title>

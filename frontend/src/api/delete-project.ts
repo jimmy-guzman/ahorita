@@ -7,8 +7,8 @@ import { queryClient } from "@/query-client";
 import { projectsQueryOptions } from "./query-projects";
 
 export const deleteProjectOptions = mutationOptions({
-  mutationFn: async (id: string) => {
-    const res = await api.projects({ id }).delete();
+  mutationFn: async (projectId: string) => {
+    const res = await api.projects({ projectId }).delete();
 
     if (res.error) {
       throw res.error;
@@ -19,9 +19,9 @@ export const deleteProjectOptions = mutationOptions({
   onMutate: async () => {
     await queryClient.cancelQueries(projectsQueryOptions);
   },
-  onSuccess: async (_response, id) => {
+  onSuccess: async (_response, projectId) => {
     queryClient.setQueryData(projectsQueryOptions.queryKey, (oldProjects) => {
-      return oldProjects?.filter((oldProject) => oldProject.id !== id);
+      return oldProjects?.filter((oldProject) => oldProject.id !== projectId);
     });
 
     toast.success("Project has been deleted");

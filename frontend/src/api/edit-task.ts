@@ -11,7 +11,7 @@ export const editTaskMutationOptions = mutationOptions({
   mutationFn: async ({
     params,
     body,
-  }: Pick<API["tasks"][":id"]["patch"], "body" | "params">) => {
+  }: Pick<API["tasks"][":taskId"]["patch"], "body" | "params">) => {
     const res = await api.tasks(params).patch(body);
 
     if (res.error) {

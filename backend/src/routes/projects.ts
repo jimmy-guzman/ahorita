@@ -10,6 +10,7 @@ import { nowAsISO } from "../utils";
 
 export const projectsRoute = new Elysia()
   .use(auth)
+  .model({ project: ProjectDto })
   .group("/projects", { detail: { tags: ["Projects"] } }, (app) =>
     app
       .get(
@@ -43,14 +44,14 @@ export const projectsRoute = new Elysia()
         },
         {
           body: t.Pick(ProjectDto, ["name", "description", "icon"]),
-          response: ProjectDto,
+          response: "project",
         },
       )
       .get(
-        "/:id",
-        async ({ params: { id } }) => {
+        "/:projectId",
+        async ({ params: { projectId } }) => {
           const [project] = await db.query.projects.findMany({
-            where: eq(projects.id, id),
+            where: eq(projects.id, projectId),
             limit: 1,
           });
 
@@ -61,17 +62,17 @@ export const projectsRoute = new Elysia()
           return project;
         },
         {
-          params: t.Object({ id: t.String() }),
-          response: ProjectDto,
+          params: t.Object({ projectId: t.String() }),
+          response: "project",
         },
       )
       .patch(
-        "/:id",
-        async ({ params: { id }, body }) => {
+        "/:projectId",
+        async ({ params: { projectId }, body }) => {
           const [project] = await db
             .update(projects)
             .set({ ...body, updatedAt: nowAsISO() })
-            .where(eq(projects.id, id))
+            .where(eq(projects.id, projectId))
             .returning();
 
           if (!project) {
@@ -81,19 +82,19 @@ export const projectsRoute = new Elysia()
           return project;
         },
         {
-          params: t.Object({ id: t.String() }),
+          params: t.Object({ projectId: t.String() }),
           body: t.Partial(
             t.Pick(ProjectDto, ["description", "isFavorite", "name", "icon"]),
           ),
-          response: ProjectDto,
+          response: "project",
         },
       )
       .delete(
-        "/:id",
-        async ({ params: { id } }) => {
+        "/:projectId",
+        async ({ params: { projectId } }) => {
           const [project] = await db
             .delete(projects)
-            .where(eq(projects.id, id))
+            .where(eq(projects.id, projectId))
             .returning();
 
           if (!project) {
@@ -103,31 +104,31 @@ export const projectsRoute = new Elysia()
           return project;
         },
         {
-          params: t.Object({ id: t.String() }),
-          response: ProjectDto,
+          params: t.Object({ projectId: t.String() }),
+          response: "project",
         },
       )
       .get(
-        "/:id/tasks",
-        async ({ params: { id } }) => {
+        "/:projectId/tasks",
+        async ({ params: { projectId } }) => {
           return db.query.tasks.findMany({
-            where: eq(tasks.projectId, id),
+            where: eq(tasks.projectId, projectId),
             orderBy: (tasks, { desc }) => desc(tasks.createdAt),
           });
         },
         {
-          params: t.Object({ id: t.String() }),
+          params: t.Object({ projectId: t.String() }),
           response: t.Array(TaskDto),
         },
       )
       .post(
-        "/:id/tasks",
-        async ({ user, params: { id }, body }) => {
+        "/:projectId/tasks",
+        async ({ user, params: { projectId }, body }) => {
           const userId = user?.id ?? "";
 
           const [task] = await db
             .insert(tasks)
-            .values({ ...body, projectId: id, userId })
+            .values({ ...body, projectId: projectId, userId })
             .returning();
 
           if (!task) {
@@ -137,7 +138,7 @@ export const projectsRoute = new Elysia()
           return task;
         },
         {
-          params: t.Object({ id: t.String() }),
+          params: t.Object({ projectId: t.String() }),
           body: t.Pick(TaskDto, ["name", "priority", "dueAt", "label"]),
           response: TaskDto,
         },

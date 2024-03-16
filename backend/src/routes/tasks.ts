@@ -7,19 +7,20 @@ import { TaskDto } from "../models/tasks";
 import { tasks } from "../schemas";
 import { nowAsISO } from "../utils";
 
-const Params = t.Object({ id: t.String() });
+const Params = t.Object({ taskId: t.String() });
 
 export const tasksRoutes = new Elysia()
   .use(auth)
+  .model({ task: TaskDto })
   .group("/tasks", { detail: { tags: ["Tasks"] } }, (app) =>
     app
       .patch(
-        "/:id",
-        async ({ params: { id }, body }) => {
+        "/:taskId",
+        async ({ params: { taskId }, body }) => {
           const [task] = await db
             .update(tasks)
             .set({ ...body, updatedAt: nowAsISO() })
-            .where(eq(tasks.id, id))
+            .where(eq(tasks.id, taskId))
             .returning();
 
           if (!task) {
@@ -33,15 +34,15 @@ export const tasksRoutes = new Elysia()
             t.Pick(TaskDto, ["name", "status", "priority", "label"]),
           ),
           params: Params,
-          response: TaskDto,
+          response: "task",
         },
       )
       .delete(
-        "/:id",
-        async ({ params: { id } }) => {
+        "/:taskId",
+        async ({ params: { taskId } }) => {
           const [task] = await db
             .delete(tasks)
-            .where(eq(tasks.id, id))
+            .where(eq(tasks.id, taskId))
             .returning();
 
           if (!task) {
@@ -52,7 +53,7 @@ export const tasksRoutes = new Elysia()
         },
         {
           params: Params,
-          response: TaskDto,
+          response: "task",
         },
       ),
   );

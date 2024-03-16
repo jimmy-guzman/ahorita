@@ -9,7 +9,10 @@ export const createTaskByProjectIdOptions = mutationOptions({
   mutationFn: async ({
     params,
     body,
-  }: Pick<API["projects"][":id"]["tasks"]["post"], "params" | "body">) => {
+  }: Pick<
+    API["projects"][":projectId"]["tasks"]["post"],
+    "params" | "body"
+  >) => {
     const res = await api.projects(params).tasks.post(body);
 
     if (res.error) {
@@ -18,10 +21,10 @@ export const createTaskByProjectIdOptions = mutationOptions({
 
     return res.data;
   },
-  onMutate: async ({ params: { id } }) => {
-    await queryClient.cancelQueries(tasksByProjectQueryOptions(id));
+  onMutate: async ({ params: { projectId } }) => {
+    await queryClient.cancelQueries(tasksByProjectQueryOptions(projectId));
   },
-  onSuccess: async (_response, { params: { id } }) => {
-    await queryClient.invalidateQueries(tasksByProjectQueryOptions(id));
+  onSuccess: async (_response, { params: { projectId } }) => {
+    await queryClient.invalidateQueries(tasksByProjectQueryOptions(projectId));
   },
 });
