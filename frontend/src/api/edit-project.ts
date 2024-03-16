@@ -11,8 +11,8 @@ export const editProjectOptions = mutationOptions({
   mutationFn: async ({
     params,
     body,
-  }: Pick<API["/groups/:id"]["patch"], "body" | "params">) => {
-    const res = await api.groups[params.id as ":id"].patch(body);
+  }: Pick<API["/projects/:id"]["patch"], "body" | "params">) => {
+    const res = await api.projects[params.id as ":id"].patch(body);
 
     if (res.error) throw new Error(res.error.value);
 

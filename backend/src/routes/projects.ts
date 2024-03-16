@@ -10,7 +10,7 @@ import { nowAsISO } from "../utils";
 
 export const projectsRoute = new Elysia()
   .use(auth)
-  .group("/groups", { detail: { tags: ["Projects"] } }, (app) =>
+  .group("/projects", { detail: { tags: ["Projects"] } }, (app) =>
     app
       .get(
         "",
