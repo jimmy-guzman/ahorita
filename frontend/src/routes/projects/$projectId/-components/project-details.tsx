@@ -62,7 +62,8 @@ export const ProjectDetails = () => {
               activeOptions={{ exact: true }}
               activeProps={{ className: "dsy-btn-active" }}
             >
-              Tasks <ListTodoIcon />
+              <span className="hidden sm:inline">Tasks </span>
+              <ListTodoIcon />
             </Link>
           </div>
         </div>

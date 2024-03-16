@@ -22,7 +22,8 @@ export const DeleteProject = () => {
           className="dsy-btn dsy-btn-neutral dsy-btn-sm"
           onClick={() => setOpen(true)}
         >
-          Delete <FolderMinusIcon />
+          <span className="hidden sm:inline">Delete </span>
+          <FolderMinusIcon />
         </button>
       </AlertDialog.Trigger>
       <AlertDialog.Portal>

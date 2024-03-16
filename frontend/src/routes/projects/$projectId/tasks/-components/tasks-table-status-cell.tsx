@@ -13,27 +13,32 @@ type Status = "BACKLOG" | "CANCELED" | "DONE" | "IN_PROGRESS" | "TODO";
 const cellsByStatus = {
   IN_PROGRESS: (
     <>
-      <TimerIcon className={ICON_CLASS} /> In Progress
+      <TimerIcon className={ICON_CLASS} />
+      <span className="hidden sm:inline"> In Progress</span>
     </>
   ),
   TODO: (
     <>
-      <CircleIcon className={ICON_CLASS} /> Todo
+      <CircleIcon className={ICON_CLASS} />
+      <span className="hidden sm:inline"> Todo</span>
     </>
   ),
   DONE: (
     <>
-      <CheckCircle2Icon className={ICON_CLASS} /> Done
+      <CheckCircle2Icon className={ICON_CLASS} />
+      <span className="hidden sm:inline"> Done</span>
     </>
   ),
   CANCELED: (
     <>
-      <XCircleIcon className={ICON_CLASS} /> Canceled
+      <XCircleIcon className={ICON_CLASS} />
+      <span className="hidden sm:inline"> Canceled</span>
     </>
   ),
   BACKLOG: (
     <>
-      <HelpCircleIcon className={ICON_CLASS} /> Backlog
+      <HelpCircleIcon className={ICON_CLASS} />
+      <span className="hidden sm:inline"> Backlog</span>
     </>
   ),
 } satisfies Record<Status, JSX.Element>;
