@@ -4,7 +4,7 @@ import { api } from "@/api/client";
 import { mutationOptions } from "@/api/mutation-options";
 import { queryClient } from "@/query-client";
 
-import { groupsQueryOptions } from "./query-groups";
+import { groupsQueryOptions } from "./query-projects";
 
 export const deleteGroupOptions = mutationOptions({
   mutationFn: async (id: string) => {

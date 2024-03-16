@@ -3,7 +3,7 @@ import { Link, createFileRoute } from "@tanstack/react-router";
 import { getRouteApi } from "@tanstack/react-router";
 import { PlusIcon } from "lucide-react";
 
-import { tasksByGroupQueryOptions } from "@/api/query-tasks-by-group";
+import { tasksByGroupQueryOptions } from "@/api/query-tasks-by-project";
 import { Table } from "@/components/table";
 
 import { columns } from "./-components/columns";

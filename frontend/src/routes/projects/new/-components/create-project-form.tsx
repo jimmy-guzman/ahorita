@@ -5,7 +5,7 @@ import { ListPlusIcon } from "lucide-react";
 import { Controller, useForm } from "react-hook-form";
 import { toast } from "sonner";
 
-import { createGroupOptions } from "@/api/create-group";
+import { createGroupOptions } from "@/api/create-project";
 import { EmojiPicker } from "@/components/emoji-picker";
 import { TextInput } from "@/components/text-input";
 

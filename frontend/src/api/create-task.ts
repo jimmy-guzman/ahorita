@@ -3,7 +3,7 @@ import { api } from "@/api/client";
 import { mutationOptions } from "@/api/mutation-options";
 import { queryClient } from "@/query-client";
 
-import { tasksByGroupQueryOptions } from "./query-tasks-by-group";
+import { tasksByGroupQueryOptions } from "./query-tasks-by-project";
 
 export const createTaskByGroupIdOptions = mutationOptions({
   mutationFn: async ({

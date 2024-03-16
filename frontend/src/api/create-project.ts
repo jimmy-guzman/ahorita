@@ -1,7 +1,7 @@
 import type { API } from "@/api/client";
 import { api } from "@/api/client";
 import { mutationOptions } from "@/api/mutation-options";
-import { groupsQueryOptions } from "@/api/query-groups";
+import { groupsQueryOptions } from "@/api/query-projects";
 import { queryClient } from "@/query-client";
 
 export const createGroupOptions = mutationOptions({
