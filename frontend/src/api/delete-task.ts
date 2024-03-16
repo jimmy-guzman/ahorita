@@ -7,8 +7,8 @@ import { queryClient } from "@/query-client";
 import { tasksByProjectQueryOptions } from "./query-tasks-by-project";
 
 export const deleteTaskMutationOptions = mutationOptions({
-  mutationFn: async (id: string) => {
-    const res = await api.tasks({ id }).delete();
+  mutationFn: async (taskId: string) => {
+    const res = await api.tasks({ taskId }).delete();
 
     if (res.error) {
       throw res.error;

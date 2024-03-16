@@ -50,7 +50,7 @@ export const TasksTableRowActions = ({ task }: TaskTableActionsProps) => {
                     type="button"
                     onClick={() => {
                       editMutation.mutate({
-                        params: { id: task.id },
+                        params: { taskId: task.id },
                         body: { status },
                       });
                     }}
@@ -75,7 +75,7 @@ export const TasksTableRowActions = ({ task }: TaskTableActionsProps) => {
                     type="button"
                     onClick={() => {
                       editMutation.mutate({
-                        params: { id: task.id },
+                        params: { taskId: task.id },
                         body: { priority },
                       });
                     }}
@@ -100,7 +100,7 @@ export const TasksTableRowActions = ({ task }: TaskTableActionsProps) => {
                     type="button"
                     onClick={() => {
                       editMutation.mutate({
-                        params: { id: task.id },
+                        params: { taskId: task.id },
                         body: { label },
                       });
                     }}
@@ -117,10 +117,10 @@ export const TasksTableRowActions = ({ task }: TaskTableActionsProps) => {
         </li>
         <div className="dsy-divider my-1" />
         <li>
-          <RenameTaskAction name={task.name} id={task.id} />
+          <RenameTaskAction name={task.name} taskId={task.id} />
         </li>
         <li>
-          <DeleteTaskAction name={task.name} id={task.id} />
+          <DeleteTaskAction name={task.name} taskId={task.id} />
         </li>
       </ul>
     </details>

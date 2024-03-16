@@ -65,7 +65,7 @@ export const EditProject = () => {
               <form
                 onSubmit={form.handleSubmit((values) => {
                   mutate(
-                    { params: { id: projectId }, body: values },
+                    { params: { projectId }, body: values },
                     { onSuccess: () => setOpen(false) },
                   );
                 })}
