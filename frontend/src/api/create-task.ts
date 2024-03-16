@@ -3,9 +3,9 @@ import { api } from "@/api/client";
 import { mutationOptions } from "@/api/mutation-options";
 import { queryClient } from "@/query-client";
 
-import { tasksByGroupQueryOptions } from "./query-tasks-by-project";
+import { tasksByProjectQueryOptions } from "./query-tasks-by-project";
 
-export const createTaskByGroupIdOptions = mutationOptions({
+export const createTaskByProjectIdOptions = mutationOptions({
   mutationFn: async ({
     params,
     body,
@@ -17,9 +17,9 @@ export const createTaskByGroupIdOptions = mutationOptions({
     return res.data;
   },
   onMutate: async ({ params: { id } }) => {
-    await queryClient.cancelQueries(tasksByGroupQueryOptions(id));
+    await queryClient.cancelQueries(tasksByProjectQueryOptions(id));
   },
   onSuccess: async (_response, { params: { id } }) => {
-    await queryClient.invalidateQueries(tasksByGroupQueryOptions(id));
+    await queryClient.invalidateQueries(tasksByProjectQueryOptions(id));
   },
 });

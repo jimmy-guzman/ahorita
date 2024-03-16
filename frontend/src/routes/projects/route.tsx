@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { redirect } from "@tanstack/react-router";
 
 import { meQueryOptions } from "@/api/query-me";
-import { groupsQueryOptions } from "@/api/query-projects";
+import { projectsQueryOptions } from "@/api/query-projects";
 
 export const Route = createFileRoute("/projects")({
   beforeLoad: async ({ location, context }) => {
@@ -21,6 +21,6 @@ export const Route = createFileRoute("/projects")({
     }
   },
   loader: async ({ context: { queryClient } }) => {
-    await queryClient.ensureQueryData(groupsQueryOptions);
+    await queryClient.ensureQueryData(projectsQueryOptions);
   },
 });

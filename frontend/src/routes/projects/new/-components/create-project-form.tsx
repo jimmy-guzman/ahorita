@@ -5,7 +5,7 @@ import { ListPlusIcon } from "lucide-react";
 import { Controller, useForm } from "react-hook-form";
 import { toast } from "sonner";
 
-import { createGroupOptions } from "@/api/create-project";
+import { createProjectOptions } from "@/api/create-project";
 import { EmojiPicker } from "@/components/emoji-picker";
 import { TextInput } from "@/components/text-input";
 
@@ -15,8 +15,8 @@ const schema = Type.Object({
   icon: Type.Union([Type.String(), Type.Null()]),
 });
 
-export const CreateGroupForm = () => {
-  const { mutate, isPending } = useMutation(createGroupOptions);
+export const CreateProjectForm = () => {
+  const { mutate, isPending } = useMutation(createProjectOptions);
   const { handleSubmit, control, reset } = useForm<Static<typeof schema>>({
     resolver: typeboxResolver(schema),
     defaultValues: {

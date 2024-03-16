@@ -1,10 +1,10 @@
 import type { API } from "@/api/client";
 import { api } from "@/api/client";
 import { mutationOptions } from "@/api/mutation-options";
-import { groupsQueryOptions } from "@/api/query-projects";
+import { projectsQueryOptions } from "@/api/query-projects";
 import { queryClient } from "@/query-client";
 
-export const createGroupOptions = mutationOptions({
+export const createProjectOptions = mutationOptions({
   mutationFn: async (body: API["/groups"]["post"]["body"]) => {
     const res = await api.groups.post(body);
 
@@ -13,9 +13,9 @@ export const createGroupOptions = mutationOptions({
     return res.data;
   },
   onMutate: async () => {
-    await queryClient.cancelQueries(groupsQueryOptions);
+    await queryClient.cancelQueries(projectsQueryOptions);
   },
   onSuccess: async () => {
-    await queryClient.invalidateQueries(groupsQueryOptions);
+    await queryClient.invalidateQueries(projectsQueryOptions);
   },
 });

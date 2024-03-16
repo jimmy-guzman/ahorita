@@ -4,13 +4,13 @@ import { getRouteApi, useNavigate } from "@tanstack/react-router";
 import { Trash2Icon } from "lucide-react";
 import { useState } from "react";
 
-import { deleteGroupOptions } from "@/api/delete-project";
+import { deleteProjectOptions } from "@/api/delete-project";
 
 const routeApi = getRouteApi("/projects/$projectId");
 
-export const DeleteGroup = () => {
+export const DeleteProject = () => {
   const { projectId } = routeApi.useParams();
-  const { mutate } = useMutation(deleteGroupOptions);
+  const { mutate } = useMutation(deleteProjectOptions);
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
 

@@ -7,8 +7,8 @@ import { PencilIcon, SaveIcon, XIcon } from "lucide-react";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 
-import { editGroupOptions } from "@/api/edit-project";
-import { groupQueryOptions } from "@/api/query-project";
+import { editProjectOptions } from "@/api/edit-project";
+import { projectQueryOptions } from "@/api/query-project";
 import { EmojiPicker } from "@/components/emoji-picker";
 import { TextInput } from "@/components/text-input";
 
@@ -21,19 +21,19 @@ const schema = Type.Object({
   icon: Type.Union([Type.String(), Type.Null()]),
 });
 
-export const EditGroup = () => {
+export const EditProject = () => {
   const { projectId } = routeApi.useParams();
-  const { data: group } = useSuspenseQuery(groupQueryOptions(projectId));
-  const { mutate } = useMutation(editGroupOptions);
+  const { data: project } = useSuspenseQuery(projectQueryOptions(projectId));
+  const { mutate } = useMutation(editProjectOptions);
   const [open, setOpen] = useState(false);
 
   const form = useForm<Static<typeof schema>>({
     resolver: typeboxResolver(schema),
     values: {
-      description: group.description,
-      name: group.name,
-      isFavorite: group.isFavorite,
-      icon: group.icon,
+      description: project.description,
+      name: project.name,
+      isFavorite: project.isFavorite,
+      icon: project.icon,
     },
   });
 

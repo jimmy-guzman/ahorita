@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { ListChecksIcon } from "lucide-react";
 
-export const GroupsMenuItem = ({
+export const ProjectsMenuItem = ({
   projectId,
   icon,
   name,
