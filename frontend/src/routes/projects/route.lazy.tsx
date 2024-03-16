@@ -37,14 +37,14 @@ const Projects = () => {
             <div className="dsy-navbar-start" />
             <div className="dsy-navbar-end hidden gap-2 sm:flex">
               <a
-                className="dsy-btn dsy-btn-ghost dsy-btn-circle dsy-btn-xs lg:dsy-btn-md"
+                className="dsy-btn dsy-btn-ghost dsy-btn-circle dsy-btn-xs lg:dsy-btn-sm"
                 href="https://github.com/jimmy-guzman/ahorita"
                 target="__blank"
               >
                 <Icon icon="simple-icons:github" className="text-xl" />
               </a>
               <a
-                className="dsy-btn dsy-btn-ghost dsy-btn-circle dsy-btn-xs lg:dsy-btn-md"
+                className="dsy-btn dsy-btn-ghost dsy-btn-circle dsy-btn-xs lg:dsy-btn-sm"
                 href={`${import.meta.env.VITE_SERVER_DOMAIN}/docs`}
                 target="__blank"
               >

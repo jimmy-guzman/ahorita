@@ -30,7 +30,7 @@ export const Logout = () => {
   return (
     <button
       type="button"
-      className="dsy-btn dsy-btn-ghost dsy-btn-circle dsy-btn-xs lg:dsy-btn-md"
+      className="dsy-btn dsy-btn-ghost dsy-btn-circle dsy-btn-xs lg:dsy-btn-sm"
       onClick={() => mutate()}
     >
       <LogOutIcon />

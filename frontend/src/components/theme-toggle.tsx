@@ -7,7 +7,7 @@ export const ThemeToggle = ({ lightTheme }: { lightTheme: Theme }) => {
   const { toggleLightMode } = useAppActions();
 
   return (
-    <label className="dsy-swap dsy-swap-rotate dsy-btn dsy-ghost dsy-btn-circle">
+    <label className="dsy-swap dsy-swap-rotate dsy-btn dsy-ghost dsy-btn-circle dsy-btn-xs lg:dsy-btn-sm">
       <input
         type="checkbox"
         className="theme-controller"
