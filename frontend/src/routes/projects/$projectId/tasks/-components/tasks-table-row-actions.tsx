@@ -3,6 +3,7 @@ import { EllipsisIcon } from "lucide-react";
 
 import { editTaskMutationOptions } from "@/api/edit-task";
 import {
+  type Label,
   type Priority,
   type Status,
   labels,
@@ -20,7 +21,7 @@ interface TaskTableActionsProps {
     name: string;
     status: Status;
     priority: Priority;
-    label: "Feature" | "Bug" | "Documentation";
+    label: Label;
     createdAt: string;
     updatedAt: string;
   };
@@ -44,7 +45,7 @@ export const TasksTableRowActions = ({ task }: TaskTableActionsProps) => {
           <details>
             <summary>Status</summary>
             <ul>
-              {statuses.map(({ status, label }) => (
+              {statuses.map((status) => (
                 <li key={status}>
                   <button
                     type="button"
@@ -55,7 +56,7 @@ export const TasksTableRowActions = ({ task }: TaskTableActionsProps) => {
                       });
                     }}
                   >
-                    {label}
+                    {status}
                     {task.status === status && (
                       <span className="dsy-badge dsy-badge-xs dsy-badge-info" />
                     )}
@@ -69,7 +70,7 @@ export const TasksTableRowActions = ({ task }: TaskTableActionsProps) => {
           <details>
             <summary>Priority</summary>
             <ul>
-              {priorities.map(({ priority, label }) => (
+              {priorities.map((priority) => (
                 <li key={priority}>
                   <button
                     type="button"
@@ -80,7 +81,7 @@ export const TasksTableRowActions = ({ task }: TaskTableActionsProps) => {
                       });
                     }}
                   >
-                    {label}
+                    {priority}
                     {task.priority === priority && (
                       <span className="dsy-badge dsy-badge-xs dsy-badge-info" />
                     )}

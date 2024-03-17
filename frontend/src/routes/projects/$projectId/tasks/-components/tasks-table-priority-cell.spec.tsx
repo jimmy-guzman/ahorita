@@ -3,16 +3,12 @@ import { render, screen } from "@/testing/utils";
 import { TasksTablePriorityCell } from "./tasks-table-priority-cell";
 
 describe("<TasksTablePriorityCell />", () => {
-  it.each([
-    { priority: "LOW", text: "Low" },
-    { priority: "MEDIUM", text: "Medium" },
-    { priority: "HIGH", text: "High" },
-  ] as const)(
-    "should render $priority when status is $text",
-    ({ priority, text }) => {
+  it.each(["Low", "Medium", "High"] as const)(
+    "should render %s priority",
+    (priority) => {
       render(<TasksTablePriorityCell priority={priority} />);
 
-      expect(screen.getByText(text)).toBeInTheDocument();
+      expect(screen.getByText(priority)).toBeInTheDocument();
     },
   );
 });

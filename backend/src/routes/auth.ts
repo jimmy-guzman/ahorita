@@ -6,6 +6,8 @@ import { lucia } from "../auth";
 import { db } from "../db";
 import { users } from "../schemas";
 
+const tags = ["Authentication"];
+
 export const authRoutes = new Elysia({ prefix: "/auth" })
   .post(
     "/login",
@@ -44,7 +46,7 @@ export const authRoutes = new Elysia({ prefix: "/auth" })
     },
     {
       body: t.Object({ username: t.String(), password: t.String() }),
-      detail: { tags: ["Auth"] },
+      detail: { tags },
     },
   )
   .post(
@@ -71,7 +73,7 @@ export const authRoutes = new Elysia({ prefix: "/auth" })
         username: t.String(),
         password: t.String(),
       }),
-      detail: { tags: ["Auth"] },
+      detail: { tags },
     },
   )
   .post(
@@ -105,6 +107,6 @@ export const authRoutes = new Elysia({ prefix: "/auth" })
       });
     },
     {
-      detail: { tags: ["Auth"] },
+      detail: { tags },
     },
   );
