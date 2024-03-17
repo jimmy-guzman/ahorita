@@ -19,9 +19,9 @@ const routeApi = getRouteApi("/projects/$projectId/tasks/new");
 const schema = Type.Object({
   name: Type.String({ minLength: 1 }),
   priority: Type.Union([
-    Type.Literal("LOW"),
-    Type.Literal("MEDIUM"),
-    Type.Literal("HIGH"),
+    Type.Literal("Low"),
+    Type.Literal("Medium"),
+    Type.Literal("High"),
   ]),
   label: Type.Union([
     Type.Literal("Feature"),
@@ -43,7 +43,7 @@ export const CreateTaskForm = () => {
     resolver: typeboxResolver(schema),
     defaultValues: {
       name: "",
-      priority: "MEDIUM",
+      priority: "Medium",
       label: "Feature",
       dueAt: formatISO9075(addMonths(new Date(), 1), {
         representation: "date",
@@ -84,9 +84,9 @@ export const CreateTaskForm = () => {
               ))}
             </Select>
             <Select control={control} name="priority" label="Priority">
-              {priorities.map(({ label, priority }) => (
+              {priorities.map((priority) => (
                 <option key={priority} value={priority}>
-                  {label}
+                  {priority}
                 </option>
               ))}
             </Select>

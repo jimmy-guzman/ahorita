@@ -1,6 +1,8 @@
 import { createColumnHelper } from "@tanstack/react-table";
 import { formatDistanceToNowStrict } from "date-fns";
 
+import type { Label, Priority, Status } from "@/constants/tasks";
+
 import { TasksTablePriorityCell } from "./tasks-table-priority-cell";
 import { TasksTableRowActions } from "./tasks-table-row-actions";
 import { TasksTableStatusCell } from "./tasks-table-status-cell";
@@ -9,9 +11,9 @@ const columnHelper = createColumnHelper<{
   id: string;
   projectId: string;
   name: string;
-  status: "BACKLOG" | "TODO" | "IN_PROGRESS" | "DONE" | "CANCELED";
-  priority: "LOW" | "MEDIUM" | "HIGH";
-  label: "Feature" | "Bug" | "Documentation";
+  status: Status;
+  priority: Priority;
+  label: Label;
   createdAt: string;
   updatedAt: string;
   dueAt: string;

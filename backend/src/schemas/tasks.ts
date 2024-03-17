@@ -24,21 +24,21 @@ export const projects = pgTable("project", {
 
 export const labelEnum = pgEnum("label", ["Feature", "Bug", "Documentation"]);
 
-export const priorityEnum = pgEnum("priority", ["LOW", "MEDIUM", "HIGH"]);
+export const priorityEnum = pgEnum("priority", ["Low", "Medium", "High"]);
 
 export const statusEnum = pgEnum("status", [
-  "BACKLOG",
-  "TODO",
-  "IN_PROGRESS",
-  "DONE",
-  "CANCELED",
+  "Backlog",
+  "Todo",
+  "In Progress",
+  "Done",
+  "Canceled",
 ]);
 
 export const tasks = pgTable("task", {
   id: text("id").$default(nanoid).primaryKey(),
   name: text("name").notNull(),
-  status: statusEnum("status").default("TODO").notNull(),
-  priority: priorityEnum("priority").default("MEDIUM").notNull(),
+  status: statusEnum("status").default("Todo").notNull(),
+  priority: priorityEnum("priority").default("Medium").notNull(),
   label: labelEnum("label").default("Feature").notNull(),
   createdAt: timestamp("created_at", { withTimezone: true, mode: "string" })
     .defaultNow()

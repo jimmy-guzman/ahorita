@@ -21,7 +21,7 @@ export const ProjectDetails = () => {
     <section className="flex w-full flex-col gap-4">
       <div className="dsy-card bg-base-200">
         <div className="dsy-card-body">
-          <h1 className="dsy-card-title text-secondary">
+          <h1 className="dsy-card-title text-2xl sm:text-3xl">
             {project.icon && <span>{project.icon}</span>} {project.name}
             {project.isFavorite ? (
               <button
