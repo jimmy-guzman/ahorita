@@ -1,16 +1,16 @@
-import { typeboxResolver } from "@hookform/resolvers/typebox";
+import { valibotResolver } from "@hookform/resolvers/valibot";
 import * as Dialog from "@radix-ui/react-dialog";
-import { type Static, Type } from "@sinclair/typebox";
 import { useMutation } from "@tanstack/react-query";
 import { PencilIcon, SaveIcon, XIcon } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { type Output, minLength, object, string } from "valibot";
 
 import { editTaskMutationOptions } from "@/api/edit-task";
 import { TextInput } from "@/components/text-input";
 
-const schema = Type.Object({
-  name: Type.String({ minLength: 1 }),
+const schema = object({
+  name: string([minLength(1, "Your username is too short.")]),
 });
 
 interface RenameTaskActionProps {
@@ -21,8 +21,8 @@ interface RenameTaskActionProps {
 export const RenameTaskAction = ({ name, taskId }: RenameTaskActionProps) => {
   const { mutate } = useMutation(editTaskMutationOptions);
   const [open, setOpen] = useState(false);
-  const form = useForm<Static<typeof schema>>({
-    resolver: typeboxResolver(schema),
+  const form = useForm<Output<typeof schema>>({
+    resolver: valibotResolver(schema),
     values: { name },
   });
 

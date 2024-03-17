@@ -1,11 +1,18 @@
-import { typeboxResolver } from "@hookform/resolvers/typebox";
+import { valibotResolver } from "@hookform/resolvers/valibot";
 import * as Dialog from "@radix-ui/react-dialog";
-import { type Static, Type } from "@sinclair/typebox";
 import { useMutation, useSuspenseQuery } from "@tanstack/react-query";
 import { getRouteApi } from "@tanstack/react-router";
 import { FolderPenIcon, SaveIcon, XIcon } from "lucide-react";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
+import {
+  type Output,
+  boolean,
+  minLength,
+  nullable,
+  object,
+  string,
+} from "valibot";
 
 import { editProjectOptions } from "@/api/edit-project";
 import { projectQueryOptions } from "@/api/query-project";
@@ -14,11 +21,11 @@ import { TextInput } from "@/components/text-input";
 
 const routeApi = getRouteApi("/projects/$projectId");
 
-const schema = Type.Object({
-  name: Type.String({ minLength: 1 }),
-  description: Type.String({ minLength: 1 }),
-  isFavorite: Type.Boolean(),
-  icon: Type.Union([Type.String(), Type.Null()]),
+const schema = object({
+  name: string([minLength(1, "Your username is too short.")]),
+  description: string([minLength(1, "Your description is too short.")]),
+  isFavorite: boolean(),
+  icon: nullable(string()),
 });
 
 export const EditProject = () => {
@@ -27,8 +34,8 @@ export const EditProject = () => {
   const { mutate } = useMutation(editProjectOptions);
   const [open, setOpen] = useState(false);
 
-  const form = useForm<Static<typeof schema>>({
-    resolver: typeboxResolver(schema),
+  const form = useForm<Output<typeof schema>>({
+    resolver: valibotResolver(schema),
     values: {
       description: project.description,
       name: project.name,

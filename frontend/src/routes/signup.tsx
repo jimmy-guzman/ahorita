@@ -1,22 +1,25 @@
-import { typeboxResolver } from "@hookform/resolvers/typebox";
-import { type Static, Type } from "@sinclair/typebox";
+import { valibotResolver } from "@hookform/resolvers/valibot";
 import { useMutation } from "@tanstack/react-query";
 import { Link, createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useForm } from "react-hook-form";
+import { type Output, minLength, object, regex, string } from "valibot";
 
 import { api } from "@/api/client";
 import { PasswordInput } from "@/components/password-input";
 import { TextInput } from "@/components/text-input";
 
-const schema = Type.Object({
-  username: Type.String({ minLength: 1, pattern: "^[a-zA-Z0-9]+$" }),
-  password: Type.String({ minLength: 1 }),
+const schema = object({
+  username: string([
+    minLength(1, "Your username is too short."),
+    regex(/^[a-zA-Z0-9]+$/, "Your username must be alphanumeric."),
+  ]),
+  password: string([minLength(1, "Your password is too short.")]),
 });
 
 export const SignUp = () => {
   const navigate = useNavigate();
-  const { handleSubmit, control } = useForm<Static<typeof schema>>({
-    resolver: typeboxResolver(schema),
+  const { handleSubmit, control } = useForm<Output<typeof schema>>({
+    resolver: valibotResolver(schema),
     defaultValues: {
       username: "",
       password: "",
@@ -24,7 +27,7 @@ export const SignUp = () => {
   });
 
   const { mutate } = useMutation({
-    mutationFn: async (user: Static<typeof schema>) => {
+    mutationFn: async (user: Output<typeof schema>) => {
       const res = await api.auth.signup.post(user);
 
       if (res.error) {

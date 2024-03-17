@@ -1,13 +1,19 @@
 import { ErrorMessage } from "@hookform/error-message";
-import { typeboxResolver } from "@hookform/resolvers/typebox";
-import type { Static } from "@sinclair/typebox";
-import { Type } from "@sinclair/typebox";
+import { valibotResolver } from "@hookform/resolvers/valibot";
 import { useMutation } from "@tanstack/react-query";
 import { Link, getRouteApi } from "@tanstack/react-router";
 import { addMonths, formatISO9075 } from "date-fns";
 import { ListPlusIcon } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
+import {
+  type Output,
+  literal,
+  minLength,
+  object,
+  string,
+  union,
+} from "valibot";
 
 import { createTaskByProjectIdOptions } from "@/api/create-task";
 import { Select } from "@/components/select";
@@ -16,19 +22,11 @@ import { labels, priorities } from "@/constants/tasks";
 
 const routeApi = getRouteApi("/projects/$projectId/tasks/new");
 
-const schema = Type.Object({
-  name: Type.String({ minLength: 1 }),
-  priority: Type.Union([
-    Type.Literal("Low"),
-    Type.Literal("Medium"),
-    Type.Literal("High"),
-  ]),
-  label: Type.Union([
-    Type.Literal("Feature"),
-    Type.Literal("Documentation"),
-    Type.Literal("Bug"),
-  ]),
-  dueAt: Type.String(),
+const schema = object({
+  name: string([minLength(1, "Your name is too short.")]),
+  priority: union([literal("Low"), literal("Medium"), literal("High")]),
+  label: union([literal("Feature"), literal("Documentation"), literal("Bug")]),
+  dueAt: string(),
 });
 
 export const CreateTaskForm = () => {
@@ -39,8 +37,8 @@ export const CreateTaskForm = () => {
     reset,
     register,
     formState: { errors },
-  } = useForm<Static<typeof schema>>({
-    resolver: typeboxResolver(schema),
+  } = useForm<Output<typeof schema>>({
+    resolver: valibotResolver(schema),
     defaultValues: {
       name: "",
       priority: "Medium",

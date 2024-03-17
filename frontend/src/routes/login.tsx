@@ -1,11 +1,5 @@
-import { api } from "@/api/client";
-import { meQueryOptions } from "@/api/query-me";
-import { PasswordInput } from "@/components/password-input";
-import { TextInput } from "@/components/text-input";
 import { queryClient } from "@/query-client";
-import { typeboxResolver } from "@hookform/resolvers/typebox";
-import { type Static, Type } from "@sinclair/typebox";
-import { Value } from "@sinclair/typebox/value";
+import { valibotResolver } from "@hookform/resolvers/valibot";
 import { useMutation } from "@tanstack/react-query";
 import {
   Link,
@@ -14,10 +8,23 @@ import {
   useNavigate,
 } from "@tanstack/react-router";
 import { useForm } from "react-hook-form";
+import {
+  type Output,
+  minLength,
+  object,
+  optional,
+  parse,
+  string,
+} from "valibot";
 
-const schema = Type.Object({
-  username: Type.String({ minLength: 1 }),
-  password: Type.String({ minLength: 1 }),
+import { api } from "@/api/client";
+import { meQueryOptions } from "@/api/query-me";
+import { PasswordInput } from "@/components/password-input";
+import { TextInput } from "@/components/text-input";
+
+const schema = object({
+  username: string([minLength(1, "Your username is too short.")]),
+  password: string([minLength(1, "Your password is too short.")]),
 });
 
 const routeApi = getRouteApi("/login");
@@ -25,8 +32,8 @@ const routeApi = getRouteApi("/login");
 export const Login = () => {
   const search = routeApi.useSearch();
   const navigate = useNavigate({ from: routeApi.id });
-  const { handleSubmit, control } = useForm<Static<typeof schema>>({
-    resolver: typeboxResolver(schema),
+  const { handleSubmit, control } = useForm<Output<typeof schema>>({
+    resolver: valibotResolver(schema),
     defaultValues: {
       username: "",
       password: "",
@@ -34,7 +41,7 @@ export const Login = () => {
   });
 
   const { mutate } = useMutation({
-    mutationFn: async (user: Static<typeof schema>) => {
+    mutationFn: async (user: Output<typeof schema>) => {
       const res = await api.auth.login.post(user);
 
       if (res.error) {
@@ -86,13 +93,13 @@ export const Login = () => {
   );
 };
 
-const searchSchema = Type.Object({
-  redirect: Type.Optional(Type.String({ default: "/" })),
+const searchSchema = object({
+  redirect: optional(string()),
 });
 
 export const Route = createFileRoute("/login")({
   component: Login,
   validateSearch: (value) => {
-    return Value.Decode(searchSchema, value);
+    return parse(searchSchema, value);
   },
 });

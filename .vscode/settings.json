@@ -35,6 +35,7 @@
     "typebox",
     "typecheck",
     "Uncurried",
+    "valibot",
     "zustand"
   ],
   "css.lint.unknownAtRules": "ignore",
