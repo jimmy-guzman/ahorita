@@ -1,10 +1,10 @@
 import { t } from "elysia";
 
-export const ProjectDto = t.Object({
+export const ProjectSchema = t.Object({
   id: t.String(),
   name: t.String(),
   description: t.String(),
-  icon: t.Union([t.String(), t.Null()]),
+  icon: t.Nullable(t.String()),
   isFavorite: t.Boolean(),
   createdAt: t.String(),
   updatedAt: t.String(),

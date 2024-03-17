@@ -14,4 +14,6 @@ export const api = treaty<App>(import.meta.env.VITE_SERVER_DOMAIN, {
   },
 });
 
-export type API = App["_routes"];
+export type APIRoutes = App["_routes"];
+
+export type APITypes = App["_types"]["Definitions"]["type"];

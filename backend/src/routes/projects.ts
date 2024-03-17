@@ -3,14 +3,14 @@ import { Elysia, InternalServerError, NotFoundError, t } from "elysia";
 
 import { db } from "../db";
 import { auth } from "../middleware/auth";
-import { ProjectDto } from "../models/projects";
-import { TaskDto } from "../models/tasks";
+import { ProjectSchema } from "../models/projects";
+import { TaskSchema } from "../models/tasks";
 import { projects, tasks } from "../schemas";
 import { nowAsISO } from "../utils";
 
 export const projectsRoute = new Elysia()
   .use(auth)
-  .model({ project: ProjectDto })
+  .model({ project: ProjectSchema })
   .group("/projects", { detail: { tags: ["Projects"] } }, (app) =>
     app
       .get(
@@ -23,7 +23,7 @@ export const projectsRoute = new Elysia()
           });
         },
         {
-          response: t.Array(ProjectDto),
+          response: t.Array(ProjectSchema),
         },
       )
       .post(
@@ -43,7 +43,7 @@ export const projectsRoute = new Elysia()
           return project;
         },
         {
-          body: t.Pick(ProjectDto, ["name", "description", "icon"]),
+          body: t.Pick(ProjectSchema, ["name", "description", "icon"]),
           response: "project",
         },
       )
@@ -84,7 +84,12 @@ export const projectsRoute = new Elysia()
         {
           params: t.Object({ projectId: t.String() }),
           body: t.Partial(
-            t.Pick(ProjectDto, ["description", "isFavorite", "name", "icon"]),
+            t.Pick(ProjectSchema, [
+              "description",
+              "isFavorite",
+              "name",
+              "icon",
+            ]),
           ),
           response: "project",
         },
@@ -118,7 +123,7 @@ export const projectsRoute = new Elysia()
         },
         {
           params: t.Object({ projectId: t.String() }),
-          response: t.Array(TaskDto),
+          response: t.Array(TaskSchema),
         },
       )
       .post(
@@ -139,8 +144,8 @@ export const projectsRoute = new Elysia()
         },
         {
           params: t.Object({ projectId: t.String() }),
-          body: t.Pick(TaskDto, ["name", "priority", "dueAt", "label"]),
-          response: TaskDto,
+          body: t.Pick(TaskSchema, ["name", "priority", "dueAt", "label"]),
+          response: TaskSchema,
         },
       ),
   );

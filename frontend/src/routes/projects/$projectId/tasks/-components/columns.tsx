@@ -1,24 +1,13 @@
 import { createColumnHelper } from "@tanstack/react-table";
 import { formatDistanceToNowStrict } from "date-fns";
 
-import type { Label, Priority, Status } from "@/constants/tasks";
+import type { APITypes } from "@/api/client";
 
 import { TasksTablePriorityCell } from "./tasks-table-priority-cell";
 import { TasksTableRowActions } from "./tasks-table-row-actions";
 import { TasksTableStatusCell } from "./tasks-table-status-cell";
 
-const columnHelper = createColumnHelper<{
-  id: string;
-  projectId: string;
-  name: string;
-  status: Status;
-  priority: Priority;
-  label: Label;
-  createdAt: string;
-  updatedAt: string;
-  dueAt: string;
-  userId: string;
-}>();
+const columnHelper = createColumnHelper<APITypes["task"]>();
 
 export const columns = [
   columnHelper.accessor("name", {

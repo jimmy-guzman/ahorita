@@ -1,4 +1,4 @@
-import type { API } from "@/api/client";
+import type { APIRoutes } from "@/api/client";
 import { api } from "@/api/client";
 import { mutationOptions } from "@/api/mutation-options";
 import { queryClient } from "@/query-client";
@@ -10,7 +10,7 @@ export const createTaskByProjectIdOptions = mutationOptions({
     params,
     body,
   }: Pick<
-    API["projects"][":projectId"]["tasks"]["post"],
+    APIRoutes["projects"][":projectId"]["tasks"]["post"],
     "params" | "body"
   >) => {
     const res = await api.projects(params).tasks.post(body);

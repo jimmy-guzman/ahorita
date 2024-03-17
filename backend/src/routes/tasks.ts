@@ -3,7 +3,7 @@ import { Elysia, NotFoundError, t } from "elysia";
 
 import { db } from "../db";
 import { auth } from "../middleware/auth";
-import { TaskDto } from "../models/tasks";
+import { TaskSchema } from "../models/tasks";
 import { tasks } from "../schemas";
 import { nowAsISO } from "../utils";
 
@@ -11,7 +11,7 @@ const Params = t.Object({ taskId: t.String() });
 
 export const tasksRoutes = new Elysia()
   .use(auth)
-  .model({ task: TaskDto })
+  .model({ task: TaskSchema })
   .group("/tasks", { detail: { tags: ["Tasks"] } }, (app) =>
     app
       .patch(
@@ -31,7 +31,7 @@ export const tasksRoutes = new Elysia()
         },
         {
           body: t.Partial(
-            t.Pick(TaskDto, ["name", "status", "priority", "label"]),
+            t.Pick(TaskSchema, ["name", "status", "priority", "label"]),
           ),
           params: Params,
           response: "task",
