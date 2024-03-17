@@ -1,24 +1,24 @@
-import { typeboxResolver } from "@hookform/resolvers/typebox";
-import { type Static, Type } from "@sinclair/typebox";
+import { valibotResolver } from "@hookform/resolvers/valibot";
 import { useMutation } from "@tanstack/react-query";
 import { FolderPlusIcon } from "lucide-react";
 import { Controller, useForm } from "react-hook-form";
 import { toast } from "sonner";
+import { type Output, minLength, nullable, object, string } from "valibot";
 
 import { createProjectOptions } from "@/api/create-project";
 import { EmojiPicker } from "@/components/emoji-picker";
 import { TextInput } from "@/components/text-input";
 
-const schema = Type.Object({
-  name: Type.String({ minLength: 1 }),
-  description: Type.String({ minLength: 1 }),
-  icon: Type.Union([Type.String(), Type.Null()]),
+const schema = object({
+  name: string([minLength(1, "Your name is too short.")]),
+  description: string([minLength(1, "Your description is too short.")]),
+  icon: nullable(string()),
 });
 
 export const CreateProjectForm = () => {
   const { mutate, isPending } = useMutation(createProjectOptions);
-  const { handleSubmit, control, reset } = useForm<Static<typeof schema>>({
-    resolver: typeboxResolver(schema),
+  const { handleSubmit, control, reset } = useForm<Output<typeof schema>>({
+    resolver: valibotResolver(schema),
     defaultValues: {
       name: "",
       description: "",
