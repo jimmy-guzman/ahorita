@@ -1,30 +1,16 @@
 import { useMutation } from "@tanstack/react-query";
 import { EllipsisIcon } from "lucide-react";
 
+import type { APITypes } from "@/api/client";
+
 import { editTaskMutationOptions } from "@/api/edit-task";
-import {
-  type Label,
-  type Priority,
-  type Status,
-  labels,
-  priorities,
-  statuses,
-} from "@/constants/tasks";
+import { labels, priorities, statuses } from "@/constants/tasks";
 
 import { DeleteTaskAction } from "./delete-task-action";
 import { RenameTaskAction } from "./rename-task-action";
 
 interface TaskTableActionsProps {
-  task: {
-    id: string;
-    projectId: string;
-    name: string;
-    status: Status;
-    priority: Priority;
-    label: Label;
-    createdAt: string;
-    updatedAt: string;
-  };
+  task: APITypes["task"];
 }
 
 export const TasksTableRowActions = ({ task }: TaskTableActionsProps) => {

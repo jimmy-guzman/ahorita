@@ -1,6 +1,4 @@
-export type Status = "Backlog" | "Canceled" | "Done" | "In Progress" | "Todo";
-export type Priority = "Low" | "Medium" | "High";
-export type Label = "Feature" | "Bug" | "Documentation";
+import type { APITypes } from "@/api/client";
 
 export const statuses = [
   "Backlog",
@@ -8,8 +6,16 @@ export const statuses = [
   "In Progress",
   "Done",
   "Canceled",
-] satisfies Status[];
+] satisfies APITypes["task"]["status"][];
 
-export const priorities = ["Low", "Medium", "High"] satisfies Priority[];
+export const priorities = [
+  "Low",
+  "Medium",
+  "High",
+] satisfies APITypes["task"]["priority"][];
 
-export const labels = ["Feature", "Documentation", "Bug"] satisfies Label[];
+export const labels = [
+  "Feature",
+  "Documentation",
+  "Bug",
+] satisfies APITypes["task"]["label"][];

@@ -1,21 +1,31 @@
 import { t } from "elysia";
 
-export const TaskDto = t.Object({
+const StatusSchema = t.Union([
+  t.Literal("Backlog"),
+  t.Literal("Todo"),
+  t.Literal("In Progress"),
+  t.Literal("Done"),
+  t.Literal("Canceled"),
+]);
+
+const PrioritySchema = t.Union([
+  t.Literal("Low"),
+  t.Literal("Medium"),
+  t.Literal("High"),
+]);
+
+const LabelSchema = t.Union([
+  t.Literal("Feature"),
+  t.Literal("Bug"),
+  t.Literal("Documentation"),
+]);
+
+export const TaskSchema = t.Object({
   id: t.String(),
   name: t.String(),
-  status: t.Union([
-    t.Literal("Backlog"),
-    t.Literal("Todo"),
-    t.Literal("In Progress"),
-    t.Literal("Done"),
-    t.Literal("Canceled"),
-  ]),
-  priority: t.Union([t.Literal("Low"), t.Literal("Medium"), t.Literal("High")]),
-  label: t.Union([
-    t.Literal("Feature"),
-    t.Literal("Bug"),
-    t.Literal("Documentation"),
-  ]),
+  status: StatusSchema,
+  priority: PrioritySchema,
+  label: LabelSchema,
   createdAt: t.String(),
   updatedAt: t.String(),
   dueAt: t.String(),

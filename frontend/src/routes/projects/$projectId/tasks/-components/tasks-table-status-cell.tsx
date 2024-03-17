@@ -6,7 +6,7 @@ import {
   XCircleIcon,
 } from "lucide-react";
 
-import type { Status } from "@/constants/tasks";
+import type { APITypes } from "@/api/client";
 
 const ICON_CLASS = "inline-block h-4 w-4 stroke-current align-text-bottom";
 
@@ -16,9 +16,11 @@ const cellsByStatus = {
   Done: <CheckCircle2Icon className={ICON_CLASS} />,
   Canceled: <XCircleIcon className={ICON_CLASS} />,
   Backlog: <HelpCircleIcon className={ICON_CLASS} />,
-} satisfies Record<Status, JSX.Element>;
+};
 
-export const TasksTableStatusCell = ({ status }: { status: Status }) => {
+export const TasksTableStatusCell = ({
+  status,
+}: { status: APITypes["task"]["status"] }) => {
   return (
     <>
       {cellsByStatus[status]}

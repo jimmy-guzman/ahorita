@@ -1,6 +1,6 @@
 import { toast } from "sonner";
 
-import type { API } from "@/api/client";
+import type { APIRoutes } from "@/api/client";
 import { api } from "@/api/client";
 import { mutationOptions } from "@/api/mutation-options";
 import { queryClient } from "@/query-client";
@@ -11,7 +11,7 @@ export const editTaskMutationOptions = mutationOptions({
   mutationFn: async ({
     params,
     body,
-  }: Pick<API["tasks"][":taskId"]["patch"], "body" | "params">) => {
+  }: Pick<APIRoutes["tasks"][":taskId"]["patch"], "body" | "params">) => {
     const res = await api.tasks(params).patch(body);
 
     if (res.error) {

@@ -20,6 +20,7 @@
 - [TanStack Query](https://tanstack.com/query/latest)
 - [TanStack Table](https://tanstack.com/table/latest)
 - [React Hook Form](https://www.react-hook-form.com)
+- [Valibot](https://valibot.dev)
 - [Zustand](https://zustand-demo.pmnd.rs)
 - [Sonner](https://sonner.emilkowal.ski)
 - [TailwindCSS](https://tailwindcss.com)
