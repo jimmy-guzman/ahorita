@@ -1,6 +1,6 @@
 {
   "$schema": "https://turbo.build/schema.json",
-  "globalDependencies": ["**/.env.*local"],
+  "globalDependencies": ["**/.env.*local", "biome.json"],
   "pipeline": {
     "topo": {
       "dependsOn": ["^topo"]
@@ -9,10 +9,20 @@
       "dependsOn": ["^build"],
       "outputs": ["dist/**"]
     },
-    "format": { "dependsOn": ["topo"] },
-    "format:fix": { "dependsOn": ["topo"] },
-    "lint": { "dependsOn": ["topo"] },
-    "lint:fix": { "dependsOn": ["topo"] },
+    "format": {
+      "dependsOn": ["topo"]
+    },
+    "format:fix": {
+      "cache": false,
+      "dependsOn": ["topo"]
+    },
+    "lint": {
+      "dependsOn": ["topo"]
+    },
+    "lint:fix": {
+      "cache": false,
+      "dependsOn": ["topo"]
+    },
     "typecheck": {},
     "e2e": {
       "outputs": ["playwright-report/**", "test-results/**"]

@@ -1,0 +1,61 @@
+import { eq } from "drizzle-orm";
+import { Elysia, NotFoundError, t } from "elysia";
+
+import { db } from "../db";
+import { auth } from "../middleware/auth";
+import { ProjectSchema } from "../models/projects";
+import { TaskSchema } from "../models/tasks";
+import { tasks } from "../schemas";
+import { nowAsISO } from "../utils";
+
+const tags = ["Task"];
+
+const Params = t.Object({ taskId: t.String() });
+
+export const taskRoutes = new Elysia({ prefix: "/:taskId" })
+  .use(auth)
+  .model({ project: ProjectSchema, task: TaskSchema })
+  .patch(
+    "",
+    async ({ params: { taskId }, body }) => {
+      const [task] = await db
+        .update(tasks)
+        .set({ ...body, updatedAt: nowAsISO() })
+        .where(eq(tasks.id, taskId))
+        .returning();
+
+      if (!task) {
+        throw NotFoundError;
+      }
+
+      return task;
+    },
+    {
+      body: t.Partial(
+        t.Pick(TaskSchema, ["name", "status", "priority", "label"]),
+      ),
+      params: Params,
+      response: "task",
+      detail: { tags, summary: "Updates a task" },
+    },
+  )
+  .delete(
+    "",
+    async ({ params: { taskId } }) => {
+      const [task] = await db
+        .delete(tasks)
+        .where(eq(tasks.id, taskId))
+        .returning();
+
+      if (!task) {
+        throw NotFoundError;
+      }
+
+      return task;
+    },
+    {
+      params: Params,
+      response: "task",
+      detail: { tags, summary: "Delete a task" },
+    },
+  );
