@@ -20,10 +20,10 @@
   "dependencies": {
     "@elysiajs/cors": "1.0.2",
     "@elysiajs/swagger": "1.0.2",
-    "@lucia-auth/adapter-drizzle": "1.0.4",
+    "@lucia-auth/adapter-drizzle": "1.0.5",
     "@neondatabase/serverless": "0.9.0",
     "date-fns": "3.6.0",
-    "drizzle-orm": "0.30.2",
+    "drizzle-orm": "0.30.3",
     "elysia": "1.0.4",
     "lucia": "3.1.1",
     "nanoid": "5.0.6",
