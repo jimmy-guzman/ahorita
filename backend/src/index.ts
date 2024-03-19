@@ -4,7 +4,7 @@ import { Elysia } from "elysia";
 import { cyan } from "picocolors";
 
 import { authRoutes } from "./routes/auth";
-import { projectsRoute } from "./routes/projects";
+import { projectsRoutes } from "./routes/projects";
 import { tasksRoutes } from "./routes/tasks";
 import { usersRoutes } from "./routes/users";
 
@@ -22,13 +22,17 @@ const app = new Elysia()
       path: "/docs",
       documentation: {
         info: { title: "Ahorita API Docs", version: "", description: "" },
+        tags: [
+          { description: "Everything about your Projects", name: "Project" },
+          { description: "Everything about your Tasks", name: "Task" },
+        ],
       },
       exclude: ["/docs", "/docs/json"],
     }),
   )
   .use(authRoutes)
+  .use(projectsRoutes)
   .use(tasksRoutes)
-  .use(projectsRoute)
   .use(usersRoutes)
   .listen(3000, ({ hostname, port }) => {
     // biome-ignore lint/suspicious/noConsoleLog: elysia does not provide a logger
