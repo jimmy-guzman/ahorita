@@ -1,12 +1,14 @@
 import { valibotResolver } from "@hookform/resolvers/valibot";
 import { useMutation } from "@tanstack/react-query";
-import { Link, createFileRoute, useNavigate } from "@tanstack/react-router";
+import { Link, createFileRoute, getRouteApi } from "@tanstack/react-router";
 import { useForm } from "react-hook-form";
 import { type Output, minLength, object, regex, string } from "valibot";
 
 import { api } from "@/api/client";
 import { PasswordInput } from "@/components/password-input";
 import { TextInput } from "@/components/text-input";
+
+const routeApi = getRouteApi("/signup");
 
 const schema = object({
   username: string([
@@ -17,7 +19,7 @@ const schema = object({
 });
 
 export const SignUp = () => {
-  const navigate = useNavigate();
+  const navigate = routeApi.useNavigate();
   const { handleSubmit, control } = useForm<Output<typeof schema>>({
     resolver: valibotResolver(schema),
     defaultValues: {

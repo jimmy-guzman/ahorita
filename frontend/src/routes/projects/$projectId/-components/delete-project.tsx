@@ -1,6 +1,6 @@
 import * as AlertDialog from "@radix-ui/react-alert-dialog";
 import { useMutation } from "@tanstack/react-query";
-import { getRouteApi, useNavigate } from "@tanstack/react-router";
+import { getRouteApi } from "@tanstack/react-router";
 import { FolderMinusIcon } from "lucide-react";
 import { useState } from "react";
 
@@ -10,8 +10,8 @@ const routeApi = getRouteApi("/projects/$projectId");
 
 export const DeleteProject = () => {
   const { projectId } = routeApi.useParams();
+  const navigate = routeApi.useNavigate();
   const { mutate } = useMutation(deleteProjectOptions);
-  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
 
   return (

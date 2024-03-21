@@ -1,12 +1,7 @@
 import { queryClient } from "@/query-client";
 import { valibotResolver } from "@hookform/resolvers/valibot";
 import { useMutation } from "@tanstack/react-query";
-import {
-  Link,
-  createFileRoute,
-  getRouteApi,
-  useNavigate,
-} from "@tanstack/react-router";
+import { Link, createFileRoute, getRouteApi } from "@tanstack/react-router";
 import { useForm } from "react-hook-form";
 import {
   type Output,
@@ -31,7 +26,7 @@ const routeApi = getRouteApi("/login");
 
 export const Login = () => {
   const search = routeApi.useSearch();
-  const navigate = useNavigate({ from: routeApi.id });
+  const navigate = routeApi.useNavigate();
   const { handleSubmit, control } = useForm<Output<typeof schema>>({
     resolver: valibotResolver(schema),
     defaultValues: {
