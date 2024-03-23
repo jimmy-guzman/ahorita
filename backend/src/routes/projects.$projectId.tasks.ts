@@ -3,15 +3,15 @@ import { Elysia, InternalServerError, t } from "elysia";
 
 import { db } from "../db";
 import { auth } from "../middleware/auth";
-import { ProjectSchema } from "../models/projects";
-import { TaskSchema } from "../models/tasks";
+import { selectProjectSchema } from "../models/projects";
+import { insertTaskSchema, selectTaskSchema } from "../models/tasks";
 import { tasks } from "../schemas";
 
 const tags = ["Project", "Task"];
 
 export const tasksRoutes = new Elysia({ prefix: "/tasks" })
   .use(auth)
-  .model({ project: ProjectSchema, task: TaskSchema })
+  .model({ project: selectProjectSchema, task: selectTaskSchema })
   .get(
     "",
     async ({ params: { projectId } }) => {
@@ -22,7 +22,7 @@ export const tasksRoutes = new Elysia({ prefix: "/tasks" })
     },
     {
       params: t.Object({ projectId: t.String() }),
-      response: t.Array(TaskSchema),
+      response: t.Array(selectTaskSchema),
       detail: { tags, summary: "Find a project's tasks" },
     },
   )
@@ -44,7 +44,7 @@ export const tasksRoutes = new Elysia({ prefix: "/tasks" })
     },
     {
       params: t.Object({ projectId: t.String() }),
-      body: t.Pick(TaskSchema, ["name", "priority", "dueAt", "label"]),
+      body: insertTaskSchema,
       response: "task",
       detail: { tags, summary: "Add a new task to a project" },
     },

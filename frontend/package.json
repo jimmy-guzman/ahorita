@@ -25,7 +25,7 @@
     "@radix-ui/react-dialog": "1.0.5",
     "@tanstack/match-sorter-utils": "8.11.8",
     "@tanstack/react-query": "5.28.6",
-    "@tanstack/react-router": "1.22.2",
+    "@tanstack/react-router": "1.22.3",
     "@tanstack/react-table": "8.15.0",
     "clsx": "2.1.0",
     "date-fns": "3.6.0",
@@ -45,7 +45,7 @@
     "@playwright/test": "1.42.1",
     "@tailwindcss/typography": "0.5.10",
     "@tanstack/react-query-devtools": "5.28.6",
-    "@tanstack/router-devtools": "1.22.2",
+    "@tanstack/router-devtools": "1.22.3",
     "@tanstack/router-vite-plugin": "1.20.5",
     "@testing-library/jest-dom": "6.4.2",
     "@testing-library/react": "14.2.2",
@@ -55,12 +55,12 @@
     "@vitejs/plugin-react-swc": "3.6.0",
     "autoprefixer": "10.4.19",
     "daisyui": "4.7.3",
-    "happy-dom": "14.3.1",
+    "happy-dom": "14.3.2",
     "postcss": "8.4.38",
     "rimraf": "5.0.5",
     "tailwindcss": "3.4.1",
     "typescript": "5.4.3",
-    "vite": "5.2.3",
+    "vite": "5.2.4",
     "vitest": "1.4.0"
   }
 }

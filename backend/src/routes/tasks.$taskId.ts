@@ -3,8 +3,8 @@ import { Elysia, NotFoundError, t } from "elysia";
 
 import { db } from "../db";
 import { auth } from "../middleware/auth";
-import { ProjectSchema } from "../models/projects";
-import { TaskSchema } from "../models/tasks";
+import { selectProjectSchema } from "../models/projects";
+import { selectTaskSchema } from "../models/tasks";
 import { tasks } from "../schemas";
 import { nowAsISO } from "../utils";
 
@@ -14,7 +14,7 @@ const Params = t.Object({ taskId: t.String() });
 
 export const taskRoutes = new Elysia({ prefix: "/:taskId" })
   .use(auth)
-  .model({ project: ProjectSchema, task: TaskSchema })
+  .model({ project: selectProjectSchema, task: selectTaskSchema })
   .patch(
     "",
     async ({ params: { taskId }, body }) => {
@@ -32,7 +32,7 @@ export const taskRoutes = new Elysia({ prefix: "/:taskId" })
     },
     {
       body: t.Partial(
-        t.Pick(TaskSchema, ["name", "status", "priority", "label"]),
+        t.Pick(selectTaskSchema, ["name", "status", "priority", "label"]),
       ),
       params: Params,
       response: "task",
