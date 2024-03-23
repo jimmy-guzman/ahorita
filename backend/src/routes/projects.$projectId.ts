@@ -8,8 +8,6 @@ import { selectTaskSchema } from "../models/tasks";
 import { projects } from "../schemas";
 import { nowAsISO } from "../utils";
 
-import { tasksRoutes } from "./projects.$projectId.tasks";
-
 const tags = ["Project"];
 
 const Params = t.Object({ projectId: t.String() });
@@ -85,5 +83,4 @@ export const projectRoutes = new Elysia({ prefix: "/:projectId" })
       response: "project",
       detail: { tags, summary: "Deletes a project" },
     },
-  )
-  .use(tasksRoutes);
+  );

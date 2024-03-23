@@ -7,5 +7,4 @@ export const selectTaskSchema = createSelectSchema(tasks);
 
 export const insertTaskSchema = createInsertSchema(tasks, {
   userId: t.Optional(t.String()),
-  projectId: t.Optional(t.String()),
 });
