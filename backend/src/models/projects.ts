@@ -1,12 +1,10 @@
+import { createInsertSchema, createSelectSchema } from "drizzle-typebox";
 import { t } from "elysia";
 
-export const ProjectSchema = t.Object({
-  id: t.String(),
-  name: t.String(),
-  description: t.String(),
-  icon: t.Nullable(t.String()),
-  isFavorite: t.Boolean(),
-  createdAt: t.String(),
-  updatedAt: t.String(),
-  userId: t.String(),
+import { projects } from "../schemas/tasks";
+
+export const selectProjectSchema = createSelectSchema(projects);
+
+export const insertProjectSchema = createInsertSchema(projects, {
+  userId: t.Optional(t.String()),
 });
