@@ -3,17 +3,11 @@ import { api } from "@/api/client";
 import { mutationOptions } from "@/api/mutation-options";
 import { queryClient } from "@/query-client";
 
-import { tasksByProjectQueryOptions } from "./query-tasks-by-project";
+import { tasksQueryOptions } from "./query-tasks";
 
-export const createTaskByProjectIdOptions = mutationOptions({
-  mutationFn: async ({
-    params,
-    body,
-  }: Pick<
-    APIRoutes["projects"][":projectId"]["tasks"]["post"],
-    "params" | "body"
-  >) => {
-    const res = await api.projects(params).tasks.post(body);
+export const createTask = mutationOptions({
+  mutationFn: async (body: APIRoutes["tasks"]["post"]["body"]) => {
+    const res = await api.tasks.post(body);
 
     if (res.error) {
       throw res.error;
@@ -21,10 +15,10 @@ export const createTaskByProjectIdOptions = mutationOptions({
 
     return res.data;
   },
-  onMutate: async ({ params: { projectId } }) => {
-    await queryClient.cancelQueries(tasksByProjectQueryOptions(projectId));
+  onMutate: async ({ projectId }) => {
+    await queryClient.cancelQueries(tasksQueryOptions({ projectId }));
   },
-  onSuccess: async (_response, { params: { projectId } }) => {
-    await queryClient.invalidateQueries(tasksByProjectQueryOptions(projectId));
+  onSuccess: async ({ projectId }) => {
+    await queryClient.invalidateQueries(tasksQueryOptions({ projectId }));
   },
 });

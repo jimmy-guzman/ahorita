@@ -4,7 +4,7 @@ import { api } from "@/api/client";
 import { mutationOptions } from "@/api/mutation-options";
 import { queryClient } from "@/query-client";
 
-import { tasksByProjectQueryOptions } from "./query-tasks-by-project";
+import { tasksQueryOptions } from "./query-tasks";
 
 export const deleteTaskMutationOptions = mutationOptions({
   mutationFn: async (taskId: string) => {
@@ -17,7 +17,7 @@ export const deleteTaskMutationOptions = mutationOptions({
     return res.data;
   },
   onSuccess: async ({ projectId }) => {
-    await queryClient.invalidateQueries(tasksByProjectQueryOptions(projectId));
+    await queryClient.invalidateQueries(tasksQueryOptions({ projectId }));
 
     toast.success("Task has been deleted");
   },

@@ -15,7 +15,7 @@ import {
   union,
 } from "valibot";
 
-import { createTaskByProjectIdOptions } from "@/api/create-task";
+import { createTask } from "@/api/create-task";
 import { Select } from "@/components/select";
 import { TextInput } from "@/components/text-input";
 import { labels, priorities } from "@/constants/tasks";
@@ -48,7 +48,7 @@ export const CreateTaskForm = () => {
       }),
     },
   });
-  const { mutate, isPending } = useMutation(createTaskByProjectIdOptions);
+  const { mutate, isPending } = useMutation(createTask);
 
   return (
     <div className="flex w-full flex-col gap-4">
@@ -59,10 +59,7 @@ export const CreateTaskForm = () => {
         className="flex flex-col gap-4"
         onSubmit={handleSubmit((body) => {
           mutate(
-            {
-              body,
-              params: { projectId },
-            },
+            { ...body, projectId },
             {
               onSuccess() {
                 reset();

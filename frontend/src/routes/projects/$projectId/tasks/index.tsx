@@ -3,7 +3,7 @@ import { Link, createFileRoute } from "@tanstack/react-router";
 import { getRouteApi } from "@tanstack/react-router";
 import { ListPlusIcon } from "lucide-react";
 
-import { tasksByProjectQueryOptions } from "@/api/query-tasks-by-project";
+import { tasksQueryOptions } from "@/api/query-tasks";
 import { Table } from "@/components/table";
 
 import { columns } from "./-components/columns";
@@ -11,10 +11,8 @@ import { columns } from "./-components/columns";
 const routeApi = getRouteApi("/projects/$projectId/tasks");
 
 const TasksByProject = () => {
-  const { projectId } = routeApi.useParams();
-  const { data: tasks } = useSuspenseQuery(
-    tasksByProjectQueryOptions(projectId),
-  );
+  const params = routeApi.useParams();
+  const { data: tasks } = useSuspenseQuery(tasksQueryOptions(params));
 
   return (
     <div className="flex flex-col gap-4 md:container md:mx-auto md:px-8">
@@ -25,7 +23,7 @@ const TasksByProject = () => {
         <Link
           className="dsy-btn dsy-btn-accent dsy-btn-sm"
           to="/projects/$projectId/tasks/new"
-          params={{ projectId }}
+          params={params}
         >
           New Task <ListPlusIcon />
         </Link>
@@ -43,8 +41,6 @@ const TasksByProject = () => {
 export const Route = createFileRoute("/projects/$projectId/tasks/")({
   component: TasksByProject,
   loader: async ({ context: { queryClient }, params }) => {
-    await queryClient.ensureQueryData(
-      tasksByProjectQueryOptions(params.projectId),
-    );
+    await queryClient.ensureQueryData(tasksQueryOptions(params));
   },
 });
