@@ -10,7 +10,11 @@ import { configDefaults } from "vitest/config";
 export default defineConfig(() => ({
   plugins: [
     react(),
-    TanStackRouterVite({ generatedRouteTree: "./src/route-tree.gen.ts" }),
+    TanStackRouterVite({
+      generatedRouteTree: "./src/route-tree.gen.ts",
+      semicolons: true,
+      quoteStyle: "double",
+    }),
   ],
   resolve: { alias: { "@": path.resolve(__dirname, "./src") } },
   test: {

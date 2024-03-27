@@ -23,7 +23,7 @@
     "@lucia-auth/adapter-drizzle": "1.0.7",
     "@neondatabase/serverless": "0.9.0",
     "date-fns": "3.6.0",
-    "drizzle-orm": "0.30.4",
+    "drizzle-orm": "0.30.5",
     "drizzle-typebox": "0.1.1",
     "elysia": "1.0.9",
     "lucia": "3.1.1",
