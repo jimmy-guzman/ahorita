@@ -33,7 +33,7 @@
   },
   "devDependencies": {
     "drizzle-kit": "0.20.14",
-    "pg": "8.11.3",
+    "pg": "8.11.4",
     "rimraf": "5.0.5",
     "typescript": "5.4.3"
   }
