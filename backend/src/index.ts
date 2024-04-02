@@ -19,7 +19,7 @@ const app = new Elysia()
   )
   .use(
     swagger({
-      path: "/docs",
+      path: "",
       documentation: {
         info: { title: "Ahorita API Docs", version: "", description: "" },
         tags: [
@@ -27,16 +27,16 @@ const app = new Elysia()
           { description: "Everything about your Tasks", name: "Task" },
         ],
       },
-      exclude: ["/docs", "/docs/json"],
+      exclude: ["", "/json"],
     }),
   )
   .use(authRoutes)
   .use(projectsRoutes)
   .use(tasksRoutes)
   .use(usersRoutes)
-  .listen(3000, ({ hostname, port }) => {
+  .listen(3000, ({ url }) => {
     // biome-ignore lint/suspicious/noConsoleLog: elysia does not provide a logger
-    console.log(`🚀 Running at ${cyan(`http://${hostname}:${port}/docs`)}`);
+    console.log(`🚀 Running at ${cyan(url.toString())}`);
   });
 
 export type App = typeof app;
