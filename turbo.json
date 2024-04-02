@@ -1,6 +1,6 @@
 {
   "$schema": "https://turbo.build/schema.json",
-  "globalDependencies": ["**/.env.*local", "biome.json"],
+  "globalDependencies": [".env", "biome.json"],
   "pipeline": {
     "topo": {
       "dependsOn": ["^topo"]
