@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.6.1/schema.json",
+  "$schema": "https://biomejs.dev/schemas/1.6.4/schema.json",
   "files": {
     "ignore": [
       "dist",
@@ -41,8 +41,9 @@
       },
       "nursery": {
         "useSortedClasses": "error",
-        "noSemicolonInJsx": "error",
-        "noUselessTernary": "error"
+        "noSuspiciousSemicolonInJsx": "error",
+        "noUselessTernary": "error",
+        "noEvolvingAny": "error"
       }
     }
   }
