@@ -15,8 +15,6 @@ jobs:
 
       - name: 📦 Install
         uses: ./.github/actions/setup
-        with:
-          bun-version: 1.1.0
 
       - name: 🚨 Check
         run: bun check
