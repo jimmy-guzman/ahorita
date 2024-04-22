@@ -18,6 +18,7 @@ import { Route as LoginImport } from "./routes/login";
 import { Route as ProjectsRouteImport } from "./routes/projects/route";
 import { Route as IndexImport } from "./routes/index";
 import { Route as ProjectsProjectIdRouteImport } from "./routes/projects/$projectId/route";
+import { Route as ProjectsProjectIdIndexImport } from "./routes/projects/$projectId/index";
 import { Route as ProjectsProjectIdTasksRouteImport } from "./routes/projects/$projectId/tasks/route";
 import { Route as ProjectsProjectIdTasksIndexImport } from "./routes/projects/$projectId/tasks/index";
 import { Route as ProjectsProjectIdTasksNewRouteImport } from "./routes/projects/$projectId/tasks/new/route";
@@ -63,6 +64,11 @@ const ProjectsProjectIdRouteRoute = ProjectsProjectIdRouteImport.update({
 } as any).lazy(() =>
   import("./routes/projects/$projectId/route.lazy").then((d) => d.Route),
 );
+
+const ProjectsProjectIdIndexRoute = ProjectsProjectIdIndexImport.update({
+  path: "/",
+  getParentRoute: () => ProjectsProjectIdRouteRoute,
+} as any);
 
 const ProjectsProjectIdTasksRouteRoute =
   ProjectsProjectIdTasksRouteImport.update({
@@ -114,6 +120,10 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof ProjectsProjectIdTasksRouteImport;
       parentRoute: typeof ProjectsProjectIdRouteImport;
     };
+    "/projects/$projectId/": {
+      preLoaderRoute: typeof ProjectsProjectIdIndexImport;
+      parentRoute: typeof ProjectsProjectIdRouteImport;
+    };
     "/projects/$projectId/tasks/new": {
       preLoaderRoute: typeof ProjectsProjectIdTasksNewRouteImport;
       parentRoute: typeof ProjectsProjectIdTasksRouteImport;
@@ -135,6 +145,7 @@ export const routeTree = rootRoute.addChildren([
         ProjectsProjectIdTasksNewRouteRoute,
         ProjectsProjectIdTasksIndexRoute,
       ]),
+      ProjectsProjectIdIndexRoute,
     ]),
     ProjectsNewRouteLazyRoute,
   ]),

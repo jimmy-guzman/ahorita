@@ -23,7 +23,7 @@
     "@lucia-auth/adapter-drizzle": "1.0.7",
     "@neondatabase/serverless": "0.9.1",
     "date-fns": "3.6.0",
-    "drizzle-orm": "0.30.8",
+    "drizzle-orm": "0.30.9",
     "drizzle-typebox": "0.1.1",
     "elysia": "1.0.13",
     "lucia": "3.1.1",
@@ -32,7 +32,7 @@
     "picocolors": "1.0.0"
   },
   "devDependencies": {
-    "drizzle-kit": "0.20.14",
+    "drizzle-kit": "0.20.17",
     "pg": "8.11.5",
     "rimraf": "5.0.5",
     "typescript": "5.4.5"
