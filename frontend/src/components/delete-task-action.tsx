@@ -1,9 +1,9 @@
 import * as AlertDialog from "@radix-ui/react-alert-dialog";
 import { useMutation } from "@tanstack/react-query";
 import { TrashIcon } from "lucide-react";
+import { useState } from "react";
 
 import { deleteTaskMutationOptions } from "@/api/delete-task";
-import { useState } from "react";
 
 interface DeleteTaskActionProps {
   name: string;

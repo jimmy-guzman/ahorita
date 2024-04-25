@@ -6,9 +6,8 @@ import { FolderPlusIcon, MenuIcon } from "lucide-react";
 
 import { projectsQueryOptions } from "@/api/query-projects";
 import { Logout } from "@/components/logout";
+import { ProjectsMenuItem } from "@/components/projects-menu-item";
 import { ThemeToggle } from "@/components/theme-toggle";
-
-import { ProjectsMenuItem } from "./-components/projects-menu-item";
 
 const Projects = () => {
   const { data: projects } = useSuspenseQuery(projectsQueryOptions);
