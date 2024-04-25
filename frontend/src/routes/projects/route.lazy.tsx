@@ -45,7 +45,7 @@ const Projects = () => {
               </a>
               <a
                 className="dsy-btn dsy-btn-ghost dsy-btn-circle dsy-btn-xs lg:dsy-btn-sm"
-                href={`${import.meta.env.VITE_SERVER_DOMAIN}/docs`}
+                href={import.meta.env.VITE_SERVER_DOMAIN}
                 target="__blank"
               >
                 <Icon icon="simple-icons:swagger" className="text-xl" />
