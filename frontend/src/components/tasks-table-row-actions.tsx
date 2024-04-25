@@ -2,7 +2,6 @@ import { useMutation } from "@tanstack/react-query";
 import { EllipsisIcon } from "lucide-react";
 
 import type { APITypes } from "@/api/client";
-
 import { editTaskMutationOptions } from "@/api/edit-task";
 import { labels, priorities, statuses } from "@/constants/tasks";
 

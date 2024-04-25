@@ -5,8 +5,7 @@ import { ListPlusIcon } from "lucide-react";
 
 import { tasksQueryOptions } from "@/api/query-tasks";
 import { Table } from "@/components/table";
-
-import { columns } from "./-components/columns";
+import { columns } from "@/components/tasks-table-columns";
 
 const routeApi = getRouteApi("/projects/$projectId/tasks");
 
