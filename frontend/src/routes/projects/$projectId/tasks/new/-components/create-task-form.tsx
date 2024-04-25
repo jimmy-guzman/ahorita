@@ -113,7 +113,7 @@ export const CreateTaskForm = () => {
           </div>
         </div>
         <div className="flex justify-end gap-2">
-          <Link from={routeApi.id} to="../" className="dsy-btn dsy-btn-neutral">
+          <Link from={routeApi.id} to=".." className="dsy-btn dsy-btn-neutral">
             Cancel
           </Link>
           <button
