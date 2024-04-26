@@ -35,7 +35,7 @@ const app = new Elysia()
   .use(tasksRoutes)
   .use(usersRoutes)
   .listen(3000, ({ url }) => {
-    // biome-ignore lint/suspicious/noConsoleLog: elysia does not provide a logger
+    // biome-ignore lint/nursery/noConsole: elysia does not provide a logger
     console.log(`🚀 Running at ${cyan(url.toString())}`);
   });
 

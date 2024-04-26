@@ -36,14 +36,14 @@
         "useHookAtTopLevel": "error"
       },
       "suspicious": {
-        "noConsoleLog": "error",
         "noEmptyBlockStatements": "error",
         "useAwait": "error",
         "noSuspiciousSemicolonInJsx": "error"
       },
       "nursery": {
         "useSortedClasses": "error",
-        "noEvolvingAny": "error"
+        "noEvolvingAny": "error",
+        "noConsole": "error"
       }
     }
   }

@@ -25,7 +25,7 @@
     "date-fns": "3.6.0",
     "drizzle-orm": "0.30.9",
     "drizzle-typebox": "0.1.1",
-    "elysia": "1.0.14",
+    "elysia": "1.0.15",
     "lucia": "3.2.0",
     "nanoid": "5.0.7",
     "oslo": "1.2.0",
