@@ -1,7 +1,7 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
 import { FoldersIcon } from "lucide-react";
 
-const Index = () => {
+function Index() {
   return (
     <main>
       <div className="dsy-hero -mt-16 min-h-screen">
@@ -30,6 +30,6 @@ const Index = () => {
       </div>
     </main>
   );
-};
+}
 
 export const Route = createFileRoute("/")({ component: Index });

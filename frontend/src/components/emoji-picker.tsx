@@ -1,6 +1,7 @@
-import EmojiPickerReact, { EmojiStyle, Theme } from "emoji-picker-react";
 import { MinusIcon } from "lucide-react";
-import { useState } from "react";
+import { Suspense, lazy, useState } from "react";
+
+const LazyEmojiPicker = lazy(() => import("emoji-picker-react"));
 
 interface EmojiPickerProps {
   onChange: (emoji: string | null) => void;
@@ -21,19 +22,23 @@ export const EmojiPicker = ({ onChange, value }: EmojiPickerProps) => {
           {value ?? "Add Icon"}
         </button>
         {isEmojiOpen && (
-          <EmojiPickerReact
-            lazyLoadEmojis
-            className="dsy-dropdown-content"
-            theme={Theme.AUTO}
-            emojiStyle={EmojiStyle.NATIVE}
-            previewConfig={{
-              defaultCaption: "Choose your icon",
-            }}
-            onEmojiClick={(event) => {
-              onChange(event.emoji);
-              setIsEmojiOpen(false);
-            }}
-          />
+          <Suspense fallback={null}>
+            <LazyEmojiPicker
+              lazyLoadEmojis
+              className="dsy-dropdown-content"
+              // @ts-expect-error emoji-picker-react is not tree shaking correctly
+              theme="auto"
+              // @ts-expect-error emoji-picker-react is not tree shaking correctly
+              emojiStyle="native"
+              previewConfig={{
+                defaultCaption: "Choose your icon",
+              }}
+              onEmojiClick={(event) => {
+                onChange(event.emoji);
+                setIsEmojiOpen(false);
+              }}
+            />
+          </Suspense>
         )}
       </div>
       <div className="dsy-tooltip" data-tip="Remove Icon">

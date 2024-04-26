@@ -24,7 +24,7 @@ const schema = object({
 
 const routeApi = getRouteApi("/login");
 
-export const Login = () => {
+function Login() {
   const search = routeApi.useSearch();
   const navigate = routeApi.useNavigate();
   const { handleSubmit, control } = useForm<Output<typeof schema>>({
@@ -86,7 +86,7 @@ export const Login = () => {
       </div>
     </div>
   );
-};
+}
 
 const searchSchema = object({
   redirect: optional(string()),
