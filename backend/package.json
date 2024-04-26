@@ -5,7 +5,7 @@
     ".": "./src/index.ts"
   },
   "scripts": {
-    "build": "dotenv-run -- bun build ./src/index.ts --outdir ./dist --target=bun --minify",
+    "build": "NODE_ENV=production dotenv-run -- bun build ./src/index.ts --outdir ./dist --target=bun --minify",
     "clean": "rimraf .turbo node_modules dist",
     "db:push": "dotenv-run -- drizzle-kit push:pg",
     "db:studio": "dotenv-run -- drizzle-kit studio",

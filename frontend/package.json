@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "dotenv-run -- vite build",
+    "build": "NODE_ENV=production dotenv-run -- vite build",
     "clean": "rimraf .turbo node_modules dist",
     "dev": "dotenv-run -- bunx --bun vite",
     "e2e": "playwright test",

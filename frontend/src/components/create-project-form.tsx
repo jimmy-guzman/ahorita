@@ -8,6 +8,7 @@ import { type Output, minLength, nullable, object, string } from "valibot";
 import { createProjectOptions } from "@/api/create-project";
 import { EmojiPicker } from "@/components/emoji-picker";
 import { TextInput } from "@/components/text-input";
+import { Link } from "@tanstack/react-router";
 
 const schema = object({
   name: string([minLength(1, "Your name is too short.")]),
@@ -35,9 +36,19 @@ export const CreateProjectForm = () => {
         className="flex flex-col gap-2"
         onSubmit={handleSubmit((body) => {
           mutate(body, {
-            onSuccess: () => {
+            onSuccess: (response) => {
               reset();
-              toast.success("Project has been created");
+              toast.success("Project has been created", {
+                action: (
+                  <Link
+                    to="/projects/$projectId"
+                    params={{ projectId: response.id }}
+                    className="dsy-link"
+                  >
+                    {response.id}
+                  </Link>
+                ),
+              });
             },
           });
         })}

@@ -63,7 +63,17 @@ export const CreateTaskForm = () => {
             {
               onSuccess() {
                 reset();
-                toast.success("Task has been created");
+                toast.success("Task has been created", {
+                  action: (
+                    <Link
+                      to="/projects/$projectId/tasks"
+                      params={{ projectId }}
+                      className="dsy-link"
+                    >
+                      Tasks
+                    </Link>
+                  ),
+                });
               },
             },
           );
