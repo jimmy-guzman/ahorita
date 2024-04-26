@@ -9,7 +9,7 @@ import { columns } from "@/components/tasks-table-columns";
 
 const routeApi = getRouteApi("/projects/$projectId/tasks");
 
-const TasksByProject = () => {
+function TasksByProject() {
   const params = routeApi.useParams();
   const { data: tasks } = useSuspenseQuery(tasksQueryOptions(params));
 
@@ -35,7 +35,7 @@ const TasksByProject = () => {
       />
     </div>
   );
-};
+}
 
 export const Route = createFileRoute("/projects/$projectId/tasks/")({
   component: TasksByProject,

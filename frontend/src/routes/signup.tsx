@@ -18,7 +18,7 @@ const schema = object({
   password: string([minLength(1, "Your password is too short.")]),
 });
 
-export const SignUp = () => {
+function SignUp() {
   const navigate = routeApi.useNavigate();
   const { handleSubmit, control } = useForm<Output<typeof schema>>({
     resolver: valibotResolver(schema),
@@ -78,7 +78,7 @@ export const SignUp = () => {
       </div>
     </div>
   );
-};
+}
 
 export const Route = createFileRoute("/signup")({
   component: SignUp,
