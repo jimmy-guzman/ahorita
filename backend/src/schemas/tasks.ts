@@ -1,4 +1,4 @@
-import { relations, sql } from "drizzle-orm";
+import { relations } from "drizzle-orm";
 import { boolean, pgEnum, pgTable, text, timestamp } from "drizzle-orm/pg-core";
 
 import { nanoid } from "../utils";
@@ -16,7 +16,6 @@ export const projects = pgTable("project", {
   updatedAt: timestamp("updated_at", { withTimezone: true, mode: "string" })
     .defaultNow()
     .notNull(),
-
   userId: text("user_id")
     .references(() => users.id, { onDelete: "cascade" })
     .notNull(),
@@ -45,9 +44,6 @@ export const tasks = pgTable("task", {
     .notNull(),
   updatedAt: timestamp("updated_at", { withTimezone: true, mode: "string" })
     .defaultNow()
-    .notNull(),
-  dueAt: timestamp("due_at", { withTimezone: true, mode: "string" })
-    .default(sql`now() + INTERVAL '1 MONTHS'`)
     .notNull(),
   projectId: text("project_id")
     .references(() => projects.id, { onDelete: "cascade" })

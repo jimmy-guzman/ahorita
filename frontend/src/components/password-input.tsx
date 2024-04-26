@@ -1,4 +1,3 @@
-import { clsx } from "clsx";
 import { useState } from "react";
 import {
   type Control,
@@ -6,6 +5,8 @@ import {
   type UseControllerProps,
   useController,
 } from "react-hook-form";
+
+import { cn } from "@/utils/cn";
 
 interface TextFieldProps<T extends FieldValues> extends UseControllerProps<T> {
   control: Control<T>;
@@ -50,7 +51,7 @@ export const PasswordInput = <T extends FieldValues>({
       <input
         type={view ? "text" : "password"}
         placeholder={placeholder}
-        className={clsx(
+        className={cn(
           "dsy-input dsy-input-bordered w-full pr-2",
           error?.message ? "d-input-error" : "",
         )}
