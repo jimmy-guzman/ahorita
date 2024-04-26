@@ -16,9 +16,9 @@ export const deleteTaskMutationOptions = mutationOptions({
 
     return res.data;
   },
-  onSuccess: async ({ projectId }) => {
+  onSuccess: async ({ projectId, name }) => {
     await queryClient.invalidateQueries(tasksQueryOptions({ projectId }));
 
-    toast.success("Task has been deleted");
+    toast.success(`Task ${name} has been deleted`);
   },
 });

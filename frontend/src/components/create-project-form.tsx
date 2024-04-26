@@ -36,16 +36,16 @@ export const CreateProjectForm = () => {
         className="flex flex-col gap-2"
         onSubmit={handleSubmit((body) => {
           mutate(body, {
-            onSuccess: (response) => {
+            onSuccess: ({ name, id }) => {
               reset();
-              toast.success("Project has been created", {
+              toast.success(`Project ${name} has been created`, {
                 action: (
                   <Link
                     to="/projects/$projectId"
-                    params={{ projectId: response.id }}
+                    params={{ projectId: id }}
                     className="dsy-link"
                   >
-                    {response.id}
+                    View Project
                   </Link>
                 ),
               });
