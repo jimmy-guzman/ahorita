@@ -1,8 +1,9 @@
 import type { QueryClient } from "@tanstack/react-query";
 import { Outlet, createRootRouteWithContext } from "@tanstack/react-router";
 import { Suspense, lazy } from "react";
-
 import { Toaster } from "sonner";
+
+import { cn } from "@/utils/cn";
 
 const RouterDevTools = import.meta.env.DEV
   ? lazy(() =>
@@ -17,6 +18,7 @@ const Root = () => {
     <>
       <Outlet />
       <Toaster
+        cn={cn}
         toastOptions={{
           unstyled: true,
           classNames: {

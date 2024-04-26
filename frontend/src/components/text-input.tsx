@@ -1,10 +1,11 @@
-import { clsx } from "clsx";
 import {
   type Control,
   type FieldValues,
   type UseControllerProps,
   useController,
 } from "react-hook-form";
+
+import { cn } from "@/utils/cn";
 
 interface TextFieldProps<T extends FieldValues> extends UseControllerProps<T> {
   control: Control<T>;
@@ -43,13 +44,13 @@ export const TextInput = <T extends FieldValues>({
   });
 
   return (
-    <div className={clsx("dsy-form-control", className)}>
+    <div className={cn("dsy-form-control", className)}>
       <label className="dsy-label" htmlFor={name}>
         <span className="dsy-label-text">{label}</span>
       </label>
       <input
         placeholder={placeholder}
-        className={clsx(
+        className={cn(
           "dsy-input dsy-input-bordered w-full",
           error?.message ? "dsy-input-error" : "",
         )}

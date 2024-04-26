@@ -1,8 +1,6 @@
-import { ErrorMessage } from "@hookform/error-message";
 import { valibotResolver } from "@hookform/resolvers/valibot";
 import { useMutation } from "@tanstack/react-query";
 import { Link, getRouteApi } from "@tanstack/react-router";
-import { addMonths, formatISO9075 } from "date-fns";
 import { ListPlusIcon } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -26,26 +24,16 @@ const schema = object({
   name: string([minLength(1, "Your name is too short.")]),
   priority: union([literal("Low"), literal("Medium"), literal("High")]),
   label: union([literal("Feature"), literal("Documentation"), literal("Bug")]),
-  dueAt: string(),
 });
 
 export const CreateTaskForm = () => {
   const { projectId } = routeApi.useParams();
-  const {
-    handleSubmit,
-    control,
-    reset,
-    register,
-    formState: { errors },
-  } = useForm<Output<typeof schema>>({
+  const { handleSubmit, control, reset } = useForm<Output<typeof schema>>({
     resolver: valibotResolver(schema),
     defaultValues: {
       name: "",
       priority: "Medium",
       label: "Feature",
-      dueAt: formatISO9075(addMonths(new Date(), 1), {
-        representation: "date",
-      }),
     },
   });
   const { mutate, isPending } = useMutation(createTask);
@@ -100,25 +88,6 @@ export const CreateTaskForm = () => {
               name="name"
               label="Name"
               className="grow"
-            />
-          </div>
-          <div className="dsy-form-control">
-            <label className="dsy-label" htmlFor="dueAt">
-              <span className="dsy-label-text">Due Date</span>
-            </label>
-            <input
-              type="date"
-              className="dsy-input dsy-input-bordered w-full"
-              id="name"
-              min={formatISO9075(new Date(), { representation: "date" })}
-              {...register("dueAt")}
-            />
-            <ErrorMessage
-              errors={errors}
-              name="dueAt"
-              render={({ message }) => (
-                <p className="text-error text-sm">{message}</p>
-              )}
             />
           </div>
         </div>
