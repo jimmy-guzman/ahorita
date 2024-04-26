@@ -23,9 +23,9 @@ export const editProjectOptions = mutationOptions({
   onMutate: async () => {
     await queryClient.cancelQueries(projectsQueryOptions);
   },
-  onSuccess: async () => {
+  onSuccess: async ({ name }) => {
     await queryClient.invalidateQueries(projectsQueryOptions);
 
-    toast.success("Project has been edited");
+    toast.success(`Project ${name} has been edited`);
   },
 });

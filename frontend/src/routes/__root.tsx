@@ -36,6 +36,8 @@ const Root = () => {
   );
 };
 
-export const Route = createRootRouteWithContext<{
+interface Context {
   queryClient: QueryClient;
-}>()({ component: Root });
+}
+
+export const Route = createRootRouteWithContext<Context>()({ component: Root });
