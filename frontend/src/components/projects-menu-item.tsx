@@ -1,18 +1,33 @@
 import { Link } from "@tanstack/react-router";
-import { FolderIcon } from "lucide-react";
+import { FolderCheckIcon, FolderIcon } from "lucide-react";
+
+interface ProjectsMenuItemProps {
+  projectId: string;
+  icon: string | null;
+  name: string;
+  isDone: boolean;
+}
 
 export const ProjectsMenuItem = ({
   projectId,
   icon,
   name,
-}: { projectId: string; icon: string | null; name: string }) => {
+  isDone,
+}: ProjectsMenuItemProps) => {
   return (
     <Link
       to="/projects/$projectId"
       params={{ projectId }}
       activeProps={{ className: "dsy-active" }}
     >
-      {icon ? <span>{icon}</span> : <FolderIcon className="h-4 w-4" />} {name}
+      {icon ? (
+        <span>{icon}</span>
+      ) : isDone ? (
+        <FolderCheckIcon className="h-4 w-4" />
+      ) : (
+        <FolderIcon className="h-4 w-4" />
+      )}
+      {name}
     </Link>
   );
 };

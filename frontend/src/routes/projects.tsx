@@ -86,24 +86,26 @@ function Projects() {
             </li>
             {projects
               .filter((project) => project.isFavorite)
-              .map(({ id: projectId, name, icon }) => (
+              .map(({ id: projectId, name, icon, isDone }) => (
                 <li key={projectId}>
                   <ProjectsMenuItem
                     projectId={projectId}
                     name={name}
                     icon={icon}
+                    isDone={isDone}
                   />
                 </li>
               ))}
             <li className="dsy-menu-title text-secondary uppercase">More</li>
             {projects
               .filter((project) => !project.isFavorite)
-              .map(({ id: projectId, name, icon }) => (
+              .map(({ id: projectId, name, icon, isDone }) => (
                 <li key={projectId}>
                   <ProjectsMenuItem
                     projectId={projectId}
                     name={name}
                     icon={icon}
+                    isDone={isDone}
                   />
                 </li>
               ))}
