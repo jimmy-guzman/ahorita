@@ -25,6 +25,7 @@ const schema = object({
   name: string([minLength(1, "Your username is too short.")]),
   description: string([minLength(1, "Your description is too short.")]),
   isFavorite: boolean(),
+  isDone: boolean(),
   icon: nullable(string()),
 });
 
@@ -40,6 +41,7 @@ export const EditProject = () => {
       description: project.description,
       name: project.name,
       isFavorite: project.isFavorite,
+      isDone: project.isDone,
       icon: project.icon,
     },
   });
@@ -104,6 +106,16 @@ export const EditProject = () => {
                       type="checkbox"
                       className="dsy-toggle"
                       {...form.register("isFavorite")}
+                    />
+                  </label>
+                </div>
+                <div className="dsy-form-control">
+                  <label className="dsy-label cursor-pointer">
+                    <span className="dsy-label-text">Done?</span>
+                    <input
+                      type="checkbox"
+                      className="dsy-toggle"
+                      {...form.register("isDone")}
                     />
                   </label>
                 </div>

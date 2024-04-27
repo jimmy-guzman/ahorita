@@ -58,6 +58,7 @@ export const projectRoutes = new Elysia({ prefix: "/:projectId" })
           "isFavorite",
           "name",
           "icon",
+          "isDone",
         ]),
       ),
       response: "project",
