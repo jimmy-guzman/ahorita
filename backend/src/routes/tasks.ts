@@ -4,7 +4,7 @@ import { Elysia, InternalServerError, t } from "elysia";
 import { db } from "../db";
 import { auth } from "../middleware/auth";
 import { insertTaskSchema, selectTaskSchema } from "../models/tasks";
-import { tasks } from "../schemas/tasks";
+import { tasks } from "../schemas/projects";
 import { taskRoutes } from "./tasks.$taskId";
 
 const tags = ["Task"];

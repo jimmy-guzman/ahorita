@@ -4,19 +4,11 @@ import { useMutation, useSuspenseQuery } from "@tanstack/react-query";
 import { getRouteApi } from "@tanstack/react-router";
 import { FolderPenIcon, SaveIcon, XIcon } from "lucide-react";
 import { useState } from "react";
-import { Controller, useForm } from "react-hook-form";
-import {
-  type Output,
-  boolean,
-  minLength,
-  nullable,
-  object,
-  string,
-} from "valibot";
+import { useForm } from "react-hook-form";
+import { type Output, boolean, minLength, object, string } from "valibot";
 
 import { editProjectOptions } from "@/api/edit-project";
 import { projectQueryOptions } from "@/api/query-project";
-import { EmojiPicker } from "@/components/emoji-picker";
 import { TextInput } from "@/components/text-input";
 
 const routeApi = getRouteApi("/projects/$projectId");
@@ -26,7 +18,6 @@ const schema = object({
   description: string([minLength(1, "Your description is too short.")]),
   isFavorite: boolean(),
   isDone: boolean(),
-  icon: nullable(string()),
 });
 
 export const EditProject = () => {
@@ -42,7 +33,6 @@ export const EditProject = () => {
       name: project.name,
       isFavorite: project.isFavorite,
       isDone: project.isDone,
-      icon: project.icon,
     },
   });
 
@@ -80,13 +70,6 @@ export const EditProject = () => {
                 })}
               >
                 <div className="flex w-full items-end gap-2">
-                  <Controller
-                    control={form.control}
-                    name="icon"
-                    render={({ field: { onChange, value } }) => (
-                      <EmojiPicker value={value} onChange={onChange} />
-                    )}
-                  />
                   <TextInput
                     control={form.control}
                     name="name"

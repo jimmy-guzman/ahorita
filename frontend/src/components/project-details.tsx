@@ -28,9 +28,7 @@ export const ProjectDetails = () => {
       <div className="dsy-card bg-base-200">
         <div className="dsy-card-body">
           <h1 className="dsy-card-title flex justify-between text-2xl sm:text-3xl">
-            <div>
-              {project.icon && <span>{project.icon}</span>} {project.name}
-            </div>
+            <span>{project.name}</span>
             <div>
               {project.isFavorite ? (
                 <button
