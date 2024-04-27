@@ -8,7 +8,6 @@ export const projects = pgTable("project", {
   id: text("id").$default(nanoid).primaryKey(),
   name: text("name").unique().notNull(),
   description: text("description").notNull(),
-  icon: text("icon"),
   isFavorite: boolean("is_favorite").default(false).notNull(),
   isDone: boolean("is_done").default(false).notNull(),
   createdAt: timestamp("created_at", { withTimezone: true, mode: "string" })

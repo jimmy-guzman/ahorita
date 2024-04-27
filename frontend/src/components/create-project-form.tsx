@@ -1,19 +1,17 @@
 import { valibotResolver } from "@hookform/resolvers/valibot";
 import { useMutation } from "@tanstack/react-query";
 import { FolderPlusIcon } from "lucide-react";
-import { Controller, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { toast } from "sonner";
-import { type Output, minLength, nullable, object, string } from "valibot";
+import { type Output, minLength, object, string } from "valibot";
 
 import { createProjectOptions } from "@/api/create-project";
-import { EmojiPicker } from "@/components/emoji-picker";
 import { TextInput } from "@/components/text-input";
 import { Link } from "@tanstack/react-router";
 
 const schema = object({
   name: string([minLength(1, "Your name is too short.")]),
   description: string([minLength(1, "Your description is too short.")]),
-  icon: nullable(string()),
 });
 
 export const CreateProjectForm = () => {
@@ -23,7 +21,6 @@ export const CreateProjectForm = () => {
     defaultValues: {
       name: "",
       description: "",
-      icon: null,
     },
   });
 
@@ -54,13 +51,6 @@ export const CreateProjectForm = () => {
         })}
       >
         <div className="flex w-full items-end gap-2">
-          <Controller
-            control={control}
-            name="icon"
-            render={({ field: { onChange, value } }) => (
-              <EmojiPicker value={value} onChange={onChange} />
-            )}
-          />
           <TextInput
             control={control}
             name="name"

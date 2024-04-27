@@ -44,7 +44,7 @@ export const projectsRoutes = new Elysia({ prefix: "/projects" })
       return project;
     },
     {
-      body: t.Pick(selectProjectSchema, ["name", "description", "icon"]),
+      body: t.Pick(selectProjectSchema, ["name", "description"]),
       response: "project",
       detail: { tags, summary: "Add a new project" },
     },

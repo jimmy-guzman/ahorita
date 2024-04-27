@@ -1,7 +1,7 @@
 import { createInsertSchema, createSelectSchema } from "drizzle-typebox";
 import { t } from "elysia";
 
-import { projects } from "../schemas/tasks";
+import { projects } from "../schemas/projects";
 
 export const selectProjectSchema = createSelectSchema(projects);
 
