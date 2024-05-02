@@ -21,7 +21,7 @@ function Index() {
               with new technologies.
             </p>
             <div className="flex justify-end">
-              <Link to="/projects/new" className="dsy-btn dsy-btn-accent">
+              <Link to="/projects" className="dsy-btn dsy-btn-accent">
                 Get Started <FoldersIcon />
               </Link>
             </div>
