@@ -26,6 +26,7 @@
 - [TailwindCSS](https://tailwindcss.com)
 - [Radix Primitives](https://www.radix-ui.com/primitives)
 - [daisyUI](https://daisyui.com)
+- [Recharts](https://recharts.org)
 - [Lucide](https://lucide.dev)
 - [Vite](https://vitejs.dev)
 
