@@ -2,11 +2,11 @@ import { Icon } from "@iconify/react";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { Link, Outlet, createFileRoute } from "@tanstack/react-router";
 import { redirect } from "@tanstack/react-router";
-import { FolderPlusIcon, MenuIcon } from "lucide-react";
+import { FolderPlusIcon, LayoutDashboardIcon, MenuIcon } from "lucide-react";
 
 import { meQueryOptions } from "@/api/query-me";
 import { projectsQueryOptions } from "@/api/query-projects";
-import { Logout } from "@/components/logout";
+import { LogoutButton } from "@/components/logout-button";
 import { ProjectsMenuItem } from "@/components/projects-menu-item";
 import { ThemeToggle } from "@/components/theme-toggle";
 
@@ -51,7 +51,7 @@ function Projects() {
                 <Icon icon="simple-icons:swagger" className="text-xl" />
               </a>
               <ThemeToggle lightTheme="cmyk" />
-              <Logout />
+              <LogoutButton />
             </div>
           </nav>
           <main>
@@ -73,6 +73,15 @@ function Projects() {
             ahorita
           </Link>
           <ul className="dsy-menu min-h-screen w-56 bg-base-100">
+            <li>
+              <Link
+                to="/projects"
+                activeOptions={{ exact: true }}
+                activeProps={{ className: "dsy-active" }}
+              >
+                Dashboard <LayoutDashboardIcon className="h-5 w-5 text-info" />
+              </Link>
+            </li>
             <li>
               <Link
                 to="/projects/new"

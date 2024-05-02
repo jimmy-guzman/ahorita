@@ -5,7 +5,7 @@ import { api } from "@/api/client";
 import { meQueryOptions } from "@/api/query-me";
 import { LogOutIcon } from "lucide-react";
 
-export const Logout = () => {
+export const LogoutButton = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 

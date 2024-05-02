@@ -15,6 +15,7 @@ import { Route as SignupImport } from "./routes/signup";
 import { Route as ProjectsImport } from "./routes/projects";
 import { Route as LoginImport } from "./routes/login";
 import { Route as IndexImport } from "./routes/index";
+import { Route as ProjectsIndexImport } from "./routes/projects.index";
 import { Route as ProjectsNewImport } from "./routes/projects.new";
 import { Route as ProjectsProjectIdImport } from "./routes/projects.$projectId";
 import { Route as ProjectsProjectIdIndexImport } from "./routes/projects.$projectId.index";
@@ -42,6 +43,11 @@ const LoginRoute = LoginImport.update({
 const IndexRoute = IndexImport.update({
   path: "/",
   getParentRoute: () => rootRoute,
+} as any);
+
+const ProjectsIndexRoute = ProjectsIndexImport.update({
+  path: "/",
+  getParentRoute: () => ProjectsRoute,
 } as any);
 
 const ProjectsNewRoute = ProjectsNewImport.update({
@@ -103,6 +109,10 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof ProjectsNewImport;
       parentRoute: typeof ProjectsImport;
     };
+    "/projects/": {
+      preLoaderRoute: typeof ProjectsIndexImport;
+      parentRoute: typeof ProjectsImport;
+    };
     "/projects/$projectId/tasks": {
       preLoaderRoute: typeof ProjectsProjectIdTasksImport;
       parentRoute: typeof ProjectsProjectIdImport;
@@ -136,6 +146,7 @@ export const routeTree = rootRoute.addChildren([
       ProjectsProjectIdIndexRoute,
     ]),
     ProjectsNewRoute,
+    ProjectsIndexRoute,
   ]),
   SignupRoute,
 ]);
