@@ -9,7 +9,7 @@ const mutationCache = new MutationCache({
   onError: (error) => toast.error(error.message),
 });
 
-export const queryClient = new QueryClient({
+export default new QueryClient({
   queryCache,
   mutationCache,
 });

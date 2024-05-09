@@ -1,4 +1,4 @@
-import { queryClient } from "@/query-client";
+import queryClient from "@/query-client";
 import { valibotResolver } from "@hookform/resolvers/valibot";
 import { useMutation } from "@tanstack/react-query";
 import { Link, createFileRoute, getRouteApi } from "@tanstack/react-router";
