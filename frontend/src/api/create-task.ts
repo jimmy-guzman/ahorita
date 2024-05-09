@@ -1,7 +1,7 @@
 import type { APIRoutes } from "@/api/client";
 import { api } from "@/api/client";
 import { mutationOptions } from "@/api/mutation-options";
-import { queryClient } from "@/query-client";
+import queryClient from "@/query-client";
 
 import { tasksQueryOptions } from "./query-tasks";
 

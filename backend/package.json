@@ -19,20 +19,20 @@
   },
   "dependencies": {
     "@elysiajs/cors": "1.0.2",
-    "@elysiajs/swagger": "1.0.4",
+    "@elysiajs/swagger": "1.0.5",
     "@lucia-auth/adapter-drizzle": "1.0.7",
-    "@neondatabase/serverless": "0.9.1",
+    "@neondatabase/serverless": "0.9.3",
     "date-fns": "3.6.0",
     "drizzle-orm": "0.30.10",
     "drizzle-typebox": "0.1.1",
-    "elysia": "1.0.15",
+    "elysia": "1.0.17",
     "lucia": "3.2.0",
     "nanoid": "5.0.7",
     "oslo": "1.2.0",
     "picocolors": "1.0.0"
   },
   "devDependencies": {
-    "drizzle-kit": "0.20.17-c347d7b",
+    "drizzle-kit": "0.21.0",
     "pg": "8.11.5",
     "rimraf": "5.0.5",
     "typescript": "5.4.5"

@@ -3,7 +3,7 @@ import { queryOptions } from "@tanstack/react-query";
 import { type APIRoutes, api } from "@/api/client";
 
 export const tasksQueryOptions = (
-  query: APIRoutes["tasks"]["get"]["query"],
+  query: APIRoutes["tasks"]["get"]["query"] = {},
 ) => {
   return queryOptions({
     queryKey: ["tasks", query] as const,
