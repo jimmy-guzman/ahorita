@@ -32,9 +32,9 @@
     "picocolors": "1.0.0"
   },
   "devDependencies": {
-    "drizzle-kit": "0.21.0",
+    "drizzle-kit": "0.21.1",
     "pg": "8.11.5",
-    "rimraf": "5.0.5",
+    "rimraf": "5.0.6",
     "typescript": "5.4.5"
   }
 }
