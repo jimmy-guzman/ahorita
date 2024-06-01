@@ -8,9 +8,14 @@ import { deleteTaskMutationOptions } from "@/api/delete-task";
 interface DeleteTaskActionProps {
   name: string;
   taskId: string;
+  closeActions: () => void;
 }
 
-export const DeleteTaskAction = ({ name, taskId }: DeleteTaskActionProps) => {
+export const DeleteTaskAction = ({
+  name,
+  taskId,
+  closeActions,
+}: DeleteTaskActionProps) => {
   const { mutate } = useMutation(deleteTaskMutationOptions);
   const [open, setOpen] = useState(false);
 
@@ -37,7 +42,12 @@ export const DeleteTaskAction = ({ name, taskId }: DeleteTaskActionProps) => {
                 onSubmit={async (event) => {
                   event.preventDefault();
 
-                  mutate(taskId, { onSuccess: () => setOpen(false) });
+                  mutate(taskId, {
+                    onSuccess: () => {
+                      setOpen(false);
+                      closeActions();
+                    },
+                  });
                 }}
               >
                 <AlertDialog.Title>Are You Sure?</AlertDialog.Title>

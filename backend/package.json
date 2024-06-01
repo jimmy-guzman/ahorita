@@ -23,18 +23,18 @@
     "@lucia-auth/adapter-drizzle": "1.0.7",
     "@neondatabase/serverless": "0.9.3",
     "date-fns": "3.6.0",
-    "drizzle-orm": "0.30.10",
+    "drizzle-orm": "0.31.0",
     "drizzle-typebox": "0.1.1",
-    "elysia": "1.0.17",
+    "elysia": "1.0.22",
     "lucia": "3.2.0",
     "nanoid": "5.0.7",
     "oslo": "1.2.0",
-    "picocolors": "1.0.0"
+    "picocolors": "1.0.1"
   },
   "devDependencies": {
-    "drizzle-kit": "0.21.1",
+    "drizzle-kit": "0.22.1",
     "pg": "8.11.5",
-    "rimraf": "5.0.6",
+    "rimraf": "5.0.7",
     "typescript": "5.4.5"
   }
 }

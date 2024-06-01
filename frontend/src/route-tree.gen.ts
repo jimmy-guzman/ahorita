@@ -86,46 +86,79 @@ const ProjectsProjectIdTasksNewRoute = ProjectsProjectIdTasksNewImport.update({
 declare module "@tanstack/react-router" {
   interface FileRoutesByPath {
     "/": {
+      id: "/";
+      path: "/";
+      fullPath: "/";
       preLoaderRoute: typeof IndexImport;
       parentRoute: typeof rootRoute;
     };
     "/login": {
+      id: "/login";
+      path: "/login";
+      fullPath: "/login";
       preLoaderRoute: typeof LoginImport;
       parentRoute: typeof rootRoute;
     };
     "/projects": {
+      id: "/projects";
+      path: "/projects";
+      fullPath: "/projects";
       preLoaderRoute: typeof ProjectsImport;
       parentRoute: typeof rootRoute;
     };
     "/signup": {
+      id: "/signup";
+      path: "/signup";
+      fullPath: "/signup";
       preLoaderRoute: typeof SignupImport;
       parentRoute: typeof rootRoute;
     };
     "/projects/$projectId": {
+      id: "/projects/$projectId";
+      path: "/$projectId";
+      fullPath: "/projects/$projectId";
       preLoaderRoute: typeof ProjectsProjectIdImport;
       parentRoute: typeof ProjectsImport;
     };
     "/projects/new": {
+      id: "/projects/new";
+      path: "/new";
+      fullPath: "/projects/new";
       preLoaderRoute: typeof ProjectsNewImport;
       parentRoute: typeof ProjectsImport;
     };
     "/projects/": {
+      id: "/projects/";
+      path: "/";
+      fullPath: "/projects/";
       preLoaderRoute: typeof ProjectsIndexImport;
       parentRoute: typeof ProjectsImport;
     };
     "/projects/$projectId/tasks": {
+      id: "/projects/$projectId/tasks";
+      path: "/tasks";
+      fullPath: "/projects/$projectId/tasks";
       preLoaderRoute: typeof ProjectsProjectIdTasksImport;
       parentRoute: typeof ProjectsProjectIdImport;
     };
     "/projects/$projectId/": {
+      id: "/projects/$projectId/";
+      path: "/";
+      fullPath: "/projects/$projectId/";
       preLoaderRoute: typeof ProjectsProjectIdIndexImport;
       parentRoute: typeof ProjectsProjectIdImport;
     };
     "/projects/$projectId/tasks/new": {
+      id: "/projects/$projectId/tasks/new";
+      path: "/new";
+      fullPath: "/projects/$projectId/tasks/new";
       preLoaderRoute: typeof ProjectsProjectIdTasksNewImport;
       parentRoute: typeof ProjectsProjectIdTasksImport;
     };
     "/projects/$projectId/tasks/": {
+      id: "/projects/$projectId/tasks/";
+      path: "/";
+      fullPath: "/projects/$projectId/tasks/";
       preLoaderRoute: typeof ProjectsProjectIdTasksIndexImport;
       parentRoute: typeof ProjectsProjectIdTasksImport;
     };
@@ -134,21 +167,90 @@ declare module "@tanstack/react-router" {
 
 // Create and export the route tree
 
-export const routeTree = rootRoute.addChildren([
+export const routeTree = rootRoute.addChildren({
   IndexRoute,
   LoginRoute,
-  ProjectsRoute.addChildren([
-    ProjectsProjectIdRoute.addChildren([
-      ProjectsProjectIdTasksRoute.addChildren([
+  ProjectsRoute: ProjectsRoute.addChildren({
+    ProjectsProjectIdRoute: ProjectsProjectIdRoute.addChildren({
+      ProjectsProjectIdTasksRoute: ProjectsProjectIdTasksRoute.addChildren({
         ProjectsProjectIdTasksNewRoute,
         ProjectsProjectIdTasksIndexRoute,
-      ]),
+      }),
       ProjectsProjectIdIndexRoute,
-    ]),
+    }),
     ProjectsNewRoute,
     ProjectsIndexRoute,
-  ]),
+  }),
   SignupRoute,
-]);
+});
 
 /* prettier-ignore-end */
+
+/* ROUTE_MANIFEST_START
+{
+  "routes": {
+    "__root__": {
+      "filePath": "__root.tsx",
+      "children": [
+        "/",
+        "/login",
+        "/projects",
+        "/signup"
+      ]
+    },
+    "/": {
+      "filePath": "index.tsx"
+    },
+    "/login": {
+      "filePath": "login.tsx"
+    },
+    "/projects": {
+      "filePath": "projects.tsx",
+      "children": [
+        "/projects/$projectId",
+        "/projects/new",
+        "/projects/"
+      ]
+    },
+    "/signup": {
+      "filePath": "signup.tsx"
+    },
+    "/projects/$projectId": {
+      "filePath": "projects.$projectId.tsx",
+      "parent": "/projects",
+      "children": [
+        "/projects/$projectId/tasks",
+        "/projects/$projectId/"
+      ]
+    },
+    "/projects/new": {
+      "filePath": "projects.new.tsx",
+      "parent": "/projects"
+    },
+    "/projects/": {
+      "filePath": "projects.index.tsx",
+      "parent": "/projects"
+    },
+    "/projects/$projectId/tasks": {
+      "filePath": "projects.$projectId.tasks.tsx",
+      "parent": "/projects/$projectId",
+      "children": [
+        "/projects/$projectId/tasks/new",
+        "/projects/$projectId/tasks/"
+      ]
+    },
+    "/projects/$projectId/": {
+      "filePath": "projects.$projectId.index.tsx",
+      "parent": "/projects/$projectId"
+    },
+    "/projects/$projectId/tasks/new": {
+      "filePath": "projects.$projectId.tasks.new.tsx",
+      "parent": "/projects/$projectId/tasks"
+    },
+    "/projects/$projectId/tasks/": {
+      "filePath": "projects.$projectId.tasks.index.tsx",
+      "parent": "/projects/$projectId/tasks"
+    }
+  }
+}
+ROUTE_MANIFEST_END */
