@@ -139,8 +139,8 @@ export const Route = createFileRoute("/projects")({
       });
     }
   },
-  loader: async ({ context: { queryClient } }) => {
-    await queryClient.ensureQueryData(projectsQueryOptions);
+  loader: async ({ context }) => {
+    await context.queryClient.ensureQueryData(projectsQueryOptions);
   },
   component: Projects,
 });

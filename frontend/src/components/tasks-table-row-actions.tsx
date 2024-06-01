@@ -5,6 +5,7 @@ import type { APITypes } from "@/api/client";
 import { editTaskMutationOptions } from "@/api/edit-task";
 import { labels, priorities, statuses } from "@/constants/tasks";
 
+import { useRef } from "react";
 import { DeleteTaskAction } from "./delete-task-action";
 import { RenameTaskAction } from "./rename-task-action";
 
@@ -14,9 +15,16 @@ interface TaskTableActionsProps {
 
 export const TasksTableRowActions = ({ task }: TaskTableActionsProps) => {
   const editMutation = useMutation(editTaskMutationOptions);
+  const ref = useRef<HTMLDetailsElement>(null);
+
+  const closeActions = () => {
+    if (ref.current) {
+      ref.current.open = false;
+    }
+  };
 
   return (
-    <details className="dsy-dropdown dsy-dropdown-end">
+    <details className="dsy-dropdown dsy-dropdown-end" ref={ref}>
       <summary className="dsy-btn dsy-btn-ghost dsy-btn-sm">
         <EllipsisIcon />
         <span className="sr-only">Open menu</span>
@@ -106,7 +114,11 @@ export const TasksTableRowActions = ({ task }: TaskTableActionsProps) => {
           <RenameTaskAction name={task.name} taskId={task.id} />
         </li>
         <li>
-          <DeleteTaskAction name={task.name} taskId={task.id} />
+          <DeleteTaskAction
+            name={task.name}
+            taskId={task.id}
+            closeActions={closeActions}
+          />
         </li>
       </ul>
     </details>
