@@ -1,7 +1,7 @@
 {
   "$schema": "https://turbo.build/schema.json",
-  "globalDependencies": [".env", "biome.json"],
-  "pipeline": {
+  "globalDependencies": ["biome.json"],
+  "tasks": {
     "build": {
       "dependsOn": ["^build"],
       "outputs": ["dist/**", "route-tree.gen.ts"]
@@ -26,7 +26,9 @@
       "cache": false,
       "persistent": true
     },
-    "test": {},
+    "test": {
+      "persistent": true
+    },
     "clean": {
       "cache": false
     },
