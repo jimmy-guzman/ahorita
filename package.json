@@ -29,7 +29,7 @@
     "@types/bun": "1.1.3",
     "gitzy": "5.4.0",
     "lefthook": "1.6.16",
-    "turbo": "1.13.3"
+    "turbo": "2.0.4"
   },
   "packageManager": "bun@1.1.13"
 }
