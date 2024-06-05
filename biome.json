@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.7.3/schema.json",
+  "$schema": "https://biomejs.dev/schemas/1.8.0/schema.json",
   "files": {
     "ignore": [
       "dist",
@@ -34,7 +34,8 @@
       },
       "correctness": {
         "noUnusedImports": "error",
-        "useHookAtTopLevel": "error"
+        "useHookAtTopLevel": "error",
+        "useArrayLiterals": "error"
       },
       "suspicious": {
         "noEmptyBlockStatements": "error",
@@ -43,9 +44,12 @@
       },
       "nursery": {
         "useSortedClasses": "error",
-        "noEvolvingAny": "error",
+        "noEvolvingTypes": "error",
         "noConsole": "error",
-        "useExplicitLengthCheck": "error"
+        "useExplicitLengthCheck": "error",
+        "useDateNow": "error",
+        "useErrorMessage": "error",
+        "useThrowOnlyError": "error"
       }
     }
   }
