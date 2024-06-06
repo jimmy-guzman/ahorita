@@ -1,7 +1,7 @@
 import { relations } from "drizzle-orm";
 import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
 
-import { nanoid, nowAsISO } from "../utils";
+import { nanoid, now } from "../utils";
 import { users } from "./users";
 
 export const projects = sqliteTable("project", {
@@ -12,11 +12,8 @@ export const projects = sqliteTable("project", {
     .default(false)
     .notNull(),
   isDone: integer("is_done", { mode: "boolean" }).default(false).notNull(),
-  createdAt: text("created_at").$default(nowAsISO).notNull(),
-  updatedAt: text("updated_at")
-    .$default(nowAsISO)
-    .$onUpdate(nowAsISO)
-    .notNull(),
+  createdAt: text("created_at").$default(now).notNull(),
+  updatedAt: text("updated_at").$default(now).$onUpdate(now).notNull(),
   userId: text("user_id")
     .references(() => users.id, { onDelete: "cascade" })
     .notNull(),
@@ -40,11 +37,8 @@ export const tasks = sqliteTable("task", {
   })
     .default("Feature")
     .notNull(),
-  createdAt: text("created_at").$default(nowAsISO).notNull(),
-  updatedAt: text("updated_at")
-    .$default(nowAsISO)
-    .$onUpdate(nowAsISO)
-    .notNull(),
+  createdAt: text("created_at").$default(now).notNull(),
+  updatedAt: text("updated_at").$default(now).$onUpdate(now).notNull(),
   projectId: text("project_id")
     .references(() => projects.id, { onDelete: "cascade" })
     .notNull(),

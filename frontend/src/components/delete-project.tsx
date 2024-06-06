@@ -19,7 +19,7 @@ export const DeleteProject = () => {
       <AlertDialog.Trigger asChild>
         <button
           type="button"
-          className="dsy-btn dsy-btn-neutral dsy-btn-sm"
+          className="dsy-btn dsy-btn-neutral"
           onClick={() => setOpen(true)}
         >
           <span className="hidden sm:inline">Delete </span>
