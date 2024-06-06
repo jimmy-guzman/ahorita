@@ -34,7 +34,7 @@
 
 - [ElysiaJS](https://elysiajs.com)
 - [Drizzle ORM](https://orm.drizzle.team)
-- [Neon](https://neon.tech)
+- [Turso](https://docs.turso.tech)
 - [Lucia](https://lucia-auth.com)
 
 ## 🏁 Getting Started
@@ -63,13 +63,42 @@ And to download new browsers for Playwright, run the following command:
 bunx playwright install
 ```
 
-And to create a [neon branch](https://neon.tech/docs/introduction/branching#development), run the following:
+[Turso](https://docs.turso.tech/introduction) is being used as the SQLite Database, which requires the [CLI to be installed](https://docs.turso.tech/cli/introduction):
 
 ```
-brew install neonctl
-neonctl auth
-neonctl branches create --name dev/[your name]
-neonctl branches list
+brew install tursodatabase/tap/turso
+```
+
+Then you can either login or signup:
+
+```
+turso auth login
+```
+
+```
+turso auth signup
+```
+
+Then you can start creating databases, for example:
+
+```
+turso db create ahorita
+```
+
+```
+turso db create ahorita-dev --from-db ahorita
+```
+
+You can generate a `TURSO_AUTH_TOKEN`, by running the following:
+
+```
+turso db tokens create ahorita-dev
+```
+
+You can get the `DATABASE_URL`, by running the following:
+
+```
+turso db show ahorita-dev --url
 ```
 
 Then setup environment variables, by running the following:
@@ -81,7 +110,7 @@ cp .env.example .env
 Then to push your schema changes directly to the database, by running the following:
 
 ```
-bun db:push
+bun --filter @ahorita/backend db:push
 ```
 
 Then you start running things, by running the following:

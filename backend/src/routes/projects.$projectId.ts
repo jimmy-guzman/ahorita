@@ -6,7 +6,6 @@ import { auth } from "../middleware/auth";
 import { selectProjectSchema } from "../models/projects";
 import { selectTaskSchema } from "../models/tasks";
 import { projects } from "../schemas";
-import { nowAsISO } from "../utils";
 
 const tags = ["Project"];
 
@@ -40,7 +39,7 @@ export const projectRoutes = new Elysia({ prefix: "/:projectId" })
     async ({ params: { projectId }, body }) => {
       const [project] = await db
         .update(projects)
-        .set({ ...body, updatedAt: nowAsISO() })
+        .set(body)
         .where(eq(projects.id, projectId))
         .returning();
 

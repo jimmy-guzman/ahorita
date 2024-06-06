@@ -1,49 +1,49 @@
 import { relations } from "drizzle-orm";
-import { boolean, pgEnum, pgTable, text, timestamp } from "drizzle-orm/pg-core";
+import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
 
-import { nanoid } from "../utils";
+import { nanoid, nowAsISO } from "../utils";
 import { users } from "./users";
 
-export const projects = pgTable("project", {
+export const projects = sqliteTable("project", {
   id: text("id").$default(nanoid).primaryKey(),
   name: text("name").unique().notNull(),
   description: text("description").notNull(),
-  isFavorite: boolean("is_favorite").default(false).notNull(),
-  isDone: boolean("is_done").default(false).notNull(),
-  createdAt: timestamp("created_at", { withTimezone: true, mode: "string" })
-    .defaultNow()
+  isFavorite: integer("is_favorite", { mode: "boolean" })
+    .default(false)
     .notNull(),
-  updatedAt: timestamp("updated_at", { withTimezone: true, mode: "string" })
-    .defaultNow()
+  isDone: integer("is_done", { mode: "boolean" }).default(false).notNull(),
+  createdAt: text("created_at").$default(nowAsISO).notNull(),
+  updatedAt: text("updated_at")
+    .$default(nowAsISO)
+    .$onUpdate(nowAsISO)
     .notNull(),
   userId: text("user_id")
     .references(() => users.id, { onDelete: "cascade" })
     .notNull(),
 });
 
-export const labelEnum = pgEnum("label", ["Feature", "Bug", "Documentation"]);
-
-export const priorityEnum = pgEnum("priority", ["Low", "Medium", "High"]);
-
-export const statusEnum = pgEnum("status", [
-  "Backlog",
-  "Todo",
-  "In Progress",
-  "Done",
-  "Canceled",
-]);
-
-export const tasks = pgTable("task", {
+export const tasks = sqliteTable("task", {
   id: text("id").$default(nanoid).primaryKey(),
   name: text("name").notNull(),
-  status: statusEnum("status").default("Todo").notNull(),
-  priority: priorityEnum("priority").default("Medium").notNull(),
-  label: labelEnum("label").default("Feature").notNull(),
-  createdAt: timestamp("created_at", { withTimezone: true, mode: "string" })
-    .defaultNow()
+  status: text("status", {
+    enum: ["Backlog", "Todo", "In Progress", "Done", "Canceled"],
+  })
+    .default("Todo")
     .notNull(),
-  updatedAt: timestamp("updated_at", { withTimezone: true, mode: "string" })
-    .defaultNow()
+  priority: text("priority", {
+    enum: ["Low", "Medium", "High"],
+  })
+    .default("Medium")
+    .notNull(),
+  label: text("label", {
+    enum: ["Feature", "Bug", "Documentation"],
+  })
+    .default("Feature")
+    .notNull(),
+  createdAt: text("created_at").$default(nowAsISO).notNull(),
+  updatedAt: text("updated_at")
+    .$default(nowAsISO)
+    .$onUpdate(nowAsISO)
     .notNull(),
   projectId: text("project_id")
     .references(() => projects.id, { onDelete: "cascade" })
