@@ -8,10 +8,13 @@ on:
 jobs:
   check:
     runs-on: ubuntu-latest
+    timeout-minutes: 5
 
     steps:
       - name: 🏗 Setup Repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
 
       - name: 📦 Install
         uses: ./.github/actions/setup
