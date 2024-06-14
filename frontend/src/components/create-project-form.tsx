@@ -3,20 +3,20 @@ import { useMutation } from "@tanstack/react-query";
 import { FolderPlusIcon } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
-import { type Output, minLength, object, string } from "valibot";
+import { type InferOutput, minLength, object, pipe, string } from "valibot";
 
 import { createProjectOptions } from "@/api/create-project";
 import { TextInput } from "@/components/text-input";
 import { Link } from "@tanstack/react-router";
 
 const schema = object({
-  name: string([minLength(1, "Your name is too short.")]),
-  description: string([minLength(1, "Your description is too short.")]),
+  name: pipe(string(), minLength(1, "Your name is too short.")),
+  description: pipe(string(), minLength(1, "Your description is too short.")),
 });
 
 export const CreateProjectForm = () => {
   const { mutate, isPending } = useMutation(createProjectOptions);
-  const { handleSubmit, control, reset } = useForm<Output<typeof schema>>({
+  const { handleSubmit, control, reset } = useForm<InferOutput<typeof schema>>({
     resolver: valibotResolver(schema),
     defaultValues: {
       name: "",

@@ -5,7 +5,14 @@ import { getRouteApi } from "@tanstack/react-router";
 import { FolderPenIcon, SaveIcon, XIcon } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { type Output, boolean, minLength, object, string } from "valibot";
+import {
+  type InferOutput,
+  boolean,
+  minLength,
+  object,
+  pipe,
+  string,
+} from "valibot";
 
 import { editProjectOptions } from "@/api/edit-project";
 import { projectQueryOptions } from "@/api/query-project";
@@ -14,8 +21,8 @@ import { TextInput } from "@/components/text-input";
 const routeApi = getRouteApi("/projects/$projectId");
 
 const schema = object({
-  name: string([minLength(1, "Your username is too short.")]),
-  description: string([minLength(1, "Your description is too short.")]),
+  name: pipe(string(), minLength(1, "Your username is too short.")),
+  description: pipe(string(), minLength(1, "Your description is too short.")),
   isFavorite: boolean(),
   isDone: boolean(),
 });
@@ -26,7 +33,7 @@ export const EditProject = () => {
   const { mutate } = useMutation(editProjectOptions);
   const [open, setOpen] = useState(false);
 
-  const form = useForm<Output<typeof schema>>({
+  const form = useForm<InferOutput<typeof schema>>({
     resolver: valibotResolver(schema),
     values: {
       description: project.description,
