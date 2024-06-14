@@ -5,10 +5,11 @@ import { ListPlusIcon } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import {
-  type Output,
+  type InferOutput,
   literal,
   minLength,
   object,
+  pipe,
   string,
   union,
 } from "valibot";
@@ -21,14 +22,14 @@ import { labels, priorities } from "@/constants/tasks";
 const routeApi = getRouteApi("/projects/$projectId/tasks/new");
 
 const schema = object({
-  name: string([minLength(1, "Your name is too short.")]),
+  name: pipe(string(), minLength(1, "Your name is too short.")),
   priority: union([literal("Low"), literal("Medium"), literal("High")]),
   label: union([literal("Feature"), literal("Documentation"), literal("Bug")]),
 });
 
 export const CreateTaskForm = () => {
   const { projectId } = routeApi.useParams();
-  const { handleSubmit, control, reset } = useForm<Output<typeof schema>>({
+  const { handleSubmit, control, reset } = useForm<InferOutput<typeof schema>>({
     resolver: valibotResolver(schema),
     defaultValues: {
       name: "",

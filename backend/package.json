@@ -13,7 +13,7 @@
     "format": "biome format .",
     "format:fix": "biome format --write .",
     "lint": "biome lint .",
-    "lint:fix": "biome lint --apply .",
+    "lint:fix": "biome lint --write .",
     "preview": "dotenv-run -- bun run dist/index.js",
     "typecheck": "tsc --noEmit"
   },
@@ -23,16 +23,16 @@
     "@libsql/client": "0.6.2",
     "@lucia-auth/adapter-drizzle": "1.0.7",
     "date-fns": "3.6.0",
-    "drizzle-orm": "0.31.1",
+    "drizzle-orm": "0.31.2",
     "drizzle-typebox": "0.1.1",
-    "elysia": "1.0.22",
+    "elysia": "1.0.23",
     "lucia": "3.2.0",
     "nanoid": "5.0.7",
     "oslo": "1.2.0",
     "picocolors": "1.0.1"
   },
   "devDependencies": {
-    "drizzle-kit": "0.22.2",
+    "drizzle-kit": "0.22.7",
     "rimraf": "5.0.7",
     "typescript": "5.4.5"
   }

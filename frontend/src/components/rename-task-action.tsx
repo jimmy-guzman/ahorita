@@ -4,13 +4,13 @@ import { useMutation } from "@tanstack/react-query";
 import { PencilIcon, SaveIcon, XIcon } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { type Output, minLength, object, string } from "valibot";
+import { type InferOutput, minLength, object, pipe, string } from "valibot";
 
 import { editTaskMutationOptions } from "@/api/edit-task";
 import { TextInput } from "@/components/text-input";
 
 const schema = object({
-  name: string([minLength(1, "Your username is too short.")]),
+  name: pipe(string(), minLength(1, "Your username is too short.")),
 });
 
 interface RenameTaskActionProps {
@@ -21,7 +21,7 @@ interface RenameTaskActionProps {
 export const RenameTaskAction = ({ name, taskId }: RenameTaskActionProps) => {
   const { mutate } = useMutation(editTaskMutationOptions);
   const [open, setOpen] = useState(false);
-  const form = useForm<Output<typeof schema>>({
+  const form = useForm<InferOutput<typeof schema>>({
     resolver: valibotResolver(schema),
     values: { name },
   });
