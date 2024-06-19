@@ -3,6 +3,7 @@ import swagger from "@elysiajs/swagger";
 import { Elysia } from "elysia";
 import { cyan } from "picocolors";
 
+import env from "./env";
 import { authRoutes } from "./routes/auth";
 import { projectsRoutes } from "./routes/projects";
 import { tasksRoutes } from "./routes/tasks";
@@ -34,7 +35,7 @@ const app = new Elysia()
   .use(projectsRoutes)
   .use(tasksRoutes)
   .use(usersRoutes)
-  .listen(3000, ({ url }) => {
+  .listen(env.PORT, ({ url }) => {
     // biome-ignore lint/nursery/noConsole: elysia does not provide a logger
     console.log(`🚀 Running at ${cyan(url.toString())}`);
   });
