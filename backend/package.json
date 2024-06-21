@@ -35,6 +35,6 @@
   "devDependencies": {
     "drizzle-kit": "0.22.7",
     "rimraf": "5.0.7",
-    "typescript": "5.4.5"
+    "typescript": "5.5.2"
   }
 }

@@ -50,7 +50,13 @@ export const DeleteTaskAction = ({
                   });
                 }}
               >
-                <AlertDialog.Title>Are You Sure?</AlertDialog.Title>
+                <AlertDialog.Title className="font-bold text-lg">
+                  Are You Sure?
+                </AlertDialog.Title>
+                <AlertDialog.Description className="py-4">
+                  This action cannot be undone. This will permanently delete
+                  your task.
+                </AlertDialog.Description>
                 <div className="dsy-modal-action">
                   <button
                     type="button"
