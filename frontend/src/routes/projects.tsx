@@ -140,7 +140,10 @@ export const Route = createFileRoute("/projects")({
     }
   },
   loader: async ({ context }) => {
-    await context.queryClient.ensureQueryData(projectsQueryOptions);
+    // TODO: remove context null check when issue of being undefined is addressed
+    if (context) {
+      await context.queryClient.ensureQueryData(projectsQueryOptions);
+    }
   },
   component: Projects,
 });
