@@ -30,7 +30,7 @@ function Projects() {
             </div>
             <Link
               to="/"
-              className="dsy-btn dsy-btn-ghost bg-gradient-to-r from-primary to-secondary bg-clip-text text-lg text-transparent normal-case lg:hidden md:text-3xl"
+              className="dsy-btn dsy-btn-ghost bg-gradient-to-r from-primary to-secondary bg-clip-text text-lg text-transparent normal-case md:text-3xl lg:hidden"
             >
               ahorita
             </Link>
@@ -68,7 +68,7 @@ function Projects() {
         <div className="bg-base-100">
           <Link
             to="/"
-            className="dsy-btn dsy-btn-ghost dsy-btn-lg hidden bg-gradient-to-r from-primary to-secondary bg-clip-text text-lg text-transparent normal-case lg:flex md:text-3xl"
+            className="dsy-btn dsy-btn-ghost dsy-btn-lg hidden bg-gradient-to-r from-primary to-secondary bg-clip-text text-lg text-transparent normal-case md:text-3xl lg:flex"
           >
             ahorita
           </Link>
