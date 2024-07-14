@@ -10,14 +10,7 @@ import { tasksRoutes } from "./routes/tasks";
 import { usersRoutes } from "./routes/users";
 
 const app = new Elysia()
-  .use(
-    cors({
-      methods: ["GET", "POST", "PATCH", "DELETE", "PUT"],
-      allowedHeaders: ["Content-Type"],
-      // TODO: revisit when https://github.com/elysiajs/elysia-cors/issues/41 is addressed
-      origin: /localhost.*/,
-    }),
-  )
+  .use(cors())
   .use(
     swagger({
       path: "",
