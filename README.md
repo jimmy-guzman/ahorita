@@ -10,6 +10,7 @@
 - [Turborepo](https://turbo.build/repo)
 - [Biome](https://biomejs.dev)
 - [lefthook](https://github.com/evilmartians/lefthook)
+- [Knip](https://knip.dev)
 - [Playwright](https://playwright.dev)
 - [GitHub Actions](https://github.com/features/actions)
 
