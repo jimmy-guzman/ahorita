@@ -19,5 +19,11 @@ jobs:
       - name: 📦 Install
         uses: ./.github/actions/setup
 
+      - name: ✂️ Knip
+        run: bun knip
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          TURSO_AUTH_TOKEN: ${{ secrets.TURSO_AUTH_TOKEN }}
+
       - name: 🚨 Check
         run: bun check
