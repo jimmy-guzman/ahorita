@@ -3,7 +3,6 @@ import { Elysia, NotFoundError, t } from "elysia";
 
 import { db } from "../db";
 import { auth } from "../middleware/auth";
-import { selectProjectSchema } from "../models/projects";
 import { selectTaskSchema } from "../models/tasks";
 import { tasks } from "../schemas";
 
@@ -13,7 +12,7 @@ const Params = t.Object({ taskId: t.String() });
 
 export const taskRoutes = new Elysia({ prefix: "/:taskId" })
   .use(auth)
-  .model({ project: selectProjectSchema, task: selectTaskSchema })
+  .model({ task: selectTaskSchema })
   .patch(
     "",
     async ({ params: { taskId }, body }) => {
@@ -24,7 +23,7 @@ export const taskRoutes = new Elysia({ prefix: "/:taskId" })
         .returning();
 
       if (!task) {
-        throw NotFoundError;
+        throw new NotFoundError("Task Not Found");
       }
 
       return task;
@@ -47,7 +46,7 @@ export const taskRoutes = new Elysia({ prefix: "/:taskId" })
         .returning();
 
       if (!task) {
-        throw NotFoundError;
+        throw new NotFoundError("Task Not Found");
       }
 
       return task;
@@ -56,5 +55,24 @@ export const taskRoutes = new Elysia({ prefix: "/:taskId" })
       params: Params,
       response: "task",
       detail: { tags, summary: "Delete a task" },
+    },
+  )
+  .get(
+    "",
+    async ({ params: { taskId } }) => {
+      const task = await db.query.tasks.findFirst({
+        where: eq(tasks.id, taskId),
+      });
+
+      if (!task) {
+        throw new NotFoundError("Task Not Found");
+      }
+
+      return task;
+    },
+    {
+      params: Params,
+      response: "task",
+      detail: { tags, summary: "Find task by id" },
     },
   );
