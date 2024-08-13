@@ -34,7 +34,7 @@ export const taskRoutes = new Elysia({ prefix: "/:taskId" })
       ),
       params: Params,
       response: "task",
-      detail: { tags, summary: "Updates a task" },
+      detail: { tags, summary: "Update Task" },
     },
   )
   .delete(
@@ -54,7 +54,7 @@ export const taskRoutes = new Elysia({ prefix: "/:taskId" })
     {
       params: Params,
       response: "task",
-      detail: { tags, summary: "Delete a task" },
+      detail: { tags, summary: "Delete Task" },
     },
   )
   .get(
@@ -73,6 +73,6 @@ export const taskRoutes = new Elysia({ prefix: "/:taskId" })
     {
       params: Params,
       response: "task",
-      detail: { tags, summary: "Find task by id" },
+      detail: { tags, summary: "Get Task" },
     },
   );
