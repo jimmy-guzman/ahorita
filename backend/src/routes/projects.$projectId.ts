@@ -31,7 +31,7 @@ export const projectRoutes = new Elysia({ prefix: "/:projectId" })
     {
       params: Params,
       response: "project",
-      detail: { tags, summary: "Find project by id" },
+      detail: { tags, summary: "Get Project" },
     },
   )
   .patch(
@@ -60,7 +60,7 @@ export const projectRoutes = new Elysia({ prefix: "/:projectId" })
         ]),
       ),
       response: "project",
-      detail: { tags, summary: "Updates a project" },
+      detail: { tags, summary: "Update Project" },
     },
   )
   .delete(
@@ -80,6 +80,6 @@ export const projectRoutes = new Elysia({ prefix: "/:projectId" })
     {
       params: Params,
       response: "project",
-      detail: { tags, summary: "Deletes a project" },
+      detail: { tags, summary: "Delete Project" },
     },
   );

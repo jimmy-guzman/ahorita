@@ -28,7 +28,7 @@ export const tasksRoutes = new Elysia({ prefix: "/tasks" })
     {
       body: insertTaskSchema,
       response: "task",
-      detail: { tags, summary: "Add a new task" },
+      detail: { tags, summary: "Create Task" },
     },
   )
   .get(
@@ -59,7 +59,7 @@ export const tasksRoutes = new Elysia({ prefix: "/tasks" })
         "updatedAt",
       ]),
       response: t.Array(selectTaskSchema),
-      detail: { tags, summary: "Find tasks" },
+      detail: { tags, summary: "List Tasks" },
     },
   )
   .use(taskRoutes);

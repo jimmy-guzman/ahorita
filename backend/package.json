@@ -20,9 +20,9 @@
   "dependencies": {
     "@elysiajs/cors": "1.0.5",
     "@elysiajs/swagger": "1.0.5",
-    "@libsql/client": "0.8.1",
+    "@libsql/client": "0.9.0",
     "@lucia-auth/adapter-drizzle": "1.1.0",
-    "drizzle-orm": "0.32.2",
+    "drizzle-orm": "0.33.0",
     "drizzle-typebox": "0.1.1",
     "elysia": "1.0.27",
     "env-schema": "6.0.0",
@@ -32,7 +32,7 @@
     "picocolors": "1.0.1"
   },
   "devDependencies": {
-    "drizzle-kit": "0.23.2",
+    "drizzle-kit": "0.24.0",
     "rimraf": "6.0.1",
     "typescript": "5.5.4"
   }

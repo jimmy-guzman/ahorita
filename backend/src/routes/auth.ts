@@ -46,7 +46,7 @@ export const authRoutes = new Elysia({ prefix: "/auth" })
     },
     {
       body: t.Object({ username: t.String(), password: t.String() }),
-      detail: { tags },
+      detail: { tags, summary: "Login" },
     },
   )
   .post(
@@ -73,7 +73,7 @@ export const authRoutes = new Elysia({ prefix: "/auth" })
         username: t.String(),
         password: t.String(),
       }),
-      detail: { tags },
+      detail: { tags, summary: "Signup" },
     },
   )
   .post(
@@ -107,6 +107,6 @@ export const authRoutes = new Elysia({ prefix: "/auth" })
       });
     },
     {
-      detail: { tags },
+      detail: { tags, summary: "Logout" },
     },
   );

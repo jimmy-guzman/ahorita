@@ -24,7 +24,7 @@ export const projectsRoutes = new Elysia({ prefix: "/projects" })
     },
     {
       response: t.Array(selectProjectSchema),
-      detail: { tags, summary: "Find projects" },
+      detail: { tags, summary: "List Projects" },
     },
   )
   .post(
@@ -46,7 +46,7 @@ export const projectsRoutes = new Elysia({ prefix: "/projects" })
     {
       body: t.Pick(selectProjectSchema, ["name", "description"]),
       response: "project",
-      detail: { tags, summary: "Add a new project" },
+      detail: { tags, summary: "Create Project" },
     },
   )
   .get(
@@ -95,7 +95,7 @@ export const projectsRoutes = new Elysia({ prefix: "/projects" })
           Canceled: t.Number(),
         }),
       ),
-      detail: { tags, summary: "Find projects' totals" },
+      detail: { tags, summary: "List Projects' Totals" },
     },
   )
   .use(projectRoutes);

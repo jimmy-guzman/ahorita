@@ -13,5 +13,5 @@ export const usersRoutes = new Elysia({ prefix: "/users" })
   .model({ user: UserSchema })
   .get("/me", ({ user }) => ({ user }), {
     response: "user",
-    detail: { tags },
+    detail: { tags, summary: "Get Me" },
   });
