@@ -22,6 +22,8 @@
     "@elysiajs/swagger": "1.0.5",
     "@libsql/client": "0.9.0",
     "@lucia-auth/adapter-drizzle": "1.1.0",
+    "@oslojs/crypto": "0.6.2",
+    "@oslojs/encoding": "0.4.1",
     "drizzle-orm": "0.33.0",
     "drizzle-typebox": "0.1.1",
     "elysia": "1.0.27",
