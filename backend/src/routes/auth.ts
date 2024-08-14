@@ -5,22 +5,21 @@ import { Argon2id } from "oslo/password";
 import { lucia } from "../auth";
 import { db } from "../db";
 import { users } from "../schemas";
+import { isPasswordStrong } from "../utils/is-password-strong";
 
 const tags = ["Authentication"];
 
 export const authRoutes = new Elysia({ prefix: "/auth" })
   .post(
     "/login",
-    async ({ set, body: { username, password }, cookie }) => {
+    async ({ body: { username, password }, cookie, error }) => {
       const [existingUser] = await db
         .select()
         .from(users)
         .where(eq(users.username, username));
 
       if (!existingUser) {
-        set.status = 401;
-
-        throw new Error("Invalid Username");
+        return error(401, "Invalid Username");
       }
 
       const validPassword = await new Argon2id().verify(
@@ -29,9 +28,7 @@ export const authRoutes = new Elysia({ prefix: "/auth" })
       );
 
       if (!validPassword) {
-        set.status = 401;
-
-        throw new Error("Invalid Password");
+        return error(401, "Invalid Password");
       }
 
       const session = await lucia.createSession(existingUser.id, {});
@@ -51,7 +48,11 @@ export const authRoutes = new Elysia({ prefix: "/auth" })
   )
   .post(
     "/signup",
-    async ({ body: { username, password }, cookie }) => {
+    async ({ body: { username, password }, cookie, error }) => {
+      if (!(await isPasswordStrong(password))) {
+        return error(400, "Weak Password");
+      }
+
       const hashedPassword = await new Argon2id().hash(password);
 
       const userId = generateId(15);
@@ -78,23 +79,19 @@ export const authRoutes = new Elysia({ prefix: "/auth" })
   )
   .post(
     "/logout",
-    async ({ set, request, cookie }) => {
+    async ({ request, cookie, error }) => {
       const cookieHeader = request.headers.get("Cookie") ?? "";
 
       const sessionId = lucia.readSessionCookie(cookieHeader);
 
       if (!sessionId) {
-        set.status = 401;
-
-        throw new Error("No Session");
+        return error(401, "No Session");
       }
 
       const { session } = await lucia.validateSession(sessionId);
 
       if (!session) {
-        set.status = 401;
-
-        throw new Error("Invalid Session");
+        return error(401, "Invalid Session");
       }
 
       await lucia.invalidateSession(session.id);
