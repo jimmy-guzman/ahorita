@@ -1,11 +1,12 @@
 import { useMutation } from "@tanstack/react-query";
-import { EllipsisIcon } from "lucide-react";
+import { Link } from "@tanstack/react-router";
+import { EllipsisIcon, EyeIcon } from "lucide-react";
+import { useRef } from "react";
 
 import type { APITypes } from "@/api/client";
 import { editTaskMutationOptions } from "@/api/edit-task";
 import { labels, priorities, statuses } from "@/constants/tasks";
 
-import { useRef } from "react";
 import { DeleteTaskAction } from "./delete-task-action";
 import { RenameTaskAction } from "./rename-task-action";
 
@@ -110,6 +111,17 @@ export const TasksTableRowActions = ({ task }: TaskTableActionsProps) => {
           </details>
         </li>
         <div className="dsy-divider my-1" />
+        <li>
+          <Link
+            to="/projects/$projectId/tasks/$taskId"
+            params={{ projectId: task.projectId, taskId: task.id }}
+          >
+            View
+            <span className="dsy-badge dsy-badge-ghost">
+              <EyeIcon className="h-4 w-4" />
+            </span>
+          </Link>
+        </li>
         <li>
           <RenameTaskAction name={task.name} taskId={task.id} />
         </li>
