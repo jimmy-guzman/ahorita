@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import { toast } from "sonner";
 
 import type { APIRoutes } from "@/api/client";
@@ -20,9 +21,19 @@ export const editTaskMutationOptions = mutationOptions({
 
     return res.data;
   },
-  onSuccess: async ({ projectId, name }) => {
+  onSuccess: async ({ id, projectId, name }) => {
     await queryClient.invalidateQueries(tasksQueryOptions({ projectId }));
 
-    toast.success(`Task ${name} has been edited`);
+    toast.success(`Task ${name} has been edited`, {
+      action: (
+        <Link
+          to="/projects/$projectId/tasks/$taskId"
+          params={{ taskId: id, projectId }}
+          className="dsy-link"
+        >
+          View Task
+        </Link>
+      ),
+    });
   },
 });

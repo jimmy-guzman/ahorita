@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import { createColumnHelper } from "@tanstack/react-table";
 
 import type { APITypes } from "@/api/client";
@@ -11,7 +12,20 @@ const columnHelper = createColumnHelper<APITypes["task"]>();
 export const columns = [
   columnHelper.accessor("name", {
     header: "Name",
-    cell: (info) => info.getValue(),
+    cell: (info) => {
+      return (
+        <Link
+          className="dsy-link"
+          to="/projects/$projectId/tasks/$taskId"
+          params={{
+            projectId: info.row.original.projectId,
+            taskId: info.row.original.id,
+          }}
+        >
+          {info.getValue()}
+        </Link>
+      );
+    },
   }),
   columnHelper.accessor("label", {
     header: "Label",
