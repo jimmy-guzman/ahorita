@@ -12,17 +12,18 @@
 
 import { Route as rootRoute } from "./routes/__root";
 import { Route as SignupImport } from "./routes/signup";
-import { Route as ProjectsImport } from "./routes/projects";
 import { Route as LoginImport } from "./routes/login";
+import { Route as AuthRouteImport } from "./routes/_auth/route";
 import { Route as IndexImport } from "./routes/index";
-import { Route as ProjectsIndexImport } from "./routes/projects.index";
-import { Route as ProjectsNewImport } from "./routes/projects.new";
-import { Route as ProjectsProjectIdImport } from "./routes/projects.$projectId";
-import { Route as ProjectsProjectIdIndexImport } from "./routes/projects.$projectId.index";
-import { Route as ProjectsProjectIdTasksImport } from "./routes/projects.$projectId.tasks";
-import { Route as ProjectsProjectIdTasksIndexImport } from "./routes/projects.$projectId.tasks.index";
-import { Route as ProjectsProjectIdTasksNewImport } from "./routes/projects.$projectId.tasks.new";
-import { Route as ProjectsProjectIdTasksTaskIdImport } from "./routes/projects.$projectId.tasks.$taskId";
+import { Route as AuthProjectsImport } from "./routes/_auth/projects";
+import { Route as AuthProjectsIndexImport } from "./routes/_auth/projects.index";
+import { Route as AuthProjectsNewImport } from "./routes/_auth/projects.new";
+import { Route as AuthProjectsProjectIdImport } from "./routes/_auth/projects.$projectId";
+import { Route as AuthProjectsProjectIdIndexImport } from "./routes/_auth/projects.$projectId.index";
+import { Route as AuthProjectsProjectIdTasksImport } from "./routes/_auth/projects.$projectId.tasks";
+import { Route as AuthProjectsProjectIdTasksIndexImport } from "./routes/_auth/projects.$projectId.tasks.index";
+import { Route as AuthProjectsProjectIdTasksNewImport } from "./routes/_auth/projects.$projectId.tasks.new";
+import { Route as AuthProjectsProjectIdTasksTaskIdImport } from "./routes/_auth/projects.$projectId.tasks.$taskId";
 
 // Create/Update Routes
 
@@ -31,13 +32,13 @@ const SignupRoute = SignupImport.update({
   getParentRoute: () => rootRoute,
 } as any);
 
-const ProjectsRoute = ProjectsImport.update({
-  path: "/projects",
+const LoginRoute = LoginImport.update({
+  path: "/login",
   getParentRoute: () => rootRoute,
 } as any);
 
-const LoginRoute = LoginImport.update({
-  path: "/login",
+const AuthRouteRoute = AuthRouteImport.update({
+  id: "/_auth",
   getParentRoute: () => rootRoute,
 } as any);
 
@@ -46,46 +47,56 @@ const IndexRoute = IndexImport.update({
   getParentRoute: () => rootRoute,
 } as any);
 
-const ProjectsIndexRoute = ProjectsIndexImport.update({
-  path: "/",
-  getParentRoute: () => ProjectsRoute,
+const AuthProjectsRoute = AuthProjectsImport.update({
+  path: "/projects",
+  getParentRoute: () => AuthRouteRoute,
 } as any);
 
-const ProjectsNewRoute = ProjectsNewImport.update({
+const AuthProjectsIndexRoute = AuthProjectsIndexImport.update({
+  path: "/",
+  getParentRoute: () => AuthProjectsRoute,
+} as any);
+
+const AuthProjectsNewRoute = AuthProjectsNewImport.update({
   path: "/new",
-  getParentRoute: () => ProjectsRoute,
+  getParentRoute: () => AuthProjectsRoute,
 } as any);
 
-const ProjectsProjectIdRoute = ProjectsProjectIdImport.update({
+const AuthProjectsProjectIdRoute = AuthProjectsProjectIdImport.update({
   path: "/$projectId",
-  getParentRoute: () => ProjectsRoute,
+  getParentRoute: () => AuthProjectsRoute,
 } as any);
 
-const ProjectsProjectIdIndexRoute = ProjectsProjectIdIndexImport.update({
-  path: "/",
-  getParentRoute: () => ProjectsProjectIdRoute,
-} as any);
-
-const ProjectsProjectIdTasksRoute = ProjectsProjectIdTasksImport.update({
-  path: "/tasks",
-  getParentRoute: () => ProjectsProjectIdRoute,
-} as any);
-
-const ProjectsProjectIdTasksIndexRoute =
-  ProjectsProjectIdTasksIndexImport.update({
+const AuthProjectsProjectIdIndexRoute = AuthProjectsProjectIdIndexImport.update(
+  {
     path: "/",
-    getParentRoute: () => ProjectsProjectIdTasksRoute,
+    getParentRoute: () => AuthProjectsProjectIdRoute,
+  } as any,
+);
+
+const AuthProjectsProjectIdTasksRoute = AuthProjectsProjectIdTasksImport.update(
+  {
+    path: "/tasks",
+    getParentRoute: () => AuthProjectsProjectIdRoute,
+  } as any,
+);
+
+const AuthProjectsProjectIdTasksIndexRoute =
+  AuthProjectsProjectIdTasksIndexImport.update({
+    path: "/",
+    getParentRoute: () => AuthProjectsProjectIdTasksRoute,
   } as any);
 
-const ProjectsProjectIdTasksNewRoute = ProjectsProjectIdTasksNewImport.update({
-  path: "/new",
-  getParentRoute: () => ProjectsProjectIdTasksRoute,
-} as any);
+const AuthProjectsProjectIdTasksNewRoute =
+  AuthProjectsProjectIdTasksNewImport.update({
+    path: "/new",
+    getParentRoute: () => AuthProjectsProjectIdTasksRoute,
+  } as any);
 
-const ProjectsProjectIdTasksTaskIdRoute =
-  ProjectsProjectIdTasksTaskIdImport.update({
+const AuthProjectsProjectIdTasksTaskIdRoute =
+  AuthProjectsProjectIdTasksTaskIdImport.update({
     path: "/$taskId",
-    getParentRoute: () => ProjectsProjectIdTasksRoute,
+    getParentRoute: () => AuthProjectsProjectIdTasksRoute,
   } as any);
 
 // Populate the FileRoutesByPath interface
@@ -99,18 +110,18 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof IndexImport;
       parentRoute: typeof rootRoute;
     };
+    "/_auth": {
+      id: "/_auth";
+      path: "";
+      fullPath: "";
+      preLoaderRoute: typeof AuthRouteImport;
+      parentRoute: typeof rootRoute;
+    };
     "/login": {
       id: "/login";
       path: "/login";
       fullPath: "/login";
       preLoaderRoute: typeof LoginImport;
-      parentRoute: typeof rootRoute;
-    };
-    "/projects": {
-      id: "/projects";
-      path: "/projects";
-      fullPath: "/projects";
-      preLoaderRoute: typeof ProjectsImport;
       parentRoute: typeof rootRoute;
     };
     "/signup": {
@@ -120,61 +131,68 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof SignupImport;
       parentRoute: typeof rootRoute;
     };
-    "/projects/$projectId": {
-      id: "/projects/$projectId";
+    "/_auth/projects": {
+      id: "/_auth/projects";
+      path: "/projects";
+      fullPath: "/projects";
+      preLoaderRoute: typeof AuthProjectsImport;
+      parentRoute: typeof AuthRouteImport;
+    };
+    "/_auth/projects/$projectId": {
+      id: "/_auth/projects/$projectId";
       path: "/$projectId";
       fullPath: "/projects/$projectId";
-      preLoaderRoute: typeof ProjectsProjectIdImport;
-      parentRoute: typeof ProjectsImport;
+      preLoaderRoute: typeof AuthProjectsProjectIdImport;
+      parentRoute: typeof AuthProjectsImport;
     };
-    "/projects/new": {
-      id: "/projects/new";
+    "/_auth/projects/new": {
+      id: "/_auth/projects/new";
       path: "/new";
       fullPath: "/projects/new";
-      preLoaderRoute: typeof ProjectsNewImport;
-      parentRoute: typeof ProjectsImport;
+      preLoaderRoute: typeof AuthProjectsNewImport;
+      parentRoute: typeof AuthProjectsImport;
     };
-    "/projects/": {
-      id: "/projects/";
+    "/_auth/projects/": {
+      id: "/_auth/projects/";
       path: "/";
       fullPath: "/projects/";
-      preLoaderRoute: typeof ProjectsIndexImport;
-      parentRoute: typeof ProjectsImport;
+      preLoaderRoute: typeof AuthProjectsIndexImport;
+      parentRoute: typeof AuthProjectsImport;
     };
-    "/projects/$projectId/tasks": {
-      id: "/projects/$projectId/tasks";
+    "/_auth/projects/$projectId/tasks": {
+      id: "/_auth/projects/$projectId/tasks";
       path: "/tasks";
       fullPath: "/projects/$projectId/tasks";
-      preLoaderRoute: typeof ProjectsProjectIdTasksImport;
-      parentRoute: typeof ProjectsProjectIdImport;
+      preLoaderRoute: typeof AuthProjectsProjectIdTasksImport;
+      parentRoute: typeof AuthProjectsProjectIdImport;
     };
-    "/projects/$projectId/": {
-      id: "/projects/$projectId/";
+    "/_auth/projects/$projectId/": {
+      id: "/_auth/projects/$projectId/";
       path: "/";
       fullPath: "/projects/$projectId/";
-      preLoaderRoute: typeof ProjectsProjectIdIndexImport;
-      parentRoute: typeof ProjectsProjectIdImport;
+      preLoaderRoute: typeof AuthProjectsProjectIdIndexImport;
+      parentRoute: typeof AuthProjectsProjectIdImport;
     };
-    "/projects/$projectId/tasks/$taskId": {
-      id: "/projects/$projectId/tasks/$taskId";
+    "/_auth/projects/$projectId/tasks/$taskId": {
+      id: "/_auth/projects/$projectId/tasks/$taskId";
       path: "/$taskId";
       fullPath: "/projects/$projectId/tasks/$taskId";
-      preLoaderRoute: typeof ProjectsProjectIdTasksTaskIdImport;
-      parentRoute: typeof ProjectsProjectIdTasksImport;
+      preLoaderRoute: typeof AuthProjectsProjectIdTasksTaskIdImport;
+      parentRoute: typeof AuthProjectsProjectIdTasksImport;
     };
-    "/projects/$projectId/tasks/new": {
-      id: "/projects/$projectId/tasks/new";
+    "/_auth/projects/$projectId/tasks/new": {
+      id: "/_auth/projects/$projectId/tasks/new";
       path: "/new";
       fullPath: "/projects/$projectId/tasks/new";
-      preLoaderRoute: typeof ProjectsProjectIdTasksNewImport;
-      parentRoute: typeof ProjectsProjectIdTasksImport;
+      preLoaderRoute: typeof AuthProjectsProjectIdTasksNewImport;
+      parentRoute: typeof AuthProjectsProjectIdTasksImport;
     };
-    "/projects/$projectId/tasks/": {
-      id: "/projects/$projectId/tasks/";
+    "/_auth/projects/$projectId/tasks/": {
+      id: "/_auth/projects/$projectId/tasks/";
       path: "/";
       fullPath: "/projects/$projectId/tasks/";
-      preLoaderRoute: typeof ProjectsProjectIdTasksIndexImport;
-      parentRoute: typeof ProjectsProjectIdTasksImport;
+      preLoaderRoute: typeof AuthProjectsProjectIdTasksIndexImport;
+      parentRoute: typeof AuthProjectsProjectIdTasksImport;
     };
   }
 }
@@ -183,19 +201,22 @@ declare module "@tanstack/react-router" {
 
 export const routeTree = rootRoute.addChildren({
   IndexRoute,
-  LoginRoute,
-  ProjectsRoute: ProjectsRoute.addChildren({
-    ProjectsProjectIdRoute: ProjectsProjectIdRoute.addChildren({
-      ProjectsProjectIdTasksRoute: ProjectsProjectIdTasksRoute.addChildren({
-        ProjectsProjectIdTasksTaskIdRoute,
-        ProjectsProjectIdTasksNewRoute,
-        ProjectsProjectIdTasksIndexRoute,
+  AuthRouteRoute: AuthRouteRoute.addChildren({
+    AuthProjectsRoute: AuthProjectsRoute.addChildren({
+      AuthProjectsProjectIdRoute: AuthProjectsProjectIdRoute.addChildren({
+        AuthProjectsProjectIdTasksRoute:
+          AuthProjectsProjectIdTasksRoute.addChildren({
+            AuthProjectsProjectIdTasksTaskIdRoute,
+            AuthProjectsProjectIdTasksNewRoute,
+            AuthProjectsProjectIdTasksIndexRoute,
+          }),
+        AuthProjectsProjectIdIndexRoute,
       }),
-      ProjectsProjectIdIndexRoute,
+      AuthProjectsNewRoute,
+      AuthProjectsIndexRoute,
     }),
-    ProjectsNewRoute,
-    ProjectsIndexRoute,
   }),
+  LoginRoute,
   SignupRoute,
 });
 
@@ -208,68 +229,75 @@ export const routeTree = rootRoute.addChildren({
       "filePath": "__root.tsx",
       "children": [
         "/",
+        "/_auth",
         "/login",
-        "/projects",
         "/signup"
       ]
     },
     "/": {
       "filePath": "index.tsx"
     },
+    "/_auth": {
+      "filePath": "_auth/route.tsx",
+      "children": [
+        "/_auth/projects"
+      ]
+    },
     "/login": {
       "filePath": "login.tsx"
-    },
-    "/projects": {
-      "filePath": "projects.tsx",
-      "children": [
-        "/projects/$projectId",
-        "/projects/new",
-        "/projects/"
-      ]
     },
     "/signup": {
       "filePath": "signup.tsx"
     },
-    "/projects/$projectId": {
-      "filePath": "projects.$projectId.tsx",
-      "parent": "/projects",
+    "/_auth/projects": {
+      "filePath": "_auth/projects.tsx",
+      "parent": "/_auth",
       "children": [
-        "/projects/$projectId/tasks",
-        "/projects/$projectId/"
+        "/_auth/projects/$projectId",
+        "/_auth/projects/new",
+        "/_auth/projects/"
       ]
     },
-    "/projects/new": {
-      "filePath": "projects.new.tsx",
-      "parent": "/projects"
-    },
-    "/projects/": {
-      "filePath": "projects.index.tsx",
-      "parent": "/projects"
-    },
-    "/projects/$projectId/tasks": {
-      "filePath": "projects.$projectId.tasks.tsx",
-      "parent": "/projects/$projectId",
+    "/_auth/projects/$projectId": {
+      "filePath": "_auth/projects.$projectId.tsx",
+      "parent": "/_auth/projects",
       "children": [
-        "/projects/$projectId/tasks/$taskId",
-        "/projects/$projectId/tasks/new",
-        "/projects/$projectId/tasks/"
+        "/_auth/projects/$projectId/tasks",
+        "/_auth/projects/$projectId/"
       ]
     },
-    "/projects/$projectId/": {
-      "filePath": "projects.$projectId.index.tsx",
-      "parent": "/projects/$projectId"
+    "/_auth/projects/new": {
+      "filePath": "_auth/projects.new.tsx",
+      "parent": "/_auth/projects"
     },
-    "/projects/$projectId/tasks/$taskId": {
-      "filePath": "projects.$projectId.tasks.$taskId.tsx",
-      "parent": "/projects/$projectId/tasks"
+    "/_auth/projects/": {
+      "filePath": "_auth/projects.index.tsx",
+      "parent": "/_auth/projects"
     },
-    "/projects/$projectId/tasks/new": {
-      "filePath": "projects.$projectId.tasks.new.tsx",
-      "parent": "/projects/$projectId/tasks"
+    "/_auth/projects/$projectId/tasks": {
+      "filePath": "_auth/projects.$projectId.tasks.tsx",
+      "parent": "/_auth/projects/$projectId",
+      "children": [
+        "/_auth/projects/$projectId/tasks/$taskId",
+        "/_auth/projects/$projectId/tasks/new",
+        "/_auth/projects/$projectId/tasks/"
+      ]
     },
-    "/projects/$projectId/tasks/": {
-      "filePath": "projects.$projectId.tasks.index.tsx",
-      "parent": "/projects/$projectId/tasks"
+    "/_auth/projects/$projectId/": {
+      "filePath": "_auth/projects.$projectId.index.tsx",
+      "parent": "/_auth/projects/$projectId"
+    },
+    "/_auth/projects/$projectId/tasks/$taskId": {
+      "filePath": "_auth/projects.$projectId.tasks.$taskId.tsx",
+      "parent": "/_auth/projects/$projectId/tasks"
+    },
+    "/_auth/projects/$projectId/tasks/new": {
+      "filePath": "_auth/projects.$projectId.tasks.new.tsx",
+      "parent": "/_auth/projects/$projectId/tasks"
+    },
+    "/_auth/projects/$projectId/tasks/": {
+      "filePath": "_auth/projects.$projectId.tasks.index.tsx",
+      "parent": "/_auth/projects/$projectId/tasks"
     }
   }
 }

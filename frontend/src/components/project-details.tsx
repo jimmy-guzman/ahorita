@@ -10,7 +10,7 @@ import { DeleteProject } from "./delete-project";
 import { EditProject } from "./edit-project";
 import { ProjectActions } from "./project-actions";
 
-const routeApi = getRouteApi("/projects/$projectId");
+const routeApi = getRouteApi("/_auth/projects/$projectId");
 
 export const ProjectDetails = () => {
   const { projectId } = routeApi.useParams();

@@ -21,7 +21,7 @@ function Dashboard() {
   );
 }
 
-export const Route = createFileRoute("/projects/")({
+export const Route = createFileRoute("/_auth/projects/")({
   loader: async ({ context: { queryClient } }) => {
     await queryClient.ensureQueryData(projectsTotalsQueryOptions);
   },

@@ -1,10 +1,8 @@
 import { Icon } from "@iconify/react";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { Link, Outlet, createFileRoute } from "@tanstack/react-router";
-import { redirect } from "@tanstack/react-router";
 import { FolderPlusIcon, LayoutDashboardIcon, MenuIcon } from "lucide-react";
 
-import { meQueryOptions } from "@/api/query-me";
 import { projectsQueryOptions } from "@/api/query-projects";
 import { LogoutButton } from "@/components/logout-button";
 import { ProjectsMenuItem } from "@/components/projects-menu-item";
@@ -123,22 +121,7 @@ function Projects() {
   );
 }
 
-export const Route = createFileRoute("/projects")({
-  beforeLoad: async ({ location, context }) => {
-    const response = await context.queryClient.fetchQuery({
-      ...meQueryOptions,
-      staleTime: Number.POSITIVE_INFINITY,
-    });
-
-    if (!response.data?.user) {
-      throw redirect({
-        to: "/login",
-        search: {
-          redirect: location.href,
-        },
-      });
-    }
-  },
+export const Route = createFileRoute("/_auth/projects")({
   loader: async ({ context }) => {
     // TODO: remove context null check when issue of being undefined is addressed
     if (context) {

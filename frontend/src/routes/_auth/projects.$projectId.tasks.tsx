@@ -1,5 +1,5 @@
 import { Outlet, createFileRoute } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/projects/$projectId/tasks")({
+export const Route = createFileRoute("/_auth/projects/$projectId/tasks")({
   component: Outlet,
 });
