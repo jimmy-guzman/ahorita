@@ -5,7 +5,7 @@ import { ArrowLeftIcon, SquareCheckIcon, SquareIcon } from "lucide-react";
 
 import { queryTaskOptions } from "@/api/query-task";
 
-const routeApi = getRouteApi("/projects/$projectId/tasks/$taskId");
+const routeApi = getRouteApi("/_auth/projects/$projectId/tasks/$taskId");
 
 export function TaskDetails() {
   const params = routeApi.useParams();
@@ -41,7 +41,7 @@ export function TaskDetails() {
             .
           </p>
           <div className="dsy-card-actions justify-end">
-            <Link className="dsy-btn dsy-btn-link" from={routeApi.id} to="..">
+            <Link className="dsy-btn dsy-btn-link" to="..">
               <ArrowLeftIcon />
               <span className="hidden sm:inline">Back to Tasks</span>
             </Link>

@@ -10,7 +10,7 @@ import {
 import { editProjectOptions } from "@/api/edit-project";
 import { projectQueryOptions } from "@/api/query-project";
 
-const routeApi = getRouteApi("/projects/$projectId");
+const routeApi = getRouteApi("/_auth/projects/$projectId");
 
 export const ProjectActions = () => {
   const { projectId } = routeApi.useParams();

@@ -19,7 +19,7 @@ import { Select } from "@/components/select";
 import { TextInput } from "@/components/text-input";
 import { labels, priorities } from "@/constants/tasks";
 
-const routeApi = getRouteApi("/projects/$projectId/tasks/new");
+const routeApi = getRouteApi("/_auth/projects/$projectId/tasks/new");
 
 const schema = object({
   name: pipe(string(), minLength(1, "Your name is too short.")),
@@ -93,7 +93,7 @@ export const CreateTaskForm = () => {
           </div>
         </div>
         <div className="flex justify-end gap-2">
-          <Link from={routeApi.id} to=".." className="dsy-btn dsy-btn-neutral">
+          <Link to=".." className="dsy-btn dsy-btn-neutral">
             Cancel
           </Link>
           <button

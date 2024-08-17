@@ -6,7 +6,7 @@ import { useState } from "react";
 
 import { deleteProjectOptions } from "@/api/delete-project";
 
-const routeApi = getRouteApi("/projects/$projectId");
+const routeApi = getRouteApi("/_auth/projects/$projectId");
 
 export const DeleteProject = () => {
   const { projectId } = routeApi.useParams();

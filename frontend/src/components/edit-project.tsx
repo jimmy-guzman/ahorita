@@ -18,7 +18,7 @@ import { editProjectOptions } from "@/api/edit-project";
 import { projectQueryOptions } from "@/api/query-project";
 import { TextInput } from "@/components/text-input";
 
-const routeApi = getRouteApi("/projects/$projectId");
+const routeApi = getRouteApi("/_auth/projects/$projectId");
 
 const schema = object({
   name: pipe(string(), minLength(1, "Your username is too short.")),

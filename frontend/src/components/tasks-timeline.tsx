@@ -6,7 +6,7 @@ import { CircleCheckIcon, CircleIcon, HistoryIcon } from "lucide-react";
 import { tasksQueryOptions } from "@/api/query-tasks";
 import { sortTasksByCreatedAt } from "@/utils/select";
 
-const routeApi = getRouteApi("/projects/$projectId/");
+const routeApi = getRouteApi("/_auth/projects/$projectId/");
 
 export const TasksTimeline = () => {
   const params = routeApi.useParams();

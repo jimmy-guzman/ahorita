@@ -7,7 +7,7 @@ import { tasksQueryOptions } from "@/api/query-tasks";
 import { Table } from "@/components/table";
 import { columns } from "@/components/tasks-table-columns";
 
-const routeApi = getRouteApi("/projects/$projectId/tasks");
+const routeApi = getRouteApi("/_auth/projects/$projectId/tasks");
 
 function TasksByProject() {
   const params = routeApi.useParams();
@@ -37,7 +37,7 @@ function TasksByProject() {
   );
 }
 
-export const Route = createFileRoute("/projects/$projectId/tasks/")({
+export const Route = createFileRoute("/_auth/projects/$projectId/tasks/")({
   component: TasksByProject,
   loader: async ({ context: { queryClient }, params }) => {
     await queryClient.ensureQueryData(tasksQueryOptions(params));
