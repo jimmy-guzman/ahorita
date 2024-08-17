@@ -46,7 +46,7 @@ export const EditProject = () => {
   return (
     <Dialog.Root open={open} onOpenChange={setOpen}>
       <Dialog.Trigger asChild>
-        <button type="button" className="dsy-btn dsy-btn-secondary">
+        <button type="button" className="dsy-btn dsy-btn-accent">
           <span className="hidden sm:inline">Edit </span>
           <FolderPenIcon />
         </button>
