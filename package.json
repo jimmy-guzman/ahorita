@@ -30,8 +30,8 @@
     "@types/bun": "1.1.6",
     "gitzy": "5.4.0",
     "knip": "5.27.2",
-    "lefthook": "1.7.12",
-    "turbo": "2.0.13"
+    "lefthook": "1.7.14",
+    "turbo": "2.0.14"
   },
   "packageManager": "bun@1.1.24"
 }
