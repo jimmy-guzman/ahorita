@@ -1,6 +1,6 @@
 import { render, screen } from "@/testing/utils";
 
-import { TasksTableStatusCell } from "./tasks-table-status-cell";
+import { TasksTableStatusCell } from "./status-cell";
 
 describe("<TasksTableStatusCell />", () => {
   it.each(["In Progress", "Todo", "Done", "Canceled", "Backlog"] as const)(

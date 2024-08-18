@@ -1,74 +1,52 @@
-import { valibotResolver } from "@hookform/resolvers/valibot";
 import { useMutation, useSuspenseQuery } from "@tanstack/react-query";
 import { Link, getRouteApi } from "@tanstack/react-router";
 import { ListPlusIcon } from "lucide-react";
-import { useForm } from "react-hook-form";
 import { toast } from "sonner";
-import {
-  type InferOutput,
-  literal,
-  minLength,
-  object,
-  pipe,
-  string,
-  union,
-} from "valibot";
 
 import { createTask } from "@/api/create-task";
 import { queryMetadataOptions } from "@/api/query-metadata";
-import { Select } from "@/components/select";
-import { TextInput } from "@/components/text-input";
+import { useCreateTaskForm } from "@/hooks/forms/create-task";
+
+import { Select } from "./shared/select";
+import { TextInput } from "./shared/text-input";
 
 const routeApi = getRouteApi("/_auth/projects/$projectId/tasks/new");
 
-const schema = object({
-  name: pipe(string(), minLength(1, "Your name is too short.")),
-  priority: union([literal("Low"), literal("Medium"), literal("High")]),
-  label: union([literal("Feature"), literal("Documentation"), literal("Bug")]),
-});
-
-export const CreateTaskForm = () => {
+export const CreateTask = () => {
   const { projectId } = routeApi.useParams();
   const { data } = useSuspenseQuery(queryMetadataOptions());
-  const { handleSubmit, control, reset } = useForm<InferOutput<typeof schema>>({
-    resolver: valibotResolver(schema),
-    defaultValues: {
-      name: "",
-      priority: "Medium",
-      label: "Feature",
-    },
-  });
+  const { handleSubmit, control, reset } = useCreateTaskForm();
   const { mutate, isPending } = useMutation(createTask);
+
+  const addToTasks = handleSubmit((body) => {
+    mutate(
+      { ...body, projectId },
+      {
+        onSuccess({ name }) {
+          reset();
+
+          toast.success(`Task ${name} has been created`, {
+            action: (
+              <Link
+                to="/projects/$projectId/tasks"
+                params={{ projectId }}
+                className="dsy-link"
+              >
+                View Tasks
+              </Link>
+            ),
+          });
+        },
+      },
+    );
+  });
 
   return (
     <div className="flex w-full flex-col gap-4">
       <div className="prose dsy-prose">
         <h2>Create New Task</h2>
       </div>
-      <form
-        className="flex flex-col gap-4"
-        onSubmit={handleSubmit((body) => {
-          mutate(
-            { ...body, projectId },
-            {
-              onSuccess({ name }) {
-                reset();
-                toast.success(`Task ${name} has been created`, {
-                  action: (
-                    <Link
-                      to="/projects/$projectId/tasks"
-                      params={{ projectId }}
-                      className="dsy-link"
-                    >
-                      View Tasks
-                    </Link>
-                  ),
-                });
-              },
-            },
-          );
-        })}
-      >
+      <form className="flex flex-col gap-4" onSubmit={addToTasks}>
         <div className="flex flex-col gap-2">
           <div className="flex flex-col gap-2 sm:flex-row">
             <Select control={control} name="label" label="Label">

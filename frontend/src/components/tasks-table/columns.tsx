@@ -3,9 +3,9 @@ import { createColumnHelper } from "@tanstack/react-table";
 
 import type { APITypes } from "@/api/client";
 
-import { TasksTablePriorityCell } from "./tasks-table-priority-cell";
-import { TasksTableRowActions } from "./tasks-table-row-actions";
-import { TasksTableStatusCell } from "./tasks-table-status-cell";
+import { PriorityCell } from "./priority-cell";
+import { RowActions } from "./row-actions";
+import { TasksTableStatusCell } from "./status-cell";
 
 const columnHelper = createColumnHelper<APITypes["Task"]>();
 
@@ -39,12 +39,12 @@ export const columns = [
   }),
   columnHelper.accessor("priority", {
     header: "Priority",
-    cell: (info) => <TasksTablePriorityCell priority={info.getValue()} />,
+    cell: (info) => <PriorityCell priority={info.getValue()} />,
   }),
   columnHelper.display({
     id: "actions",
     header: () => <span className="sr-only">Actions</span>,
-    cell: (info) => <TasksTableRowActions task={info.row.original} />,
+    cell: (info) => <RowActions task={info.row.original} />,
     enableGlobalFilter: false,
   }),
 ];

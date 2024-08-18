@@ -1,10 +1,10 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { LayoutListIcon, ListChecksIcon, ListPlusIcon } from "lucide-react";
 
-import { tasksQueryOptions } from "@/api/query-tasks";
+import { queryTasksOptions } from "@/api/query-tasks";
 
 export const TasksStats = () => {
-  const { data } = useSuspenseQuery(tasksQueryOptions());
+  const { data } = useSuspenseQuery(queryTasksOptions());
 
   return (
     <div className="dsy-stats dsy-stats-vertical sm:dsy-stats-horizontal bg-base-200 shadow">

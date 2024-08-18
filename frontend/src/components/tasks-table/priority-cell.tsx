@@ -10,7 +10,7 @@ const cellsByPriority = {
   High: <ArrowUpIcon className={ICON_CLASS} />,
 };
 
-export const TasksTablePriorityCell = ({
+export const PriorityCell = ({
   priority,
 }: { priority: APITypes["Task"]["priority"] }) => {
   return (

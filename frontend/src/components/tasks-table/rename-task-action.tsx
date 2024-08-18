@@ -1,17 +1,11 @@
-import { valibotResolver } from "@hookform/resolvers/valibot";
 import * as Dialog from "@radix-ui/react-dialog";
 import { useMutation } from "@tanstack/react-query";
 import { PencilIcon, SaveIcon, XIcon } from "lucide-react";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { type InferOutput, minLength, object, pipe, string } from "valibot";
 
 import { editTaskMutationOptions } from "@/api/edit-task";
-import { TextInput } from "@/components/text-input";
-
-const schema = object({
-  name: pipe(string(), minLength(1, "Your username is too short.")),
-});
+import { TextInput } from "@/components/shared/text-input";
+import { useRenameTaskForm } from "@/hooks/forms/rename-task";
 
 interface RenameTaskActionProps {
   name: string;
@@ -21,10 +15,7 @@ interface RenameTaskActionProps {
 export const RenameTaskAction = ({ name, taskId }: RenameTaskActionProps) => {
   const { mutate } = useMutation(editTaskMutationOptions);
   const [open, setOpen] = useState(false);
-  const form = useForm<InferOutput<typeof schema>>({
-    resolver: valibotResolver(schema),
-    values: { name },
-  });
+  const form = useRenameTaskForm(name);
 
   return (
     <Dialog.Root open={open} onOpenChange={setOpen}>

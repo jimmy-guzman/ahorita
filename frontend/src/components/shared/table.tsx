@@ -14,7 +14,7 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 
-import { fuzzyFilter } from "./filters";
+import { fuzzyFilter } from "./table.filters";
 
 // biome-ignore lint/suspicious/noExplicitAny: unknown does not work with @tanstack/react-table
 export function Table<TData, TColumns extends ColumnDef<TData, any>[]>(props: {

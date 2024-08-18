@@ -1,43 +1,23 @@
-import queryClient from "@/query-client";
-import { valibotResolver } from "@hookform/resolvers/valibot";
 import { useMutation } from "@tanstack/react-query";
 import { Link, createFileRoute, getRouteApi } from "@tanstack/react-router";
-import { useForm } from "react-hook-form";
-import {
-  type InferOutput,
-  minLength,
-  object,
-  optional,
-  parse,
-  pipe,
-  string,
-} from "valibot";
+import { object, optional, parse, string } from "valibot";
 
 import { api } from "@/api/client";
 import { meQueryOptions } from "@/api/query-me";
 import { PasswordInput } from "@/components/password-input";
-import { TextInput } from "@/components/text-input";
-
-const schema = object({
-  username: pipe(string(), minLength(1, "Your username is too short.")),
-  password: pipe(string(), minLength(1, "Your password is too short.")),
-});
+import { TextInput } from "@/components/shared/text-input";
+import { type LoginFormValues, useLoginForm } from "@/hooks/forms/login";
+import queryClient from "@/query-client";
 
 const routeApi = getRouteApi("/login");
 
 function Login() {
   const search = routeApi.useSearch();
   const navigate = routeApi.useNavigate();
-  const { handleSubmit, control } = useForm<InferOutput<typeof schema>>({
-    resolver: valibotResolver(schema),
-    defaultValues: {
-      username: "",
-      password: "",
-    },
-  });
+  const { handleSubmit, control } = useLoginForm();
 
   const { mutate } = useMutation({
-    mutationFn: async (user: InferOutput<typeof schema>) => {
+    mutationFn: async (user: LoginFormValues) => {
       const res = await api.auth.login.post(user);
 
       if (res.error) {
