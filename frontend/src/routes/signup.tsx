@@ -1,43 +1,19 @@
-import { valibotResolver } from "@hookform/resolvers/valibot";
 import { useMutation } from "@tanstack/react-query";
 import { Link, createFileRoute, getRouteApi } from "@tanstack/react-router";
-import { useForm } from "react-hook-form";
-import {
-  type InferOutput,
-  minLength,
-  object,
-  pipe,
-  regex,
-  string,
-} from "valibot";
 
 import { api } from "@/api/client";
 import { PasswordInput } from "@/components/password-input";
-import { TextInput } from "@/components/text-input";
+import { TextInput } from "@/components/shared/text-input";
+import { type SignFormValues, useSignupForm } from "@/hooks/forms/signup";
 
 const routeApi = getRouteApi("/signup");
 
-const schema = object({
-  username: pipe(
-    string(),
-    minLength(1, "Your username is too short."),
-    regex(/^[a-zA-Z0-9]+$/, "Your username must be alphanumeric."),
-  ),
-  password: pipe(string(), minLength(1, "Your password is too short.")),
-});
-
 function SignUp() {
   const navigate = routeApi.useNavigate();
-  const { handleSubmit, control } = useForm<InferOutput<typeof schema>>({
-    resolver: valibotResolver(schema),
-    defaultValues: {
-      username: "",
-      password: "",
-    },
-  });
+  const { handleSubmit, control } = useSignupForm();
 
   const { mutate } = useMutation({
-    mutationFn: async (user: InferOutput<typeof schema>) => {
+    mutationFn: async (user: SignFormValues) => {
       const res = await api.auth.signup.post(user);
 
       if (res.error) {

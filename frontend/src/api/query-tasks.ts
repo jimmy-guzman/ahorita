@@ -2,7 +2,7 @@ import { queryOptions } from "@tanstack/react-query";
 
 import { type APIRoutes, api } from "@/api/client";
 
-export const tasksQueryOptions = (
+export const queryTasksOptions = (
   query: APIRoutes["tasks"]["get"]["query"] = {},
 ) => {
   return queryOptions({

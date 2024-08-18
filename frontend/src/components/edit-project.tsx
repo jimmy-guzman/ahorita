@@ -1,31 +1,15 @@
-import { valibotResolver } from "@hookform/resolvers/valibot";
 import * as Dialog from "@radix-ui/react-dialog";
 import { useMutation, useSuspenseQuery } from "@tanstack/react-query";
 import { getRouteApi } from "@tanstack/react-router";
 import { FolderPenIcon, SaveIcon, XIcon } from "lucide-react";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
-import {
-  type InferOutput,
-  boolean,
-  minLength,
-  object,
-  pipe,
-  string,
-} from "valibot";
 
 import { editProjectOptions } from "@/api/edit-project";
 import { projectQueryOptions } from "@/api/query-project";
-import { TextInput } from "@/components/text-input";
+import { TextInput } from "@/components/shared/text-input";
+import { useEditProjectForm } from "@/hooks/forms/edit-project";
 
 const routeApi = getRouteApi("/_auth/projects/$projectId");
-
-const schema = object({
-  name: pipe(string(), minLength(1, "Your username is too short.")),
-  description: pipe(string(), minLength(1, "Your description is too short.")),
-  isFavorite: boolean(),
-  isDone: boolean(),
-});
 
 export const EditProject = () => {
   const { projectId } = routeApi.useParams();
@@ -33,15 +17,7 @@ export const EditProject = () => {
   const { mutate } = useMutation(editProjectOptions);
   const [open, setOpen] = useState(false);
 
-  const form = useForm<InferOutput<typeof schema>>({
-    resolver: valibotResolver(schema),
-    values: {
-      description: project.description,
-      name: project.name,
-      isFavorite: project.isFavorite,
-      isDone: project.isDone,
-    },
-  });
+  const form = useEditProjectForm(project);
 
   return (
     <Dialog.Root open={open} onOpenChange={setOpen}>

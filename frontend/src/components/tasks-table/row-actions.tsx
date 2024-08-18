@@ -14,7 +14,7 @@ interface TaskTableActionsProps {
   task: APITypes["Task"];
 }
 
-export const TasksTableRowActions = ({ task }: TaskTableActionsProps) => {
+export const RowActions = ({ task }: TaskTableActionsProps) => {
   const { data } = useSuspenseQuery(queryMetadataOptions());
   const editMutation = useMutation(editTaskMutationOptions);
   const ref = useRef<HTMLDetailsElement>(null);

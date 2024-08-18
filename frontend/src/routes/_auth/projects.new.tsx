@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-import { CreateProjectForm } from "@/components/create-project-form";
+import { CreateProject } from "@/components/create-project";
 
 export const Route = createFileRoute("/_auth/projects/new")({
-  component: CreateProjectForm,
+  component: CreateProject,
 });

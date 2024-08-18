@@ -6,7 +6,7 @@ import { api } from "@/api/client";
 import { mutationOptions } from "@/api/mutation-options";
 import queryClient from "@/query-client";
 
-import { tasksQueryOptions } from "./query-tasks";
+import { queryTasksOptions } from "./query-tasks";
 
 export const editTaskMutationOptions = mutationOptions({
   mutationFn: async ({
@@ -22,7 +22,7 @@ export const editTaskMutationOptions = mutationOptions({
     return res.data;
   },
   onSuccess: async ({ id, projectId, name }) => {
-    await queryClient.invalidateQueries(tasksQueryOptions({ projectId }));
+    await queryClient.invalidateQueries(queryTasksOptions({ projectId }));
 
     toast.success(`Task ${name} has been edited`, {
       action: (
