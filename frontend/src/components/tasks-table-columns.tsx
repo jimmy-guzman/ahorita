@@ -7,7 +7,7 @@ import { TasksTablePriorityCell } from "./tasks-table-priority-cell";
 import { TasksTableRowActions } from "./tasks-table-row-actions";
 import { TasksTableStatusCell } from "./tasks-table-status-cell";
 
-const columnHelper = createColumnHelper<APITypes["task"]>();
+const columnHelper = createColumnHelper<APITypes["Task"]>();
 
 export const columns = [
   columnHelper.accessor("name", {

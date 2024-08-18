@@ -20,7 +20,7 @@ const cellsByStatus = {
 
 export const TasksTableStatusCell = ({
   status,
-}: { status: APITypes["task"]["status"] }) => {
+}: { status: APITypes["Task"]["status"] }) => {
   return (
     <>
       {cellsByStatus[status]}

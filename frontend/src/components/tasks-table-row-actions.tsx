@@ -11,7 +11,7 @@ import { DeleteTaskAction } from "./delete-task-action";
 import { RenameTaskAction } from "./rename-task-action";
 
 interface TaskTableActionsProps {
-  task: APITypes["task"];
+  task: APITypes["Task"];
 }
 
 export const TasksTableRowActions = ({ task }: TaskTableActionsProps) => {

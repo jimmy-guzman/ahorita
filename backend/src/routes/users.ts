@@ -10,8 +10,8 @@ const UserSchema = t.Object({
 
 export const usersRoutes = new Elysia({ prefix: "/users" })
   .use(auth)
-  .model({ user: UserSchema })
+  .model({ User: UserSchema })
   .get("/me", ({ user }) => ({ user }), {
-    response: "user",
+    response: "User",
     detail: { tags, summary: "Get Me" },
   });

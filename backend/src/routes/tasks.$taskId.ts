@@ -12,7 +12,7 @@ const Params = t.Object({ taskId: t.String() });
 
 export const taskRoutes = new Elysia({ prefix: "/:taskId" })
   .use(auth)
-  .model({ task: selectTaskSchema })
+  .model({ Task: selectTaskSchema })
   .patch(
     "",
     async ({ params: { taskId }, body }) => {
@@ -33,7 +33,7 @@ export const taskRoutes = new Elysia({ prefix: "/:taskId" })
         t.Pick(selectTaskSchema, ["name", "status", "priority", "label"]),
       ),
       params: Params,
-      response: "task",
+      response: "Task",
       detail: { tags, summary: "Update Task" },
     },
   )
@@ -53,7 +53,7 @@ export const taskRoutes = new Elysia({ prefix: "/:taskId" })
     },
     {
       params: Params,
-      response: "task",
+      response: "Task",
       detail: { tags, summary: "Delete Task" },
     },
   )
@@ -72,7 +72,7 @@ export const taskRoutes = new Elysia({ prefix: "/:taskId" })
     },
     {
       params: Params,
-      response: "task",
+      response: "Task",
       detail: { tags, summary: "Get Task" },
     },
   );

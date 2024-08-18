@@ -10,7 +10,7 @@ const tags = ["Task"];
 
 export const tasksRoutes = new Elysia({ prefix: "/tasks" })
   .use(auth)
-  .model({ task: selectTaskSchema })
+  .model({ Task: selectTaskSchema })
   .post(
     "",
     async ({ user, body }) => {
@@ -27,7 +27,7 @@ export const tasksRoutes = new Elysia({ prefix: "/tasks" })
     },
     {
       body: insertTaskSchema,
-      response: "task",
+      response: "Task",
       detail: { tags, summary: "Create Task" },
     },
   )
