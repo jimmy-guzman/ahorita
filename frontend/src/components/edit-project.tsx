@@ -46,7 +46,7 @@ export const EditProject = () => {
   return (
     <Dialog.Root open={open} onOpenChange={setOpen}>
       <Dialog.Trigger asChild>
-        <button type="button" className="dsy-btn dsy-btn-accent">
+        <button type="button" className="dsy-btn dsy-btn-accent dsy-btn-sm">
           <span className="hidden sm:inline">Edit </span>
           <FolderPenIcon />
         </button>
@@ -68,6 +68,9 @@ export const EditProject = () => {
               <Dialog.Title className="font-bold text-lg">
                 Edit Project
               </Dialog.Title>
+              <Dialog.Description className="py-4">
+                Make changes to your project here. Click save when you're done.
+              </Dialog.Description>
               <form
                 onSubmit={form.handleSubmit((values) => {
                   mutate(

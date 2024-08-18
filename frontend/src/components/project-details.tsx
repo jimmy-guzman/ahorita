@@ -35,7 +35,7 @@ export const ProjectDetails = () => {
             <DeleteProject />
             <EditProject />
             <Link
-              className="dsy-btn dsy-btn-secondary"
+              className="dsy-btn dsy-btn-secondary dsy-btn-sm"
               to="/projects/$projectId"
               params={{ projectId }}
               activeOptions={{ exact: true }}
@@ -45,7 +45,7 @@ export const ProjectDetails = () => {
               <HistoryIcon />
             </Link>
             <Link
-              className="dsy-btn dsy-btn-primary"
+              className="dsy-btn dsy-btn-primary dsy-btn-sm"
               to="/projects/$projectId/tasks"
               params={{ projectId }}
               activeOptions={{ exact: true }}

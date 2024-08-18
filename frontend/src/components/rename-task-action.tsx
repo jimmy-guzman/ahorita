@@ -53,6 +53,9 @@ export const RenameTaskAction = ({ name, taskId }: RenameTaskActionProps) => {
               <Dialog.Title className="font-bold text-lg">
                 Rename The Task
               </Dialog.Title>
+              <Dialog.Description className="py-4">
+                Rename your task here. Click save when you're done.
+              </Dialog.Description>
               <form
                 onSubmit={form.handleSubmit((values) => {
                   mutate(
