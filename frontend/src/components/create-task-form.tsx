@@ -1,5 +1,5 @@
 import { valibotResolver } from "@hookform/resolvers/valibot";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useSuspenseQuery } from "@tanstack/react-query";
 import { Link, getRouteApi } from "@tanstack/react-router";
 import { ListPlusIcon } from "lucide-react";
 import { useForm } from "react-hook-form";
@@ -15,9 +15,9 @@ import {
 } from "valibot";
 
 import { createTask } from "@/api/create-task";
+import { queryMetadataOptions } from "@/api/query-metadata";
 import { Select } from "@/components/select";
 import { TextInput } from "@/components/text-input";
-import { labels, priorities } from "@/constants/tasks";
 
 const routeApi = getRouteApi("/_auth/projects/$projectId/tasks/new");
 
@@ -29,6 +29,7 @@ const schema = object({
 
 export const CreateTaskForm = () => {
   const { projectId } = routeApi.useParams();
+  const { data } = useSuspenseQuery(queryMetadataOptions());
   const { handleSubmit, control, reset } = useForm<InferOutput<typeof schema>>({
     resolver: valibotResolver(schema),
     defaultValues: {
@@ -71,14 +72,14 @@ export const CreateTaskForm = () => {
         <div className="flex flex-col gap-2">
           <div className="flex flex-col gap-2 sm:flex-row">
             <Select control={control} name="label" label="Label">
-              {labels.map((label) => (
+              {data.labels.map((label) => (
                 <option key={label} value={label}>
                   {label}
                 </option>
               ))}
             </Select>
             <Select control={control} name="priority" label="Priority">
-              {priorities.map((priority) => (
+              {data.priorities.map((priority) => (
                 <option key={priority} value={priority}>
                   {priority}
                 </option>

@@ -5,6 +5,7 @@ import { cyan } from "picocolors";
 
 import env from "./env";
 import { authRoutes } from "./routes/auth";
+import { metadataRoutes } from "./routes/metadata";
 import { projectsRoutes } from "./routes/projects";
 import { tasksRoutes } from "./routes/tasks";
 import { usersRoutes } from "./routes/users";
@@ -28,6 +29,7 @@ const app = new Elysia()
   .use(projectsRoutes)
   .use(tasksRoutes)
   .use(usersRoutes)
+  .use(metadataRoutes)
   .listen(env.PORT, ({ url }) => {
     // biome-ignore lint/nursery/noConsole: elysia does not provide a logger
     console.log(`🚀 Running at ${cyan(url.toString())}`);

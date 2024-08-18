@@ -2,6 +2,7 @@ import { relations } from "drizzle-orm";
 import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
 
 import { nanoid, now } from "../utils";
+import { labels, priorities, statuses } from "./constants";
 import { users } from "./users";
 
 export const projects = sqliteTable("project", {
@@ -22,21 +23,9 @@ export const projects = sqliteTable("project", {
 export const tasks = sqliteTable("task", {
   id: text("id").$default(nanoid).primaryKey(),
   name: text("name").notNull(),
-  status: text("status", {
-    enum: ["Backlog", "Todo", "In Progress", "Done", "Canceled"],
-  })
-    .default("Todo")
-    .notNull(),
-  priority: text("priority", {
-    enum: ["Low", "Medium", "High"],
-  })
-    .default("Medium")
-    .notNull(),
-  label: text("label", {
-    enum: ["Feature", "Bug", "Documentation"],
-  })
-    .default("Feature")
-    .notNull(),
+  status: text("status", { enum: statuses }).default("Todo").notNull(),
+  priority: text("priority", { enum: priorities }).default("Medium").notNull(),
+  label: text("label", { enum: labels }).default("Feature").notNull(),
   createdAt: text("created_at").$default(now).notNull(),
   updatedAt: text("updated_at").$default(now).$onUpdate(now).notNull(),
   projectId: text("project_id")

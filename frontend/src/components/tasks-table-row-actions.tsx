@@ -1,11 +1,11 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useSuspenseQuery } from "@tanstack/react-query";
 import { Link } from "@tanstack/react-router";
 import { EllipsisIcon, EyeIcon } from "lucide-react";
 import { useRef } from "react";
 
 import type { APITypes } from "@/api/client";
 import { editTaskMutationOptions } from "@/api/edit-task";
-import { labels, priorities, statuses } from "@/constants/tasks";
+import { queryMetadataOptions } from "@/api/query-metadata";
 
 import { DeleteTaskAction } from "./delete-task-action";
 import { RenameTaskAction } from "./rename-task-action";
@@ -15,6 +15,7 @@ interface TaskTableActionsProps {
 }
 
 export const TasksTableRowActions = ({ task }: TaskTableActionsProps) => {
+  const { data } = useSuspenseQuery(queryMetadataOptions());
   const editMutation = useMutation(editTaskMutationOptions);
   const ref = useRef<HTMLDetailsElement>(null);
 
@@ -39,7 +40,7 @@ export const TasksTableRowActions = ({ task }: TaskTableActionsProps) => {
           <details>
             <summary>Status</summary>
             <ul>
-              {statuses.map((status) => (
+              {data.statuses.map((status) => (
                 <li key={status}>
                   <button
                     type="button"
@@ -64,7 +65,7 @@ export const TasksTableRowActions = ({ task }: TaskTableActionsProps) => {
           <details>
             <summary>Priority</summary>
             <ul>
-              {priorities.map((priority) => (
+              {data.priorities.map((priority) => (
                 <li key={priority}>
                   <button
                     type="button"
@@ -89,7 +90,7 @@ export const TasksTableRowActions = ({ task }: TaskTableActionsProps) => {
           <details>
             <summary>Label</summary>
             <ul>
-              {labels.map((label) => (
+              {data.labels.map((label) => (
                 <li key={label}>
                   <button
                     type="button"
