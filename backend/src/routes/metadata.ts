@@ -14,8 +14,8 @@ const MetadataSchema = t.Object({
 
 export const metadataRoutes = new Elysia({ prefix: "/metadata" })
   .use(auth)
-  .model({ metadata: MetadataSchema })
+  .model({ Metadata: MetadataSchema })
   .get("", () => ({ statuses, priorities, labels }), {
-    response: "metadata",
+    response: "Metadata",
     detail: { tags, summary: "Get Metadata" },
   });

@@ -4,7 +4,6 @@ import { Elysia, InternalServerError, t } from "elysia";
 import { db } from "../db";
 import { auth } from "../middleware/auth";
 import { selectProjectSchema } from "../models/projects";
-import { selectTaskSchema } from "../models/tasks";
 import { projects } from "../schemas";
 import { projectRoutes } from "./projects.$projectId";
 
@@ -12,7 +11,7 @@ const tags = ["Project"];
 
 export const projectsRoutes = new Elysia({ prefix: "/projects" })
   .use(auth)
-  .model({ project: selectProjectSchema, task: selectTaskSchema })
+  .model({ Project: selectProjectSchema })
   .get(
     "",
     async ({ user }) => {
@@ -45,7 +44,7 @@ export const projectsRoutes = new Elysia({ prefix: "/projects" })
     },
     {
       body: t.Pick(selectProjectSchema, ["name", "description"]),
-      response: "project",
+      response: "Project",
       detail: { tags, summary: "Create Project" },
     },
   )

@@ -12,7 +12,7 @@ const cellsByPriority = {
 
 export const TasksTablePriorityCell = ({
   priority,
-}: { priority: APITypes["task"]["priority"] }) => {
+}: { priority: APITypes["Task"]["priority"] }) => {
   return (
     <>
       {cellsByPriority[priority]}
