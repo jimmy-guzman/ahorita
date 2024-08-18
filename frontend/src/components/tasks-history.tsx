@@ -8,7 +8,7 @@ import { sortTasksByCreatedAt } from "@/utils/select";
 
 const routeApi = getRouteApi("/_auth/projects/$projectId/");
 
-export const TasksTimeline = () => {
+export const TasksHistory = () => {
   const params = routeApi.useParams();
   const { data: tasks } = useSuspenseQuery({
     ...tasksQueryOptions(params),
@@ -24,7 +24,7 @@ export const TasksTimeline = () => {
         </h2>
       </div>
       {tasks.length > 0 ? (
-        <ul className="dsy-timeline">
+        <ul className="dsy-timeline dsy-timeline-vertical sm:dsy-timeline-horizontal">
           {tasks.map(({ id, createdAt, name, status }, index) => {
             return (
               <li key={id}>
