@@ -11,7 +11,7 @@ import {
 } from "recharts";
 
 import { projectsTotalsQueryOptions } from "@/api/query-projects-totals";
-import { useAppLightMode } from "@/stores/app";
+import { useAppLightMode } from "@/hooks/stores/app";
 
 export const OverviewChart = () => {
   const { data } = useSuspenseQuery(projectsTotalsQueryOptions);

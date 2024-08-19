@@ -1,4 +1,4 @@
-import { useAppActions, useAppLightMode } from "@/stores/app";
+import { useAppActions, useAppLightMode } from "@/hooks/stores/app";
 import type { Theme } from "daisyui";
 import { MoonIcon, SunIcon } from "lucide-react";
 
