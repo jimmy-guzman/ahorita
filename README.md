@@ -36,6 +36,8 @@
 - [ElysiaJS](https://elysiajs.com)
 - [Drizzle ORM](https://orm.drizzle.team)
 - [Turso](https://docs.turso.tech)
+- [OpenTelemetry](https://opentelemetry.io)
+- [Axiom](https://axiom.co)
 - [Lucia](https://lucia-auth.com)
 
 ## 🏁 Getting Started

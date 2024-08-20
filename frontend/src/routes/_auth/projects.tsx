@@ -48,6 +48,13 @@ function Projects() {
               >
                 <Icon icon="simple-icons:swagger" className="text-xl" />
               </a>
+              <a
+                className="dsy-btn dsy-btn-ghost dsy-btn-circle dsy-btn-xs lg:dsy-btn-sm"
+                href={import.meta.env.VITE_OTEL_DASHBOARD}
+                target="__blank"
+              >
+                <Icon icon="simple-icons:opentelemetry" className="text-xl" />
+              </a>
               <ThemeToggle lightTheme="cmyk" />
               <LogoutButton />
             </div>
