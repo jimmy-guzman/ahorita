@@ -19,9 +19,12 @@
   },
   "dependencies": {
     "@elysiajs/cors": "1.1.0",
+    "@elysiajs/opentelemetry": "1.1.4",
     "@elysiajs/swagger": "1.1.1",
     "@libsql/client": "0.9.0",
     "@lucia-auth/adapter-drizzle": "1.1.0",
+    "@opentelemetry/exporter-trace-otlp-proto": "0.52.1",
+    "@opentelemetry/sdk-trace-node": "1.25.1",
     "@oslojs/crypto": "0.6.2",
     "@oslojs/encoding": "0.4.1",
     "drizzle-orm": "0.33.0",

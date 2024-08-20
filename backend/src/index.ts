@@ -1,5 +1,8 @@
 import cors from "@elysiajs/cors";
+import { opentelemetry } from "@elysiajs/opentelemetry";
 import swagger from "@elysiajs/swagger";
+import { OTLPTraceExporter } from "@opentelemetry/exporter-trace-otlp-proto";
+import { BatchSpanProcessor } from "@opentelemetry/sdk-trace-node";
 import { Elysia } from "elysia";
 import { cyan } from "picocolors";
 
@@ -11,6 +14,22 @@ import { tasksRoutes } from "./routes/tasks";
 import { usersRoutes } from "./routes/users";
 
 const app = new Elysia()
+  .use(
+    opentelemetry({
+      serviceName: "ahorita",
+      spanProcessors: [
+        new BatchSpanProcessor(
+          new OTLPTraceExporter({
+            url: env.AXIOM_HOST,
+            headers: {
+              Authorization: `Bearer ${env.AXIOM_TOKEN}`,
+              "X-Axiom-Dataset": env.AXIOM_DATASET,
+            },
+          }),
+        ),
+      ],
+    }),
+  )
   .use(cors())
   .use(
     swagger({
