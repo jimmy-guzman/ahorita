@@ -199,26 +199,177 @@ declare module "@tanstack/react-router" {
 
 // Create and export the route tree
 
-export const routeTree = rootRoute.addChildren({
-  IndexRoute,
-  AuthRouteRoute: AuthRouteRoute.addChildren({
-    AuthProjectsRoute: AuthProjectsRoute.addChildren({
-      AuthProjectsProjectIdRoute: AuthProjectsProjectIdRoute.addChildren({
-        AuthProjectsProjectIdTasksRoute:
-          AuthProjectsProjectIdTasksRoute.addChildren({
-            AuthProjectsProjectIdTasksTaskIdRoute,
-            AuthProjectsProjectIdTasksNewRoute,
-            AuthProjectsProjectIdTasksIndexRoute,
-          }),
-        AuthProjectsProjectIdIndexRoute,
-      }),
-      AuthProjectsNewRoute,
-      AuthProjectsIndexRoute,
-    }),
-  }),
-  LoginRoute,
-  SignupRoute,
-});
+interface AuthProjectsProjectIdTasksRouteChildren {
+  AuthProjectsProjectIdTasksTaskIdRoute: typeof AuthProjectsProjectIdTasksTaskIdRoute;
+  AuthProjectsProjectIdTasksNewRoute: typeof AuthProjectsProjectIdTasksNewRoute;
+  AuthProjectsProjectIdTasksIndexRoute: typeof AuthProjectsProjectIdTasksIndexRoute;
+}
+
+const AuthProjectsProjectIdTasksRouteChildren: AuthProjectsProjectIdTasksRouteChildren =
+  {
+    AuthProjectsProjectIdTasksTaskIdRoute:
+      AuthProjectsProjectIdTasksTaskIdRoute,
+    AuthProjectsProjectIdTasksNewRoute: AuthProjectsProjectIdTasksNewRoute,
+    AuthProjectsProjectIdTasksIndexRoute: AuthProjectsProjectIdTasksIndexRoute,
+  };
+
+const AuthProjectsProjectIdTasksRouteWithChildren =
+  AuthProjectsProjectIdTasksRoute._addFileChildren(
+    AuthProjectsProjectIdTasksRouteChildren,
+  );
+
+interface AuthProjectsProjectIdRouteChildren {
+  AuthProjectsProjectIdTasksRoute: typeof AuthProjectsProjectIdTasksRouteWithChildren;
+  AuthProjectsProjectIdIndexRoute: typeof AuthProjectsProjectIdIndexRoute;
+}
+
+const AuthProjectsProjectIdRouteChildren: AuthProjectsProjectIdRouteChildren = {
+  AuthProjectsProjectIdTasksRoute: AuthProjectsProjectIdTasksRouteWithChildren,
+  AuthProjectsProjectIdIndexRoute: AuthProjectsProjectIdIndexRoute,
+};
+
+const AuthProjectsProjectIdRouteWithChildren =
+  AuthProjectsProjectIdRoute._addFileChildren(
+    AuthProjectsProjectIdRouteChildren,
+  );
+
+interface AuthProjectsRouteChildren {
+  AuthProjectsProjectIdRoute: typeof AuthProjectsProjectIdRouteWithChildren;
+  AuthProjectsNewRoute: typeof AuthProjectsNewRoute;
+  AuthProjectsIndexRoute: typeof AuthProjectsIndexRoute;
+}
+
+const AuthProjectsRouteChildren: AuthProjectsRouteChildren = {
+  AuthProjectsProjectIdRoute: AuthProjectsProjectIdRouteWithChildren,
+  AuthProjectsNewRoute: AuthProjectsNewRoute,
+  AuthProjectsIndexRoute: AuthProjectsIndexRoute,
+};
+
+const AuthProjectsRouteWithChildren = AuthProjectsRoute._addFileChildren(
+  AuthProjectsRouteChildren,
+);
+
+interface AuthRouteRouteChildren {
+  AuthProjectsRoute: typeof AuthProjectsRouteWithChildren;
+}
+
+const AuthRouteRouteChildren: AuthRouteRouteChildren = {
+  AuthProjectsRoute: AuthProjectsRouteWithChildren,
+};
+
+const AuthRouteRouteWithChildren = AuthRouteRoute._addFileChildren(
+  AuthRouteRouteChildren,
+);
+
+export interface FileRoutesByFullPath {
+  "/": typeof IndexRoute;
+  "": typeof AuthRouteRouteWithChildren;
+  "/login": typeof LoginRoute;
+  "/signup": typeof SignupRoute;
+  "/projects": typeof AuthProjectsRouteWithChildren;
+  "/projects/$projectId": typeof AuthProjectsProjectIdRouteWithChildren;
+  "/projects/new": typeof AuthProjectsNewRoute;
+  "/projects/": typeof AuthProjectsIndexRoute;
+  "/projects/$projectId/tasks": typeof AuthProjectsProjectIdTasksRouteWithChildren;
+  "/projects/$projectId/": typeof AuthProjectsProjectIdIndexRoute;
+  "/projects/$projectId/tasks/$taskId": typeof AuthProjectsProjectIdTasksTaskIdRoute;
+  "/projects/$projectId/tasks/new": typeof AuthProjectsProjectIdTasksNewRoute;
+  "/projects/$projectId/tasks/": typeof AuthProjectsProjectIdTasksIndexRoute;
+}
+
+export interface FileRoutesByTo {
+  "/": typeof IndexRoute;
+  "": typeof AuthRouteRouteWithChildren;
+  "/login": typeof LoginRoute;
+  "/signup": typeof SignupRoute;
+  "/projects/new": typeof AuthProjectsNewRoute;
+  "/projects": typeof AuthProjectsIndexRoute;
+  "/projects/$projectId": typeof AuthProjectsProjectIdIndexRoute;
+  "/projects/$projectId/tasks/$taskId": typeof AuthProjectsProjectIdTasksTaskIdRoute;
+  "/projects/$projectId/tasks/new": typeof AuthProjectsProjectIdTasksNewRoute;
+  "/projects/$projectId/tasks": typeof AuthProjectsProjectIdTasksIndexRoute;
+}
+
+export interface FileRoutesById {
+  __root__: typeof rootRoute;
+  "/": typeof IndexRoute;
+  "/_auth": typeof AuthRouteRouteWithChildren;
+  "/login": typeof LoginRoute;
+  "/signup": typeof SignupRoute;
+  "/_auth/projects": typeof AuthProjectsRouteWithChildren;
+  "/_auth/projects/$projectId": typeof AuthProjectsProjectIdRouteWithChildren;
+  "/_auth/projects/new": typeof AuthProjectsNewRoute;
+  "/_auth/projects/": typeof AuthProjectsIndexRoute;
+  "/_auth/projects/$projectId/tasks": typeof AuthProjectsProjectIdTasksRouteWithChildren;
+  "/_auth/projects/$projectId/": typeof AuthProjectsProjectIdIndexRoute;
+  "/_auth/projects/$projectId/tasks/$taskId": typeof AuthProjectsProjectIdTasksTaskIdRoute;
+  "/_auth/projects/$projectId/tasks/new": typeof AuthProjectsProjectIdTasksNewRoute;
+  "/_auth/projects/$projectId/tasks/": typeof AuthProjectsProjectIdTasksIndexRoute;
+}
+
+export interface FileRouteTypes {
+  fileRoutesByFullPath: FileRoutesByFullPath;
+  fullPaths:
+    | "/"
+    | ""
+    | "/login"
+    | "/signup"
+    | "/projects"
+    | "/projects/$projectId"
+    | "/projects/new"
+    | "/projects/"
+    | "/projects/$projectId/tasks"
+    | "/projects/$projectId/"
+    | "/projects/$projectId/tasks/$taskId"
+    | "/projects/$projectId/tasks/new"
+    | "/projects/$projectId/tasks/";
+  fileRoutesByTo: FileRoutesByTo;
+  to:
+    | "/"
+    | ""
+    | "/login"
+    | "/signup"
+    | "/projects/new"
+    | "/projects"
+    | "/projects/$projectId"
+    | "/projects/$projectId/tasks/$taskId"
+    | "/projects/$projectId/tasks/new"
+    | "/projects/$projectId/tasks";
+  id:
+    | "__root__"
+    | "/"
+    | "/_auth"
+    | "/login"
+    | "/signup"
+    | "/_auth/projects"
+    | "/_auth/projects/$projectId"
+    | "/_auth/projects/new"
+    | "/_auth/projects/"
+    | "/_auth/projects/$projectId/tasks"
+    | "/_auth/projects/$projectId/"
+    | "/_auth/projects/$projectId/tasks/$taskId"
+    | "/_auth/projects/$projectId/tasks/new"
+    | "/_auth/projects/$projectId/tasks/";
+  fileRoutesById: FileRoutesById;
+}
+
+export interface RootRouteChildren {
+  IndexRoute: typeof IndexRoute;
+  AuthRouteRoute: typeof AuthRouteRouteWithChildren;
+  LoginRoute: typeof LoginRoute;
+  SignupRoute: typeof SignupRoute;
+}
+
+const rootRouteChildren: RootRouteChildren = {
+  IndexRoute: IndexRoute,
+  AuthRouteRoute: AuthRouteRouteWithChildren,
+  LoginRoute: LoginRoute,
+  SignupRoute: SignupRoute,
+};
+
+export const routeTree = rootRoute
+  ._addFileChildren(rootRouteChildren)
+  ._addFileTypes<FileRouteTypes>();
 
 /* prettier-ignore-end */
 
