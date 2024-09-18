@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.8.3/schema.json",
+  "$schema": "https://biomejs.dev/schemas/1.9.1/schema.json",
   "files": {
     "ignore": [
       "dist",
@@ -26,11 +26,14 @@
         "useFragmentSyntax": "error",
         "noShoutyConstants": "error",
         "useBlockStatements": "error",
-        "useForOf": "error"
+        "useForOf": "error",
+        "useExplicitLengthCheck": "error",
+        "useThrowOnlyError": "error"
       },
       "complexity": {
         "useSimplifiedLogicExpression": "error",
-        "noUselessTernary": "error"
+        "noUselessTernary": "error",
+        "useDateNow": "error"
       },
       "correctness": {
         "noUnusedImports": "error",
@@ -40,16 +43,20 @@
       "suspicious": {
         "noEmptyBlockStatements": "error",
         "useAwait": "error",
-        "noSuspiciousSemicolonInJsx": "error"
+        "noSuspiciousSemicolonInJsx": "error",
+        "noEvolvingTypes": "error",
+        "noConsole": "error",
+        "useErrorMessage": "error"
       },
       "nursery": {
         "useSortedClasses": "error",
-        "noEvolvingTypes": "error",
-        "noConsole": "error",
-        "useExplicitLengthCheck": "error",
-        "useDateNow": "error",
-        "useErrorMessage": "error",
-        "useThrowOnlyError": "error"
+        "noCommonJs": "error",
+        "noEnum": "error",
+        "noIrregularWhitespace": "error",
+        "noUselessEscapeInRegex": "error",
+        "useAriaPropsSupportedByRole": "error",
+        "useStrictMode": "error",
+        "useTrimStartEnd": "error"
       }
     }
   }
