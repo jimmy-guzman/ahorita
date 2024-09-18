@@ -50,7 +50,7 @@ const app = new Elysia()
   .use(usersRoutes)
   .use(metadataRoutes)
   .listen(env.PORT, ({ url }) => {
-    // biome-ignore lint/nursery/noConsole: elysia does not provide a logger
+    // biome-ignore lint/suspicious/noConsole: <explanation>
     console.log(`🚀 Running at ${cyan(url.toString())}`);
   });
 
