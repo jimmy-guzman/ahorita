@@ -1,8 +1,8 @@
-import { sortTasksByCreatedAt } from "./select";
+import { getTasksByCreatedAt } from "./select";
 
 describe("select", () => {
-  it("sortTasksByCreatedAt", () => {
-    const tasks = sortTasksByCreatedAt([
+  it("getTasksByCreatedAt", () => {
+    const tasks = getTasksByCreatedAt([
       {
         id: "B7P7",
         name: "add task details route 1",
