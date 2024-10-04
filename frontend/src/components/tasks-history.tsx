@@ -4,7 +4,7 @@ import { intlFormat } from "date-fns";
 import { CircleCheckIcon, CircleIcon, HistoryIcon } from "lucide-react";
 
 import { queryTasksOptions } from "@/api/query-tasks";
-import { sortTasksByCreatedAt } from "@/utils/select";
+import { getTasksByCreatedAt } from "@/utils/select";
 
 const routeApi = getRouteApi("/_auth/projects/$projectId/");
 
@@ -12,7 +12,7 @@ export const TasksHistory = () => {
   const params = routeApi.useParams();
   const { data: tasks } = useSuspenseQuery({
     ...queryTasksOptions(params),
-    select: sortTasksByCreatedAt,
+    select: getTasksByCreatedAt,
   });
 
   return (

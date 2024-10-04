@@ -22,17 +22,17 @@ export const CreateTask = () => {
     mutate(
       { ...body, projectId },
       {
-        onSuccess({ name }) {
+        onSuccess({ name, id }) {
           reset();
 
           toast.success(`Task ${name} has been created`, {
             action: (
               <Link
-                to="/projects/$projectId/tasks"
-                params={{ projectId }}
+                to="/projects/$projectId/tasks/$taskId"
+                params={{ projectId, taskId: id }}
                 className="dsy-link"
               >
-                View Tasks
+                View
               </Link>
             ),
           });
