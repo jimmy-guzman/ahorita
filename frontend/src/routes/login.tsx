@@ -1,6 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { Link, createFileRoute, getRouteApi } from "@tanstack/react-router";
-import { object, optional, parse, string } from "valibot";
+import { valibotSearchValidator } from "@tanstack/router-valibot-adapter";
+import { fallback, object, optional, string } from "valibot";
 
 import { api } from "@/api/client";
 import { meQueryOptions } from "@/api/query-me";
@@ -28,7 +29,7 @@ function Login() {
     },
     onSuccess: async () => {
       await queryClient.fetchQuery(meQueryOptions);
-      await navigate({ to: search.redirect ?? "/" });
+      await navigate({ to: search.redirect });
     },
   });
 
@@ -70,12 +71,10 @@ function Login() {
 }
 
 const searchSchema = object({
-  redirect: optional(string()),
+  redirect: optional(fallback(string(), "/"), "/"),
 });
 
 export const Route = createFileRoute("/login")({
   component: Login,
-  validateSearch: (value) => {
-    return parse(searchSchema, value);
-  },
+  validateSearch: valibotSearchValidator(searchSchema),
 });
