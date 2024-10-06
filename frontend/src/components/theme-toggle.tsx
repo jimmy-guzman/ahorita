@@ -1,6 +1,7 @@
-import { useAppActions, useAppLightMode } from "@/hooks/stores/app";
 import type { Theme } from "daisyui";
 import { MoonIcon, SunIcon } from "lucide-react";
+
+import { useAppActions, useAppLightMode } from "@/hooks/stores/app";
 
 export const ThemeToggle = ({ lightTheme }: { lightTheme: Theme }) => {
   const lightMode = useAppLightMode();
