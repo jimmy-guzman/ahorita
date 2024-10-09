@@ -1,12 +1,12 @@
 import { relations } from "drizzle-orm";
-import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
+import { sqliteTable } from "drizzle-orm/sqlite-core";
 import { projects, tasks } from "./projects";
 
-export const users = sqliteTable("user", {
-  id: text("id").notNull().primaryKey(),
-  username: text("username").unique(),
-  password: text("password").notNull(),
-});
+export const users = sqliteTable("user", (t) => ({
+  id: t.text().notNull().primaryKey(),
+  username: t.text().unique(),
+  password: t.text().notNull(),
+}));
 
 export const usersRelations = relations(users, ({ many }) => ({
   session: many(sessions),
@@ -14,13 +14,14 @@ export const usersRelations = relations(users, ({ many }) => ({
   tasks: many(tasks),
 }));
 
-export const sessions = sqliteTable("session", {
-  id: text("id").notNull().primaryKey(),
-  userId: text("user_id")
+export const sessions = sqliteTable("session", (t) => ({
+  id: t.text().notNull().primaryKey(),
+  userId: t
+    .text()
     .notNull()
     .references(() => users.id),
-  expiresAt: integer("expires_at").notNull(),
-});
+  expiresAt: t.integer().notNull(),
+}));
 
 export const sessionsRelations = relations(sessions, ({ one }) => ({
   user: one(users, {

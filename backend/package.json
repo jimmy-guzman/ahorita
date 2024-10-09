@@ -5,7 +5,6 @@
     ".": "./src/index.ts"
   },
   "scripts": {
-    "build": "NODE_ENV=production dotenv-run -- bun build ./src/index.ts --outdir ./dist --target=bun --minify",
     "clean": "rimraf .turbo node_modules dist",
     "db:push": "dotenv-run -- drizzle-kit push",
     "db:studio": "dotenv-run -- drizzle-kit studio",
@@ -14,7 +13,7 @@
     "format:fix": "biome format --write .",
     "lint": "biome lint .",
     "lint:fix": "biome lint --write .",
-    "preview": "dotenv-run -- bun run dist/index.js",
+    "preview": "NODE_ENV=production dotenv-run -- bun run ./src/index.ts",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
@@ -27,18 +26,18 @@
     "@opentelemetry/sdk-trace-node": "1.25.1",
     "@oslojs/crypto": "1.0.1",
     "@oslojs/encoding": "1.1.0",
-    "drizzle-orm": "0.33.0",
+    "drizzle-orm": "0.34.1",
     "drizzle-typebox": "0.1.1",
-    "elysia": "1.1.18",
+    "elysia": "1.1.19",
     "env-schema": "6.0.0",
-    "lucia": "3.2.0",
+    "lucia": "3.2.1",
     "nanoid": "5.0.7",
     "oslo": "1.2.1",
     "picocolors": "1.1.0"
   },
   "devDependencies": {
-    "drizzle-kit": "0.24.2",
+    "drizzle-kit": "0.25.0",
     "rimraf": "6.0.1",
-    "typescript": "5.6.2"
+    "typescript": "5.6.3"
   }
 }

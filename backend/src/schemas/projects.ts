@@ -1,40 +1,41 @@
 import { relations } from "drizzle-orm";
-import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
+import { sqliteTable } from "drizzle-orm/sqlite-core";
 
 import { nanoid, now } from "../utils";
 import { labels, priorities, statuses } from "./constants";
 import { users } from "./users";
 
-export const projects = sqliteTable("project", {
-  id: text("id").$default(nanoid).primaryKey(),
-  name: text("name").unique().notNull(),
-  description: text("description").notNull(),
-  isFavorite: integer("is_favorite", { mode: "boolean" })
-    .default(false)
-    .notNull(),
-  isDone: integer("is_done", { mode: "boolean" }).default(false).notNull(),
-  createdAt: text("created_at").$default(now).notNull(),
-  updatedAt: text("updated_at").$default(now).$onUpdate(now).notNull(),
-  userId: text("user_id")
+export const projects = sqliteTable("project", (t) => ({
+  id: t.text().$default(nanoid).primaryKey(),
+  name: t.text().unique().notNull(),
+  description: t.text().notNull(),
+  isFavorite: t.integer({ mode: "boolean" }).default(false).notNull(),
+  isDone: t.integer({ mode: "boolean" }).default(false).notNull(),
+  createdAt: t.text().$default(now).notNull(),
+  updatedAt: t.text().$default(now).$onUpdate(now).notNull(),
+  userId: t
+    .text()
     .references(() => users.id, { onDelete: "cascade" })
     .notNull(),
-});
+}));
 
-export const tasks = sqliteTable("task", {
-  id: text("id").$default(nanoid).primaryKey(),
-  name: text("name").notNull(),
-  status: text("status", { enum: statuses }).default("Todo").notNull(),
-  priority: text("priority", { enum: priorities }).default("Medium").notNull(),
-  label: text("label", { enum: labels }).default("Feature").notNull(),
-  createdAt: text("created_at").$default(now).notNull(),
-  updatedAt: text("updated_at").$default(now).$onUpdate(now).notNull(),
-  projectId: text("project_id")
+export const tasks = sqliteTable("task", (t) => ({
+  id: t.text().$default(nanoid).primaryKey(),
+  name: t.text().notNull(),
+  status: t.text({ enum: statuses }).default("Todo").notNull(),
+  priority: t.text({ enum: priorities }).default("Medium").notNull(),
+  label: t.text({ enum: labels }).default("Feature").notNull(),
+  createdAt: t.text().$default(now).notNull(),
+  updatedAt: t.text().$default(now).$onUpdate(now).notNull(),
+  projectId: t
+    .text()
     .references(() => projects.id, { onDelete: "cascade" })
     .notNull(),
-  userId: text("user_id")
+  userId: t
+    .text()
     .references(() => users.id, { onDelete: "cascade" })
     .notNull(),
-});
+}));
 
 export const projectsRelations = relations(projects, ({ many, one }) => ({
   tasks: many(tasks),
