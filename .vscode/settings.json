@@ -55,6 +55,9 @@
   "editor.codeActionsOnSave": {
     "source.organizeImports.biome": "always"
   },
+  "[typescript]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
   "[yaml]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
