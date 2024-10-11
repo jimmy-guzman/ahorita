@@ -5,7 +5,7 @@ import { server } from "./mocks/server";
 vi.mock("zustand");
 
 beforeAll(() => {
-  server.listen({ onUnhandledRequest: "warn" });
+  server.listen({ onUnhandledRequest: "error" });
 });
 
 afterEach(() => {
