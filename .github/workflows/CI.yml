@@ -27,3 +27,5 @@ jobs:
 
       - name: 🚨 Check
         run: bun check
+        env:
+          VITE_SERVER_DOMAIN: http://localhost:3000

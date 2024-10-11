@@ -1,3 +1,4 @@
+import type { FileRoutesById } from "@/route-tree.gen";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
   RouterProvider,
@@ -24,17 +25,23 @@ const queryClient = new QueryClient({
   },
 });
 
-const Wrapper = ({ children }: { children: ReactNode }) => {
+const Wrapper = ({
+  children,
+  path,
+}: { children: ReactNode; path: keyof FileRoutesById }) => {
   const rootRoute = createRootRoute();
   const testingRoute = createRoute({
     getParentRoute: () => rootRoute,
-    path: "/",
+    path,
     component: () => children,
   });
   const routeTree = rootRoute.addChildren([testingRoute]);
   const router = createRouter({
     routeTree,
-    history: createMemoryHistory(),
+    history: createMemoryHistory({
+      initialEntries: [path],
+    }),
+    context: { queryClient },
   });
 
   return (
@@ -47,14 +54,17 @@ const Wrapper = ({ children }: { children: ReactNode }) => {
 
 const customRender = async (
   ui: ReactElement,
-  options: Omit<RenderOptions, "wrapper"> = {},
+  {
+    path = "/",
+    ...options
+  }: Omit<RenderOptions, "wrapper"> & { path?: keyof FileRoutesById } = {},
 ) => {
-  const result = await act(async () =>
-    render(ui, {
-      wrapper: Wrapper,
+  const result = await act(async () => {
+    return render(ui, {
+      wrapper: ({ children }) => <Wrapper path={path}>{children}</Wrapper>,
       ...options,
-    }),
-  );
+    });
+  });
 
   return {
     user: userEvent.setup(),
