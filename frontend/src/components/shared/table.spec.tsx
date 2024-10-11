@@ -19,8 +19,8 @@ const columns = [
 ];
 
 describe("<Table />", () => {
-  it("should render table with correct column headers", () => {
-    render(
+  it("should render table with correct column headers", async () => {
+    await render(
       <Table
         data={[{ id: 1, name: "apple", color: "red" }]}
         columns={columns}
@@ -32,8 +32,8 @@ describe("<Table />", () => {
     }
   });
 
-  it("should NOT render global filter", () => {
-    render(
+  it("should NOT render global filter", async () => {
+    await render(
       <Table
         data={[{ id: 1, name: "apple", color: "red" }]}
         columns={columns}
@@ -44,7 +44,7 @@ describe("<Table />", () => {
   });
 
   it("should be able to filter rows", async () => {
-    const { user } = render(
+    const { user } = await render(
       <Table
         data={[
           { id: 1, name: "apple", color: "red" },
@@ -60,8 +60,8 @@ describe("<Table />", () => {
     expect(screen.getAllByRole("row")).toHaveLength(2);
   });
 
-  it("should render filter with placeholder text", () => {
-    render(
+  it("should render filter with placeholder text", async () => {
+    await render(
       <Table
         data={[
           { id: 1, name: "apple", color: "red" },
