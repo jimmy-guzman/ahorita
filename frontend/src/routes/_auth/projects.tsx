@@ -46,6 +46,7 @@ function Projects() {
                 href={import.meta.env.VITE_SERVER_DOMAIN}
                 target="__blank"
               >
+                <span className="sr-only">API Docs</span>
                 <Icon icon="simple-icons:swagger" className="text-xl" />
               </a>
               <a
