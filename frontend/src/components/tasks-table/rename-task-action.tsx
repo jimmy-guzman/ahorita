@@ -20,7 +20,11 @@ export const RenameTaskAction = ({ name, taskId }: RenameTaskActionProps) => {
   return (
     <Dialog.Root open={open} onOpenChange={setOpen}>
       <Dialog.Trigger asChild>
-        <button type="button" onClick={() => setOpen(true)}>
+        <button
+          type="button"
+          aria-label={`Rename ${name}`}
+          onClick={() => setOpen(true)}
+        >
           Rename
           <span className="dsy-badge dsy-badge-ghost">
             <PencilIcon className="h-4 w-4" />
