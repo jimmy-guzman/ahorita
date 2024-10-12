@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "NODE_ENV=production dotenv-run -- vite build",
-    "clean": "rimraf .turbo node_modules dist",
+    "clean": "rimraf .turbo node_modules dist coverage",
     "coverage": "dotenv-run -- vitest run --coverage",
     "dev": "dotenv-run -- bunx --bun vite",
     "e2e": "playwright test",
@@ -42,8 +42,6 @@
   },
   "devDependencies": {
     "@ahorita/backend": "workspace:*",
-    "@axe-core/playwright": "4.10.0",
-    "@faker-js/faker": "9.0.3",
     "@playwright/test": "1.48.0",
     "@tailwindcss/typography": "0.5.15",
     "@tanstack/react-query-devtools": "5.59.13",
