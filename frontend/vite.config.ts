@@ -20,6 +20,22 @@ export default defineConfig(() => ({
     environment: "happy-dom",
     globals: true,
     exclude: [...configDefaults.exclude, "e2e/*"],
-    setupFiles: "./src/testing/setup.ts",
+    setupFiles: "./src/testing/setup.tsx",
+    coverage: {
+      exclude: [
+        ...(configDefaults.coverage.exclude ?? []),
+        "{tailwind,postcss,playwright}.config.*",
+        "**/*.setup.*",
+        "**/*.gen.*",
+        "__mocks__/**",
+        "e2e/**",
+      ],
+      thresholds: {
+        statements: 47.14,
+        branches: 52.27,
+        functions: 40.42,
+        lines: 47.14,
+      },
+    },
   },
 }));

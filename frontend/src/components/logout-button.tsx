@@ -33,6 +33,7 @@ export const LogoutButton = () => {
       className="dsy-btn dsy-btn-ghost dsy-btn-circle dsy-btn-xs lg:dsy-btn-sm"
       onClick={() => mutate()}
     >
+      <span className="sr-only">Log Out</span>
       <LogOutIcon />
     </button>
   );
