@@ -19,17 +19,6 @@ export const OverviewChart = () => {
 
   const theme = isLightMode ? "cmyk" : "night";
 
-  // This is a hack to suppress the warning about missing defaultProps in recharts library as of version 2.12
-  // @link https://github.com/recharts/recharts/issues/3615
-  const logErrors = console.error;
-
-  console.error = (...args: unknown[]) => {
-    if (typeof args[0] === "string" && /defaultProps/.test(args[0])) {
-      return;
-    }
-    logErrors(...args);
-  };
-
   return (
     <ResponsiveContainer width="100%" height={350}>
       <BarChart data={data} title="Overview Bar Chart">
