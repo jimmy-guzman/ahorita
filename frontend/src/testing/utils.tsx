@@ -1,4 +1,3 @@
-import type { FileRoutesById } from "@/route-tree.gen";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
   RouterProvider,
@@ -13,6 +12,8 @@ import { userEvent } from "@testing-library/user-event";
 import type { ReactElement, ReactNode } from "react";
 import { afterEach } from "vitest";
 
+import type { FileRoutesById } from "@/route-tree.gen";
+
 afterEach(() => {
   cleanup();
 });
@@ -25,22 +26,22 @@ const queryClient = new QueryClient({
   },
 });
 
-const Wrapper = ({
-  children,
-  path,
-}: { children: ReactNode; path: keyof FileRoutesById }) => {
+interface WrapperProps {
+  children: ReactNode;
+  path: keyof FileRoutesById;
+  initialEntries: string[];
+}
+
+const Wrapper = ({ children, path, initialEntries }: WrapperProps) => {
   const rootRoute = createRootRoute();
   const testingRoute = createRoute({
     getParentRoute: () => rootRoute,
     path,
     component: () => children,
   });
-  const routeTree = rootRoute.addChildren([testingRoute]);
   const router = createRouter({
-    routeTree,
-    history: createMemoryHistory({
-      initialEntries: [path],
-    }),
+    routeTree: rootRoute.addChildren([testingRoute]),
+    history: createMemoryHistory({ initialEntries }),
     context: { queryClient },
   });
 
@@ -56,12 +57,19 @@ const customRender = async (
   ui: ReactElement,
   {
     path = "/",
+    initialEntries = [path],
     ...options
-  }: Omit<RenderOptions, "wrapper"> & { path?: keyof FileRoutesById } = {},
+  }: Omit<RenderOptions, "wrapper"> & Partial<WrapperProps> = {},
 ) => {
   const result = await act(async () => {
     return render(ui, {
-      wrapper: ({ children }) => <Wrapper path={path}>{children}</Wrapper>,
+      wrapper: ({ children }) => {
+        return (
+          <Wrapper path={path} initialEntries={initialEntries}>
+            {children}
+          </Wrapper>
+        );
+      },
       ...options,
     });
   });

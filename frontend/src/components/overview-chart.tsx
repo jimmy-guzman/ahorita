@@ -32,7 +32,7 @@ export const OverviewChart = () => {
 
   return (
     <ResponsiveContainer width="100%" height={350}>
-      <BarChart data={data}>
+      <BarChart data={data} title="Overview Bar Chart">
         <XAxis
           dataKey="name"
           stroke="#888888"

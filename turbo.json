@@ -29,6 +29,10 @@
     "test": {
       "persistent": true
     },
+    "coverage": {
+      "outputs": ["coverage/**"],
+      "dependsOn": ["^coverage"]
+    },
     "clean": {
       "cache": false
     },
