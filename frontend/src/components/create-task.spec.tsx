@@ -8,7 +8,7 @@ describe("<CreateTask />", () => {
   it("should render", async () => {
     const handlers = [
       http.get("/metadata", () => {
-        return HttpResponse.json({ labels: [], priorities: [] });
+        return HttpResponse.json({ labels: [], priorities: [], statuses: [] });
       }),
     ];
 

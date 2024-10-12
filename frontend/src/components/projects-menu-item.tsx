@@ -9,7 +9,6 @@ interface ProjectsMenuItemProps {
 
 export const ProjectsMenuItem = ({
   projectId,
-
   name,
   isDone,
 }: ProjectsMenuItemProps) => {
@@ -20,9 +19,9 @@ export const ProjectsMenuItem = ({
       activeProps={{ className: "dsy-active" }}
     >
       {isDone ? (
-        <FolderCheckIcon className="h-4 w-4" />
+        <FolderCheckIcon className="h-4 w-4" aria-label="Project Done:" />
       ) : (
-        <FolderIcon className="h-4 w-4" />
+        <FolderIcon className="h-4 w-4" aria-label="Project Not Done:" />
       )}
       {name}
     </Link>
