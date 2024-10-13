@@ -8,7 +8,7 @@ export const Route = createFileRoute("/_auth")({
       staleTime: Number.POSITIVE_INFINITY,
     });
 
-    if (!response.data?.user) {
+    if (!response.user) {
       throw redirect({
         to: "/login",
         search: {

@@ -18,14 +18,6 @@ afterEach(() => {
   cleanup();
 });
 
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      retry: false,
-    },
-  },
-});
-
 interface WrapperProps {
   children: ReactNode;
   path: keyof FileRoutesById;
@@ -33,6 +25,14 @@ interface WrapperProps {
 }
 
 const Wrapper = ({ children, path, initialEntries }: WrapperProps) => {
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        retry: false,
+      },
+    },
+  });
+
   const rootRoute = createRootRoute();
   const testingRoute = createRoute({
     getParentRoute: () => rootRoute,

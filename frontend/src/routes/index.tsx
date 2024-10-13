@@ -1,5 +1,6 @@
-import { Link, createFileRoute } from "@tanstack/react-router";
-import { FoldersIcon } from "lucide-react";
+import { createFileRoute } from "@tanstack/react-router";
+
+import { GetStartedButton } from "@/components/get-started-button";
 
 function Index() {
   return (
@@ -21,9 +22,7 @@ function Index() {
               with new technologies.
             </p>
             <div className="flex justify-end">
-              <Link to="/projects" className="dsy-btn dsy-btn-accent">
-                Get Started <FoldersIcon />
-              </Link>
+              <GetStartedButton />
             </div>
           </div>
         </div>
