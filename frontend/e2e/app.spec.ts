@@ -11,7 +11,7 @@ test("should navigate to api docs", async ({ page, context }) => {
 
   await page.goto("/");
 
-  await page.getByRole("link", { name: "Get Started" }).click();
+  await page.getByRole("link", { name: "Dashboard" }).click();
 
   await page.getByRole("link", { name: "API Docs" }).click();
 

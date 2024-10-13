@@ -80,7 +80,11 @@ export const authRoutes = new Elysia({ prefix: "/auth" })
   .post(
     "/logout",
     async ({ request, cookie, error }) => {
-      const cookieHeader = request.headers.get("Cookie") ?? "";
+      const cookieHeader = request.headers.get("Cookie");
+
+      if (!cookieHeader) {
+        return error(401, "No Cookie");
+      }
 
       const sessionId = lucia.readSessionCookie(cookieHeader);
 
