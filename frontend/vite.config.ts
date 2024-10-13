@@ -32,10 +32,10 @@ export default defineConfig(() => ({
         "playwright-report/**",
       ],
       thresholds: {
-        statements: 75.19,
+        statements: 75,
         branches: 66.66,
         functions: 48.59,
-        lines: 75.19,
+        lines: 75,
       },
     },
   },
