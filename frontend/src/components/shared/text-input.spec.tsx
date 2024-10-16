@@ -30,7 +30,7 @@ describe("<TextInput />", () => {
     expect(textbox).toBeInTheDocument();
   });
 
-  it("should change value whn user types", async () => {
+  it("should change value when user types", async () => {
     const { user } = await render(<Component />);
 
     const textbox = screen.getByRole("textbox", { name: "Username" });

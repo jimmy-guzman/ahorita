@@ -53,7 +53,7 @@ export const PasswordInput = <T extends FieldValues>({
         placeholder={placeholder}
         className={cn(
           "dsy-input dsy-input-bordered w-full pr-2",
-          error?.message ? "d-input-error" : "",
+          error?.message ? "dsy-input-error" : "",
         )}
         id={name}
         ref={field.ref}
