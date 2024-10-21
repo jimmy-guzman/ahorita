@@ -1,17 +1,22 @@
 {
   "$schema": "https://turbo.build/schema.json",
-  "globalDependencies": ["biome.json"],
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
       "outputs": ["dist/**", "route-tree.gen.ts"]
     },
-    "format": {},
+    "format": {
+      "inputs": ["$TURBO_DEFAULT$", "../biome.json"]
+    },
     "format:fix": {
+      "inputs": ["$TURBO_DEFAULT$", "../biome.json"],
       "cache": false
     },
-    "lint": {},
+    "lint": {
+      "inputs": ["$TURBO_DEFAULT$", "../biome.json"]
+    },
     "lint:fix": {
+      "inputs": ["$TURBO_DEFAULT$", "../biome.json"],
       "cache": false
     },
     "typecheck": {},

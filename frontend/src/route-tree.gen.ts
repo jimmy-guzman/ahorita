@@ -28,11 +28,13 @@ import { Route as AuthProjectsProjectIdTasksTaskIdImport } from "./routes/_auth/
 // Create/Update Routes
 
 const SignupRoute = SignupImport.update({
+  id: "/signup",
   path: "/signup",
   getParentRoute: () => rootRoute,
 } as any);
 
 const LoginRoute = LoginImport.update({
+  id: "/login",
   path: "/login",
   getParentRoute: () => rootRoute,
 } as any);
@@ -43,32 +45,38 @@ const AuthRouteRoute = AuthRouteImport.update({
 } as any);
 
 const IndexRoute = IndexImport.update({
+  id: "/",
   path: "/",
   getParentRoute: () => rootRoute,
 } as any);
 
 const AuthProjectsRoute = AuthProjectsImport.update({
+  id: "/projects",
   path: "/projects",
   getParentRoute: () => AuthRouteRoute,
 } as any);
 
 const AuthProjectsIndexRoute = AuthProjectsIndexImport.update({
+  id: "/",
   path: "/",
   getParentRoute: () => AuthProjectsRoute,
 } as any);
 
 const AuthProjectsNewRoute = AuthProjectsNewImport.update({
+  id: "/new",
   path: "/new",
   getParentRoute: () => AuthProjectsRoute,
 } as any);
 
 const AuthProjectsProjectIdRoute = AuthProjectsProjectIdImport.update({
+  id: "/$projectId",
   path: "/$projectId",
   getParentRoute: () => AuthProjectsRoute,
 } as any);
 
 const AuthProjectsProjectIdIndexRoute = AuthProjectsProjectIdIndexImport.update(
   {
+    id: "/",
     path: "/",
     getParentRoute: () => AuthProjectsProjectIdRoute,
   } as any,
@@ -76,6 +84,7 @@ const AuthProjectsProjectIdIndexRoute = AuthProjectsProjectIdIndexImport.update(
 
 const AuthProjectsProjectIdTasksRoute = AuthProjectsProjectIdTasksImport.update(
   {
+    id: "/tasks",
     path: "/tasks",
     getParentRoute: () => AuthProjectsProjectIdRoute,
   } as any,
@@ -83,18 +92,21 @@ const AuthProjectsProjectIdTasksRoute = AuthProjectsProjectIdTasksImport.update(
 
 const AuthProjectsProjectIdTasksIndexRoute =
   AuthProjectsProjectIdTasksIndexImport.update({
+    id: "/",
     path: "/",
     getParentRoute: () => AuthProjectsProjectIdTasksRoute,
   } as any);
 
 const AuthProjectsProjectIdTasksNewRoute =
   AuthProjectsProjectIdTasksNewImport.update({
+    id: "/new",
     path: "/new",
     getParentRoute: () => AuthProjectsProjectIdTasksRoute,
   } as any);
 
 const AuthProjectsProjectIdTasksTaskIdRoute =
   AuthProjectsProjectIdTasksTaskIdImport.update({
+    id: "/$taskId",
     path: "/$taskId",
     getParentRoute: () => AuthProjectsProjectIdTasksRoute,
   } as any);
