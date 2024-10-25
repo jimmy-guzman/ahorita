@@ -6,6 +6,8 @@ import {
   useController,
 } from "react-hook-form";
 
+import { cn } from "@/utils/cn";
+
 interface SelectFieldProps<T extends FieldValues>
   extends UseControllerProps<T> {
   control: Control<T>;
@@ -14,6 +16,7 @@ interface SelectFieldProps<T extends FieldValues>
    */
   label: string;
   children: ReactNode;
+  className?: string;
 }
 
 /**
@@ -28,7 +31,7 @@ export const Select = <T extends FieldValues>({
   shouldUnregister,
   defaultValue,
   label,
-
+  className,
   children,
 }: SelectFieldProps<T>) => {
   const {
@@ -43,7 +46,7 @@ export const Select = <T extends FieldValues>({
   });
 
   return (
-    <div className="dsy-form-control">
+    <div className={cn("dsy-form-control", className)}>
       <label className="dsy-label" htmlFor={name}>
         <span className="dsy-label-text">{label}</span>
       </label>

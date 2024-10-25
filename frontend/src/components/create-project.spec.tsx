@@ -2,12 +2,18 @@ import { render, screen } from "@/testing/utils";
 import { CreateProject } from "./create-project";
 
 describe("<CreateProject />", () => {
-  it("should render", async () => {
-    await render(<CreateProject />);
+  it("should open modal", async () => {
+    const { user } = await render(<CreateProject />);
+
+    const button = screen.getByRole("button", {
+      name: "Create Project",
+    });
+
+    await user.click(button);
 
     const heading = screen.getByRole("heading", {
-      name: "Create New Project",
-      level: 1,
+      name: "Create Project",
+      level: 2,
     });
 
     expect(heading).toBeInTheDocument();

@@ -5,21 +5,28 @@ import { render, screen } from "@/testing/utils";
 import { CreateTask } from "./create-task";
 
 describe("<CreateTask />", () => {
-  it("should render", async () => {
+  it("should  open modal", async () => {
     const handlers = [
       http.get("/metadata", () => {
         return HttpResponse.json({ labels: [], priorities: [], statuses: [] });
+      }),
+      http.get("/projects", () => {
+        return HttpResponse.json([]);
       }),
     ];
 
     server.use(...handlers);
 
-    await render(<CreateTask />, {
-      path: "/_auth/projects/$projectId/tasks/new",
+    const { user } = await render(<CreateTask />, { path: "/_auth/tasks/" });
+
+    const button = screen.getByRole("button", {
+      name: "Create Task",
     });
 
+    await user.click(button);
+
     const heading = screen.getByRole("heading", {
-      name: "Create New Task",
+      name: "Create Task",
       level: 2,
     });
 

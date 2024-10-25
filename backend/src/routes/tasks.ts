@@ -2,6 +2,7 @@ import { Elysia, InternalServerError, t } from "elysia";
 
 import { db } from "../db";
 import { auth } from "../middleware/auth";
+import { selectProjectSchema } from "../models/projects";
 import { insertTaskSchema, selectTaskSchema } from "../models/tasks";
 import { tasks } from "../schemas/projects";
 import { taskRoutes } from "./tasks.$taskId";
@@ -50,6 +51,10 @@ export const tasksRoutes = new Elysia({ prefix: "/tasks" })
           );
         },
         orderBy: (tasks, { desc }) => desc(tasks.updatedAt),
+        columns: { projectId: false, userId: false },
+        with: {
+          project: { columns: { userId: false } },
+        },
       });
     },
     {
@@ -58,7 +63,12 @@ export const tasksRoutes = new Elysia({ prefix: "/tasks" })
         "createdAt",
         "updatedAt",
       ]),
-      response: t.Array(selectTaskSchema),
+      response: t.Array(
+        t.Intersect([
+          t.Omit(selectTaskSchema, ["projectId", "userId"]),
+          t.Object({ project: t.Omit(selectProjectSchema, ["userId"]) }),
+        ]),
+      ),
       detail: { tags, summary: "List Tasks" },
     },
   )

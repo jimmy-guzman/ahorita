@@ -39,7 +39,7 @@ export const DeleteProject = () => {
                     onSuccess: async () => {
                       setOpen(false);
 
-                      await navigate({ to: "/projects/new" });
+                      await navigate({ to: "/projects" });
                     },
                   });
                 }}

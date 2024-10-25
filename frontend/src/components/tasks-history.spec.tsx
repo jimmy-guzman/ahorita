@@ -31,7 +31,7 @@ describe("<TasksHistory />", () => {
     server.use(...handlers);
 
     await render(<TasksHistory />, {
-      path: "/_auth/projects/$projectId/",
+      path: "/_auth/projects/$projectId",
       initialEntries: ["/_auth/projects/1/"],
     });
 

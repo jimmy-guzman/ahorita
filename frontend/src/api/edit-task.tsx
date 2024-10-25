@@ -21,16 +21,12 @@ export const editTaskMutationOptions = mutationOptions({
 
     return res.data;
   },
-  onSuccess: async ({ id, projectId, name }) => {
-    await queryClient.invalidateQueries(queryTasksOptions({ projectId }));
+  onSuccess: async ({ id, name }) => {
+    await queryClient.invalidateQueries(queryTasksOptions());
 
     toast.success(`Task ${name} has been edited`, {
       action: (
-        <Link
-          to="/projects/$projectId/tasks/$taskId"
-          params={{ taskId: id, projectId }}
-          className="dsy-link"
-        >
+        <Link to="/tasks/$taskId" params={{ taskId: id }} className="dsy-link">
           View Task
         </Link>
       ),

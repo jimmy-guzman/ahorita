@@ -3,7 +3,7 @@ import { Link } from "@tanstack/react-router";
 import { EllipsisIcon, EyeIcon } from "lucide-react";
 import { useRef } from "react";
 
-import type { APITypes } from "@/api/client";
+import type { APIRoutes } from "@/api/client";
 import { editTaskMutationOptions } from "@/api/edit-task";
 import { queryMetadataOptions } from "@/api/query-metadata";
 
@@ -11,7 +11,7 @@ import { DeleteTaskAction } from "./delete-task-action";
 import { RenameTaskAction } from "./rename-task-action";
 
 interface TaskTableActionsProps {
-  task: APITypes["Task"];
+  task: APIRoutes["tasks"]["get"]["response"]["200"][number];
 }
 
 export const RowActions = ({ task }: TaskTableActionsProps) => {
@@ -113,10 +113,7 @@ export const RowActions = ({ task }: TaskTableActionsProps) => {
         </li>
         <div className="dsy-divider my-1" />
         <li>
-          <Link
-            to="/projects/$projectId/tasks/$taskId"
-            params={{ projectId: task.projectId, taskId: task.id }}
-          >
+          <Link to="/tasks/$taskId" params={{ taskId: task.id }}>
             View
             <span className="dsy-badge dsy-badge-ghost">
               <EyeIcon className="h-4 w-4" />

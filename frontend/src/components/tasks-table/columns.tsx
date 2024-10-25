@@ -1,31 +1,29 @@
 import { Link } from "@tanstack/react-router";
 import { createColumnHelper } from "@tanstack/react-table";
 
-import type { APITypes } from "@/api/client";
+import type { APIRoutes } from "@/api/client";
 
 import { PriorityCell } from "./priority-cell";
 import { RowActions } from "./row-actions";
 import { TasksTableStatusCell } from "./status-cell";
 
-const columnHelper = createColumnHelper<APITypes["Task"]>();
+const columnHelper =
+  createColumnHelper<APIRoutes["tasks"]["get"]["response"]["200"][number]>();
 
 export const columns = [
   columnHelper.accessor("name", {
     header: "Name",
-    cell: (info) => {
-      return (
-        <Link
-          className="dsy-link"
-          to="/projects/$projectId/tasks/$taskId"
-          params={{
-            projectId: info.row.original.projectId,
-            taskId: info.row.original.id,
-          }}
-        >
-          {info.getValue()}
-        </Link>
-      );
-    },
+    cell: (info) => (
+      <Link
+        className="dsy-link dsy-link-primary"
+        to="/tasks/$taskId"
+        params={{
+          taskId: info.row.original.id,
+        }}
+      >
+        {info.getValue()}
+      </Link>
+    ),
   }),
   columnHelper.accessor("label", {
     header: "Label",
@@ -40,6 +38,20 @@ export const columns = [
   columnHelper.accessor("priority", {
     header: "Priority",
     cell: (info) => <PriorityCell priority={info.getValue()} />,
+  }),
+  columnHelper.accessor("project.name", {
+    header: "Project",
+    cell: (info) => (
+      <Link
+        className="dsy-link dsy-link-secondary"
+        to="/projects/$projectId"
+        params={{
+          projectId: info.row.original.project.id,
+        }}
+      >
+        {info.getValue()}
+      </Link>
+    ),
   }),
   columnHelper.display({
     id: "actions",

@@ -1,7 +1,9 @@
 import { compareAsc } from "date-fns";
 
-import type { APITypes } from "@/api/client";
+import type { APIRoutes } from "@/api/client";
 
-export const getTasksByCreatedAt = (tasks: APITypes["Task"][]) => {
+export const getTasksByCreatedAt = (
+  tasks: APIRoutes["tasks"]["get"]["response"]["200"],
+) => {
   return tasks.sort((a, b) => compareAsc(a.createdAt, b.createdAt));
 };
