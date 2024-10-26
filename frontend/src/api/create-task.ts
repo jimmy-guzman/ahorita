@@ -15,10 +15,10 @@ export const createTask = mutationOptions({
 
     return res.data;
   },
-  onMutate: async ({ projectId }) => {
-    await queryClient.cancelQueries(queryTasksOptions({ projectId }));
+  onMutate: async () => {
+    await queryClient.cancelQueries(queryTasksOptions());
   },
-  onSuccess: async ({ projectId }) => {
-    await queryClient.invalidateQueries(queryTasksOptions({ projectId }));
+  onSuccess: async () => {
+    await queryClient.invalidateQueries(queryTasksOptions());
   },
 });

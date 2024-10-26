@@ -23,8 +23,15 @@ describe("<RowActions />", () => {
           label: "Feature",
           createdAt: "2024-08-18T16:30:34.131Z",
           updatedAt: "2024-08-18T16:30:34.131Z",
-          projectId: "1",
-          userId: "1",
+          project: {
+            id: "1",
+            name: "Revamp Testing Suite",
+            description: "",
+            isFavorite: false,
+            isDone: false,
+            createdAt: "2024-08-25T16:54:05.991Z",
+            updatedAt: "2024-08-25T16:54:05.991Z",
+          },
         }}
       />,
       {

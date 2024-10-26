@@ -1,5 +1,15 @@
 import { getTasksByCreatedAt } from "./select";
 
+const mockProject = {
+  id: "1",
+  name: "Revamp Testing Suite",
+  description: "",
+  isFavorite: false,
+  isDone: false,
+  createdAt: "2024-08-25T16:54:05.991Z",
+  updatedAt: "2024-08-25T16:54:05.991Z",
+};
+
 describe("select", () => {
   it("getTasksByCreatedAt", () => {
     const tasks = getTasksByCreatedAt([
@@ -11,8 +21,7 @@ describe("select", () => {
         label: "Feature",
         createdAt: "2024-08-14T22:48:22.325Z",
         updatedAt: "2024-08-16T00:08:41.679Z",
-        projectId: "DDND",
-        userId: "5k6chbdab36lhmf",
+        project: mockProject,
       },
       {
         id: "RTQK",
@@ -22,8 +31,7 @@ describe("select", () => {
         label: "Feature",
         createdAt: "2024-08-17T16:16:59.478Z",
         updatedAt: "2024-08-17T16:28:35.953Z",
-        projectId: "DDND",
-        userId: "5k6chbdab36lhmf",
+        project: mockProject,
       },
       {
         id: "GEPR",
@@ -33,8 +41,7 @@ describe("select", () => {
         label: "Feature",
         createdAt: "2024-08-17T16:28:28.644Z",
         updatedAt: "2024-08-17T16:28:28.644Z",
-        projectId: "DDND",
-        userId: "5k6chbdab36lhmf",
+        project: mockProject,
       },
       {
         id: "JQAK",
@@ -44,8 +51,7 @@ describe("select", () => {
         label: "Feature",
         createdAt: "2024-08-17T16:52:40.687Z",
         updatedAt: "2024-08-17T16:52:40.687Z",
-        projectId: "DDND",
-        userId: "5k6chbdab36lhmf",
+        project: mockProject,
       },
       {
         id: "4LP9",
@@ -55,8 +61,7 @@ describe("select", () => {
         label: "Feature",
         createdAt: "2024-08-17T16:52:42.923Z",
         updatedAt: "2024-08-17T16:52:42.923Z",
-        projectId: "DDND",
-        userId: "5k6chbdab36lhmf",
+        project: mockProject,
       },
     ]);
 

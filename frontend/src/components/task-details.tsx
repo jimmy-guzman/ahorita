@@ -5,7 +5,7 @@ import { ArrowLeftIcon, SquareCheckIcon, SquareIcon } from "lucide-react";
 
 import { queryTaskOptions } from "@/api/query-task";
 
-const routeApi = getRouteApi("/_auth/projects/$projectId/tasks/$taskId");
+const routeApi = getRouteApi("/_auth/tasks/$taskId");
 
 export function TaskDetails() {
   const params = routeApi.useParams();
@@ -32,7 +32,15 @@ export function TaskDetails() {
             <span className="dsy-badge dsy-badge-neutral">{task.status}</span>{" "}
             with a priority of{" "}
             <span className="dsy-badge dsy-badge-neutral">{task.priority}</span>
-            . It was{" "}
+            . It's part of the{" "}
+            <Link
+              to="/projects/$projectId"
+              params={{ projectId: task.project.id }}
+              className="dsy-link dsy-link-secondary"
+            >
+              {task.project.name}
+            </Link>{" "}
+            project. It was{" "}
             <strong>created {formatDistanceToNow(task.createdAt)} ago</strong>{" "}
             and{" "}
             <strong>

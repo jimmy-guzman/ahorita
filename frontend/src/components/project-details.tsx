@@ -1,8 +1,7 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { Outlet } from "@tanstack/react-router";
 import { Link } from "@tanstack/react-router";
 import { getRouteApi } from "@tanstack/react-router";
-import { HistoryIcon, ListTodoIcon } from "lucide-react";
+import { ListTodoIcon } from "lucide-react";
 
 import { projectQueryOptions } from "@/api/query-project";
 
@@ -35,21 +34,9 @@ export const ProjectDetails = () => {
             <DeleteProject />
             <EditProject />
             <Link
-              className="dsy-btn dsy-btn-secondary dsy-btn-sm"
-              to="/projects/$projectId"
-              params={{ projectId }}
-              activeOptions={{ exact: true }}
-              activeProps={{ className: "dsy-btn-active" }}
-            >
-              <span className="hidden sm:inline">History</span>
-              <HistoryIcon />
-            </Link>
-            <Link
               className="dsy-btn dsy-btn-primary dsy-btn-sm"
-              to="/projects/$projectId/tasks"
-              params={{ projectId }}
-              activeOptions={{ exact: true }}
-              activeProps={{ className: "dsy-btn-active" }}
+              to="/tasks"
+              search={{ projectId }}
             >
               <span className="hidden sm:inline">Tasks</span>
               <ListTodoIcon />
@@ -57,7 +44,6 @@ export const ProjectDetails = () => {
           </div>
         </div>
       </div>
-      <Outlet />
     </section>
   );
 };

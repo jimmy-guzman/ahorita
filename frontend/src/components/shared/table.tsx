@@ -9,6 +9,7 @@ import {
 import {
   ArrowDownWideNarrowIcon,
   ArrowUpWideNarrowIcon,
+  CheckIcon,
   SearchIcon,
   XIcon,
 } from "lucide-react";
@@ -53,6 +54,15 @@ export function Table<TData, TColumns extends ColumnDef<TData, any>[]>({
     getFilteredRowModel: getFilteredRowModel(),
     onGlobalFilterChange: setGlobalFilter,
     globalFilterFn: fuzzyFilter,
+    defaultColumn: {
+      cell: (info) => {
+        if (typeof info.getValue() === "boolean") {
+          return info.getValue() ? <CheckIcon /> : <XIcon />;
+        }
+
+        return info.getValue();
+      },
+    },
   });
 
   return (
