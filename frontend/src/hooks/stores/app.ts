@@ -1,29 +1,48 @@
+import type { Theme } from "daisyui";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
+type Mode = "dark" | "light";
+
 interface AppState {
-  lightMode: boolean;
   actions: {
-    toggleLightMode: () => void;
+    toggleMode: () => void;
   };
+  mode: Mode;
 }
 
 const useAppStore = create<AppState>()(
   persist(
     (set) => ({
-      lightMode: false,
       actions: {
-        toggleLightMode: () => {
-          set((state) => ({ lightMode: !state.lightMode }));
+        toggleMode: () => {
+          set((state) => ({
+            mode: state.mode === "dark" ? "light" : "dark",
+          }));
         },
       },
+      mode: "dark",
     }),
     {
       name: "appStore",
-      partialize: (state) => ({ lightMode: state.lightMode }),
+      partialize: (state) => ({
+        theme: state.mode,
+      }),
     },
   ),
 );
 
-export const useAppActions = () => useAppStore((state) => state.actions);
-export const useAppLightMode = () => useAppStore((state) => state.lightMode);
+export const themesByMode = {
+  dark: "synthwave",
+  light: "cmyk",
+} satisfies Record<Mode, Theme>;
+
+export const useAppActions = () => {
+  return useAppStore((state) => state.actions);
+};
+export const useAppIsLightMode = () => {
+  return useAppStore((state) => state.mode === "light");
+};
+export const useAppTheme = () => {
+  return useAppStore((state) => themesByMode[state.mode]);
+};

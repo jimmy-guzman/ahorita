@@ -11,13 +11,11 @@ import {
 } from "recharts";
 
 import { projectsTotalsQueryOptions } from "@/api/query-projects-totals";
-import { useAppLightMode } from "@/hooks/stores/app";
+import { useAppTheme } from "@/hooks/stores/app";
 
 export const OverviewChart = () => {
   const { data } = useSuspenseQuery(projectsTotalsQueryOptions);
-  const isLightMode = useAppLightMode();
-
-  const theme = isLightMode ? "cmyk" : "night";
+  const theme = useAppTheme();
 
   return (
     <ResponsiveContainer width="100%" height={350}>
