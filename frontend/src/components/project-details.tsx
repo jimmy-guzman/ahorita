@@ -31,8 +31,8 @@ export const ProjectDetails = () => {
           </h1>
           <p>{project.description}</p>
           <div className="dsy-card-actions justify-end">
-            <DeleteProject />
-            <EditProject />
+            <DeleteProject projectId={projectId} />
+            <EditProject projectId={projectId} />
             <Link
               className="dsy-btn dsy-btn-primary dsy-btn-sm"
               to="/tasks"

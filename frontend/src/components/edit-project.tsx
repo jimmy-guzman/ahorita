@@ -1,6 +1,5 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import { useMutation, useSuspenseQuery } from "@tanstack/react-query";
-import { getRouteApi } from "@tanstack/react-router";
 import { FolderPenIcon, SaveIcon, XIcon } from "lucide-react";
 import { useState } from "react";
 
@@ -8,11 +7,19 @@ import { editProjectOptions } from "@/api/edit-project";
 import { projectQueryOptions } from "@/api/query-project";
 import { TextInput } from "@/components/shared/text-input";
 import { useEditProjectForm } from "@/hooks/forms/edit-project";
+import { cn } from "@/utils/cn";
 
-const routeApi = getRouteApi("/_auth/projects/$projectId");
+interface EditProjectProps {
+  className?: string;
+  hideText?: boolean;
+  projectId: string;
+}
 
-export const EditProject = () => {
-  const { projectId } = routeApi.useParams();
+export const EditProject = ({
+  className = "dsy-btn dsy-btn-accent dsy-btn-sm",
+  hideText = false,
+  projectId,
+}: EditProjectProps) => {
   const { data: project } = useSuspenseQuery(projectQueryOptions(projectId));
   const { mutate } = useMutation(editProjectOptions);
   const [open, setOpen] = useState(false);
@@ -22,8 +29,10 @@ export const EditProject = () => {
   return (
     <Dialog.Root open={open} onOpenChange={setOpen}>
       <Dialog.Trigger asChild>
-        <button type="button" className="dsy-btn dsy-btn-accent dsy-btn-sm">
-          <span className="hidden sm:inline">Edit </span>
+        <button type="button" className={cn(className)}>
+          <span className={cn(hideText ? "sr-only" : "hidden sm:inline")}>
+            Edit{" "}
+          </span>
           <FolderPenIcon />
         </button>
       </Dialog.Trigger>

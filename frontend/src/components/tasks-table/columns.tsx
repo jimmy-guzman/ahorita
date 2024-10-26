@@ -55,7 +55,7 @@ export const columns = [
   }),
   columnHelper.display({
     id: "actions",
-    header: () => <span className="sr-only">Actions</span>,
+    header: "Actions",
     cell: (info) => <RowActions task={info.row.original} />,
     enableGlobalFilter: false,
   }),

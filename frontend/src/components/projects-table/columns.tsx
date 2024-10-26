@@ -4,6 +4,9 @@ import { ListTodoIcon } from "lucide-react";
 
 import type { APIRoutes } from "@/api/client";
 
+import { DeleteProject } from "../delete-project";
+import { EditProject } from "../edit-project";
+
 const columnHelper =
   createColumnHelper<APIRoutes["projects"]["get"]["response"]["200"][number]>();
 
@@ -30,19 +33,29 @@ export const columns = [
   }),
   columnHelper.display({
     id: "actions",
-    header: () => <span className="sr-only">Actions</span>,
+    header: "Actions",
     cell: (info) => {
+      const projectId = info.row.original.id;
+
       return (
         <div className="dsy-join">
           <Link
-            className="dsy-btn dsy-btn-sm join-item"
+            className="dsy-btn dsy-btn-sm dsy-join-item"
             to="/tasks"
-            search={{
-              projectId: info.row.original.id,
-            }}
+            search={{ projectId }}
           >
             <ListTodoIcon />
           </Link>
+          <EditProject
+            className="dsy-btn dsy-btn-sm dsy-join-item"
+            projectId={projectId}
+            hideText
+          />
+          <DeleteProject
+            className="dsy-btn dsy-btn-sm dsy-join-item"
+            projectId={projectId}
+            hideText
+          />
         </div>
       );
     },

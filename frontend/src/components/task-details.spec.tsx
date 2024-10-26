@@ -39,10 +39,11 @@ describe("<TaskDetails />", () => {
       initialEntries: ["/_auth/tasks/1"],
     });
 
-    const button = screen.getByRole("link", {
-      name: "Back to Tasks",
+    const heading = screen.getByRole("heading", {
+      name: "add task details",
+      level: 1,
     });
 
-    expect(button).toBeInTheDocument();
+    expect(heading).toBeInTheDocument();
   });
 });
