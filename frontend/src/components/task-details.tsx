@@ -1,7 +1,6 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { Link, getRouteApi } from "@tanstack/react-router";
 import { formatDistanceToNow } from "date-fns";
-import { ArrowLeftIcon, SquareCheckIcon, SquareIcon } from "lucide-react";
 
 import { queryTaskOptions } from "@/api/query-task";
 
@@ -13,17 +12,10 @@ export function TaskDetails() {
 
   return (
     <section className="flex w-full flex-col gap-4">
-      <div className="dsy-card">
+      <div className="dsy-card bg-base-200">
         <div className="dsy-card-body">
           <h1 className="dsy-card-title flex justify-between text-2xl sm:text-3xl">
-            <span>
-              {task.status === "Done" ? (
-                <SquareCheckIcon className="inline" />
-              ) : (
-                <SquareIcon className="inline" />
-              )}{" "}
-              {task.name}
-            </span>
+            {task.name}
           </h1>
           <p>
             This{" "}
@@ -48,12 +40,7 @@ export function TaskDetails() {
             </strong>
             .
           </p>
-          <div className="dsy-card-actions justify-end">
-            <Link className="dsy-btn dsy-btn-link" to="..">
-              <ArrowLeftIcon />
-              <span className="hidden sm:inline">Back to Tasks</span>
-            </Link>
-          </div>
+          <div className="dsy-card-actions justify-end" />
         </div>
       </div>
     </section>

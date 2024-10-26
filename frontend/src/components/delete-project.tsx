@@ -1,16 +1,24 @@
 import * as AlertDialog from "@radix-ui/react-alert-dialog";
 import { useMutation } from "@tanstack/react-query";
-import { getRouteApi } from "@tanstack/react-router";
+import { useNavigate } from "@tanstack/react-router";
 import { FolderMinusIcon } from "lucide-react";
 import { useState } from "react";
 
 import { deleteProjectOptions } from "@/api/delete-project";
+import { cn } from "@/utils/cn";
 
-const routeApi = getRouteApi("/_auth/projects/$projectId");
+interface DeleteProjectProps {
+  className?: string;
+  hideText?: boolean;
+  projectId: string;
+}
 
-export const DeleteProject = () => {
-  const { projectId } = routeApi.useParams();
-  const navigate = routeApi.useNavigate();
+export const DeleteProject = ({
+  className = "dsy-btn dsy-btn-neutral dsy-btn-sm",
+  projectId,
+  hideText = false,
+}: DeleteProjectProps) => {
+  const navigate = useNavigate();
   const { mutate } = useMutation(deleteProjectOptions);
   const [open, setOpen] = useState(false);
 
@@ -19,10 +27,12 @@ export const DeleteProject = () => {
       <AlertDialog.Trigger asChild>
         <button
           type="button"
-          className="dsy-btn dsy-btn-neutral dsy-btn-sm"
+          className={cn(className)}
           onClick={() => setOpen(true)}
         >
-          <span className="hidden sm:inline">Delete </span>
+          <span className={cn(hideText ? "sr-only" : "hidden sm:inline")}>
+            Delete{" "}
+          </span>
           <FolderMinusIcon />
         </button>
       </AlertDialog.Trigger>
