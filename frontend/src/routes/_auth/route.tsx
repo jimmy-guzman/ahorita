@@ -48,7 +48,7 @@ function Component() {
           >
             <Icon icon="simple-icons:opentelemetry" className="text-xl" />
           </a>
-          <ThemeToggle lightTheme="cmyk" />
+          <ThemeToggle />
           <LogoutButton />
         </div>
       </nav>

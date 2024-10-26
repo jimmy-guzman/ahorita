@@ -4,16 +4,14 @@ import { ThemeToggle } from "./theme-toggle";
 
 describe("<ThemeToggle />", () => {
   it("should be able to toggle", async () => {
-    const { user } = await render(<ThemeToggle lightTheme="light" />);
+    const { user } = await render(<ThemeToggle />);
 
-    expect(
-      screen.getByRole("checkbox", { name: /toggle theme/i }),
-    ).not.toBeChecked();
+    const checkbox = screen.getByRole("checkbox", { name: "Toggle theme" });
 
-    await user.click(screen.getByRole("checkbox", { name: /toggle theme/i }));
+    expect(checkbox).not.toBeChecked();
 
-    expect(
-      screen.getByRole("checkbox", { name: /toggle theme/i }),
-    ).toBeChecked();
+    await user.click(checkbox);
+
+    expect(checkbox).toBeChecked();
   });
 });

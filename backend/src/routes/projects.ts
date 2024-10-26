@@ -54,6 +54,7 @@ export const projectsRoutes = new Elysia({ prefix: "/projects" })
       const userId = user?.id ?? "";
       const projectsWithTasks = await db.query.projects.findMany({
         where: eq(projects.userId, userId),
+        orderBy: (tasks, { desc }) => desc(tasks.updatedAt),
         columns: {
           id: true,
           name: true,

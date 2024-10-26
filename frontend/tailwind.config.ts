@@ -8,7 +8,7 @@ export default {
     extend: {},
   },
   daisyui: {
-    themes: ["night", "cmyk"],
+    themes: ["synthwave", "cmyk"],
     prefix: "dsy-",
     logs: false,
   },
