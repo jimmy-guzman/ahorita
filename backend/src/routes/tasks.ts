@@ -2,8 +2,11 @@ import { Elysia, InternalServerError, t } from "elysia";
 
 import { db } from "../db";
 import { auth } from "../middleware/auth";
-import { selectProjectSchema } from "../models/projects";
-import { insertTaskSchema, selectTaskSchema } from "../models/tasks";
+import {
+  insertTaskSchema,
+  selectTaskSchema,
+  selectTaskWithProjectSchema,
+} from "../models/tasks";
 import { tasks } from "../schemas/projects";
 import { taskRoutes } from "./tasks.$taskId";
 
@@ -11,7 +14,11 @@ const tags = ["Task"];
 
 export const tasksRoutes = new Elysia({ prefix: "/tasks" })
   .use(auth)
-  .model({ Task: selectTaskSchema })
+  .model({
+    Task: selectTaskSchema,
+    TaskWithProject: selectTaskWithProjectSchema,
+    TasksWithProject: t.Array(selectTaskWithProjectSchema),
+  })
   .post(
     "",
     async ({ user, body }) => {
@@ -63,12 +70,7 @@ export const tasksRoutes = new Elysia({ prefix: "/tasks" })
         "createdAt",
         "updatedAt",
       ]),
-      response: t.Array(
-        t.Intersect([
-          t.Omit(selectTaskSchema, ["projectId", "userId"]),
-          t.Object({ project: t.Omit(selectProjectSchema, ["userId"]) }),
-        ]),
-      ),
+      response: "TasksWithProject",
       detail: { tags, summary: "List Tasks" },
     },
   )

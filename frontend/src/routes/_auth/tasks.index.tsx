@@ -8,8 +8,18 @@ import { CreateTask } from "@/components/create-task";
 import { Table } from "@/components/shared/table";
 import { columns } from "@/components/tasks-table/columns";
 
+// TODO: find a better way to share static metadata between backend and frontend
+const statuses = [
+  "Backlog",
+  "Todo",
+  "In Progress",
+  "Done",
+  "Canceled",
+] as const;
+
 const tasksSearchSchema = v.object({
   projectId: v.optional(v.string()),
+  status: v.optional(v.union(statuses.map((status) => v.literal(status)))),
 });
 
 const routeApi = getRouteApi("/_auth/tasks/");

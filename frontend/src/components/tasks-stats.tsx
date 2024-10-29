@@ -2,6 +2,7 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { LayoutListIcon, ListChecksIcon, ListPlusIcon } from "lucide-react";
 
 import { queryTasksOptions } from "@/api/query-tasks";
+import { Link } from "@tanstack/react-router";
 
 export const TasksStats = () => {
   const { data } = useSuspenseQuery(queryTasksOptions());
@@ -9,8 +10,15 @@ export const TasksStats = () => {
   return (
     <div className="dsy-stats dsy-stats-vertical sm:dsy-stats-horizontal bg-base-200 shadow">
       <div className="dsy-stat">
-        <div className="dsy-stat-figure text-secondary">
-          <ListChecksIcon />
+        <div className="dsy-stat-figure">
+          <Link
+            to="/tasks"
+            className="dsy-btn dsy-btn-neutral dsy-btn-circle"
+            search={{ status: "Done" }}
+          >
+            <span className="sr-only">View Completed Tasks</span>
+            <ListChecksIcon />
+          </Link>
         </div>
         <div className="dsy-stat-title">Tasks Completed</div>
         <div className="dsy-stat-value">
@@ -19,8 +27,15 @@ export const TasksStats = () => {
       </div>
 
       <div className="dsy-stat">
-        <div className="dsy-stat-figure text-secondary">
-          <LayoutListIcon />
+        <div className="dsy-stat-figure">
+          <Link
+            to="/tasks"
+            className="dsy-btn dsy-btn-neutral dsy-btn-circle"
+            search={{ status: "In Progress" }}
+          >
+            <span className="sr-only">View In Progress Tasks</span>
+            <LayoutListIcon />
+          </Link>
         </div>
         <div className="dsy-stat-title">In Progress Tasks</div>
         <div className="dsy-stat-value">
@@ -29,8 +44,11 @@ export const TasksStats = () => {
       </div>
 
       <div className="dsy-stat">
-        <div className="dsy-stat-figure text-secondary">
-          <ListPlusIcon />
+        <div className="dsy-stat-figure">
+          <Link to="/tasks" className="dsy-btn dsy-btn-neutral dsy-btn-circle">
+            <span className="sr-only">View All Tasks</span>
+            <ListPlusIcon />
+          </Link>
         </div>
         <div className="dsy-stat-title">Total Tasks</div>
         <div className="dsy-stat-value">{data.length}</div>
