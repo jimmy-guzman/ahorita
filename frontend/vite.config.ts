@@ -16,6 +16,7 @@ export default defineConfig(() => ({
       autoCodeSplitting: true,
     }),
   ],
+  entries: ["index.html"],
   test: {
     environment: "happy-dom",
     globals: true,
