@@ -22,11 +22,11 @@
     "@elysiajs/swagger": "1.1.1",
     "@libsql/client": "0.14.0",
     "@lucia-auth/adapter-drizzle": "1.1.0",
-    "@opentelemetry/exporter-trace-otlp-proto": "0.54.0",
+    "@opentelemetry/exporter-trace-otlp-proto": "0.54.2",
     "@opentelemetry/sdk-trace-node": "1.27.0",
     "@oslojs/crypto": "1.0.1",
     "@oslojs/encoding": "1.1.0",
-    "drizzle-orm": "0.36.0",
+    "drizzle-orm": "0.36.1",
     "drizzle-typebox": "0.1.1",
     "elysia": "1.1.24",
     "env-schema": "6.0.0",
@@ -36,7 +36,7 @@
     "picocolors": "1.1.1"
   },
   "devDependencies": {
-    "drizzle-kit": "0.27.1",
+    "drizzle-kit": "0.28.0",
     "rimraf": "6.0.1",
     "typescript": "5.6.3"
   }
