@@ -1,7 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 import { Link, createFileRoute, getRouteApi } from "@tanstack/react-router";
-import { valibotSearchValidator } from "@tanstack/router-valibot-adapter";
-import { fallback, object, optional, string } from "valibot";
+import * as v from "valibot";
 
 import { api } from "@/api/client";
 import { meQueryOptions } from "@/api/query-me";
@@ -70,11 +69,11 @@ function Login() {
   );
 }
 
-const searchSchema = object({
-  redirect: optional(fallback(string(), "/"), "/"),
+const searchSchema = v.object({
+  redirect: v.optional(v.fallback(v.string(), "/"), "/"),
 });
 
 export const Route = createFileRoute("/login")({
   component: Login,
-  validateSearch: valibotSearchValidator(searchSchema),
+  validateSearch: searchSchema,
 });

@@ -26,9 +26,9 @@
     "@opentelemetry/sdk-trace-node": "1.27.0",
     "@oslojs/crypto": "1.0.1",
     "@oslojs/encoding": "1.1.0",
-    "drizzle-orm": "0.36.1",
+    "drizzle-orm": "0.36.3",
     "drizzle-typebox": "0.1.1",
-    "elysia": "1.1.24",
+    "elysia": "1.1.25",
     "env-schema": "6.0.0",
     "lucia": "3.2.2",
     "nanoid": "5.0.8",
@@ -36,7 +36,7 @@
     "picocolors": "1.1.1"
   },
   "devDependencies": {
-    "drizzle-kit": "0.28.0",
+    "drizzle-kit": "0.28.1",
     "rimraf": "6.0.1",
     "typescript": "5.6.3"
   }

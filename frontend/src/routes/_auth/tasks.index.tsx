@@ -1,6 +1,5 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute, getRouteApi } from "@tanstack/react-router";
-import { valibotSearchValidator } from "@tanstack/router-valibot-adapter";
 import * as v from "valibot";
 
 import { queryTasksOptions } from "@/api/query-tasks";
@@ -43,7 +42,7 @@ function Tasks() {
 
 export const Route = createFileRoute("/_auth/tasks/")({
   component: Tasks,
-  validateSearch: valibotSearchValidator(tasksSearchSchema),
+  validateSearch: tasksSearchSchema,
   loaderDeps: ({ search }) => search,
   loader: async ({ context, deps }) => {
     await context.queryClient.ensureQueryData(queryTasksOptions(deps));
