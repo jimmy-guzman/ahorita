@@ -1,7 +1,5 @@
 import { ArrowDownIcon, ArrowRightIcon, ArrowUpIcon } from "lucide-react";
 
-import type { APITypes } from "@/api/client";
-
 const ICON_CLASS = "inline-block h-4 w-4 stroke-current align-text-bottom";
 
 const cellsByPriority = {
@@ -12,7 +10,7 @@ const cellsByPriority = {
 
 export const PriorityCell = ({
   priority,
-}: { priority: APITypes["Task"]["priority"] }) => {
+}: { priority: keyof typeof cellsByPriority }) => {
   return (
     <>
       {cellsByPriority[priority]}
