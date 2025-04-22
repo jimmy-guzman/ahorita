@@ -6,8 +6,6 @@ import {
   XCircleIcon,
 } from "lucide-react";
 
-import type { APITypes } from "@/api/client";
-
 const ICON_CLASS = "inline-block h-4 w-4 stroke-current align-text-bottom";
 
 const cellsByStatus = {
@@ -20,7 +18,7 @@ const cellsByStatus = {
 
 export const TasksTableStatusCell = ({
   status,
-}: { status: APITypes["Task"]["status"] }) => {
+}: { status: keyof typeof cellsByStatus }) => {
   return (
     <>
       {cellsByStatus[status]}

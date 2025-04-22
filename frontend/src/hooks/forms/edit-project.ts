@@ -9,8 +9,6 @@ import {
   string,
 } from "valibot";
 
-import type { APITypes } from "@/api/client";
-
 const schema = object({
   name: pipe(string(), minLength(1, "Your username is too short.")),
   description: pipe(string(), minLength(1, "Your description is too short.")),
@@ -18,7 +16,7 @@ const schema = object({
   isDone: boolean(),
 });
 
-export const useEditProjectForm = (values: APITypes["Project"]) => {
+export const useEditProjectForm = (values: InferOutput<typeof schema>) => {
   return useForm<InferOutput<typeof schema>>({
     resolver: valibotResolver(schema),
     values,

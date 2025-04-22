@@ -47,7 +47,6 @@ const Wrapper = ({ children, path, initialEntries }: WrapperProps) => {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* @ts-expect-error this is due the testing router diverging from the application router */}
       <RouterProvider router={router} />
     </QueryClientProvider>
   );
