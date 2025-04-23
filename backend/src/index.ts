@@ -16,7 +16,7 @@ const app = new Elysia()
   .use(cors())
   .use(
     swagger({
-      path: "",
+      path: "/",
       documentation: {
         info: { title: "Ahorita API Docs", version: "", description: "" },
         tags: [
@@ -24,7 +24,7 @@ const app = new Elysia()
           { description: "Everything about your Tasks", name: "Task" },
         ],
       },
-      exclude: ["", "/json"],
+      exclude: ["/json"],
     }),
   )
   .use(authRoutes)

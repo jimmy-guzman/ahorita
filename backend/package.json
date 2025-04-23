@@ -20,14 +20,14 @@
     "@elysiajs/cors": "1.2.0",
     "@elysiajs/opentelemetry": "1.2.0",
     "@elysiajs/swagger": "1.2.2",
-    "@libsql/client": "0.14.0",
+    "@libsql/client": "0.15.4",
     "@lucia-auth/adapter-drizzle": "1.1.0",
     "@opentelemetry/exporter-trace-otlp-proto": "0.54.2",
     "@opentelemetry/sdk-trace-node": "1.27.0",
     "@oslojs/crypto": "1.0.1",
     "@oslojs/encoding": "1.1.0",
-    "drizzle-orm": "0.36.4",
-    "drizzle-typebox": "0.1.1",
+    "drizzle-orm": "0.42.0",
+    "drizzle-typebox": "0.3.2",
     "elysia": "1.2.25",
     "env-schema": "6.0.1",
     "lucia": "3.2.2",
@@ -36,7 +36,7 @@
     "picocolors": "1.1.1"
   },
   "devDependencies": {
-    "drizzle-kit": "0.28.1",
+    "drizzle-kit": "0.31.0",
     "rimraf": "6.0.1",
     "typescript": "5.8.3"
   }

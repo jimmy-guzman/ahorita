@@ -13,7 +13,7 @@ import {
   SearchIcon,
   XIcon,
 } from "lucide-react";
-import { useState } from "react";
+import { type JSX, useState } from "react";
 
 import { fuzzyFilter } from "./fuzzy-filter";
 

@@ -3,11 +3,9 @@ import { Outlet, createRootRouteWithContext } from "@tanstack/react-router";
 import { Suspense, lazy } from "react";
 import { Toaster } from "sonner";
 
-import { cn } from "@/utils/cn";
-
 const RouterDevTools = import.meta.env.DEV
   ? lazy(() =>
-      import("@tanstack/router-devtools").then((res) => ({
+      import("@tanstack/react-router-devtools").then((res) => ({
         default: res.TanStackRouterDevtools,
       })),
     )
@@ -18,7 +16,6 @@ const Root = () => {
     <>
       <Outlet />
       <Toaster
-        cn={cn}
         toastOptions={{
           unstyled: true,
           classNames: {
