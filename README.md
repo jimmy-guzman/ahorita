@@ -44,80 +44,85 @@
 
 This project uses [bun](https://bun.sh) so please [install](https://bun.sh/docs/installation) it to get started. You can do so, by running the following:
 
-```
+```bash
 curl -fsSL https://bun.sh/install | bash
 ```
 
 or if you have already have it installed you can update, by running the following:
 
-```
+```bash
 bun upgrade
 ```
 
 Then you can finally install dependencies, by running the following:
 
-```
+```bash
 bun install
 ```
 
 And to download new browsers for Playwright, run the following command:
 
-```
+```bash
 bunx playwright install
 ```
 
+> [!NOTE]
+> You can skip Turso setup and simply use a local SQLite database by setting the `DATABASE_URL` environment variable to `file:./dev.db`.
+
 [Turso](https://docs.turso.tech/introduction) is being used as the SQLite Database, which requires the [CLI to be installed](https://docs.turso.tech/cli/introduction):
 
-```
+```bash
 brew install tursodatabase/tap/turso
 ```
 
-Then you can either login or signup:
+Then you can either login:
 
-```
+```bash
 turso auth login
 ```
 
-```
+Or signup:
+
+```bash
 turso auth signup
 ```
 
 Then you can start creating databases, for example:
 
-```
+```bash
 turso db create ahorita
 ```
 
-```
+```bash
 turso db create ahorita-dev --from-db ahorita
 ```
 
 You can generate a `TURSO_AUTH_TOKEN`, by running the following:
 
-```
+```bash
 turso db tokens create ahorita-dev
 ```
 
 You can get the `DATABASE_URL`, by running the following:
 
-```
+```bash
 turso db show ahorita-dev --url
 ```
 
 Then setup environment variables, by running the following:
 
-```
+```bash
 cp .env.example .env
 ```
 
 Then to push your schema changes directly to the database, by running the following:
 
-```
+```bash
 bun --filter @ahorita/backend db:push
 ```
 
 Then you start running things, by running the following:
 
-```
+```bash
 bun dev
 ```
