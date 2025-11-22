@@ -10,7 +10,9 @@ const cellsByPriority = {
 
 export const PriorityCell = ({
   priority,
-}: { priority: keyof typeof cellsByPriority }) => {
+}: {
+  priority: keyof typeof cellsByPriority;
+}) => {
   return (
     <>
       {cellsByPriority[priority]}

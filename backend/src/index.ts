@@ -33,7 +33,7 @@ const app = new Elysia()
   .use(usersRoutes)
   .use(metadataRoutes)
   .listen(env.PORT, ({ url }) => {
-    // biome-ignore lint/suspicious/noConsole: <explanation>
+    // biome-ignore lint/suspicious/noConsole: we want to log the url
     console.log(`🚀 Running at ${cyan(url.toString())}`);
   });
 

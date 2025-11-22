@@ -18,7 +18,9 @@ const cellsByStatus = {
 
 export const TasksTableStatusCell = ({
   status,
-}: { status: keyof typeof cellsByStatus }) => {
+}: {
+  status: keyof typeof cellsByStatus;
+}) => {
   return (
     <>
       {cellsByStatus[status]}
