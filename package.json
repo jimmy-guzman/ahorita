@@ -12,6 +12,7 @@
     "coverage": "turbo run coverage",
     "db:push": "turbo run db:push",
     "db:studio": "turbo run db:studio",
+    "deps:dedupe": "rm -rf node_modules && rm bun.lock && bun install",
     "deps:up": "bunx npm-check-updates -ui -ws",
     "dev": "turbo run dev",
     "e2e": "turbo run e2e",
