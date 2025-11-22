@@ -31,13 +31,13 @@
     "elysia": "1.2.25",
     "env-schema": "6.0.1",
     "lucia": "3.2.2",
-    "nanoid": "5.1.5",
+    "nanoid": "5.1.6",
     "oslo": "1.2.1",
     "picocolors": "1.1.1"
   },
   "devDependencies": {
     "drizzle-kit": "0.31.0",
-    "rimraf": "6.0.1",
-    "typescript": "5.8.3"
+    "rimraf": "6.1.2",
+    "typescript": "5.9.3"
   }
 }
