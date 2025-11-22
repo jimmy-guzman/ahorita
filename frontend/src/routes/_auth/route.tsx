@@ -1,9 +1,9 @@
 import { Icon } from "@iconify/react";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import {
+  createFileRoute,
   Link,
   Outlet,
-  createFileRoute,
   redirect,
 } from "@tanstack/react-router";
 
@@ -57,7 +57,8 @@ function Component() {
           role="tab"
           className="dsy-tab"
           to="/$username"
-          // biome-ignore lint/style/noNonNullAssertion: <explanation>
+          // biome-ignore lint/suspicious/noNonNullAssertedOptionalChain: we know username exists here
+          // biome-ignore lint/style/noNonNullAssertion: we know username exists here
           params={{ username: data.user?.username! }}
           activeProps={{ className: "dsy-tab-active" }}
         >

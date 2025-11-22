@@ -1,19 +1,24 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.3.7/schema.json",
   "files": {
-    "ignore": [
-      "dist",
-      "playwright-report",
-      "test-results",
-      "*.gen.*",
-      "e2e/.auth/user.json",
-      "vite.config.ts.timestamp-*.mjs",
-      "node_modules",
-      "coverage"
+    "includes": [
+      "**",
+      "!**/dist",
+      "!**/playwright-report",
+      "!**/test-results",
+      "!**/*.gen.*",
+      "!**/e2e/.auth/user.json",
+      "!**/vite.config.ts.timestamp-*.mjs",
+      "!**/node_modules",
+      "!**/coverage"
     ]
   },
-  "organizeImports": {
-    "enabled": true
+  "assist": {
+    "actions": {
+      "source": {
+        "organizeImports": "on"
+      }
+    }
   },
   "formatter": {
     "enabled": true,
@@ -29,17 +34,22 @@
         "useBlockStatements": "error",
         "useForOf": "error",
         "useExplicitLengthCheck": "error",
-        "useThrowOnlyError": "error"
+        "useThrowOnlyError": "error",
+        "useArrayLiterals": "error",
+        "noCommonJs": "error",
+        "noEnum": "error",
+        "useTrimStartEnd": "error",
+        "useAtIndex": "error"
       },
       "complexity": {
         "useSimplifiedLogicExpression": "error",
         "noUselessTernary": "error",
-        "useDateNow": "error"
+        "useDateNow": "error",
+        "noUselessEscapeInRegex": "error"
       },
       "correctness": {
         "noUnusedImports": "error",
-        "useHookAtTopLevel": "error",
-        "useArrayLiterals": "error"
+        "useHookAtTopLevel": "error"
       },
       "suspicious": {
         "noEmptyBlockStatements": "error",
@@ -47,21 +57,29 @@
         "noSuspiciousSemicolonInJsx": "error",
         "noEvolvingTypes": "error",
         "noConsole": "error",
-        "useErrorMessage": "error"
+        "useErrorMessage": "error",
+        "noIrregularWhitespace": "error",
+        "useStrictMode": "error",
+        "useGuardForIn": "error",
+        "noDocumentCookie": "error"
       },
       "nursery": {
-        "useSortedClasses": "error",
-        "noCommonJs": "error",
-        "noEnum": "error",
-        "noIrregularWhitespace": "error",
-        "noUselessEscapeInRegex": "error",
-        "useAriaPropsSupportedByRole": "error",
-        "useStrictMode": "error",
-        "useTrimStartEnd": "error",
-        "useGuardForIn": "error",
-        "useAtIndex": "error",
-        "noDocumentCookie": "error"
+        "useSortedClasses": "error"
+      },
+      "a11y": {
+        "useAriaPropsSupportedByRole": "error"
       }
+    }
+  },
+  "css": {
+    "linter": {
+      "enabled": false
+    },
+    "formatter": {
+      "enabled": true
+    },
+    "parser": {
+      "tailwindDirectives": true
     }
   }
 }

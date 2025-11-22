@@ -41,10 +41,7 @@ export const tasksRoutes = new Elysia({ prefix: "/tasks" })
   )
   .get(
     "",
-    async ({
-      user,
-      query: { projectId, priority, status, name, label, id },
-    }) => {
+    ({ user, query: { projectId, priority, status, name, label, id } }) => {
       return db.query.tasks.findMany({
         where: (tasks, { eq, and }) => {
           return and(
