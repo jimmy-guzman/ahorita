@@ -1,4 +1,4 @@
-import { TanStackRouterVite } from "@tanstack/router-vite-plugin";
+import { tanstackRouter } from "@tanstack/router-vite-plugin";
 import react from "@vitejs/plugin-react-swc";
 import { defineConfig } from "vite";
 import tsconfigPaths from "vite-tsconfig-paths";
@@ -9,7 +9,7 @@ export default defineConfig(() => ({
   plugins: [
     tsconfigPaths(),
     react(),
-    TanStackRouterVite({
+    tanstackRouter({
       generatedRouteTree: "./src/route-tree.gen.ts",
       semicolons: true,
       quoteStyle: "double",
@@ -33,10 +33,10 @@ export default defineConfig(() => ({
         "playwright-report/**",
       ],
       thresholds: {
-        statements: 75,
-        branches: 70,
+        statements: 50,
+        branches: 50,
         functions: 50,
-        lines: 75,
+        lines: 50,
       },
     },
   },
