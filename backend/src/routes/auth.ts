@@ -12,14 +12,14 @@ const tags = ["Authentication"];
 export const authRoutes = new Elysia({ prefix: "/auth" })
   .post(
     "/login",
-    async ({ body: { username, password }, cookie, error }) => {
+    async ({ body: { username, password }, cookie, status }) => {
       const [existingUser] = await db
         .select()
         .from(users)
         .where(eq(users.username, username));
 
       if (!existingUser) {
-        return error(401, "Invalid Username");
+        return status(401, "Invalid Username");
       }
 
       const validPassword = await new Argon2id().verify(
@@ -28,7 +28,7 @@ export const authRoutes = new Elysia({ prefix: "/auth" })
       );
 
       if (!validPassword) {
-        return error(401, "Invalid Password");
+        return status(401, "Invalid Password");
       }
 
       const session = await lucia.createSession(existingUser.id, {});
@@ -48,9 +48,9 @@ export const authRoutes = new Elysia({ prefix: "/auth" })
   )
   .post(
     "/signup",
-    async ({ body: { username, password }, cookie, error }) => {
+    async ({ body: { username, password }, cookie, status }) => {
       if (!(await isPasswordStrong(password))) {
-        return error(400, "Weak Password");
+        return status(400, "Weak Password");
       }
 
       const hashedPassword = await new Argon2id().hash(password);
@@ -79,23 +79,23 @@ export const authRoutes = new Elysia({ prefix: "/auth" })
   )
   .post(
     "/logout",
-    async ({ request, cookie, error }) => {
+    async ({ request, cookie, status }) => {
       const cookieHeader = request.headers.get("Cookie");
 
       if (!cookieHeader) {
-        return error(401, "No Cookie");
+        return status(401, "No Cookie");
       }
 
       const sessionId = lucia.readSessionCookie(cookieHeader);
 
       if (!sessionId) {
-        return error(401, "No Session");
+        return status(401, "No Session");
       }
 
       const { session } = await lucia.validateSession(sessionId);
 
       if (!session) {
-        return error(401, "Invalid Session");
+        return status(401, "Invalid Session");
       }
 
       await lucia.invalidateSession(session.id);
