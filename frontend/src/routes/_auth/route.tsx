@@ -39,7 +39,7 @@ function Component() {
             target="__blank"
           >
             <span className="sr-only">API Docs</span>
-            <Icon icon="simple-icons:swagger" className="text-xl" />
+            <Icon icon="simple-icons:scalar" className="text-xl" />
           </a>
           <a
             className="dsy-btn dsy-btn-ghost dsy-btn-circle dsy-btn-xs lg:dsy-btn-sm"

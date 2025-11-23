@@ -1,5 +1,5 @@
 import cors from "@elysiajs/cors";
-import swagger from "@elysiajs/swagger";
+import { openapi } from "@elysiajs/openapi";
 import { Elysia } from "elysia";
 import { cyan } from "picocolors";
 
@@ -15,8 +15,7 @@ const app = new Elysia()
   .use(opentelemetry)
   .use(cors())
   .use(
-    swagger({
-      path: "/",
+    openapi({
       documentation: {
         info: { title: "Ahorita API Docs", version: "", description: "" },
         tags: [
@@ -24,14 +23,20 @@ const app = new Elysia()
           { description: "Everything about your Tasks", name: "Task" },
         ],
       },
-      exclude: ["/json"],
+      exclude: {
+        paths: ["/"],
+      },
     }),
   )
+  .get("/", ({ redirect }) => {
+    return redirect("/openapi");
+  })
   .use(authRoutes)
   .use(projectsRoutes)
   .use(tasksRoutes)
   .use(usersRoutes)
   .use(metadataRoutes)
+
   .listen(env.PORT, ({ url }) => {
     // biome-ignore lint/suspicious/noConsole: we want to log the url
     console.log(`🚀 Running at ${cyan(url.toString())}`);
