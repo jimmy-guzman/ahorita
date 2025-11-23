@@ -1,4 +1,4 @@
-import { http, HttpResponse } from "msw";
+import { HttpResponse, http } from "msw";
 
 import { server } from "@/testing/mocks/server";
 import { render, screen } from "@/testing/utils";
@@ -17,7 +17,9 @@ describe("<CreateTask />", () => {
 
     server.use(...handlers);
 
-    const { user } = await render(<CreateTask />, { path: "/_auth/tasks/" });
+    const { user } = await render(<CreateTask />, {
+      path: "/(authenticated)/tasks/",
+    });
 
     const button = screen.getByRole("button", {
       name: "Create Task",

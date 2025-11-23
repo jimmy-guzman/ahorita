@@ -6,7 +6,9 @@ import { TasksStats } from "@/components/tasks-stats";
 function Component() {
   return (
     <div className="flex flex-col gap-4">
-      <h1 className="text-2xl sm:text-3xl">Dashboard</h1>
+      <div className="prose dsy-prose">
+        <h2>Dashboard</h2>
+      </div>
       <div className="grid gap-4 md:grid-cols-1">
         <TasksStats />
         <div className="dsy-card bg-base-200 shadow-sm">
@@ -20,6 +22,6 @@ function Component() {
   );
 }
 
-export const Route = createFileRoute("/_auth/$username")({
+export const Route = createFileRoute("/(authenticated)/$username")({
   component: Component,
 });

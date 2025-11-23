@@ -11,10 +11,12 @@ export const router = createRouter({
   defaultPreload: "intent",
   context: {
     queryClient,
+    user: null,
   },
   defaultNotFoundComponent: NotFound,
   defaultErrorComponent: ErrorStatus,
   defaultStructuralSharing: true,
+  scrollRestoration: true,
 });
 
 declare module "@tanstack/react-router" {

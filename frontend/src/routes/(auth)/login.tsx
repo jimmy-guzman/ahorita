@@ -9,7 +9,7 @@ import { TextInput } from "@/components/shared/text-input";
 import { type LoginFormValues, useLoginForm } from "@/hooks/forms/login";
 import queryClient from "@/query-client";
 
-const routeApi = getRouteApi("/login");
+const routeApi = getRouteApi("/(auth)/login");
 
 function Login() {
   const search = routeApi.useSearch();
@@ -79,7 +79,7 @@ const searchSchema = v.object({
   redirect: v.optional(v.fallback(v.string(), "/"), "/"),
 });
 
-export const Route = createFileRoute("/login")({
+export const Route = createFileRoute("/(auth)/login")({
   component: Login,
   validateSearch: searchSchema,
 });

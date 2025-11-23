@@ -6,7 +6,7 @@ import { PasswordInput } from "@/components/password-input";
 import { TextInput } from "@/components/shared/text-input";
 import { type SignFormValues, useSignupForm } from "@/hooks/forms/signup";
 
-const routeApi = getRouteApi("/signup");
+const routeApi = getRouteApi("/(auth)/signup");
 
 function SignUp() {
   const navigate = routeApi.useNavigate();
@@ -70,6 +70,6 @@ function SignUp() {
   );
 }
 
-export const Route = createFileRoute("/signup")({
+export const Route = createFileRoute("/(auth)/signup")({
   component: SignUp,
 });

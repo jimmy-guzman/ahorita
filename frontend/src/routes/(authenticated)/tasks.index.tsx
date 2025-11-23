@@ -21,14 +21,14 @@ const tasksSearchSchema = v.object({
   status: v.optional(v.union(statuses.map((status) => v.literal(status)))),
 });
 
-const routeApi = getRouteApi("/_auth/tasks/");
+const routeApi = getRouteApi("/(authenticated)/tasks/");
 
 function Tasks() {
   const search = routeApi.useSearch();
   const { data: tasks } = useSuspenseQuery(queryTasksOptions(search));
 
   return (
-    <div className="flex flex-col gap-4 md:container md:mx-auto md:px-8">
+    <div className="flex flex-col">
       <div className="flex justify-between">
         <div className="prose dsy-prose">
           <h2>Tasks</h2>
@@ -40,11 +40,11 @@ function Tasks() {
   );
 }
 
-export const Route = createFileRoute("/_auth/tasks/")({
+export const Route = createFileRoute("/(authenticated)/tasks/")({
   component: Tasks,
   validateSearch: tasksSearchSchema,
   loaderDeps: ({ search }) => search,
-  loader: async ({ context, deps }) => {
-    await context.queryClient.ensureQueryData(queryTasksOptions(deps));
+  loader: ({ context, deps }) => {
+    return context.queryClient.ensureQueryData(queryTasksOptions(deps));
   },
 });

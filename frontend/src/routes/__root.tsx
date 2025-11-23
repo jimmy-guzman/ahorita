@@ -4,6 +4,8 @@ import { ReactQueryDevtoolsPanel } from "@tanstack/react-query-devtools";
 import { createRootRouteWithContext, Outlet } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 import { Toaster } from "sonner";
+import type { APIRoutes } from "@/api/client";
+import { meQueryOptions } from "@/api/query-me";
 
 const Root = () => {
   return (
@@ -40,6 +42,12 @@ const Root = () => {
 
 interface Context {
   queryClient: QueryClient;
+  user: APIRoutes["users"]["me"]["get"]["response"]["200"]["user"];
 }
 
-export const Route = createRootRouteWithContext<Context>()({ component: Root });
+export const Route = createRootRouteWithContext<Context>()({
+  beforeLoad: ({ context }) => {
+    void context.queryClient.prefetchQuery(meQueryOptions);
+  },
+  component: Root,
+});
