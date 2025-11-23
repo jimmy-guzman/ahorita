@@ -1,6 +1,6 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import { useMutation, useSuspenseQuery } from "@tanstack/react-query";
-import { Link, getRouteApi } from "@tanstack/react-router";
+import { getRouteApi, Link } from "@tanstack/react-router";
 import { ListPlusIcon, XIcon } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -75,7 +75,7 @@ export const CreateTask = () => {
                 This will create your task. Click save when you're done.
               </Dialog.Description>
               <form className="flex flex-col gap-4" onSubmit={addToTasks}>
-                <div className="flex flex-col gap-2">
+                <div className="flex flex-col gap-4">
                   {projects.length > 0 && (
                     <Select
                       control={control}

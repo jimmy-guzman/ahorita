@@ -33,7 +33,7 @@ export const RowActions = ({ task }: TaskTableActionsProps) => {
       </summary>
       <ul
         aria-label={`${task.name} actions`}
-        className="dsy-dropdown-content dsy-menu z-[1] w-52 rounded-box bg-base-100 p-2 shadow"
+        className="dsy-dropdown-content dsy-menu z-1 w-52 rounded-box bg-base-100 p-2 shadow-sm"
       >
         <li className="dsy-menu-title">{task.name}</li>
         <li>

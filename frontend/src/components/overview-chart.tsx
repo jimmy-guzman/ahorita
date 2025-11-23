@@ -1,5 +1,4 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
-import themes from "daisyui/src/theming/themes";
 import {
   Bar,
   BarChart,
@@ -9,13 +8,10 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-
 import { projectsTotalsQueryOptions } from "@/api/query-projects-totals";
-import { useAppTheme } from "@/hooks/stores/app";
 
 export const OverviewChart = () => {
   const { data } = useSuspenseQuery(projectsTotalsQueryOptions);
-  const theme = useAppTheme();
 
   return (
     <ResponsiveContainer width="100%" height={350}>
@@ -36,7 +32,7 @@ export const OverviewChart = () => {
         <Tooltip
           cursor={false}
           contentStyle={{
-            backgroundColor: themes[theme]["base-100"],
+            backgroundColor: "var(--color-base-100)",
             borderStyle: "none",
             borderRadius: "16px",
           }}
@@ -44,32 +40,19 @@ export const OverviewChart = () => {
         <Legend />
         <Bar
           dataKey="Backlog"
-          stackId="b"
-          fill={themes[theme].secondary}
+          fill="var(--color-secondary)"
           radius={[4, 4, 0, 0]}
         />
-        <Bar
-          dataKey="Todo"
-          stackId="t"
-          fill={themes[theme].primary}
-          radius={[4, 4, 0, 0]}
-        />
+        <Bar dataKey="Todo" fill="var(--color-primary)" radius={[4, 4, 0, 0]} />
         <Bar
           dataKey="In Progress"
-          stackId="ip"
-          fill={themes[theme].accent}
+          fill="var(--color-accent)"
           radius={[4, 4, 0, 0]}
         />
-        <Bar
-          dataKey="Done"
-          stackId="d"
-          fill={themes[theme].success}
-          radius={[4, 4, 0, 0]}
-        />
+        <Bar dataKey="Done" fill="var(--color-success)" radius={[4, 4, 0, 0]} />
         <Bar
           dataKey="Canceled"
-          stackId="c"
-          fill={themes[theme].warning}
+          fill="var(--color-warning)"
           radius={[4, 4, 0, 0]}
         />
       </BarChart>

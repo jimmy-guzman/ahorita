@@ -1,14 +1,13 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { LayoutListIcon, ListChecksIcon, ListPlusIcon } from "lucide-react";
-
-import { queryTasksOptions } from "@/api/query-tasks";
 import { Link } from "@tanstack/react-router";
+import { LayoutListIcon, ListChecksIcon, ListPlusIcon } from "lucide-react";
+import { queryTasksOptions } from "@/api/query-tasks";
 
 export const TasksStats = () => {
   const { data } = useSuspenseQuery(queryTasksOptions());
 
   return (
-    <div className="dsy-stats dsy-stats-vertical sm:dsy-stats-horizontal bg-base-200 shadow">
+    <div className="dsy-stats dsy-stats-vertical sm:dsy-stats-horizontal bg-base-200 shadow-sm">
       <div className="dsy-stat">
         <div className="dsy-stat-figure">
           <Link

@@ -46,12 +46,10 @@ export const Select = <T extends FieldValues>({
   });
 
   return (
-    <div className={cn("dsy-form-control", className)}>
-      <label className="dsy-label" htmlFor={name}>
-        <span className="dsy-label-text">{label}</span>
-      </label>
+    <label className={cn("dsy-floating-label", className)}>
+      <span>{label}</span>
       <select
-        className="dsy-select dsy-select-bordered w-full"
+        className="dsy-select w-full"
         id={name}
         ref={field.ref}
         onBlur={field.onBlur}
@@ -65,6 +63,6 @@ export const Select = <T extends FieldValues>({
       {error?.message && (
         <span className="text-error text-sm">{error.message}</span>
       )}
-    </div>
+    </label>
   );
 };

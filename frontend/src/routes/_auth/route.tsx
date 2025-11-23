@@ -16,11 +16,11 @@ function Component() {
 
   return (
     <div className="max-w-[100vw] px-6 pb-16 xl:pr-2">
-      <nav className="dsy-navbar static w-full lg:sticky lg:top-0 lg:z-30 lg:shadow-sm lg:backdrop-blur">
+      <nav className="dsy-navbar static w-full lg:sticky lg:top-0 lg:z-30 lg:shadow-xs lg:backdrop-blur-sm">
         <div className="dsy-navbar-start">
           <Link
             to="/"
-            className="dsy-btn dsy-btn-ghost bg-gradient-to-r from-primary to-secondary bg-clip-text text-lg text-transparent normal-case md:text-3xl"
+            className="dsy-btn dsy-btn-ghost bg-linear-to-r from-primary to-secondary bg-clip-text text-lg text-transparent normal-case md:text-3xl"
           >
             ahorita
           </Link>

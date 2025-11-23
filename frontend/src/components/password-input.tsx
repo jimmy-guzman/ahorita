@@ -5,7 +5,6 @@ import {
   type UseControllerProps,
   useController,
 } from "react-hook-form";
-
 import { cn } from "@/utils/cn";
 
 interface TextFieldProps<T extends FieldValues> extends UseControllerProps<T> {
@@ -20,7 +19,7 @@ interface TextFieldProps<T extends FieldValues> extends UseControllerProps<T> {
 /**
  * A custom text input that is meant to be used alongside `react-hook-form`
  * @example
- * <PasswordInput control={control} name='name' label="Your task's name?" />
+ * <PasswordInput control={control} name='password' label="Password" />
  */
 export const PasswordInput = <T extends FieldValues>({
   control,
@@ -44,30 +43,30 @@ export const PasswordInput = <T extends FieldValues>({
   const [view, setView] = useState(false);
 
   return (
-    <div className="dsy-form-control">
-      <label className="dsy-label" htmlFor={name}>
-        <span className="dsy-label-text">{label}</span>
+    <fieldset className="dsy-fieldset">
+      <label className="dsy-floating-label">
+        <span>{label}</span>
+        <input
+          type={view ? "text" : "password"}
+          placeholder={placeholder}
+          className={cn(
+            "dsy-input w-full",
+            error?.message ? "dsy-input-error" : "",
+          )}
+          id={name}
+          ref={field.ref}
+          name={name}
+          value={field.value}
+          defaultValue={defaultValue}
+          onBlur={field.onBlur}
+          onChange={field.onChange}
+        />
       </label>
-      <input
-        type={view ? "text" : "password"}
-        placeholder={placeholder}
-        className={cn(
-          "dsy-input dsy-input-bordered w-full pr-2",
-          error?.message ? "dsy-input-error" : "",
-        )}
-        id={name}
-        ref={field.ref}
-        name={name}
-        value={field.value}
-        defaultValue={defaultValue}
-        onBlur={field.onBlur}
-        onChange={field.onChange}
-      />
       {error?.message && (
         <span className="text-error text-sm">{error.message}</span>
       )}
-      <label className="dsy-label cursor-pointer justify-end gap-2">
-        <span className="dsy-label-text">Show password</span>
+      <label className="dsy-label flex cursor-pointer justify-end gap-2">
+        <span>Show password</span>
         <input
           type="checkbox"
           checked={view}
@@ -75,6 +74,6 @@ export const PasswordInput = <T extends FieldValues>({
           onChange={() => setView((prev) => !prev)}
         />
       </label>
-    </div>
+    </fieldset>
   );
 };

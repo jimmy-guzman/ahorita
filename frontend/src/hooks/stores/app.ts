@@ -1,4 +1,3 @@
-import type { Theme } from "daisyui";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
@@ -26,7 +25,7 @@ const useAppStore = create<AppState>()(
     {
       name: "appStore",
       partialize: (state) => ({
-        theme: state.mode,
+        mode: state.mode,
       }),
     },
   ),
@@ -35,14 +34,12 @@ const useAppStore = create<AppState>()(
 export const themesByMode = {
   dark: "synthwave",
   light: "cmyk",
-} satisfies Record<Mode, Theme>;
+};
 
 export const useAppActions = () => {
   return useAppStore((state) => state.actions);
 };
+
 export const useAppIsLightMode = () => {
   return useAppStore((state) => state.mode === "light");
-};
-export const useAppTheme = () => {
-  return useAppStore((state) => themesByMode[state.mode]);
 };

@@ -44,14 +44,12 @@ export const TextInput = <T extends FieldValues>({
   });
 
   return (
-    <div className={cn("dsy-form-control", className)}>
-      <label className="dsy-label" htmlFor={name}>
-        <span className="dsy-label-text">{label}</span>
-      </label>
+    <label className={cn("dsy-floating-label", className)}>
+      <span>{label}</span>
       <input
         placeholder={placeholder}
         className={cn(
-          "dsy-input dsy-input-bordered w-full",
+          "dsy-input w-full",
           error?.message ? "dsy-input-error" : "",
         )}
         id={name}
@@ -65,6 +63,6 @@ export const TextInput = <T extends FieldValues>({
       {error?.message && (
         <span className="text-error text-sm">{error.message}</span>
       )}
-    </div>
+    </label>
   );
 };
