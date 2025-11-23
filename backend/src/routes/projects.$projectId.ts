@@ -22,7 +22,7 @@ export const projectRoutes = new Elysia({ prefix: "/:projectId" })
       });
 
       if (!project) {
-        throw NotFoundError;
+        throw new NotFoundError("Project Not Found");
       }
 
       return project;
@@ -43,7 +43,7 @@ export const projectRoutes = new Elysia({ prefix: "/:projectId" })
         .returning();
 
       if (!project) {
-        throw NotFoundError;
+        throw new NotFoundError("Project Not Found");
       }
 
       return project;
@@ -71,7 +71,7 @@ export const projectRoutes = new Elysia({ prefix: "/:projectId" })
         .returning();
 
       if (!project) {
-        throw NotFoundError;
+        throw new NotFoundError("Project Not Found");
       }
 
       return project;
