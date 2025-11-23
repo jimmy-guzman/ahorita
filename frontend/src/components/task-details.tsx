@@ -1,10 +1,10 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { Link, getRouteApi } from "@tanstack/react-router";
+import { getRouteApi, Link } from "@tanstack/react-router";
 import { formatDistanceToNow } from "date-fns";
 
 import { queryTaskOptions } from "@/api/query-task";
 
-const routeApi = getRouteApi("/_auth/tasks/$taskId");
+const routeApi = getRouteApi("/(authenticated)/tasks/$taskId");
 
 export function TaskDetails() {
   const params = routeApi.useParams();

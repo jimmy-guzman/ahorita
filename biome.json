@@ -35,39 +35,34 @@
         "useForOf": "error",
         "useExplicitLengthCheck": "error",
         "useThrowOnlyError": "error",
-        "useArrayLiterals": "error",
         "noCommonJs": "error",
         "noEnum": "error",
         "useTrimStartEnd": "error",
-        "useAtIndex": "error"
+        "useAtIndex": "error",
+        "noUselessElse": "error"
       },
       "complexity": {
         "useSimplifiedLogicExpression": "error",
-        "noUselessTernary": "error",
-        "useDateNow": "error",
-        "noUselessEscapeInRegex": "error"
+        "noUselessStringConcat": "error"
       },
       "correctness": {
-        "noUnusedImports": "error",
         "useHookAtTopLevel": "error"
       },
       "suspicious": {
         "noEmptyBlockStatements": "error",
         "useAwait": "error",
-        "noSuspiciousSemicolonInJsx": "error",
         "noEvolvingTypes": "error",
         "noConsole": "error",
         "useErrorMessage": "error",
-        "noIrregularWhitespace": "error",
         "useStrictMode": "error",
-        "useGuardForIn": "error",
-        "noDocumentCookie": "error"
+        "useGuardForIn": "error"
       },
       "nursery": {
-        "useSortedClasses": "error"
-      },
-      "a11y": {
-        "useAriaPropsSupportedByRole": "error"
+        "useSortedClasses": "error",
+        "noDeprecatedImports": "warn",
+        "noFloatingPromises": "error",
+        "noImportCycles": "error",
+        "noMisusedPromises": "error"
       }
     }
   },

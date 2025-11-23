@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 
 import { GetStartedButton } from "@/components/get-started-button";
 
-function Index() {
+function RouteComponent() {
   return (
     <main>
       <div className="dsy-hero -mt-16 min-h-screen">
@@ -31,4 +31,4 @@ function Index() {
   );
 }
 
-export const Route = createFileRoute("/")({ component: Index });
+export const Route = createFileRoute("/")({ component: RouteComponent });

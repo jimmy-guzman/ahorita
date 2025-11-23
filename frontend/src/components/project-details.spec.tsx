@@ -1,4 +1,4 @@
-import { http, HttpResponse } from "msw";
+import { HttpResponse, http } from "msw";
 
 import { server } from "@/testing/mocks/server";
 import { render, screen } from "@/testing/utils";
@@ -24,8 +24,8 @@ describe("<ProjectDetails />", () => {
     server.use(...handlers);
 
     await render(<ProjectDetails />, {
-      path: "/_auth/projects/$projectId",
-      initialEntries: ["/_auth/projects/1"],
+      path: "/(authenticated)/projects/$projectId",
+      initialEntries: ["/(authenticated)/projects/1"],
     });
 
     const heading = screen.getByRole("heading", {

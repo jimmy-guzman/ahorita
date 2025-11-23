@@ -1,6 +1,5 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { Link } from "@tanstack/react-router";
-import { getRouteApi } from "@tanstack/react-router";
+import { getRouteApi, Link } from "@tanstack/react-router";
 import { ListTodoIcon } from "lucide-react";
 
 import { projectQueryOptions } from "@/api/query-project";
@@ -9,7 +8,7 @@ import { DeleteProject } from "./delete-project";
 import { EditProject } from "./edit-project";
 import { ProjectActions } from "./project-actions";
 
-const routeApi = getRouteApi("/_auth/projects/$projectId");
+const routeApi = getRouteApi("/(authenticated)/projects/$projectId");
 
 export const ProjectDetails = () => {
   const { projectId } = routeApi.useParams();

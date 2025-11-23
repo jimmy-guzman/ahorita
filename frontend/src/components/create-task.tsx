@@ -13,7 +13,7 @@ import { useCreateTaskForm } from "@/hooks/forms/create-task";
 import { Select } from "./shared/select";
 import { TextInput } from "./shared/text-input";
 
-const routeApi = getRouteApi("/_auth/tasks/");
+const routeApi = getRouteApi("/(authenticated)/tasks/");
 
 export const CreateTask = () => {
   const { projectId } = routeApi.useSearch();

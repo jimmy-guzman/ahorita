@@ -20,7 +20,7 @@ function Component() {
         <div className="dsy-navbar-start">
           <Link
             to="/"
-            className="dsy-btn dsy-btn-ghost bg-linear-to-r from-primary to-secondary bg-clip-text text-lg text-transparent normal-case md:text-3xl"
+            className="dsy-btn dsy-btn-ghost text-lg normal-case md:text-3xl"
           >
             ahorita
           </Link>
@@ -88,11 +88,11 @@ function Component() {
   );
 }
 
-export const Route = createFileRoute("/_auth")({
+export const Route = createFileRoute("/(authenticated)")({
   beforeLoad: async ({ location, context }) => {
-    const response = await context.queryClient.fetchQuery({
+    const response = await context.queryClient.ensureQueryData({
       ...meQueryOptions,
-      staleTime: Number.POSITIVE_INFINITY,
+      revalidateIfStale: true,
     });
 
     if (!response.user) {
@@ -103,6 +103,8 @@ export const Route = createFileRoute("/_auth")({
         },
       });
     }
+
+    return { user: response.user };
   },
   component: Component,
 });

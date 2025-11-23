@@ -1,9 +1,9 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
+import { LogOutIcon } from "lucide-react";
 
 import { api } from "@/api/client";
 import { meQueryOptions } from "@/api/query-me";
-import { LogOutIcon } from "lucide-react";
 
 export const LogoutButton = () => {
   const navigate = useNavigate();

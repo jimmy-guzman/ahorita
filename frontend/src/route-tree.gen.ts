@@ -9,28 +9,18 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from "./routes/__root";
-import { Route as SignupRouteImport } from "./routes/signup";
-import { Route as LoginRouteImport } from "./routes/login";
-import { Route as AuthRouteRouteImport } from "./routes/_auth/route";
+import { Route as authenticatedRouteRouteImport } from "./routes/(authenticated)/route";
 import { Route as IndexRouteImport } from "./routes/index";
-import { Route as AuthUsernameRouteImport } from "./routes/_auth/$username";
-import { Route as AuthTasksIndexRouteImport } from "./routes/_auth/tasks.index";
-import { Route as AuthProjectsIndexRouteImport } from "./routes/_auth/projects.index";
-import { Route as AuthTasksTaskIdRouteImport } from "./routes/_auth/tasks.$taskId";
-import { Route as AuthProjectsProjectIdRouteImport } from "./routes/_auth/projects.$projectId";
+import { Route as authenticatedUsernameRouteImport } from "./routes/(authenticated)/$username";
+import { Route as authSignupRouteImport } from "./routes/(auth)/signup";
+import { Route as authLoginRouteImport } from "./routes/(auth)/login";
+import { Route as authenticatedTasksIndexRouteImport } from "./routes/(authenticated)/tasks.index";
+import { Route as authenticatedProjectsIndexRouteImport } from "./routes/(authenticated)/projects.index";
+import { Route as authenticatedTasksTaskIdRouteImport } from "./routes/(authenticated)/tasks.$taskId";
+import { Route as authenticatedProjectsProjectIdRouteImport } from "./routes/(authenticated)/projects.$projectId";
 
-const SignupRoute = SignupRouteImport.update({
-  id: "/signup",
-  path: "/signup",
-  getParentRoute: () => rootRouteImport,
-} as any);
-const LoginRoute = LoginRouteImport.update({
-  id: "/login",
-  path: "/login",
-  getParentRoute: () => rootRouteImport,
-} as any);
-const AuthRouteRoute = AuthRouteRouteImport.update({
-  id: "/_auth",
+const authenticatedRouteRoute = authenticatedRouteRouteImport.update({
+  id: "/(authenticated)",
   getParentRoute: () => rootRouteImport,
 } as any);
 const IndexRoute = IndexRouteImport.update({
@@ -38,63 +28,76 @@ const IndexRoute = IndexRouteImport.update({
   path: "/",
   getParentRoute: () => rootRouteImport,
 } as any);
-const AuthUsernameRoute = AuthUsernameRouteImport.update({
+const authenticatedUsernameRoute = authenticatedUsernameRouteImport.update({
   id: "/$username",
   path: "/$username",
-  getParentRoute: () => AuthRouteRoute,
+  getParentRoute: () => authenticatedRouteRoute,
 } as any);
-const AuthTasksIndexRoute = AuthTasksIndexRouteImport.update({
+const authSignupRoute = authSignupRouteImport.update({
+  id: "/(auth)/signup",
+  path: "/signup",
+  getParentRoute: () => rootRouteImport,
+} as any);
+const authLoginRoute = authLoginRouteImport.update({
+  id: "/(auth)/login",
+  path: "/login",
+  getParentRoute: () => rootRouteImport,
+} as any);
+const authenticatedTasksIndexRoute = authenticatedTasksIndexRouteImport.update({
   id: "/tasks/",
   path: "/tasks/",
-  getParentRoute: () => AuthRouteRoute,
+  getParentRoute: () => authenticatedRouteRoute,
 } as any);
-const AuthProjectsIndexRoute = AuthProjectsIndexRouteImport.update({
-  id: "/projects/",
-  path: "/projects/",
-  getParentRoute: () => AuthRouteRoute,
-} as any);
-const AuthTasksTaskIdRoute = AuthTasksTaskIdRouteImport.update({
-  id: "/tasks/$taskId",
-  path: "/tasks/$taskId",
-  getParentRoute: () => AuthRouteRoute,
-} as any);
-const AuthProjectsProjectIdRoute = AuthProjectsProjectIdRouteImport.update({
-  id: "/projects/$projectId",
-  path: "/projects/$projectId",
-  getParentRoute: () => AuthRouteRoute,
-} as any);
+const authenticatedProjectsIndexRoute =
+  authenticatedProjectsIndexRouteImport.update({
+    id: "/projects/",
+    path: "/projects/",
+    getParentRoute: () => authenticatedRouteRoute,
+  } as any);
+const authenticatedTasksTaskIdRoute =
+  authenticatedTasksTaskIdRouteImport.update({
+    id: "/tasks/$taskId",
+    path: "/tasks/$taskId",
+    getParentRoute: () => authenticatedRouteRoute,
+  } as any);
+const authenticatedProjectsProjectIdRoute =
+  authenticatedProjectsProjectIdRouteImport.update({
+    id: "/projects/$projectId",
+    path: "/projects/$projectId",
+    getParentRoute: () => authenticatedRouteRoute,
+  } as any);
 
 export interface FileRoutesByFullPath {
   "/": typeof IndexRoute;
-  "/login": typeof LoginRoute;
-  "/signup": typeof SignupRoute;
-  "/$username": typeof AuthUsernameRoute;
-  "/projects/$projectId": typeof AuthProjectsProjectIdRoute;
-  "/tasks/$taskId": typeof AuthTasksTaskIdRoute;
-  "/projects": typeof AuthProjectsIndexRoute;
-  "/tasks": typeof AuthTasksIndexRoute;
+  "/login": typeof authLoginRoute;
+  "/signup": typeof authSignupRoute;
+  "/$username": typeof authenticatedUsernameRoute;
+  "/projects/$projectId": typeof authenticatedProjectsProjectIdRoute;
+  "/tasks/$taskId": typeof authenticatedTasksTaskIdRoute;
+  "/projects": typeof authenticatedProjectsIndexRoute;
+  "/tasks": typeof authenticatedTasksIndexRoute;
 }
 export interface FileRoutesByTo {
   "/": typeof IndexRoute;
-  "/login": typeof LoginRoute;
-  "/signup": typeof SignupRoute;
-  "/$username": typeof AuthUsernameRoute;
-  "/projects/$projectId": typeof AuthProjectsProjectIdRoute;
-  "/tasks/$taskId": typeof AuthTasksTaskIdRoute;
-  "/projects": typeof AuthProjectsIndexRoute;
-  "/tasks": typeof AuthTasksIndexRoute;
+  "/login": typeof authLoginRoute;
+  "/signup": typeof authSignupRoute;
+  "/$username": typeof authenticatedUsernameRoute;
+  "/projects/$projectId": typeof authenticatedProjectsProjectIdRoute;
+  "/tasks/$taskId": typeof authenticatedTasksTaskIdRoute;
+  "/projects": typeof authenticatedProjectsIndexRoute;
+  "/tasks": typeof authenticatedTasksIndexRoute;
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport;
   "/": typeof IndexRoute;
-  "/_auth": typeof AuthRouteRouteWithChildren;
-  "/login": typeof LoginRoute;
-  "/signup": typeof SignupRoute;
-  "/_auth/$username": typeof AuthUsernameRoute;
-  "/_auth/projects/$projectId": typeof AuthProjectsProjectIdRoute;
-  "/_auth/tasks/$taskId": typeof AuthTasksTaskIdRoute;
-  "/_auth/projects/": typeof AuthProjectsIndexRoute;
-  "/_auth/tasks/": typeof AuthTasksIndexRoute;
+  "/(authenticated)": typeof authenticatedRouteRouteWithChildren;
+  "/(auth)/login": typeof authLoginRoute;
+  "/(auth)/signup": typeof authSignupRoute;
+  "/(authenticated)/$username": typeof authenticatedUsernameRoute;
+  "/(authenticated)/projects/$projectId": typeof authenticatedProjectsProjectIdRoute;
+  "/(authenticated)/tasks/$taskId": typeof authenticatedTasksTaskIdRoute;
+  "/(authenticated)/projects/": typeof authenticatedProjectsIndexRoute;
+  "/(authenticated)/tasks/": typeof authenticatedTasksIndexRoute;
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath;
@@ -120,44 +123,30 @@ export interface FileRouteTypes {
   id:
     | "__root__"
     | "/"
-    | "/_auth"
-    | "/login"
-    | "/signup"
-    | "/_auth/$username"
-    | "/_auth/projects/$projectId"
-    | "/_auth/tasks/$taskId"
-    | "/_auth/projects/"
-    | "/_auth/tasks/";
+    | "/(authenticated)"
+    | "/(auth)/login"
+    | "/(auth)/signup"
+    | "/(authenticated)/$username"
+    | "/(authenticated)/projects/$projectId"
+    | "/(authenticated)/tasks/$taskId"
+    | "/(authenticated)/projects/"
+    | "/(authenticated)/tasks/";
   fileRoutesById: FileRoutesById;
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute;
-  AuthRouteRoute: typeof AuthRouteRouteWithChildren;
-  LoginRoute: typeof LoginRoute;
-  SignupRoute: typeof SignupRoute;
+  authenticatedRouteRoute: typeof authenticatedRouteRouteWithChildren;
+  authLoginRoute: typeof authLoginRoute;
+  authSignupRoute: typeof authSignupRoute;
 }
 
 declare module "@tanstack/react-router" {
   interface FileRoutesByPath {
-    "/signup": {
-      id: "/signup";
-      path: "/signup";
-      fullPath: "/signup";
-      preLoaderRoute: typeof SignupRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
-    "/login": {
-      id: "/login";
-      path: "/login";
-      fullPath: "/login";
-      preLoaderRoute: typeof LoginRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
-    "/_auth": {
-      id: "/_auth";
+    "/(authenticated)": {
+      id: "/(authenticated)";
       path: "";
       fullPath: "";
-      preLoaderRoute: typeof AuthRouteRouteImport;
+      preLoaderRoute: typeof authenticatedRouteRouteImport;
       parentRoute: typeof rootRouteImport;
     };
     "/": {
@@ -167,69 +156,82 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof IndexRouteImport;
       parentRoute: typeof rootRouteImport;
     };
-    "/_auth/$username": {
-      id: "/_auth/$username";
+    "/(authenticated)/$username": {
+      id: "/(authenticated)/$username";
       path: "/$username";
       fullPath: "/$username";
-      preLoaderRoute: typeof AuthUsernameRouteImport;
-      parentRoute: typeof AuthRouteRoute;
+      preLoaderRoute: typeof authenticatedUsernameRouteImport;
+      parentRoute: typeof authenticatedRouteRoute;
     };
-    "/_auth/tasks/": {
-      id: "/_auth/tasks/";
+    "/(auth)/signup": {
+      id: "/(auth)/signup";
+      path: "/signup";
+      fullPath: "/signup";
+      preLoaderRoute: typeof authSignupRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
+    "/(auth)/login": {
+      id: "/(auth)/login";
+      path: "/login";
+      fullPath: "/login";
+      preLoaderRoute: typeof authLoginRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
+    "/(authenticated)/tasks/": {
+      id: "/(authenticated)/tasks/";
       path: "/tasks";
       fullPath: "/tasks";
-      preLoaderRoute: typeof AuthTasksIndexRouteImport;
-      parentRoute: typeof AuthRouteRoute;
+      preLoaderRoute: typeof authenticatedTasksIndexRouteImport;
+      parentRoute: typeof authenticatedRouteRoute;
     };
-    "/_auth/projects/": {
-      id: "/_auth/projects/";
+    "/(authenticated)/projects/": {
+      id: "/(authenticated)/projects/";
       path: "/projects";
       fullPath: "/projects";
-      preLoaderRoute: typeof AuthProjectsIndexRouteImport;
-      parentRoute: typeof AuthRouteRoute;
+      preLoaderRoute: typeof authenticatedProjectsIndexRouteImport;
+      parentRoute: typeof authenticatedRouteRoute;
     };
-    "/_auth/tasks/$taskId": {
-      id: "/_auth/tasks/$taskId";
+    "/(authenticated)/tasks/$taskId": {
+      id: "/(authenticated)/tasks/$taskId";
       path: "/tasks/$taskId";
       fullPath: "/tasks/$taskId";
-      preLoaderRoute: typeof AuthTasksTaskIdRouteImport;
-      parentRoute: typeof AuthRouteRoute;
+      preLoaderRoute: typeof authenticatedTasksTaskIdRouteImport;
+      parentRoute: typeof authenticatedRouteRoute;
     };
-    "/_auth/projects/$projectId": {
-      id: "/_auth/projects/$projectId";
+    "/(authenticated)/projects/$projectId": {
+      id: "/(authenticated)/projects/$projectId";
       path: "/projects/$projectId";
       fullPath: "/projects/$projectId";
-      preLoaderRoute: typeof AuthProjectsProjectIdRouteImport;
-      parentRoute: typeof AuthRouteRoute;
+      preLoaderRoute: typeof authenticatedProjectsProjectIdRouteImport;
+      parentRoute: typeof authenticatedRouteRoute;
     };
   }
 }
 
-interface AuthRouteRouteChildren {
-  AuthUsernameRoute: typeof AuthUsernameRoute;
-  AuthProjectsProjectIdRoute: typeof AuthProjectsProjectIdRoute;
-  AuthTasksTaskIdRoute: typeof AuthTasksTaskIdRoute;
-  AuthProjectsIndexRoute: typeof AuthProjectsIndexRoute;
-  AuthTasksIndexRoute: typeof AuthTasksIndexRoute;
+interface authenticatedRouteRouteChildren {
+  authenticatedUsernameRoute: typeof authenticatedUsernameRoute;
+  authenticatedProjectsProjectIdRoute: typeof authenticatedProjectsProjectIdRoute;
+  authenticatedTasksTaskIdRoute: typeof authenticatedTasksTaskIdRoute;
+  authenticatedProjectsIndexRoute: typeof authenticatedProjectsIndexRoute;
+  authenticatedTasksIndexRoute: typeof authenticatedTasksIndexRoute;
 }
 
-const AuthRouteRouteChildren: AuthRouteRouteChildren = {
-  AuthUsernameRoute: AuthUsernameRoute,
-  AuthProjectsProjectIdRoute: AuthProjectsProjectIdRoute,
-  AuthTasksTaskIdRoute: AuthTasksTaskIdRoute,
-  AuthProjectsIndexRoute: AuthProjectsIndexRoute,
-  AuthTasksIndexRoute: AuthTasksIndexRoute,
+const authenticatedRouteRouteChildren: authenticatedRouteRouteChildren = {
+  authenticatedUsernameRoute: authenticatedUsernameRoute,
+  authenticatedProjectsProjectIdRoute: authenticatedProjectsProjectIdRoute,
+  authenticatedTasksTaskIdRoute: authenticatedTasksTaskIdRoute,
+  authenticatedProjectsIndexRoute: authenticatedProjectsIndexRoute,
+  authenticatedTasksIndexRoute: authenticatedTasksIndexRoute,
 };
 
-const AuthRouteRouteWithChildren = AuthRouteRoute._addFileChildren(
-  AuthRouteRouteChildren,
-);
+const authenticatedRouteRouteWithChildren =
+  authenticatedRouteRoute._addFileChildren(authenticatedRouteRouteChildren);
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AuthRouteRoute: AuthRouteRouteWithChildren,
-  LoginRoute: LoginRoute,
-  SignupRoute: SignupRoute,
+  authenticatedRouteRoute: authenticatedRouteRouteWithChildren,
+  authLoginRoute: authLoginRoute,
+  authSignupRoute: authSignupRoute,
 };
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

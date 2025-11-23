@@ -6,7 +6,7 @@ import { CircleCheckIcon, CircleIcon } from "lucide-react";
 import { queryTasksOptions } from "@/api/query-tasks";
 import { getTasksByCreatedAt } from "@/utils/select";
 
-const routeApi = getRouteApi("/_auth/projects/$projectId");
+const routeApi = getRouteApi("/(authenticated)/projects/$projectId");
 
 export const TasksHistory = () => {
   const params = routeApi.useParams();

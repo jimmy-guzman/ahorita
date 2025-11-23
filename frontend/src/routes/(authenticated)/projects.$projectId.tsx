@@ -13,7 +13,7 @@ function Component() {
   );
 }
 
-export const Route = createFileRoute("/_auth/projects/$projectId")({
+export const Route = createFileRoute("/(authenticated)/projects/$projectId")({
   loader: async ({ context: { queryClient }, params }) => {
     await queryClient.ensureQueryData(projectQueryOptions(params.projectId));
   },
