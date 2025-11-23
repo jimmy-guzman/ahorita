@@ -1,14 +1,10 @@
 import { MoonIcon, SunIcon } from "lucide-react";
 
-import {
-  themesByMode,
-  useAppActions,
-  useAppIsLightMode,
-} from "@/hooks/stores/app";
+import { useTheme, useToggleTheme } from "@/hooks/stores/theme";
 
 export const ThemeToggle = () => {
-  const isLightMode = useAppIsLightMode();
-  const { toggleMode } = useAppActions();
+  const theme = useTheme();
+  const toggleTheme = useToggleTheme();
 
   return (
     <label className="dsy-swap dsy-swap-rotate dsy-btn dsy-ghost dsy-btn-circle dsy-btn-xs lg:dsy-btn-sm">
@@ -16,9 +12,8 @@ export const ThemeToggle = () => {
       <input
         type="checkbox"
         className="dsy-theme-controller"
-        value={themesByMode.light}
-        checked={isLightMode}
-        onChange={toggleMode}
+        checked={theme === "light"}
+        onChange={toggleTheme}
       />
       <SunIcon className="dsy-swap-on fill-current" />
       <MoonIcon className="dsy-swap-off fill-current" />
