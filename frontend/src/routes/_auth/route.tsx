@@ -52,7 +52,7 @@ function Component() {
           <LogoutButton />
         </div>
       </nav>
-      <div role="tablist" className="dsy-tabs dsy-tabs-bordered mb-8 w-full">
+      <div role="tablist" className="dsy-tabs dsy-tabs-border mb-8 w-full">
         <Link
           role="tab"
           className="dsy-tab"

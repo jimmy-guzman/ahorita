@@ -1,5 +1,5 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { Link, getRouteApi } from "@tanstack/react-router";
+import { getRouteApi, Link } from "@tanstack/react-router";
 import { intlFormat } from "date-fns";
 import { CircleCheckIcon, CircleIcon } from "lucide-react";
 
