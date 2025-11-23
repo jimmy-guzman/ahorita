@@ -6,7 +6,7 @@ import {
   Outlet,
   redirect,
 } from "@tanstack/react-router";
-
+import { Suspense } from "react";
 import { meQueryOptions } from "@/api/query-me";
 import { LogoutButton } from "@/components/logout-button";
 import { ThemeToggle } from "@/components/theme-toggle";
@@ -82,7 +82,9 @@ function Component() {
         </Link>
       </div>
       <main>
-        <Outlet />
+        <Suspense>
+          <Outlet />
+        </Suspense>
       </main>
     </div>
   );
