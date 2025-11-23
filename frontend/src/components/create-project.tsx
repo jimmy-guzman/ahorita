@@ -62,15 +62,8 @@ export const CreateProject = () => {
               <Dialog.Description className="py-4">
                 This will create your project. Click save when you're done.
               </Dialog.Description>
-              <form className="flex flex-col gap-2" onSubmit={addToProjects}>
-                <div className="flex w-full items-end gap-2">
-                  <TextInput
-                    control={control}
-                    name="name"
-                    label="Name"
-                    className="w-full"
-                  />
-                </div>
+              <form className="flex flex-col gap-4" onSubmit={addToProjects}>
+                <TextInput control={control} name="name" label="Name" />
                 <TextInput
                   control={control}
                   name="description"

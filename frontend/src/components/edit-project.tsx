@@ -64,38 +64,43 @@ export const EditProject = ({
                   );
                 })}
               >
-                <div className="flex w-full items-end gap-2">
-                  <TextInput
-                    control={form.control}
-                    name="name"
-                    label="Name"
-                    className="w-full"
-                  />
-                </div>
-                <TextInput
-                  control={form.control}
-                  name="description"
-                  label="Description"
-                />
-                <div className="dsy-form-control">
-                  <label className="dsy-label cursor-pointer">
-                    <span className="dsy-label-text">Favorite?</span>
-                    <input
-                      type="checkbox"
-                      className="dsy-toggle"
-                      {...form.register("isFavorite")}
+                <div className="flex flex-col gap-4">
+                  <div className="flex flex-col gap-4">
+                    <TextInput
+                      control={form.control}
+                      name="name"
+                      label="Name"
+                      className="w-full"
                     />
-                  </label>
-                </div>
-                <div className="dsy-form-control">
-                  <label className="dsy-label cursor-pointer">
-                    <span className="dsy-label-text">Done?</span>
-                    <input
-                      type="checkbox"
-                      className="dsy-toggle"
-                      {...form.register("isDone")}
+                    <TextInput
+                      control={form.control}
+                      name="description"
+                      label="Description"
                     />
-                  </label>
+                  </div>
+                  <fieldset className="dsy-fieldset">
+                    <legend className="dsy-fieldset-legend">
+                      Project Options
+                    </legend>
+                    <div className="flex gap-4">
+                      <label className="dsy-label">
+                        <input
+                          type="checkbox"
+                          className="dsy-toggle"
+                          {...form.register("isFavorite")}
+                        />
+                        Favorite
+                      </label>
+                      <label className="dsy-label">
+                        <input
+                          type="checkbox"
+                          className="dsy-toggle"
+                          {...form.register("isDone")}
+                        />
+                        Done
+                      </label>
+                    </div>
+                  </fieldset>
                 </div>
                 <div className="dsy-modal-action">
                   <button type="submit" className="dsy-btn dsy-btn-neutral">

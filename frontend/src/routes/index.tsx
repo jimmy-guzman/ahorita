@@ -14,7 +14,7 @@ function Index() {
               <strong className="text-accent">to do</strong> something in my
               family.
             </span>
-            <h1 className="bg-gradient-to-r from-primary to-secondary bg-clip-text font-bold text-8xl text-transparent">
+            <h1 className="bg-linear-to-r from-primary to-secondary bg-clip-text font-bold text-8xl text-transparent">
               Ahorita
             </h1>
             <p className="text-2xl">

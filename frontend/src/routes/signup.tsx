@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { Link, createFileRoute, getRouteApi } from "@tanstack/react-router";
+import { createFileRoute, getRouteApi, Link } from "@tanstack/react-router";
 
 import { api } from "@/api/client";
 import { PasswordInput } from "@/components/password-input";
@@ -40,14 +40,20 @@ function SignUp() {
             className="dsy-card-body"
             onSubmit={handleSubmit((values) => mutate(values))}
           >
-            <legend>Create your account</legend>
-            <TextInput control={control} name="username" label="Username" />
-            <PasswordInput control={control} name="password" label="Password" />
-            <div className="dsy-form-control mt-6">
-              <button type="submit" className="dsy-btn dsy-btn-accent">
+            <fieldset className="dsy-fieldset">
+              <legend className="dsy-fieldset-legend">
+                Create your account
+              </legend>
+              <TextInput control={control} name="username" label="Username" />
+              <PasswordInput
+                control={control}
+                name="password"
+                label="Password"
+              />
+              <button type="submit" className="dsy-btn dsy-btn-accent mt-6">
                 Sign Up
               </button>
-            </div>
+            </fieldset>
             <div className="flex justify-end">
               <span>
                 Already a user?{" "}

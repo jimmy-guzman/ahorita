@@ -15,7 +15,7 @@ export const ThemeToggle = () => {
       <span className="sr-only">Toggle theme</span>
       <input
         type="checkbox"
-        className="theme-controller"
+        className="dsy-theme-controller"
         value={themesByMode.light}
         checked={isLightMode}
         onChange={toggleMode}
