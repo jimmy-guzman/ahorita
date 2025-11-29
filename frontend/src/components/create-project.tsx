@@ -72,7 +72,7 @@ export const CreateProject = () => {
                 <div className="flex justify-end">
                   <button
                     type="submit"
-                    className="dsy-btn dsy-btn-accent dsy-btn-sm"
+                    className="dsy-btn dsy-btn-primary dsy-btn-sm"
                     disabled={isPending}
                   >
                     Create Project <FolderPlusIcon />

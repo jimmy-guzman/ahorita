@@ -1,9 +1,8 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { getRouteApi, Link } from "@tanstack/react-router";
-import { ListTodoIcon } from "lucide-react";
 
 import { projectQueryOptions } from "@/api/query-project";
-
+import { AddTaskToProject } from "./add-task-to-project";
 import { DeleteProject } from "./delete-project";
 import { EditProject } from "./edit-project";
 import { ProjectActions } from "./project-actions";
@@ -32,14 +31,7 @@ export const ProjectDetails = () => {
           <div className="dsy-card-actions justify-end">
             <DeleteProject projectId={projectId} />
             <EditProject projectId={projectId} />
-            <Link
-              className="dsy-btn dsy-btn-primary dsy-btn-sm"
-              to="/tasks"
-              search={{ projectId }}
-            >
-              <span className="hidden sm:inline">Tasks</span>
-              <ListTodoIcon />
-            </Link>
+            <AddTaskToProject projectId={projectId} />
           </div>
         </div>
       </div>

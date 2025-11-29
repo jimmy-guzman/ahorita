@@ -16,7 +16,7 @@ interface EditProjectProps {
 }
 
 export const EditProject = ({
-  className = "dsy-btn dsy-btn-accent dsy-btn-sm",
+  className = "dsy-btn dsy-btn-neutral dsy-btn-sm",
   hideText = false,
   projectId,
 }: EditProjectProps) => {

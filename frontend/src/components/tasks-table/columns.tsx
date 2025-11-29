@@ -43,7 +43,7 @@ export const columns = [
     header: "Project",
     cell: (info) => (
       <Link
-        className="dsy-link dsy-link-secondary"
+        className="dsy-link"
         to="/projects/$projectId"
         params={{
           projectId: info.row.original.project.id,
