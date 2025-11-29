@@ -3,6 +3,7 @@ import type { QueryClient } from "@tanstack/react-query";
 import { ReactQueryDevtoolsPanel } from "@tanstack/react-query-devtools";
 import { createRootRouteWithContext, Outlet } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
+import HolyLoader from "holy-loader";
 import { Toaster } from "sonner";
 import type { APIRoutes } from "@/api/client";
 import { meQueryOptions } from "@/api/query-me";
@@ -10,6 +11,7 @@ import { meQueryOptions } from "@/api/query-me";
 const Root = () => {
   return (
     <>
+      <HolyLoader color="var(--color-primary)" ignoreSearchParams />
       <Outlet />
       <Toaster
         toastOptions={{
