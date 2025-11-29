@@ -13,6 +13,12 @@ export const Route = createFileRoute("/(authenticated)/projects/$projectId")({
     await queryClient.ensureQueryData(projectQueryOptions(params.projectId));
   },
   component: Component,
+  pendingComponent: () => (
+    <div className="flex flex-col gap-4">
+      <span className="dsy-skeleton h-40 w-full bg-base-200"></span>
+      <span className="dsy-skeleton h-96 w-full bg-base-200"></span>
+    </div>
+  ),
 });
 
 function Component() {

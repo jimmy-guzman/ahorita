@@ -1,5 +1,3 @@
-import { toast } from "sonner";
-
 import type { APIRoutes } from "@/api/client";
 import { api } from "@/api/client";
 import { mutationOptions } from "@/api/mutation-options";
@@ -22,10 +20,5 @@ export const editProjectOptions = mutationOptions({
   },
   onMutate: async () => {
     await queryClient.cancelQueries(projectsQueryOptions);
-  },
-  onSuccess: async ({ name }) => {
-    await queryClient.invalidateQueries(projectsQueryOptions);
-
-    toast.success(`Project ${name} has been edited`);
   },
 });

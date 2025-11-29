@@ -7,6 +7,9 @@ import { ProjectDetails } from "./project-details";
 describe("<ProjectDetails />", () => {
   it("should render", async () => {
     const handlers = [
+      http.get("/metadata", () => {
+        return HttpResponse.json({ labels: [], priorities: [], statuses: [] });
+      }),
       http.get("/projects/1", () => {
         return HttpResponse.json({
           id: "1",

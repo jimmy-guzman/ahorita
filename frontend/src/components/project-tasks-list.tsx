@@ -23,7 +23,7 @@ const priorityBadgeClass = {
 export const ProjectTasksList = ({ tasks }: ProjectTasksListProps) => {
   if (tasks.length === 0) {
     return (
-      <div className="dsy-alert dsy-alert-info">
+      <div className="dsy-alert dsy-alert-info dsy-alert-soft">
         <span>No tasks for this project yet.</span>
       </div>
     );
