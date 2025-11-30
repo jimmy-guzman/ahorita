@@ -4,8 +4,8 @@ import { createColumnHelper } from "@tanstack/react-table";
 import type { APIRoutes } from "@/api/client";
 
 import { PriorityCell } from "./priority-cell";
-import { RowActions } from "./row-actions";
 import { TasksTableStatusCell } from "./status-cell";
+import { TaskActions } from "./task-actions";
 
 const columnHelper =
   createColumnHelper<APIRoutes["tasks"]["get"]["response"]["200"][number]>();
@@ -56,7 +56,7 @@ export const columns = [
   columnHelper.display({
     id: "actions",
     header: "Actions",
-    cell: (info) => <RowActions task={info.row.original} />,
+    cell: (info) => <TaskActions task={info.row.original} />,
     enableGlobalFilter: false,
   }),
 ];

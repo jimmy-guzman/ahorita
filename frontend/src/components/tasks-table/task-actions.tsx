@@ -14,7 +14,7 @@ interface TaskTableActionsProps {
   task: APIRoutes["tasks"]["get"]["response"]["200"][number];
 }
 
-export const RowActions = ({ task }: TaskTableActionsProps) => {
+export const TaskActions = ({ task }: TaskTableActionsProps) => {
   const { data } = useSuspenseQuery(queryMetadataOptions());
   const editMutation = useMutation(editTaskMutationOptions);
   const ref = useRef<HTMLDetailsElement>(null);

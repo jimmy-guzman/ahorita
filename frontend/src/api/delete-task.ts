@@ -1,5 +1,3 @@
-import { toast } from "sonner";
-
 import { api } from "@/api/client";
 import { mutationOptions } from "@/api/mutation-options";
 import queryClient from "@/query-client";
@@ -16,9 +14,7 @@ export const deleteTaskMutationOptions = mutationOptions({
 
     return res.data;
   },
-  onSuccess: async ({ name }) => {
+  onSuccess: async () => {
     await queryClient.invalidateQueries(queryTasksOptions());
-
-    toast.success(`Task ${name} has been deleted`);
   },
 });

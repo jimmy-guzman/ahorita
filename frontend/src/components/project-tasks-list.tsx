@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import type { APIRoutes } from "@/api/client";
 import { cn } from "@/utils/cn";
+import { TaskActions } from "./tasks-table/task-actions";
 
 interface ProjectTasksListProps {
   tasks: APIRoutes["tasks"]["get"]["response"]["200"];
@@ -28,7 +29,6 @@ export const ProjectTasksList = ({ tasks }: ProjectTasksListProps) => {
       </div>
     );
   }
-
   return (
     <ul className="dsy-list mt-2">
       {tasks.map((task) => (
@@ -37,14 +37,18 @@ export const ProjectTasksList = ({ tasks }: ProjectTasksListProps) => {
           className="dsy-list-row flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between"
         >
           <div className="flex flex-1 flex-col gap-2">
-            <Link
-              className="dsy-link font-semibold text-sm sm:text-base"
-              to={"/tasks/$taskId"}
-              params={{ taskId: task.id }}
-            >
-              {task.name}
-            </Link>
-
+            <div className="flex items-start justify-between gap-2">
+              <Link
+                className="dsy-link flex-1 font-semibold text-sm sm:text-base"
+                to={"/tasks/$taskId"}
+                params={{ taskId: task.id }}
+              >
+                {task.name}
+              </Link>
+              <div className="sm:hidden">
+                <TaskActions task={task} />
+              </div>
+            </div>
             <div className="flex flex-wrap items-center gap-2 text-xs">
               <span className="dsy-badge dsy-badge-outline dsy-badge-xs">
                 {task.label}
@@ -57,7 +61,6 @@ export const ProjectTasksList = ({ tasks }: ProjectTasksListProps) => {
               >
                 {task.status}
               </span>
-
               <span
                 className={cn(
                   "dsy-badge dsy-badge-xs",
@@ -66,16 +69,18 @@ export const ProjectTasksList = ({ tasks }: ProjectTasksListProps) => {
               >
                 {task.priority} Priority
               </span>
+              <span className="text-base-content/60">
+                Updated{" "}
+                {new Date(task.updatedAt).toLocaleDateString(undefined, {
+                  month: "short",
+                  day: "numeric",
+                  year: "numeric",
+                })}
+              </span>
             </div>
           </div>
-
-          <div className="text-base-content/60 text-xs sm:pt-1">
-            Updated{" "}
-            {new Date(task.updatedAt).toLocaleDateString(undefined, {
-              month: "short",
-              day: "numeric",
-              year: "numeric",
-            })}
+          <div className="hidden sm:block">
+            <TaskActions task={task} />
           </div>
         </li>
       ))}
