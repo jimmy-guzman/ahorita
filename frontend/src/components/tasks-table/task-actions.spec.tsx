@@ -2,7 +2,7 @@ import { HttpResponse, http } from "msw";
 
 import { server } from "@/testing/mocks/server";
 import { render, screen } from "@/testing/utils";
-import { RowActions } from "./row-actions";
+import { TaskActions } from "./task-actions";
 
 describe("<RowActions />", () => {
   it("should render", async () => {
@@ -14,7 +14,7 @@ describe("<RowActions />", () => {
     server.use(...handlers);
 
     await render(
-      <RowActions
+      <TaskActions
         task={{
           id: "1",
           name: "add task details",
