@@ -40,7 +40,9 @@ describe("<RowActions />", () => {
       },
     );
 
-    const list = screen.getByRole("list", { name: "add task details actions" });
+    const list = screen.getByRole("button", {
+      name: "Open add task details menu",
+    });
 
     expect(list).toBeInTheDocument();
   });

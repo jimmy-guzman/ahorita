@@ -74,8 +74,8 @@ export interface FileRoutesByFullPath {
   "/$username": typeof authenticatedUsernameRoute;
   "/projects/$projectId": typeof authenticatedProjectsProjectIdRoute;
   "/tasks/$taskId": typeof authenticatedTasksTaskIdRoute;
-  "/projects": typeof authenticatedProjectsIndexRoute;
-  "/tasks": typeof authenticatedTasksIndexRoute;
+  "/projects/": typeof authenticatedProjectsIndexRoute;
+  "/tasks/": typeof authenticatedTasksIndexRoute;
 }
 export interface FileRoutesByTo {
   "/": typeof IndexRoute;
@@ -108,8 +108,8 @@ export interface FileRouteTypes {
     | "/$username"
     | "/projects/$projectId"
     | "/tasks/$taskId"
-    | "/projects"
-    | "/tasks";
+    | "/projects/"
+    | "/tasks/";
   fileRoutesByTo: FileRoutesByTo;
   to:
     | "/"
@@ -180,14 +180,14 @@ declare module "@tanstack/react-router" {
     "/(authenticated)/tasks/": {
       id: "/(authenticated)/tasks/";
       path: "/tasks";
-      fullPath: "/tasks";
+      fullPath: "/tasks/";
       preLoaderRoute: typeof authenticatedTasksIndexRouteImport;
       parentRoute: typeof authenticatedRouteRoute;
     };
     "/(authenticated)/projects/": {
       id: "/(authenticated)/projects/";
       path: "/projects";
-      fullPath: "/projects";
+      fullPath: "/projects/";
       preLoaderRoute: typeof authenticatedProjectsIndexRouteImport;
       parentRoute: typeof authenticatedRouteRoute;
     };
