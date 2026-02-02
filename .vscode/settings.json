@@ -50,6 +50,7 @@
     "typecheck",
     "Uncurried",
     "valibot",
+    "VITE",
     "zustand"
   ],
   "css.lint.unknownAtRules": "ignore",

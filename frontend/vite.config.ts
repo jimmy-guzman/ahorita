@@ -10,13 +10,13 @@ export default defineConfig(() => ({
   plugins: [
     tailwindcss(),
     tsconfigPaths(),
-    react(),
     tanstackRouter({
       generatedRouteTree: "./src/route-tree.gen.ts",
       semicolons: true,
       quoteStyle: "double",
       autoCodeSplitting: true,
     }),
+    react(),
   ],
   entries: ["index.html"],
   test: {
