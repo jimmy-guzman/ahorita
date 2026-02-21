@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.3.13/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.4.4/schema.json",
   "files": {
     "includes": [
       "**",
@@ -55,13 +55,13 @@
         "noConsole": "error",
         "useErrorMessage": "error",
         "useStrictMode": "error",
-        "useGuardForIn": "error"
+        "useGuardForIn": "error",
+        "noImportCycles": "error",
+        "noDeprecatedImports": "warn"
       },
       "nursery": {
         "useSortedClasses": "error",
-        "noDeprecatedImports": "warn",
         "noFloatingPromises": "error",
-        "noImportCycles": "error",
         "noMisusedPromises": "error"
       }
     }
