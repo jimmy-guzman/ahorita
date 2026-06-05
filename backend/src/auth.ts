@@ -1,31 +1,14 @@
-import { DrizzleSQLiteAdapter } from "@lucia-auth/adapter-drizzle";
-import { Lucia } from "lucia";
+import { drizzleAdapter } from "@better-auth/drizzle-adapter";
+import { betterAuth } from "better-auth";
 
 import { db } from "./db";
-import { sessions, users } from "./schemas";
+import env from "./env";
 
-const adapter = new DrizzleSQLiteAdapter(db, sessions, users);
-
-export const lucia = new Lucia(adapter, {
-  sessionCookie: {
-    attributes: {
-      secure: Bun.env.NODE_ENV === "production",
-    },
-  },
-  getUserAttributes: (attributes) => {
-    return {
-      username: attributes.username,
-    };
-  },
+export const auth = betterAuth({
+  database: drizzleAdapter(db, {
+    provider: "sqlite",
+    usePlural: true,
+  }),
+  emailAndPassword: { enabled: true },
+  trustedOrigins: [env.CORS_ORIGIN],
 });
-
-interface DatabaseUserAttributes {
-  username: string;
-}
-
-declare module "lucia" {
-  interface Register {
-    Lucia: typeof lucia;
-    DatabaseUserAttributes: DatabaseUserAttributes;
-  }
-}

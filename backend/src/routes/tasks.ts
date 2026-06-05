@@ -1,7 +1,7 @@
 import { Elysia, InternalServerError, t } from "elysia";
 
 import { db } from "../db";
-import { auth } from "../middleware/auth";
+import { authPlugin } from "../middleware/auth";
 import {
   insertTaskSchema,
   selectTaskSchema,
@@ -13,7 +13,7 @@ import { taskRoutes } from "./tasks.$taskId";
 const tags = ["Task"];
 
 export const tasksRoutes = new Elysia({ prefix: "/tasks" })
-  .use(auth)
+  .use(authPlugin)
   .model({
     Task: selectTaskSchema,
     TaskWithProject: selectTaskWithProjectSchema,
@@ -24,7 +24,7 @@ export const tasksRoutes = new Elysia({ prefix: "/tasks" })
     async ({ user, body }) => {
       const [task] = await db
         .insert(tasks)
-        .values({ ...body, userId: user?.id ?? "" })
+        .values({ ...body, userId: user.id })
         .returning();
 
       if (!task) {
@@ -34,6 +34,7 @@ export const tasksRoutes = new Elysia({ prefix: "/tasks" })
       return task;
     },
     {
+      auth: true,
       body: insertTaskSchema,
       response: "Task",
       detail: { tags, summary: "Create Task" },
@@ -45,7 +46,7 @@ export const tasksRoutes = new Elysia({ prefix: "/tasks" })
       return db.query.tasks.findMany({
         where: (tasks, { eq, and }) => {
           return and(
-            user?.id ? eq(tasks.userId, user.id) : undefined,
+            eq(tasks.userId, user.id),
             projectId ? eq(tasks.projectId, projectId) : undefined,
             priority ? eq(tasks.priority, priority) : undefined,
             status ? eq(tasks.status, status) : undefined,
@@ -62,6 +63,7 @@ export const tasksRoutes = new Elysia({ prefix: "/tasks" })
       });
     },
     {
+      auth: true,
       query: t.Omit(t.Partial(selectTaskSchema), [
         "userId",
         "createdAt",

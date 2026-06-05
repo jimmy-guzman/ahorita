@@ -2,11 +2,11 @@ import { useMutation } from "@tanstack/react-query";
 import { createFileRoute, getRouteApi, Link } from "@tanstack/react-router";
 import * as v from "valibot";
 
-import { api } from "@/api/client";
 import { meQueryOptions } from "@/api/query-me";
 import { PasswordInput } from "@/components/password-input";
 import { TextInput } from "@/components/shared/text-input";
 import { type LoginFormValues, useLoginForm } from "@/hooks/forms/login";
+import { authClient } from "@/lib/auth-client";
 import queryClient from "@/query-client";
 
 const routeApi = getRouteApi("/(auth)/login");
@@ -17,8 +17,11 @@ function Login() {
   const { handleSubmit, control } = useLoginForm();
 
   const { mutate } = useMutation({
-    mutationFn: async (user: LoginFormValues) => {
-      const res = await api.auth.login.post(user);
+    mutationFn: async (values: LoginFormValues) => {
+      const res = await authClient.signIn.email({
+        email: values.email,
+        password: values.password,
+      });
 
       if (res.error) {
         throw res.error;
@@ -49,7 +52,7 @@ function Login() {
               <legend className="dsy-fieldset-legend">
                 Login with your account
               </legend>
-              <TextInput control={control} name="username" label="Username" />
+              <TextInput control={control} name="email" label="Email" />
               <PasswordInput
                 control={control}
                 name="password"

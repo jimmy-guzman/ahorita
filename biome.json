@@ -10,7 +10,8 @@
       "!**/e2e/.auth/user.json",
       "!**/vite.config.ts.timestamp-*.mjs",
       "!**/node_modules",
-      "!**/coverage"
+      "!**/coverage",
+      "!**/.agents"
     ]
   },
   "assist": {

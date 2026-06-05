@@ -21,6 +21,7 @@
 - [TanStack Query](https://tanstack.com/query/latest)
 - [TanStack Table](https://tanstack.com/table/latest)
 - [React Hook Form](https://www.react-hook-form.com)
+- [Better Auth](https://www.better-auth.com)
 - [Valibot](https://valibot.dev)
 - [Zustand](https://zustand-demo.pmnd.rs)
 - [Sonner](https://sonner.emilkowal.ski)
@@ -38,7 +39,7 @@
 - [Turso](https://docs.turso.tech)
 - [OpenTelemetry](https://opentelemetry.io)
 - [Axiom](https://axiom.co)
-- [Lucia](https://lucia-auth.com)
+- [Better Auth](https://www.better-auth.com)
 
 ## 🏁 Getting Started
 

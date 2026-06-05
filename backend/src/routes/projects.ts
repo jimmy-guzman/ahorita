@@ -2,7 +2,7 @@ import { eq } from "drizzle-orm";
 import { Elysia, InternalServerError, t } from "elysia";
 
 import { db } from "../db";
-import { auth } from "../middleware/auth";
+import { authPlugin } from "../middleware/auth";
 import { selectProjectSchema } from "../models/projects";
 import { projects } from "../schemas";
 import { projectRoutes } from "./projects.$projectId";
@@ -10,18 +10,17 @@ import { projectRoutes } from "./projects.$projectId";
 const tags = ["Project"];
 
 export const projectsRoutes = new Elysia({ prefix: "/projects" })
-  .use(auth)
+  .use(authPlugin)
   .model({ Project: selectProjectSchema })
   .get(
     "",
     async ({ user }) => {
-      const userId = user?.id ?? "";
-
       return await db.query.projects.findMany({
-        where: eq(projects.userId, userId),
+        where: eq(projects.userId, user.id),
       });
     },
     {
+      auth: true,
       response: t.Array(selectProjectSchema),
       detail: { tags, summary: "List Projects" },
     },
@@ -29,11 +28,9 @@ export const projectsRoutes = new Elysia({ prefix: "/projects" })
   .post(
     "",
     async ({ body, user }) => {
-      const userId = user?.id ?? "";
-
       const [project] = await db
         .insert(projects)
-        .values({ ...body, userId })
+        .values({ ...body, userId: user.id })
         .returning();
 
       if (!project) {
@@ -43,6 +40,7 @@ export const projectsRoutes = new Elysia({ prefix: "/projects" })
       return project;
     },
     {
+      auth: true,
       body: t.Pick(selectProjectSchema, ["name", "description"]),
       response: "Project",
       detail: { tags, summary: "Create Project" },
@@ -51,9 +49,8 @@ export const projectsRoutes = new Elysia({ prefix: "/projects" })
   .get(
     "/totals",
     async ({ user }) => {
-      const userId = user?.id ?? "";
       const projectsWithTasks = await db.query.projects.findMany({
-        where: eq(projects.userId, userId),
+        where: eq(projects.userId, user.id),
         orderBy: (tasks, { desc }) => desc(tasks.updatedAt),
         columns: {
           id: true,
@@ -84,6 +81,7 @@ export const projectsRoutes = new Elysia({ prefix: "/projects" })
       });
     },
     {
+      auth: true,
       response: t.Array(
         t.Object({
           id: t.String(),

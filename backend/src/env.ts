@@ -12,6 +12,9 @@ const schema = t.Object({
   ),
   AXIOM_TOKEN: t.Optional(t.String()),
   AXIOM_DATASET: t.Optional(t.String()),
+  BETTER_AUTH_SECRET: t.String(),
+  BETTER_AUTH_URL: t.String(),
+  CORS_ORIGIN: t.String(),
 });
 
 type Schema = Static<typeof schema>;

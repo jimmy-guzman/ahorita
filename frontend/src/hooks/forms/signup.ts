@@ -1,30 +1,35 @@
 import { valibotResolver } from "@hookform/resolvers/valibot";
 import { useForm } from "react-hook-form";
 import {
+  email,
   type InferOutput,
   minLength,
   object,
   pipe,
-  regex,
   string,
 } from "valibot";
 
 const schema = object({
-  username: pipe(
+  name: pipe(string(), minLength(1, "Your name is too short.")),
+  email: pipe(
     string(),
-    minLength(1, "Your username is too short."),
-    regex(/^[a-zA-Z0-9]+$/, "Your username must be alphanumeric."),
+    email("Enter a valid email address."),
+    minLength(1, "Email is required."),
   ),
-  password: pipe(string(), minLength(1, "Your password is too short.")),
+  password: pipe(
+    string(),
+    minLength(8, "Password must be at least 8 characters."),
+  ),
 });
 
-export type SignFormValues = InferOutput<typeof schema>;
+export type SignupFormValues = InferOutput<typeof schema>;
 
 export const useSignupForm = () => {
-  return useForm<SignFormValues>({
+  return useForm<SignupFormValues>({
     resolver: valibotResolver(schema),
     defaultValues: {
-      username: "",
+      name: "",
+      email: "",
       password: "",
     },
   });
