@@ -9,11 +9,7 @@ export const GetStartedButton = () => {
 
   if (data.user) {
     return (
-      <Link
-        to="/$username"
-        params={{ username: data.user.username }}
-        className="dsy-btn dsy-btn-primary"
-      >
+      <Link to="/dashboard" className="dsy-btn dsy-btn-primary">
         Dashboard <LayoutDashboardIcon />
       </Link>
     );

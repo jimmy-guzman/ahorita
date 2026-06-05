@@ -11,7 +11,7 @@
 import { Route as rootRouteImport } from "./routes/__root";
 import { Route as authenticatedRouteRouteImport } from "./routes/(authenticated)/route";
 import { Route as IndexRouteImport } from "./routes/index";
-import { Route as authenticatedUsernameRouteImport } from "./routes/(authenticated)/$username";
+import { Route as authenticatedDashboardRouteImport } from "./routes/(authenticated)/dashboard";
 import { Route as authSignupRouteImport } from "./routes/(auth)/signup";
 import { Route as authLoginRouteImport } from "./routes/(auth)/login";
 import { Route as authenticatedTasksIndexRouteImport } from "./routes/(authenticated)/tasks.index";
@@ -28,9 +28,9 @@ const IndexRoute = IndexRouteImport.update({
   path: "/",
   getParentRoute: () => rootRouteImport,
 } as any);
-const authenticatedUsernameRoute = authenticatedUsernameRouteImport.update({
-  id: "/$username",
-  path: "/$username",
+const authenticatedDashboardRoute = authenticatedDashboardRouteImport.update({
+  id: "/dashboard",
+  path: "/dashboard",
   getParentRoute: () => authenticatedRouteRoute,
 } as any);
 const authSignupRoute = authSignupRouteImport.update({
@@ -71,7 +71,7 @@ export interface FileRoutesByFullPath {
   "/": typeof IndexRoute;
   "/login": typeof authLoginRoute;
   "/signup": typeof authSignupRoute;
-  "/$username": typeof authenticatedUsernameRoute;
+  "/dashboard": typeof authenticatedDashboardRoute;
   "/projects/$projectId": typeof authenticatedProjectsProjectIdRoute;
   "/tasks/$taskId": typeof authenticatedTasksTaskIdRoute;
   "/projects/": typeof authenticatedProjectsIndexRoute;
@@ -81,7 +81,7 @@ export interface FileRoutesByTo {
   "/": typeof IndexRoute;
   "/login": typeof authLoginRoute;
   "/signup": typeof authSignupRoute;
-  "/$username": typeof authenticatedUsernameRoute;
+  "/dashboard": typeof authenticatedDashboardRoute;
   "/projects/$projectId": typeof authenticatedProjectsProjectIdRoute;
   "/tasks/$taskId": typeof authenticatedTasksTaskIdRoute;
   "/projects": typeof authenticatedProjectsIndexRoute;
@@ -93,7 +93,7 @@ export interface FileRoutesById {
   "/(authenticated)": typeof authenticatedRouteRouteWithChildren;
   "/(auth)/login": typeof authLoginRoute;
   "/(auth)/signup": typeof authSignupRoute;
-  "/(authenticated)/$username": typeof authenticatedUsernameRoute;
+  "/(authenticated)/dashboard": typeof authenticatedDashboardRoute;
   "/(authenticated)/projects/$projectId": typeof authenticatedProjectsProjectIdRoute;
   "/(authenticated)/tasks/$taskId": typeof authenticatedTasksTaskIdRoute;
   "/(authenticated)/projects/": typeof authenticatedProjectsIndexRoute;
@@ -105,7 +105,7 @@ export interface FileRouteTypes {
     | "/"
     | "/login"
     | "/signup"
-    | "/$username"
+    | "/dashboard"
     | "/projects/$projectId"
     | "/tasks/$taskId"
     | "/projects/"
@@ -115,7 +115,7 @@ export interface FileRouteTypes {
     | "/"
     | "/login"
     | "/signup"
-    | "/$username"
+    | "/dashboard"
     | "/projects/$projectId"
     | "/tasks/$taskId"
     | "/projects"
@@ -126,7 +126,7 @@ export interface FileRouteTypes {
     | "/(authenticated)"
     | "/(auth)/login"
     | "/(auth)/signup"
-    | "/(authenticated)/$username"
+    | "/(authenticated)/dashboard"
     | "/(authenticated)/projects/$projectId"
     | "/(authenticated)/tasks/$taskId"
     | "/(authenticated)/projects/"
@@ -156,11 +156,11 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof IndexRouteImport;
       parentRoute: typeof rootRouteImport;
     };
-    "/(authenticated)/$username": {
-      id: "/(authenticated)/$username";
-      path: "/$username";
-      fullPath: "/$username";
-      preLoaderRoute: typeof authenticatedUsernameRouteImport;
+    "/(authenticated)/dashboard": {
+      id: "/(authenticated)/dashboard";
+      path: "/dashboard";
+      fullPath: "/dashboard";
+      preLoaderRoute: typeof authenticatedDashboardRouteImport;
       parentRoute: typeof authenticatedRouteRoute;
     };
     "/(auth)/signup": {
@@ -209,7 +209,7 @@ declare module "@tanstack/react-router" {
 }
 
 interface authenticatedRouteRouteChildren {
-  authenticatedUsernameRoute: typeof authenticatedUsernameRoute;
+  authenticatedDashboardRoute: typeof authenticatedDashboardRoute;
   authenticatedProjectsProjectIdRoute: typeof authenticatedProjectsProjectIdRoute;
   authenticatedTasksTaskIdRoute: typeof authenticatedTasksTaskIdRoute;
   authenticatedProjectsIndexRoute: typeof authenticatedProjectsIndexRoute;
@@ -217,7 +217,7 @@ interface authenticatedRouteRouteChildren {
 }
 
 const authenticatedRouteRouteChildren: authenticatedRouteRouteChildren = {
-  authenticatedUsernameRoute: authenticatedUsernameRoute,
+  authenticatedDashboardRoute: authenticatedDashboardRoute,
   authenticatedProjectsProjectIdRoute: authenticatedProjectsProjectIdRoute,
   authenticatedTasksTaskIdRoute: authenticatedTasksTaskIdRoute,
   authenticatedProjectsIndexRoute: authenticatedProjectsIndexRoute,

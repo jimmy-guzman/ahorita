@@ -22,6 +22,6 @@ function Component() {
   );
 }
 
-export const Route = createFileRoute("/(authenticated)/$username")({
+export const Route = createFileRoute("/(authenticated)/dashboard")({
   component: Component,
 });

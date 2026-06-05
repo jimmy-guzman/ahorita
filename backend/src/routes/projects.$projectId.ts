@@ -2,7 +2,7 @@ import { eq } from "drizzle-orm";
 import { Elysia, NotFoundError, t } from "elysia";
 
 import { db } from "../db";
-import { auth } from "../middleware/auth";
+import { authPlugin } from "../middleware/auth";
 import { selectProjectSchema } from "../models/projects";
 import { projects } from "../schemas";
 
@@ -11,7 +11,7 @@ const tags = ["Project"];
 const Params = t.Object({ projectId: t.String() });
 
 export const projectRoutes = new Elysia({ prefix: "/:projectId" })
-  .use(auth)
+  .use(authPlugin)
   .model({ Project: selectProjectSchema })
   .get(
     "",
@@ -28,6 +28,7 @@ export const projectRoutes = new Elysia({ prefix: "/:projectId" })
       return project;
     },
     {
+      auth: true,
       params: Params,
       response: "Project",
       detail: { tags, summary: "Get Project" },
@@ -49,6 +50,7 @@ export const projectRoutes = new Elysia({ prefix: "/:projectId" })
       return project;
     },
     {
+      auth: true,
       params: Params,
       body: t.Partial(
         t.Pick(selectProjectSchema, [
@@ -77,6 +79,7 @@ export const projectRoutes = new Elysia({ prefix: "/:projectId" })
       return project;
     },
     {
+      auth: true,
       params: Params,
       response: "Project",
       detail: { tags, summary: "Delete Project" },

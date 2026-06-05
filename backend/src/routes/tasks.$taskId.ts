@@ -2,7 +2,7 @@ import { eq } from "drizzle-orm";
 import { Elysia, NotFoundError, t } from "elysia";
 
 import { db } from "../db";
-import { auth } from "../middleware/auth";
+import { authPlugin } from "../middleware/auth";
 import { selectTaskSchema, selectTaskWithProjectSchema } from "../models/tasks";
 import { tasks } from "../schemas";
 
@@ -11,7 +11,7 @@ const tags = ["Task"];
 const Params = t.Object({ taskId: t.String() });
 
 export const taskRoutes = new Elysia({ prefix: "/:taskId" })
-  .use(auth)
+  .use(authPlugin)
   .model({
     Task: selectTaskSchema,
     TaskWithProject: selectTaskWithProjectSchema,
@@ -32,6 +32,7 @@ export const taskRoutes = new Elysia({ prefix: "/:taskId" })
       return task;
     },
     {
+      auth: true,
       body: t.Partial(
         t.Pick(selectTaskSchema, ["name", "status", "priority", "label"]),
       ),
@@ -55,6 +56,7 @@ export const taskRoutes = new Elysia({ prefix: "/:taskId" })
       return task;
     },
     {
+      auth: true,
       params: Params,
       response: "Task",
       detail: { tags, summary: "Delete Task" },
@@ -78,6 +80,7 @@ export const taskRoutes = new Elysia({ prefix: "/:taskId" })
       return task;
     },
     {
+      auth: true,
       params: Params,
       response: "TaskWithProject",
       detail: { tags, summary: "Get Task" },

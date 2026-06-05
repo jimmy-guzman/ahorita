@@ -1,10 +1,10 @@
 import { useMutation } from "@tanstack/react-query";
 import { createFileRoute, getRouteApi, Link } from "@tanstack/react-router";
 
-import { api } from "@/api/client";
 import { PasswordInput } from "@/components/password-input";
 import { TextInput } from "@/components/shared/text-input";
-import { type SignFormValues, useSignupForm } from "@/hooks/forms/signup";
+import { type SignupFormValues, useSignupForm } from "@/hooks/forms/signup";
+import { authClient } from "@/lib/auth-client";
 
 const routeApi = getRouteApi("/(auth)/signup");
 
@@ -13,8 +13,12 @@ function SignUp() {
   const { handleSubmit, control } = useSignupForm();
 
   const { mutate } = useMutation({
-    mutationFn: async (user: SignFormValues) => {
-      const res = await api.auth.signup.post(user);
+    mutationFn: async (values: SignupFormValues) => {
+      const res = await authClient.signUp.email({
+        name: values.name,
+        email: values.email,
+        password: values.password,
+      });
 
       if (res.error) {
         throw res.error;
@@ -44,7 +48,8 @@ function SignUp() {
               <legend className="dsy-fieldset-legend">
                 Create your account
               </legend>
-              <TextInput control={control} name="username" label="Username" />
+              <TextInput control={control} name="name" label="Name" />
+              <TextInput control={control} name="email" label="Email" />
               <PasswordInput
                 control={control}
                 name="password"

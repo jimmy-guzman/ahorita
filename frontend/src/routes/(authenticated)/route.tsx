@@ -1,5 +1,4 @@
 import { Icon } from "@iconify/react";
-import { useSuspenseQuery } from "@tanstack/react-query";
 import {
   createFileRoute,
   Link,
@@ -12,8 +11,6 @@ import { LogoutButton } from "@/components/logout-button";
 import { ThemeToggle } from "@/components/theme-toggle";
 
 function Component() {
-  const { data } = useSuspenseQuery(meQueryOptions);
-
   return (
     <div className="max-w-[100vw] px-6 pb-16 xl:pr-2">
       <nav className="dsy-navbar static w-full lg:sticky lg:top-0 lg:z-30 lg:shadow-xs lg:backdrop-blur-sm">
@@ -56,10 +53,7 @@ function Component() {
         <Link
           role="tab"
           className="dsy-tab"
-          to="/$username"
-          // biome-ignore lint/suspicious/noNonNullAssertedOptionalChain: we know username exists here
-          // biome-ignore lint/style/noNonNullAssertion: we know username exists here
-          params={{ username: data.user?.username! }}
+          to="/dashboard"
           activeProps={{ className: "dsy-tab-active" }}
         >
           Dashboard

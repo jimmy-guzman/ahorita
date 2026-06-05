@@ -4,8 +4,8 @@ import { Elysia } from "elysia";
 import { cyan } from "picocolors";
 
 import env from "./env";
+import { authPlugin } from "./middleware/auth";
 import { opentelemetry } from "./plugins/opentelemetry";
-import { authRoutes } from "./routes/auth";
 import { metadataRoutes } from "./routes/metadata";
 import { projectsRoutes } from "./routes/projects";
 import { tasksRoutes } from "./routes/tasks";
@@ -13,7 +13,14 @@ import { usersRoutes } from "./routes/users";
 
 const app = new Elysia()
   .use(opentelemetry)
-  .use(cors())
+  .use(
+    cors({
+      origin: env.CORS_ORIGIN,
+      methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+      credentials: true,
+      allowedHeaders: ["Content-Type", "Authorization"],
+    }),
+  )
   .use(
     openapi({
       documentation: {
@@ -31,7 +38,7 @@ const app = new Elysia()
   .get("/", ({ redirect }) => {
     return redirect("/openapi");
   })
-  .use(authRoutes)
+  .use(authPlugin)
   .use(projectsRoutes)
   .use(tasksRoutes)
   .use(usersRoutes)

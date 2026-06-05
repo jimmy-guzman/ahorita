@@ -1,6 +1,6 @@
 import { Elysia, t } from "elysia";
 
-import { auth } from "../middleware/auth";
+import { authPlugin } from "../middleware/auth";
 import { selectTaskSchema } from "../models/tasks";
 import { labels, priorities, statuses } from "../schemas/constants";
 
@@ -13,9 +13,10 @@ const MetadataSchema = t.Object({
 });
 
 export const metadataRoutes = new Elysia({ prefix: "/metadata" })
-  .use(auth)
+  .use(authPlugin)
   .model({ Metadata: MetadataSchema })
   .get("", () => ({ statuses, priorities, labels }), {
+    auth: true,
     response: "Metadata",
     detail: { tags, summary: "Get Metadata" },
   });

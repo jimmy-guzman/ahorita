@@ -1,4 +1,4 @@
-import { http, HttpResponse } from "msw";
+import { HttpResponse, http } from "msw";
 
 import { server } from "@/testing/mocks/server";
 import { render, screen } from "@/testing/utils";
@@ -26,7 +26,9 @@ describe("<GetStartedButton />", () => {
   it("should render Dashboard when user is logged in", async () => {
     const handlers = [
       http.get("/users/me", () => {
-        return HttpResponse.json({ user: { username: "jimmy", id: "1" } });
+        return HttpResponse.json({
+          user: { email: "jimmy@test.com", name: "jimmy", id: "1" },
+        });
       }),
     ];
 
