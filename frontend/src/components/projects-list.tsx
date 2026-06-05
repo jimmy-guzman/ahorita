@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { CheckIcon, ListTodoIcon, StarIcon } from "lucide-react";
 import { useMemo, useState } from "react";
+
 import { DeleteProject } from "./delete-project";
 import { EditProject } from "./edit-project";
 
@@ -33,70 +34,70 @@ export const ProjectsList = ({ projects }: ProjectsListProps) => {
   }, [projects, query]);
 
   return (
-    <div className="flex flex-col gap-4">
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <input
-          className="dsy-input dsy-input-bordered w-full max-w-xs"
-          placeholder="Filter projects..."
-          value={query}
-          onChange={(event) => setQuery(event.target.value)}
-        />
-      </div>
+    <div className="flex flex-col gap-3">
+      <input
+        className="dsy-input dsy-input-sm w-full max-w-xs"
+        placeholder="Filter projects..."
+        value={query}
+        onChange={(event) => setQuery(event.target.value)}
+      />
+
       {filteredProjects.length === 0 ? (
-        <div className="dsy-alert dsy-alert-info">
+        <div role="alert" className="dsy-alert dsy-alert-soft">
           <span>No projects found. Try a different filter or create one.</span>
         </div>
       ) : (
-        <ul className="dsy-list rounded-box bg-base-200">
+        <ul className="divide-y divide-base-300 overflow-hidden rounded-box border border-base-300">
           {filteredProjects.map((project) => (
             <li
               key={project.id}
-              className="dsy-list-row flex flex-col gap-3 px-4 py-3 sm:flex-row sm:items-center"
+              className="group flex items-center gap-3 px-4 py-3 transition-colors hover:bg-base-200"
             >
-              <div className="flex flex-1 flex-col gap-1">
-                <div className="flex flex-wrap items-center gap-2">
+              <div className="flex min-w-0 flex-1 flex-col gap-0.5">
+                <div className="flex items-center gap-1.5">
                   <Link
-                    className="dsy-link dsy-link-primary font-semibold"
+                    className="truncate font-medium text-sm hover:underline"
                     to="/projects/$projectId"
                     params={{ projectId: project.id }}
                   >
                     {project.name}
                   </Link>
-
                   {project.isFavorite && (
-                    <StarIcon className="h-4 w-4 shrink-0" />
+                    <StarIcon className="h-3.5 w-3.5 shrink-0 text-warning" />
                   )}
-                  {project.isDone && <CheckIcon className="h-4 w-4 shrink-0" />}
+                  {project.isDone && (
+                    <CheckIcon className="h-3.5 w-3.5 shrink-0 text-success" />
+                  )}
                 </div>
-
                 {project.description ? (
-                  <p className="text-base-content/70 text-sm">
+                  <p className="truncate text-base-content/60 text-xs">
                     {project.description}
                   </p>
                 ) : (
-                  <p className="text-base-content/40 text-sm italic">
+                  <p className="text-base-content/30 text-xs italic">
                     No description yet.
                   </p>
                 )}
               </div>
 
-              <div className="flex flex-wrap items-center justify-end gap-2">
+              <div className="flex items-center gap-1 opacity-0 transition-opacity group-hover:opacity-100">
                 <Link
-                  className="dsy-btn dsy-btn-sm dsy-btn-ghost"
+                  className="dsy-btn dsy-btn-xs dsy-btn-ghost dsy-btn-square"
                   to="/tasks"
                   search={{ projectId: project.id }}
+                  title="View tasks"
                 >
-                  <ListTodoIcon />
+                  <ListTodoIcon className="h-3.5 w-3.5" />
                 </Link>
 
                 <EditProject
-                  className="dsy-btn dsy-btn-sm dsy-btn-ghost"
+                  className="dsy-btn dsy-btn-xs dsy-btn-ghost dsy-btn-square"
                   projectId={project.id}
                   hideText
                 />
 
                 <DeleteProject
-                  className="dsy-btn dsy-btn-sm dsy-btn-ghost"
+                  className="dsy-btn dsy-btn-error dsy-btn-xs dsy-btn-square"
                   projectId={project.id}
                   hideText
                 />

@@ -1,85 +1,55 @@
 import { Link } from "@tanstack/react-router";
+
 import type { APIRoutes } from "@/api/client";
-import { cn } from "@/utils/cn";
+
+import { PriorityCell } from "./tasks-table/priority-cell";
+import { TasksTableStatusCell } from "./tasks-table/status-cell";
 import { TaskActions } from "./tasks-table/task-actions";
 
 interface ProjectTasksListProps {
   tasks: APIRoutes["tasks"]["get"]["response"]["200"];
 }
 
-const statusBadgeClass = {
-  Backlog: "dsy-badge-neutral",
-  Todo: "dsy-badge-info",
-  "In Progress": "dsy-badge-warning",
-  Done: "dsy-badge-success",
-  Canceled: "dsy-badge-ghost",
-} as const;
-
-const priorityBadgeClass = {
-  Low: "dsy-badge-ghost",
-  Medium: "dsy-badge-warning",
-  High: "dsy-badge-error",
-} as const;
-
 export const ProjectTasksList = ({ tasks }: ProjectTasksListProps) => {
   if (tasks.length === 0) {
     return (
-      <div className="dsy-alert dsy-alert-info dsy-alert-soft">
+      <div role="alert" className="dsy-alert dsy-alert-soft">
         <span>No tasks for this project yet.</span>
       </div>
     );
   }
+
   return (
-    <ul className="dsy-list mt-2">
+    <ul className="divide-y divide-base-300 overflow-hidden rounded-box border border-base-300">
       {tasks.map((task) => (
         <li
           key={task.id}
-          className="dsy-list-row flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between"
+          className="group flex items-center gap-3 px-4 py-2 text-sm transition-colors hover:bg-base-200"
         >
-          <div className="flex flex-1 flex-col gap-2">
-            <div className="flex items-start justify-between gap-2">
-              <Link
-                className="dsy-link flex-1 font-semibold text-sm sm:text-base"
-                to={"/tasks/$taskId"}
-                params={{ taskId: task.id }}
-              >
-                {task.name}
-              </Link>
-              <div className="sm:hidden">
-                <TaskActions task={task} />
-              </div>
-            </div>
-            <div className="flex flex-wrap items-center gap-2 text-xs">
-              <span className="dsy-badge dsy-badge-outline dsy-badge-xs">
-                {task.label}
-              </span>
-              <span
-                className={cn(
-                  "dsy-badge dsy-badge-xs",
-                  statusBadgeClass[task.status],
-                )}
-              >
-                {task.status}
-              </span>
-              <span
-                className={cn(
-                  "dsy-badge dsy-badge-xs",
-                  priorityBadgeClass[task.priority],
-                )}
-              >
-                {task.priority} Priority
-              </span>
-              <span className="text-base-content/60">
-                Updated{" "}
-                {new Date(task.updatedAt).toLocaleDateString(undefined, {
-                  month: "short",
-                  day: "numeric",
-                  year: "numeric",
-                })}
-              </span>
-            </div>
-          </div>
-          <div className="hidden sm:block">
+          <TasksTableStatusCell status={task.status} />
+
+          <Link
+            className="flex-1 truncate font-medium hover:underline"
+            to="/tasks/$taskId"
+            params={{ taskId: task.id }}
+          >
+            {task.name}
+          </Link>
+
+          <span className="hidden text-base-content/50 text-xs sm:inline">
+            {task.label}
+          </span>
+
+          <PriorityCell priority={task.priority} />
+
+          <span className="hidden text-base-content/30 text-xs sm:inline">
+            {new Date(task.updatedAt).toLocaleDateString(undefined, {
+              month: "short",
+              day: "numeric",
+            })}
+          </span>
+
+          <div className="opacity-0 transition-opacity group-hover:opacity-100">
             <TaskActions task={task} />
           </div>
         </li>

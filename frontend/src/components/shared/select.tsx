@@ -49,7 +49,10 @@ export const Select = <T extends FieldValues>({
     <label className={cn("dsy-floating-label", className)}>
       <span>{label}</span>
       <select
-        className="dsy-select w-full"
+        className={cn(
+          "dsy-select w-full",
+          error?.message ? "dsy-select-error" : "",
+        )}
         id={name}
         ref={field.ref}
         onBlur={field.onBlur}

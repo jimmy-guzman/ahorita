@@ -25,8 +25,8 @@ export const TaskActions = ({ task }: TaskTableActionsProps) => {
   return (
     <>
       <Menu.Root>
-        <Menu.Trigger className="dsy-btn dsy-btn-ghost dsy-btn-sm">
-          <EllipsisIcon />
+        <Menu.Trigger className="dsy-btn dsy-btn-ghost dsy-btn-square dsy-btn-sm">
+          <EllipsisIcon className="h-4 w-4" />
           <span className="sr-only">Open {task.name} menu</span>
         </Menu.Trigger>
 
@@ -131,9 +131,7 @@ export const TaskActions = ({ task }: TaskTableActionsProps) => {
                 className="flex cursor-pointer items-center justify-between rounded-lg px-4 py-2 text-sm outline-none hover:bg-base-200 data-highlighted:bg-base-200"
               >
                 View
-                <span className="dsy-badge dsy-badge-ghost">
-                  <EyeIcon className="h-4 w-4" />
-                </span>
+                <EyeIcon className="h-4 w-4" />
               </Menu.Item>
 
               <Menu.Item
@@ -141,19 +139,15 @@ export const TaskActions = ({ task }: TaskTableActionsProps) => {
                 className="flex cursor-pointer items-center justify-between rounded-lg px-4 py-2 text-sm outline-none hover:bg-base-200 data-highlighted:bg-base-200"
               >
                 Rename
-                <span className="dsy-badge dsy-badge-ghost">
-                  <PencilIcon className="h-4 w-4" />
-                </span>
+                <PencilIcon className="h-4 w-4" />
               </Menu.Item>
 
               <Menu.Item
                 onClick={() => setDeleteOpen(true)}
-                className="flex cursor-pointer items-center justify-between rounded-lg px-4 py-2 text-sm outline-none hover:bg-base-200 data-highlighted:bg-base-200"
+                className="flex cursor-pointer items-center justify-between rounded-lg px-4 py-2 text-error text-sm outline-none hover:bg-base-200 data-highlighted:bg-base-200"
               >
                 Delete
-                <span className="dsy-badge dsy-badge-ghost">
-                  <TrashIcon className="h-4 w-4" />
-                </span>
+                <TrashIcon className="h-4 w-4" />
               </Menu.Item>
             </Menu.Popup>
           </Menu.Positioner>

@@ -1,6 +1,7 @@
-import { Dialog } from "@base-ui-components/react/dialog";
+import * as Dialog from "@radix-ui/react-dialog";
 import { useMutation } from "@tanstack/react-query";
 import { SaveIcon, XIcon } from "lucide-react";
+
 import { editTaskMutationOptions } from "@/api/edit-task";
 import { TextInput } from "@/components/shared/text-input";
 import { useRenameTaskForm } from "@/hooks/forms/rename-task";
@@ -24,39 +25,57 @@ export const RenameTaskDialog = ({
   return (
     <Dialog.Root open={open} onOpenChange={onOpenChange}>
       <Dialog.Portal>
-        <Dialog.Backdrop className="dsy-modal-backdrop" />
-        <Dialog.Popup className={`dsy-modal ${open ? "dsy-modal-open" : ""}`}>
-          <div className="dsy-modal-box">
-            <Dialog.Close className="dsy-btn dsy-btn-sm dsy-btn-circle dsy-btn-ghost absolute top-2 right-2">
-              <XIcon className="h-4 w-4" />
-            </Dialog.Close>
-
-            <Dialog.Title className="dsy-modal-title">
-              Rename The Task
-            </Dialog.Title>
-
-            <Dialog.Description className="py-4">
-              Rename your task here. Click save when you're done.
-            </Dialog.Description>
-
-            <form
-              onSubmit={form.handleSubmit((values) => {
-                mutate(
-                  { params: { taskId }, body: values },
-                  { onSuccess: () => onOpenChange(false) },
-                );
-              })}
-            >
-              <TextInput control={form.control} name="name" label="Name" />
-              <div className="dsy-modal-action">
-                <button type="submit" className="dsy-btn dsy-btn-primary">
-                  <SaveIcon className="h-4 w-4" />
-                  Save
+        <Dialog.Overlay />
+        <Dialog.Content asChild>
+          <div className="dsy-modal dsy-modal-open">
+            <div className="dsy-modal-box">
+              <Dialog.Close asChild>
+                <button
+                  type="button"
+                  className="dsy-btn dsy-btn-ghost dsy-btn-circle dsy-btn-sm absolute top-2 right-2"
+                  aria-label="Close"
+                >
+                  <XIcon className="h-4 w-4" />
                 </button>
-              </div>
-            </form>
+              </Dialog.Close>
+
+              <Dialog.Title className="font-bold text-lg">
+                Rename The Task
+              </Dialog.Title>
+
+              <Dialog.Description className="py-4 text-base-content/60 text-sm">
+                Rename your task here. Click save when you're done.
+              </Dialog.Description>
+
+              <form
+                onSubmit={form.handleSubmit((values) => {
+                  mutate(
+                    { params: { taskId }, body: values },
+                    { onSuccess: () => onOpenChange(false) },
+                  );
+                })}
+              >
+                <TextInput control={form.control} name="name" label="Name" />
+                <div className="flex justify-end gap-2 pt-4">
+                  <button
+                    type="button"
+                    className="dsy-btn dsy-btn-ghost dsy-btn-sm"
+                    onClick={() => onOpenChange(false)}
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    className="dsy-btn dsy-btn-neutral dsy-btn-sm"
+                  >
+                    <SaveIcon className="h-4 w-4" />
+                    Save
+                  </button>
+                </div>
+              </form>
+            </div>
           </div>
-        </Dialog.Popup>
+        </Dialog.Content>
       </Dialog.Portal>
     </Dialog.Root>
   );

@@ -4,34 +4,55 @@ import { server } from "@/testing/mocks/server";
 import { render, screen } from "@/testing/utils";
 import { CreateTask } from "./create-task";
 
-describe("<CreateTask />", () => {
-  it("should  open modal", async () => {
-    const handlers = [
-      http.get("/metadata", () => {
-        return HttpResponse.json({ labels: [], priorities: [], statuses: [] });
-      }),
-      http.get("/projects", () => {
-        return HttpResponse.json([]);
-      }),
-    ];
+const metadata = { labels: ["Feature"], priorities: ["Medium"], statuses: [] };
+const projects = [{ id: "p1", name: "My Project" }];
 
-    server.use(...handlers);
+describe("<CreateTask />", () => {
+  it("shows empty state when there are no projects", async () => {
+    server.use(
+      http.get("/metadata", () => HttpResponse.json(metadata)),
+      http.get("/projects", () => HttpResponse.json([])),
+    );
 
     const { user } = await render(<CreateTask />, {
       path: "/(authenticated)/tasks/",
     });
 
-    const button = screen.getByRole("button", {
-      name: "Create Task",
+    await user.click(screen.getByRole("button", { name: "Create Task" }));
+
+    expect(
+      screen.getByRole("heading", { name: "Create Task", level: 2 }),
+    ).toBeInTheDocument();
+
+    expect(screen.getByRole("alert")).toHaveTextContent(
+      "You need a project before creating a task.",
+    );
+
+    expect(
+      screen.getByRole("link", { name: "Create a project" }),
+    ).toBeInTheDocument();
+
+    expect(screen.queryByRole("form")).not.toBeInTheDocument();
+  });
+
+  it("shows the form when projects exist", async () => {
+    server.use(
+      http.get("/metadata", () => HttpResponse.json(metadata)),
+      http.get("/projects", () => HttpResponse.json(projects)),
+    );
+
+    const { user } = await render(<CreateTask />, {
+      path: "/(authenticated)/tasks/",
     });
 
-    await user.click(button);
+    await user.click(screen.getByRole("button", { name: "Create Task" }));
 
-    const heading = screen.getByRole("heading", {
-      name: "Create Task",
-      level: 2,
-    });
+    expect(
+      screen.getByRole("heading", { name: "Create Task", level: 2 }),
+    ).toBeInTheDocument();
 
-    expect(heading).toBeInTheDocument();
+    expect(screen.getByLabelText("Name")).toBeInTheDocument();
+    expect(screen.getByLabelText("Project")).toBeInTheDocument();
+    expect(screen.queryByRole("alert")).not.toBeInTheDocument();
   });
 });

@@ -11,7 +11,10 @@ const tags = ["Project"];
 
 export const projectsRoutes = new Elysia({ prefix: "/projects" })
   .use(authPlugin)
-  .model({ Project: selectProjectSchema })
+  .model({
+    Project: selectProjectSchema,
+    Projects: t.Array(selectProjectSchema),
+  })
   .get(
     "",
     async ({ user }) => {
@@ -21,7 +24,7 @@ export const projectsRoutes = new Elysia({ prefix: "/projects" })
     },
     {
       auth: true,
-      response: t.Array(selectProjectSchema),
+      response: "Projects",
       detail: { tags, summary: "List Projects" },
     },
   )
@@ -34,7 +37,7 @@ export const projectsRoutes = new Elysia({ prefix: "/projects" })
         .returning();
 
       if (!project) {
-        throw InternalServerError;
+        throw new InternalServerError();
       }
 
       return project;

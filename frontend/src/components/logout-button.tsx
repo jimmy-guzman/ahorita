@@ -18,11 +18,11 @@ export const LogoutButton = () => {
   return (
     <button
       type="button"
-      className="dsy-btn dsy-btn-ghost dsy-btn-circle dsy-btn-xs lg:dsy-btn-sm"
+      className="dsy-btn dsy-btn-ghost dsy-btn-square dsy-btn-sm"
       onClick={handleLogout}
     >
       <span className="sr-only">Log Out</span>
-      <LogOutIcon />
+      <LogOutIcon className="h-4 w-4" />
     </button>
   );
 };

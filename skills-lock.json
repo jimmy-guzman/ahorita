@@ -13,6 +13,12 @@
       "skillPath": "security/SKILL.md",
       "computedHash": "5717187bba9c22030c7174c74012f01c359f21e2ce87e0eb80e24244d8b8c915"
     },
+    "daisyui": {
+      "source": "saadeghi/daisyui",
+      "sourceType": "github",
+      "skillPath": "skills/daisyui/SKILL.md",
+      "computedHash": "5f63c0f20f3e6cb7d804e168122c3b047cb65c9db6a31534661dafc9b9bd6764"
+    },
     "elysiajs": {
       "source": "elysiajs/skills",
       "sourceType": "github",

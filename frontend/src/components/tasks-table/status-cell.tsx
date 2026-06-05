@@ -6,14 +6,14 @@ import {
   XCircleIcon,
 } from "lucide-react";
 
-const ICON_CLASS = "inline-block h-4 w-4 stroke-current align-text-bottom";
+import { ICON_CLASS } from "@/utils/cell-classes";
 
 const cellsByStatus = {
-  "In Progress": <TimerIcon className={ICON_CLASS} />,
-  Todo: <CircleIcon className={ICON_CLASS} />,
-  Done: <CheckCircle2Icon className={ICON_CLASS} />,
-  Canceled: <XCircleIcon className={ICON_CLASS} />,
-  Backlog: <HelpCircleIcon className={ICON_CLASS} />,
+  "In Progress": <TimerIcon className={`${ICON_CLASS} text-warning`} />,
+  Todo: <CircleIcon className={`${ICON_CLASS} text-base-content/50`} />,
+  Done: <CheckCircle2Icon className={`${ICON_CLASS} text-success`} />,
+  Canceled: <XCircleIcon className={`${ICON_CLASS} text-base-content/25`} />,
+  Backlog: <HelpCircleIcon className={`${ICON_CLASS} text-base-content/30`} />,
 };
 
 export const TasksTableStatusCell = ({
@@ -22,9 +22,9 @@ export const TasksTableStatusCell = ({
   status: keyof typeof cellsByStatus;
 }) => {
   return (
-    <>
+    <span className="inline-flex items-center gap-1.5">
       {cellsByStatus[status]}
-      <span className="hidden sm:inline"> {status}</span>
-    </>
+      <span className="hidden text-sm sm:inline">{status}</span>
+    </span>
   );
 };
