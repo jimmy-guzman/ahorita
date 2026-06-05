@@ -17,7 +17,7 @@ interface TextFieldProps<T extends FieldValues> extends UseControllerProps<T> {
 }
 
 /**
- * A custom text input that is meant to be used alongside `react-hook-form`
+ * A custom password input that is meant to be used alongside `react-hook-form`
  * @example
  * <PasswordInput control={control} name='password' label="Password" />
  */
@@ -43,7 +43,7 @@ export const PasswordInput = <T extends FieldValues>({
   const [view, setView] = useState(false);
 
   return (
-    <fieldset className="dsy-fieldset">
+    <div className="flex flex-col gap-1">
       <label className="dsy-floating-label">
         <span>{label}</span>
         <input
@@ -65,7 +65,7 @@ export const PasswordInput = <T extends FieldValues>({
       {error?.message && (
         <span className="text-error text-sm">{error.message}</span>
       )}
-      <label className="dsy-label flex cursor-pointer justify-end gap-2">
+      <label className="flex cursor-pointer justify-end gap-2">
         <span>Show password</span>
         <input
           type="checkbox"
@@ -74,6 +74,6 @@ export const PasswordInput = <T extends FieldValues>({
           onChange={() => setView((prev) => !prev)}
         />
       </label>
-    </fieldset>
+    </div>
   );
 };

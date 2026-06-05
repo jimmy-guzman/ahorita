@@ -1,5 +1,3 @@
-import { toast } from "sonner";
-
 import { api } from "@/api/client";
 import { mutationOptions } from "@/api/mutation-options";
 import queryClient from "@/query-client";
@@ -19,11 +17,9 @@ export const deleteProjectOptions = mutationOptions({
   onMutate: async () => {
     await queryClient.cancelQueries(projectsQueryOptions);
   },
-  onSuccess: ({ name, id }) => {
+  onSuccess: ({ id }) => {
     queryClient.setQueryData(projectsQueryOptions.queryKey, (oldProjects) => {
       return oldProjects?.filter((oldProject) => oldProject.id !== id);
     });
-
-    toast.success(`Project ${name} has been deleted`);
   },
 });

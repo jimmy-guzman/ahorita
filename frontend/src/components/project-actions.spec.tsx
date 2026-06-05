@@ -28,8 +28,8 @@ describe("<ProjectActions />", () => {
       initialEntries: ["/(authenticated)/projects/1"],
     });
 
-    const buttons = screen.getAllByRole("button");
+    const checkboxes = screen.getAllByRole("checkbox");
 
-    expect(buttons).toHaveLength(2);
+    expect(checkboxes).toHaveLength(2);
   });
 });

@@ -2,6 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import { createFileRoute, getRouteApi, Link } from "@tanstack/react-router";
 
 import { PasswordInput } from "@/components/password-input";
+import { RouteErrorComponent } from "@/components/shared/route-error";
 import { TextInput } from "@/components/shared/text-input";
 import { type SignupFormValues, useSignupForm } from "@/hooks/forms/signup";
 import { authClient } from "@/lib/auth-client";
@@ -32,44 +33,38 @@ function SignUp() {
   });
 
   return (
-    <div className="dsy-hero min-h-screen bg-base-200">
-      <div className="dsy-hero-content flex-col lg:flex-row-reverse">
-        <img
-          alt="placeholder"
-          src="https://placehold.co/400"
-          className="max-w-sm rounded-lg shadow-2xl"
-        />
-        <div className="dsy-card w-full max-w-sm shrink-0 bg-base-100 shadow-2xl">
-          <form
-            className="dsy-card-body"
-            onSubmit={handleSubmit((values) => mutate(values))}
-          >
-            <fieldset className="dsy-fieldset">
-              <legend className="dsy-fieldset-legend">
-                Create your account
-              </legend>
-              <TextInput control={control} name="name" label="Name" />
-              <TextInput control={control} name="email" label="Email" />
-              <PasswordInput
-                control={control}
-                name="password"
-                label="Password"
-              />
-              <button type="submit" className="dsy-btn dsy-btn-accent mt-6">
-                Sign Up
-              </button>
-            </fieldset>
-            <div className="flex justify-end">
-              <span>
-                Already a user?{" "}
-                <Link to="/login" className="dsy-link">
-                  login
-                </Link>
-                .
-              </span>
-            </div>
-          </form>
+    <div className="flex min-h-screen items-center justify-center bg-base-200">
+      <div className="w-full max-w-sm rounded-box border border-base-300 bg-base-100 p-8">
+        <div className="mb-6">
+          <Link to="/" className="font-bold text-base-content text-xl">
+            ahorita
+          </Link>
+          <p className="mt-1 text-base-content/50 text-sm">
+            Create your account
+          </p>
         </div>
+
+        <form
+          className="flex flex-col gap-4"
+          onSubmit={handleSubmit((values) => mutate(values))}
+        >
+          <fieldset className="dsy-fieldset gap-3">
+            <TextInput control={control} name="name" label="Name" />
+            <TextInput control={control} name="email" label="Email" />
+            <PasswordInput control={control} name="password" label="Password" />
+          </fieldset>
+
+          <button type="submit" className="dsy-btn dsy-btn-primary w-full">
+            Sign up
+          </button>
+        </form>
+
+        <p className="mt-4 text-center text-base-content/50 text-sm">
+          Already have an account?{" "}
+          <Link to="/login" className="dsy-link dsy-link-primary">
+            Sign in
+          </Link>
+        </p>
       </div>
     </div>
   );
@@ -77,4 +72,5 @@ function SignUp() {
 
 export const Route = createFileRoute("/(auth)/signup")({
   component: SignUp,
+  errorComponent: RouteErrorComponent,
 });

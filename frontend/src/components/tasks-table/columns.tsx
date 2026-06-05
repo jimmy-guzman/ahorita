@@ -15,7 +15,7 @@ export const columns = [
     header: "Name",
     cell: (info) => (
       <Link
-        className="dsy-link dsy-link-primary"
+        className="font-medium text-sm hover:underline"
         to="/tasks/$taskId"
         params={{
           taskId: info.row.original.id,
@@ -28,7 +28,7 @@ export const columns = [
   columnHelper.accessor("label", {
     header: "Label",
     cell: (info) => (
-      <span className="dsy-badge dsy-badge-neutral">{info.getValue()}</span>
+      <span className="text-base-content/50 text-xs">{info.getValue()}</span>
     ),
   }),
   columnHelper.accessor("status", {
@@ -43,7 +43,7 @@ export const columns = [
     header: "Project",
     cell: (info) => (
       <Link
-        className="dsy-link"
+        className="text-base-content/60 text-sm hover:underline"
         to="/projects/$projectId"
         params={{
           projectId: info.row.original.project.id,

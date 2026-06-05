@@ -1,11 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-const themes = {
-  dark: "coffee",
-  light: "lemonade",
-} as const;
-
 interface ThemeState {
   theme: "dark" | "light";
   toggleTheme: () => void;
@@ -31,11 +26,11 @@ const themeStore = create<ThemeState>()(
 if (typeof window !== "undefined") {
   document.documentElement.setAttribute(
     "data-theme",
-    themes[themeStore.getState().theme],
+    themeStore.getState().theme,
   );
 
   themeStore.subscribe((state) => {
-    document.documentElement.setAttribute("data-theme", themes[state.theme]);
+    document.documentElement.setAttribute("data-theme", state.theme);
   });
 }
 

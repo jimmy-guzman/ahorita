@@ -1,57 +1,60 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { Link } from "@tanstack/react-router";
 import { LayoutListIcon, ListChecksIcon, ListPlusIcon } from "lucide-react";
+
 import { queryTasksOptions } from "@/api/query-tasks";
 
 export const TasksStats = () => {
   const { data } = useSuspenseQuery(queryTasksOptions());
 
+  const done = data.filter((t) => t.status === "Done").length;
+  const inProgress = data.filter((t) => t.status === "In Progress").length;
+  const total = data.length;
+
   return (
-    <div className="dsy-stats dsy-stats-vertical sm:dsy-stats-horizontal bg-base-200 shadow-sm">
-      <div className="dsy-stat">
-        <div className="dsy-stat-figure">
-          <Link
-            to="/tasks"
-            className="dsy-btn dsy-btn-neutral dsy-btn-circle"
-            search={{ status: "Done" }}
-          >
-            <span className="sr-only">View Completed Tasks</span>
-            <ListChecksIcon />
-          </Link>
+    <div className="flex divide-x divide-base-300 overflow-hidden rounded-box border border-base-300">
+      <Link
+        to="/tasks"
+        search={{ status: "Done" }}
+        className="flex flex-1 flex-col gap-1 px-5 py-4 transition-colors hover:bg-base-200"
+      >
+        <div className="flex items-center gap-2 text-base-content/50">
+          <ListChecksIcon className="h-4 w-4" />
+          <span className="font-medium text-xs uppercase tracking-wider">
+            Completed
+          </span>
         </div>
-        <div className="dsy-stat-title">Tasks Completed</div>
-        <div className="dsy-stat-value">
-          {data.filter((task) => task.status === "Done").length}
-        </div>
-      </div>
+        <span className="font-semibold text-3xl tabular-nums">{done}</span>
+      </Link>
 
-      <div className="dsy-stat">
-        <div className="dsy-stat-figure">
-          <Link
-            to="/tasks"
-            className="dsy-btn dsy-btn-neutral dsy-btn-circle"
-            search={{ status: "In Progress" }}
-          >
-            <span className="sr-only">View In Progress Tasks</span>
-            <LayoutListIcon />
-          </Link>
+      <Link
+        to="/tasks"
+        search={{ status: "In Progress" }}
+        className="flex flex-1 flex-col gap-1 px-5 py-4 transition-colors hover:bg-base-200"
+      >
+        <div className="flex items-center gap-2 text-base-content/50">
+          <LayoutListIcon className="h-4 w-4" />
+          <span className="font-medium text-xs uppercase tracking-wider">
+            In Progress
+          </span>
         </div>
-        <div className="dsy-stat-title">In Progress Tasks</div>
-        <div className="dsy-stat-value">
-          {data.filter((task) => task.status === "In Progress").length}
-        </div>
-      </div>
+        <span className="font-semibold text-3xl tabular-nums">
+          {inProgress}
+        </span>
+      </Link>
 
-      <div className="dsy-stat">
-        <div className="dsy-stat-figure">
-          <Link to="/tasks" className="dsy-btn dsy-btn-neutral dsy-btn-circle">
-            <span className="sr-only">View All Tasks</span>
-            <ListPlusIcon />
-          </Link>
+      <Link
+        to="/tasks"
+        className="flex flex-1 flex-col gap-1 px-5 py-4 transition-colors hover:bg-base-200"
+      >
+        <div className="flex items-center gap-2 text-base-content/50">
+          <ListPlusIcon className="h-4 w-4" />
+          <span className="font-medium text-xs uppercase tracking-wider">
+            Total
+          </span>
         </div>
-        <div className="dsy-stat-title">Total Tasks</div>
-        <div className="dsy-stat-value">{data.length}</div>
-      </div>
+        <span className="font-semibold text-3xl tabular-nums">{total}</span>
+      </Link>
     </div>
   );
 };

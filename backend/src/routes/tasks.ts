@@ -28,7 +28,7 @@ export const tasksRoutes = new Elysia({ prefix: "/tasks" })
         .returning();
 
       if (!task) {
-        throw InternalServerError;
+        throw new InternalServerError();
       }
 
       return task;

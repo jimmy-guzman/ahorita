@@ -14,26 +14,39 @@ export const AddTaskToProject = ({ projectId }: { projectId: string }) => {
   const { handleSubmit, control, reset } = useAddTaskToProjectForm();
   const { mutate, isPending } = useMutation(createTask);
   const [open, setOpen] = useState(false);
+  const [mutationError, setMutationError] = useState<string | null>(null);
+
+  const handleOpenChange = (nextOpen: boolean) => {
+    setOpen(nextOpen);
+    if (!nextOpen) {
+      setMutationError(null);
+    }
+  };
 
   const addToTasks = handleSubmit((body) => {
+    setMutationError(null);
     mutate(
       { ...body, projectId },
       {
         onSuccess() {
           reset();
-
           setOpen(false);
+        },
+        onError(err) {
+          setMutationError(
+            "message" in err ? err.message : "Failed to add task",
+          );
         },
       },
     );
   });
 
   return (
-    <Dialog.Root open={open} onOpenChange={setOpen}>
+    <Dialog.Root open={open} onOpenChange={handleOpenChange}>
       <Dialog.Trigger asChild>
         <button type="button" className="dsy-btn dsy-btn-primary dsy-btn-sm">
           <span className="hidden sm:inline">Add Task</span>
-          <ListPlusIcon />
+          <ListPlusIcon className="h-4 w-4" />
         </button>
       </Dialog.Trigger>
       <Dialog.Portal>
@@ -44,16 +57,16 @@ export const AddTaskToProject = ({ projectId }: { projectId: string }) => {
               <Dialog.Close asChild>
                 <button
                   type="button"
-                  className="dsy-btn dsy-btn-sm dsy-btn-circle dsy-btn-ghost absolute top-2 right-2"
+                  className="dsy-btn dsy-btn-ghost dsy-btn-circle dsy-btn-sm absolute top-2 right-2"
                   aria-label="Close"
                 >
-                  <XIcon />
+                  <XIcon className="h-4 w-4" />
                 </button>
               </Dialog.Close>
               <Dialog.Title className="font-bold text-lg">
                 Add Task
               </Dialog.Title>
-              <Dialog.Description className="py-6">
+              <Dialog.Description className="py-4 text-base-content/60 text-sm">
                 This will add your task to your project.
               </Dialog.Description>
               <form className="flex flex-col gap-4" onSubmit={addToTasks}>
@@ -86,22 +99,28 @@ export const AddTaskToProject = ({ projectId }: { projectId: string }) => {
                   </div>
                   <TextInput control={control} name="name" label="Name" />
                 </div>
+                {mutationError && (
+                  <div
+                    role="alert"
+                    className="dsy-alert dsy-alert-error dsy-alert-soft"
+                  >
+                    <span>{mutationError}</span>
+                  </div>
+                )}
                 <div className="flex justify-end gap-2">
                   <button
                     type="button"
-                    className="dsy-btn dsy-btn-neutral"
-                    onClick={() => {
-                      setOpen(false);
-                    }}
+                    className="dsy-btn dsy-btn-ghost dsy-btn-sm"
+                    onClick={() => handleOpenChange(false)}
                   >
                     Cancel
                   </button>
                   <button
                     type="submit"
-                    className="dsy-btn dsy-btn-primary"
+                    className="dsy-btn dsy-btn-primary dsy-btn-sm"
                     disabled={isPending}
                   >
-                    New Task <ListPlusIcon />
+                    Add Task <ListPlusIcon className="h-4 w-4" />
                   </button>
                 </div>
               </form>

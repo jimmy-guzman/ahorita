@@ -33,7 +33,7 @@ export const EditProject = ({
           <span className={cn(hideText ? "sr-only" : "hidden sm:inline")}>
             Edit{" "}
           </span>
-          <FolderPenIcon />
+          <FolderPenIcon className="h-4 w-4" />
         </button>
       </Dialog.Trigger>
       <Dialog.Portal>
@@ -44,16 +44,16 @@ export const EditProject = ({
               <Dialog.Close asChild>
                 <button
                   type="button"
-                  className="dsy-btn dsy-btn-sm dsy-btn-circle dsy-btn-ghost absolute top-2 right-2"
+                  className="dsy-btn dsy-btn-ghost dsy-btn-circle dsy-btn-sm absolute top-2 right-2"
                   aria-label="Close"
                 >
-                  <XIcon />
+                  <XIcon className="h-4 w-4" />
                 </button>
               </Dialog.Close>
               <Dialog.Title className="font-bold text-lg">
                 Edit Project
               </Dialog.Title>
-              <Dialog.Description className="py-4">
+              <Dialog.Description className="py-4 text-base-content/60 text-sm">
                 Make changes to your project here. Click save when you're done.
               </Dialog.Description>
               <form
@@ -83,7 +83,7 @@ export const EditProject = ({
                       Project Options
                     </legend>
                     <div className="flex gap-4">
-                      <label className="dsy-label">
+                      <label className="flex cursor-pointer items-center gap-2">
                         <input
                           type="checkbox"
                           className="dsy-toggle"
@@ -91,7 +91,7 @@ export const EditProject = ({
                         />
                         Favorite
                       </label>
-                      <label className="dsy-label">
+                      <label className="flex cursor-pointer items-center gap-2">
                         <input
                           type="checkbox"
                           className="dsy-toggle"
@@ -102,9 +102,19 @@ export const EditProject = ({
                     </div>
                   </fieldset>
                 </div>
-                <div className="dsy-modal-action">
-                  <button type="submit" className="dsy-btn dsy-btn-neutral">
-                    Save <SaveIcon />
+                <div className="flex justify-end gap-2">
+                  <button
+                    type="button"
+                    className="dsy-btn dsy-btn-ghost dsy-btn-sm"
+                    onClick={() => setOpen(false)}
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    className="dsy-btn dsy-btn-neutral dsy-btn-sm"
+                  >
+                    Save <SaveIcon className="h-4 w-4" />
                   </button>
                 </div>
               </form>

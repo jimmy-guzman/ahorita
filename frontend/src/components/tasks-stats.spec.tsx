@@ -1,4 +1,4 @@
-import { http, HttpResponse } from "msw";
+import { HttpResponse, http } from "msw";
 
 import { server } from "@/testing/mocks/server";
 import { render, screen } from "@/testing/utils";
@@ -32,11 +32,11 @@ describe("<TasksStats />", () => {
 
     await render(<TasksStats />);
 
-    expect(screen.getByText("Tasks Completed")).toBeInTheDocument();
+    expect(screen.getByText("Completed")).toBeInTheDocument();
 
-    expect(screen.getByText("In Progress Tasks")).toBeInTheDocument();
+    expect(screen.getByText("In Progress")).toBeInTheDocument();
 
-    expect(screen.getByText("Total Tasks")).toBeInTheDocument();
+    expect(screen.getByText("Total")).toBeInTheDocument();
   });
 
   it("should render links", async () => {
@@ -67,15 +67,13 @@ describe("<TasksStats />", () => {
     await render(<TasksStats />);
 
     expect(
-      screen.getByRole("link", { name: "View Completed Tasks" }),
+      screen.getByRole("link", { name: /Completed/i }),
     ).toBeInTheDocument();
 
     expect(
-      screen.getByRole("link", { name: "View In Progress Tasks" }),
+      screen.getByRole("link", { name: /In Progress/i }),
     ).toBeInTheDocument();
 
-    expect(
-      screen.getByRole("link", { name: "View All Tasks" }),
-    ).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /Total/i })).toBeInTheDocument();
   });
 });

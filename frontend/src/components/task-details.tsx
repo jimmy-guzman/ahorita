@@ -1,8 +1,11 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { getRouteApi, Link } from "@tanstack/react-router";
 import { formatDistanceToNow } from "date-fns";
+import { CalendarIcon, ClockIcon, FolderIcon, TagIcon } from "lucide-react";
 
 import { queryTaskOptions } from "@/api/query-task";
+import { PriorityCell } from "./tasks-table/priority-cell";
+import { TasksTableStatusCell } from "./tasks-table/status-cell";
 
 const routeApi = getRouteApi("/(authenticated)/tasks/$taskId");
 
@@ -11,38 +14,38 @@ export function TaskDetails() {
   const { data: task } = useSuspenseQuery(queryTaskOptions(params));
 
   return (
-    <section className="flex w-full flex-col gap-4">
-      <div className="dsy-card bg-base-200">
-        <div className="dsy-card-body">
-          <h1 className="dsy-card-title flex justify-between text-2xl sm:text-3xl">
-            {task.name}
-          </h1>
-          <p>
-            This{" "}
-            <span className="dsy-badge dsy-badge-neutral">{task.label}</span>{" "}
-            currently has as status of{" "}
-            <span className="dsy-badge dsy-badge-neutral">{task.status}</span>{" "}
-            with a priority of{" "}
-            <span className="dsy-badge dsy-badge-neutral">{task.priority}</span>
-            . It's part of the{" "}
-            <Link
-              to="/projects/$projectId"
-              params={{ projectId: task.project.id }}
-              className="dsy-link dsy-link-secondary"
-            >
-              {task.project.name}
-            </Link>{" "}
-            project. It was{" "}
-            <strong>created {formatDistanceToNow(task.createdAt)} ago</strong>{" "}
-            and{" "}
-            <strong>
-              last updated {formatDistanceToNow(task.updatedAt)} ago
-            </strong>
-            .
-          </p>
-          <div className="dsy-card-actions justify-end" />
-        </div>
+    <div className="flex flex-col gap-4">
+      <h1 className="font-semibold text-base-content text-xl">{task.name}</h1>
+
+      <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm">
+        <span className="flex items-center gap-1.5 text-base-content/60">
+          <TagIcon className="h-4 w-4 shrink-0" />
+          <span>{task.label}</span>
+        </span>
+
+        <TasksTableStatusCell status={task.status} />
+
+        <PriorityCell priority={task.priority} />
+
+        <Link
+          to="/projects/$projectId"
+          params={{ projectId: task.project.id }}
+          className="flex items-center gap-1.5 text-base-content/60 hover:text-base-content hover:underline"
+        >
+          <FolderIcon className="h-4 w-4 shrink-0" />
+          <span>{task.project.name}</span>
+        </Link>
+
+        <span className="flex items-center gap-1.5 text-base-content/40">
+          <CalendarIcon className="h-4 w-4 shrink-0" />
+          <span>Created {formatDistanceToNow(task.createdAt)} ago</span>
+        </span>
+
+        <span className="flex items-center gap-1.5 text-base-content/40">
+          <ClockIcon className="h-4 w-4 shrink-0" />
+          <span>Updated {formatDistanceToNow(task.updatedAt)} ago</span>
+        </span>
       </div>
-    </section>
+    </div>
   );
 }

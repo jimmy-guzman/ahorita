@@ -14,7 +14,7 @@ interface DeleteProjectProps {
 }
 
 export const DeleteProject = ({
-  className = "dsy-btn dsy-btn-neutral dsy-btn-sm",
+  className = "dsy-btn dsy-btn-error dsy-btn-sm",
   projectId,
   hideText = false,
 }: DeleteProjectProps) => {
@@ -33,7 +33,7 @@ export const DeleteProject = ({
           <span className={cn(hideText ? "sr-only" : "hidden sm:inline")}>
             Delete{" "}
           </span>
-          <FolderMinusIcon />
+          <FolderMinusIcon className="h-4 w-4" />
         </button>
       </AlertDialog.Trigger>
       <AlertDialog.Portal>
@@ -57,19 +57,22 @@ export const DeleteProject = ({
                 <AlertDialog.Title className="font-bold text-lg">
                   Are You Sure?
                 </AlertDialog.Title>
-                <AlertDialog.Description className="py-4">
+                <AlertDialog.Description className="py-4 text-base-content/60 text-sm">
                   This action cannot be undone. This will permanently delete
                   your project.
                 </AlertDialog.Description>
-                <div className="dsy-modal-action">
+                <div className="flex justify-end gap-2">
                   <button
                     type="button"
-                    className="dsy-btn dsy-btn-neutral"
+                    className="dsy-btn dsy-btn-ghost dsy-btn-sm"
                     onClick={() => setOpen(false)}
                   >
                     Cancel
                   </button>
-                  <button type="submit" className="dsy-btn dsy-btn-error">
+                  <button
+                    type="submit"
+                    className="dsy-btn dsy-btn-error dsy-btn-sm"
+                  >
                     Yes, delete project
                   </button>
                 </div>

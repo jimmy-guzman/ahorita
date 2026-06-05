@@ -57,7 +57,11 @@ export function Table<TData, TColumns extends ColumnDef<TData, any>[]>({
     defaultColumn: {
       cell: (info) => {
         if (typeof info.getValue() === "boolean") {
-          return info.getValue() ? <CheckIcon /> : <XIcon />;
+          return info.getValue() ? (
+            <CheckIcon className="h-4 w-4" />
+          ) : (
+            <XIcon className="h-4 w-4" />
+          );
         }
 
         return info.getValue();
@@ -69,7 +73,7 @@ export function Table<TData, TColumns extends ColumnDef<TData, any>[]>({
     <div className="flex flex-col gap-4">
       {enableGlobalFiltering && (
         <div className="flex gap-2">
-          <label className="dsy-input dsy-input-sm flex items-center gap-2 sm:w-1/2 lg:w-1/2 xl:w-1/4">
+          <label className="dsy-input dsy-input-sm flex items-center gap-2 sm:w-1/2 xl:w-1/4">
             <input
               type="text"
               className="grow"
@@ -77,20 +81,20 @@ export function Table<TData, TColumns extends ColumnDef<TData, any>[]>({
               value={globalFilter}
               onChange={(event) => setGlobalFilter(String(event?.target.value))}
             />
-            <SearchIcon className="h-4 w-4 opacity-70" />
+            <SearchIcon className="h-4 w-4 opacity-50" />
           </label>
           {globalFilter && (
             <button
               type="button"
-              className="dsy-btn dsy-btn-neutral dsy-btn-sm"
+              className="dsy-btn dsy-btn-ghost dsy-btn-sm"
               onClick={() => setGlobalFilter("")}
             >
-              Reset <XIcon />
+              Reset <XIcon className="h-4 w-4" />
             </button>
           )}
         </div>
       )}
-      <div className="h-svh overflow-x-auto">
+      <div className="overflow-x-auto">
         <table className="dsy-table dsy-table-pin-rows md:dsy-table-md dsy-table-xs">
           <thead>
             {table.getHeaderGroups().map((headerGroup) => (
@@ -99,7 +103,10 @@ export function Table<TData, TColumns extends ColumnDef<TData, any>[]>({
                   const sort = header.column.getIsSorted();
 
                   return (
-                    <th key={header.id} className="uppercase">
+                    <th
+                      key={header.id}
+                      className="text-base-content/50 text-xs uppercase tracking-wider"
+                    >
                       {header.isPlaceholder ? null : header.column.getCanSort() ? (
                         <button
                           type="button"
@@ -110,11 +117,10 @@ export function Table<TData, TColumns extends ColumnDef<TData, any>[]>({
                             header.column.columnDef.header,
                             header.getContext(),
                           )}
-
                           {sort === false ? null : sort === "asc" ? (
-                            <ArrowUpWideNarrowIcon className="inline h-4 w-4" />
+                            <ArrowUpWideNarrowIcon className="ml-1 inline h-3.5 w-3.5" />
                           ) : (
-                            <ArrowDownWideNarrowIcon className="inline h-4 w-4" />
+                            <ArrowDownWideNarrowIcon className="ml-1 inline h-3.5 w-3.5" />
                           )}
                         </button>
                       ) : (
@@ -129,16 +135,32 @@ export function Table<TData, TColumns extends ColumnDef<TData, any>[]>({
               </tr>
             ))}
           </thead>
-          <tbody>
-            {table.getRowModel().rows.map((row) => (
-              <tr key={row.id}>
-                {row.getVisibleCells().map((cell) => (
-                  <td key={cell.id}>
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </td>
-                ))}
+          <tbody className="divide-y divide-base-300">
+            {table.getRowModel().rows.length === 0 ? (
+              <tr>
+                <td colSpan={table.getVisibleLeafColumns().length}>
+                  <div role="alert" className="dsy-alert dsy-alert-soft">
+                    <span>No results.</span>
+                  </div>
+                </td>
               </tr>
-            ))}
+            ) : (
+              table.getRowModel().rows.map((row) => (
+                <tr
+                  key={row.id}
+                  className="transition-colors hover:bg-base-200"
+                >
+                  {row.getVisibleCells().map((cell) => (
+                    <td key={cell.id}>
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext(),
+                      )}
+                    </td>
+                  ))}
+                </tr>
+              ))
+            )}
           </tbody>
         </table>
       </div>
