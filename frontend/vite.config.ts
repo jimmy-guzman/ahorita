@@ -1,15 +1,16 @@
 import tailwindcss from "@tailwindcss/vite";
 import { tanstackRouter } from "@tanstack/router-vite-plugin";
-import react from "@vitejs/plugin-react-swc";
+import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
-import tsconfigPaths from "vite-tsconfig-paths";
 
 import { configDefaults } from "vitest/config";
 
 export default defineConfig(() => ({
+  resolve: {
+    tsconfigPaths: true,
+  },
   plugins: [
     tailwindcss(),
-    tsconfigPaths(),
     tanstackRouter({
       generatedRouteTree: "./src/route-tree.gen.ts",
       semicolons: true,
