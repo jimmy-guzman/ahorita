@@ -1,18 +1,21 @@
-import { CheckCircle2Icon, CircleIcon } from "lucide-react";
+import { CheckCircle2Icon, TimerIcon } from "lucide-react";
 
 import { ICON_CLASS } from "@/utils/cell-classes";
 
-export const ProjectStatusCell = ({ isDone }: { isDone: boolean }) => {
+const cellsByStatus = {
+  "In Progress": <TimerIcon className={`${ICON_CLASS} text-warning`} />,
+  Done: <CheckCircle2Icon className={`${ICON_CLASS} text-success`} />,
+};
+
+export const ProjectStatusCell = ({
+  status,
+}: {
+  status: keyof typeof cellsByStatus;
+}) => {
   return (
     <span className="inline-flex items-center gap-1.5">
-      {isDone ? (
-        <CheckCircle2Icon className={`${ICON_CLASS} text-success`} />
-      ) : (
-        <CircleIcon className={`${ICON_CLASS} text-base-content/50`} />
-      )}
-      <span className="hidden text-sm sm:inline">
-        {isDone ? "Done" : "Active"}
-      </span>
+      {cellsByStatus[status]}
+      <span className="hidden text-sm sm:inline">{status}</span>
     </span>
   );
 };

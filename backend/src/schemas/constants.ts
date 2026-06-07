@@ -6,6 +6,11 @@ export const statuses = [
   "Canceled" as const,
 ] satisfies [string, ...string[]];
 
+export const projectStatuses = [
+  "In Progress" as const,
+  "Done" as const,
+] satisfies [string, ...string[]];
+
 export const priorities = [
   "Low" as const,
   "Medium" as const,

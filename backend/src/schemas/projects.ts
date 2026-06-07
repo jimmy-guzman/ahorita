@@ -2,7 +2,7 @@ import { relations } from "drizzle-orm";
 import { sqliteTable } from "drizzle-orm/sqlite-core";
 
 import { nanoid, now } from "../utils";
-import { labels, priorities, statuses } from "./constants";
+import { labels, priorities, projectStatuses, statuses } from "./constants";
 import { users } from "./users";
 
 export const projects = sqliteTable("project", (t) => ({
@@ -10,7 +10,7 @@ export const projects = sqliteTable("project", (t) => ({
   name: t.text().unique().notNull(),
   description: t.text().notNull(),
   isFavorite: t.integer({ mode: "boolean" }).default(false).notNull(),
-  isDone: t.integer({ mode: "boolean" }).default(false).notNull(),
+  status: t.text({ enum: projectStatuses }).default("In Progress").notNull(),
   createdAt: t.text().$default(now).notNull(),
   updatedAt: t.text().$default(now).$onUpdate(now).notNull(),
   userId: t

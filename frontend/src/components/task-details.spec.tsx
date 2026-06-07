@@ -10,7 +10,7 @@ const mockProject = {
   name: "Revamp Testing Suite",
   description: "",
   isFavorite: false,
-  isDone: false,
+  status: "In Progress",
   createdAt: "2024-08-25T16:54:05.991Z",
   updatedAt: "2024-08-25T16:54:05.991Z",
 };

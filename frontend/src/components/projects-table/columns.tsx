@@ -43,9 +43,9 @@ export const columns = [
       );
     },
   }),
-  columnHelper.accessor("isDone", {
+  columnHelper.accessor("status", {
     header: "Status",
-    cell: (info) => <ProjectStatusCell isDone={info.getValue()} />,
+    cell: (info) => <ProjectStatusCell status={info.getValue()} />,
   }),
   columnHelper.accessor(
     (row) =>

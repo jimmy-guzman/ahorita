@@ -1,8 +1,9 @@
 import { useMutation, useSuspenseQuery } from "@tanstack/react-query";
 import { getRouteApi } from "@tanstack/react-router";
-import { FolderCheckIcon, StarIcon } from "lucide-react";
+import { StarIcon } from "lucide-react";
 
 import { editProjectOptions } from "@/api/edit-project";
+import { queryMetadataOptions } from "@/api/query-metadata";
 import { projectQueryOptions } from "@/api/query-project";
 
 const routeApi = getRouteApi("/(authenticated)/projects/$projectId");
@@ -10,6 +11,7 @@ const routeApi = getRouteApi("/(authenticated)/projects/$projectId");
 export const ProjectActions = () => {
   const { projectId } = routeApi.useParams();
   const { data: project } = useSuspenseQuery(projectQueryOptions(projectId));
+  const { data: metadata } = useSuspenseQuery(queryMetadataOptions());
   const { mutate: editProject } = useMutation(editProjectOptions);
 
   return (
@@ -31,19 +33,23 @@ export const ProjectActions = () => {
       </label>
 
       <label className="flex cursor-pointer items-center gap-1.5 text-sm">
-        <input
-          type="checkbox"
-          className="dsy-toggle dsy-toggle-sm dsy-toggle-success"
-          checked={project.isDone}
+        <span className="sr-only">Status</span>
+        <select
+          className="dsy-select dsy-select-sm"
+          value={project.status}
           onChange={(e) =>
             editProject({
               params: { projectId },
-              body: { isDone: e.target.checked },
+              body: { status: e.target.value as typeof project.status },
             })
           }
-        />
-        <FolderCheckIcon className="h-3.5 w-3.5" />
-        <span className="sr-only">Done</span>
+        >
+          {metadata.projectStatuses.map((status) => (
+            <option key={status} value={status}>
+              {status}
+            </option>
+          ))}
+        </select>
       </label>
     </div>
   );
