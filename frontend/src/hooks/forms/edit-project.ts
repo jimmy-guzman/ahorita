@@ -5,6 +5,7 @@ import {
   type InferOutput,
   nonEmpty,
   object,
+  picklist,
   pipe,
   string,
 } from "valibot";
@@ -13,7 +14,7 @@ const schema = object({
   name: pipe(string(), nonEmpty("Name is required.")),
   description: pipe(string(), nonEmpty("Description is required.")),
   isFavorite: boolean(),
-  isDone: boolean(),
+  status: picklist(["In Progress", "Done"]),
 });
 
 export const useEditProjectForm = (values: InferOutput<typeof schema>) => {

@@ -11,7 +11,7 @@ const baseProject = {
   name: "Revamp Testing Suite",
   description: "",
   isFavorite: false,
-  isDone: false,
+  status: "In Progress" as const,
   createdAt: "2024-08-25T16:54:05.991Z",
   updatedAt: "2024-08-25T16:54:05.991Z",
   userId: "1",
@@ -27,6 +27,14 @@ describe("columns", () => {
       http.get("/projects/:projectId", () => {
         return HttpResponse.json(baseProject);
       }),
+      http.get("/metadata", () => {
+        return HttpResponse.json({
+          labels: [],
+          priorities: [],
+          statuses: [],
+          projectStatuses: ["In Progress", "Done"],
+        });
+      }),
     );
 
     await render(
@@ -36,7 +44,7 @@ describe("columns", () => {
             ...baseProject,
             description: "has description",
             isFavorite: true,
-            isDone: true,
+            status: "Done" as const,
             taskSummary: { total: 4, completed: 4 },
           },
           {

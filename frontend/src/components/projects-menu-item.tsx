@@ -4,13 +4,13 @@ import { FolderCheckIcon, FolderIcon } from "lucide-react";
 interface ProjectsMenuItemProps {
   projectId: string;
   name: string;
-  isDone: boolean;
+  status: "In Progress" | "Done";
 }
 
 export const ProjectsMenuItem = ({
   projectId,
   name,
-  isDone,
+  status,
 }: ProjectsMenuItemProps) => {
   return (
     <Link
@@ -18,7 +18,7 @@ export const ProjectsMenuItem = ({
       params={{ projectId }}
       activeProps={{ className: "dsy-active" }}
     >
-      {isDone ? (
+      {status === "Done" ? (
         <FolderCheckIcon className="h-4 w-4" aria-label="Project Done:" />
       ) : (
         <FolderIcon className="h-4 w-4" aria-label="Project Not Done:" />

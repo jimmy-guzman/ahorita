@@ -10,6 +10,14 @@ describe("<EditProject />", () => {
       http.get("/projects/1", () => {
         return HttpResponse.json({});
       }),
+      http.get("/metadata", () => {
+        return HttpResponse.json({
+          labels: [],
+          priorities: [],
+          statuses: [],
+          projectStatuses: ["In Progress", "Done"],
+        });
+      }),
     ];
 
     server.use(...handlers);
@@ -27,6 +35,14 @@ describe("<EditProject />", () => {
     const handlers = [
       http.get("/projects/1", () => {
         return HttpResponse.json({});
+      }),
+      http.get("/metadata", () => {
+        return HttpResponse.json({
+          labels: [],
+          priorities: [],
+          statuses: [],
+          projectStatuses: ["In Progress", "Done"],
+        });
       }),
     ];
 
@@ -48,6 +64,14 @@ describe("<EditProject />", () => {
     const handlers = [
       http.get("/projects/1", () => {
         return HttpResponse.json({});
+      }),
+      http.get("/metadata", () => {
+        return HttpResponse.json({
+          labels: [],
+          priorities: [],
+          statuses: [],
+          projectStatuses: ["In Progress", "Done"],
+        });
       }),
     ];
 

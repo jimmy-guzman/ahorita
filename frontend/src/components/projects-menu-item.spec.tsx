@@ -4,7 +4,11 @@ import { ProjectsMenuItem } from "./projects-menu-item";
 describe("<ProjectsMenuItem />", () => {
   it("should render", async () => {
     await render(
-      <ProjectsMenuItem projectId="1" name="Revamp Testing Suite" isDone />,
+      <ProjectsMenuItem
+        projectId="1"
+        name="Revamp Testing Suite"
+        status="Done"
+      />,
     );
 
     const link = screen.getByRole("link", {
@@ -19,7 +23,7 @@ describe("<ProjectsMenuItem />", () => {
       <ProjectsMenuItem
         projectId="1"
         name="Revamp Testing Suite"
-        isDone={false}
+        status="In Progress"
       />,
     );
 

@@ -4,7 +4,9 @@ import { Dialog } from "radix-ui";
 import { useState } from "react";
 
 import { editProjectOptions } from "@/api/edit-project";
+import { queryMetadataOptions } from "@/api/query-metadata";
 import { projectQueryOptions } from "@/api/query-project";
+import { Select } from "@/components/shared/select";
 import { TextInput } from "@/components/shared/text-input";
 import { useEditProjectForm } from "@/hooks/forms/edit-project";
 import { cn } from "@/utils/cn";
@@ -27,6 +29,7 @@ export const EditProject = ({
   withTrigger = true,
 }: EditProjectProps) => {
   const { data: project } = useSuspenseQuery(projectQueryOptions(projectId));
+  const { data: metadata } = useSuspenseQuery(queryMetadataOptions());
   const { mutate } = useMutation(editProjectOptions);
   const [internalOpen, setInternalOpen] = useState(false);
 
@@ -76,42 +79,32 @@ export const EditProject = ({
                 })}
               >
                 <div className="flex flex-col gap-4">
-                  <div className="flex flex-col gap-4">
-                    <TextInput
-                      control={form.control}
-                      name="name"
-                      label="Name"
-                      className="w-full"
+                  <TextInput
+                    control={form.control}
+                    name="name"
+                    label="Name"
+                    className="w-full"
+                  />
+                  <TextInput
+                    control={form.control}
+                    name="description"
+                    label="Description"
+                  />
+                  <Select control={form.control} name="status" label="Status">
+                    {metadata.projectStatuses.map((status) => (
+                      <option key={status} value={status}>
+                        {status}
+                      </option>
+                    ))}
+                  </Select>
+                  <label className="flex cursor-pointer items-center gap-2">
+                    <input
+                      type="checkbox"
+                      className="dsy-toggle dsy-toggle-warning"
+                      {...form.register("isFavorite")}
                     />
-                    <TextInput
-                      control={form.control}
-                      name="description"
-                      label="Description"
-                    />
-                  </div>
-                  <fieldset className="dsy-fieldset">
-                    <legend className="dsy-fieldset-legend">
-                      Project Options
-                    </legend>
-                    <div className="flex gap-4">
-                      <label className="flex cursor-pointer items-center gap-2">
-                        <input
-                          type="checkbox"
-                          className="dsy-toggle"
-                          {...form.register("isFavorite")}
-                        />
-                        Favorite
-                      </label>
-                      <label className="flex cursor-pointer items-center gap-2">
-                        <input
-                          type="checkbox"
-                          className="dsy-toggle"
-                          {...form.register("isDone")}
-                        />
-                        Done
-                      </label>
-                    </div>
-                  </fieldset>
+                    Favorite
+                  </label>
                 </div>
                 <div className="flex justify-end gap-2">
                   <button

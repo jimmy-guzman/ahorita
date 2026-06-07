@@ -8,7 +8,12 @@ describe("<RowActions />", () => {
   it("should render", async () => {
     const handlers = [
       http.get("/metadata", () => {
-        return HttpResponse.json({ labels: [], priorities: [], statuses: [] });
+        return HttpResponse.json({
+          labels: [],
+          priorities: [],
+          statuses: [],
+          projectStatuses: [],
+        });
       }),
     ];
     server.use(...handlers);
@@ -28,7 +33,7 @@ describe("<RowActions />", () => {
             name: "Revamp Testing Suite",
             description: "",
             isFavorite: false,
-            isDone: false,
+            status: "In Progress",
             createdAt: "2024-08-25T16:54:05.991Z",
             updatedAt: "2024-08-25T16:54:05.991Z",
           },

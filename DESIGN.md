@@ -164,7 +164,7 @@ The wrapper is `inline-flex items-center gap-1.5`.
 | Medium | `text-warning` |
 | Low | `text-base-content/40` |
 
-**Projects reuse this same indicator pattern.** Project Status is `Done` (`CheckCircle2Icon text-success`) vs `Active` (`CircleIcon text-base-content/50`); Favorite is a filled `StarIcon text-warning` vs muted `text-base-content/30`. Progress is the one exception to the icon+label rule: a muted `completed/total` count beside a thin track-and-fill bar (`bg-success` only at 100%), never a badge.
+**Projects reuse this same indicator pattern.** Project Status is an enum that shares the task vocabulary — `In Progress` (`TimerIcon text-warning`) vs `Done` (`CheckCircle2Icon text-success`); Favorite is a filled `StarIcon text-warning` vs muted `text-base-content/30`. Progress is the one exception to the icon+label rule: a muted `completed/total` count beside a thin track-and-fill bar (`bg-success` only at 100%), never a badge.
 
 ---
 
@@ -172,13 +172,15 @@ The wrapper is `inline-flex items-center gap-1.5`.
 
 **Task rows and project rows** share the same pattern: a Radix `DropdownMenu` triggered by an ellipsis icon button (`dsy-btn dsy-btn-ghost dsy-btn-square dsy-btn-sm`) via `DropdownMenu.Trigger asChild`. The popup (`DropdownMenu.Content`, rendered in a `DropdownMenu.Portal`) uses DaisyUI's `dsy-menu` class with `rounded-box bg-base-100 shadow-sm`. Items activate via `onSelect`; navigation items use `DropdownMenu.Item asChild` wrapping a router `Link`. Quick-edit submenus (task Status/Priority/Label) use `DropdownMenu.Sub`/`SubTrigger`/`SubContent`. Destructive items (Delete) carry `text-error`. Edit/Rename and Delete items open dedicated Radix dialogs by setting local `useState` booleans (the dialogs are rendered with `withTrigger={false}` and driven by the menu).
 
-For project rows, the boolean fields shown as read-only indicator columns (Status, Favorite) are toggled from this same menu (Favorite/Unfavorite, Mark as done/not done) — there are no inline row buttons or toggles.
+For project rows, the indicator columns are edited from this same menu — Status via a `DropdownMenu.Sub` submenu (In Progress/Done, mirroring the task Status submenu) and Favorite via a Favorite/Unfavorite item. There are no inline row buttons or toggles.
 
 ---
 
 ## Boolean Toggles
 
-Boolean project fields (Favorite, Done) use `dsy-toggle dsy-toggle-sm` checkboxes rather than buttons or icons. The Favorite toggle uses `dsy-toggle-warning`; the Done toggle uses `dsy-toggle-success`. Each toggle is paired with a descriptive icon visible alongside it, and the semantic label is provided via `sr-only` text for screen readers.
+Favorite is the only boolean project field, rendered as a `dsy-toggle dsy-toggle-sm dsy-toggle-warning` checkbox rather than a button or icon. The toggle is paired with a descriptive icon visible alongside it, and the semantic label is provided via `sr-only` text for screen readers.
+
+Project Status is an enum (not a boolean), so it is never a toggle: it is edited via the floating-label shared `Select` in the edit dialog, the row-action Status submenu, and a compact inline `dsy-select dsy-select-sm` in the project-detail header.
 
 ---
 
