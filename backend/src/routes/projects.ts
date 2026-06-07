@@ -1,4 +1,4 @@
-import { count, eq, getTableColumns, sql } from "drizzle-orm";
+import { count, desc, eq, sql } from "drizzle-orm";
 import { Elysia, InternalServerError, t } from "elysia";
 
 import { db } from "../db";
@@ -13,36 +13,27 @@ export const projectsRoutes = new Elysia({ prefix: "/projects" })
   .use(authPlugin)
   .model({
     Project: selectProjectSchema,
-    Projects: t.Array(
-      t.Composite([
-        selectProjectSchema,
-        t.Object({
-          taskSummary: t.Object({
-            total: t.Number(),
-            completed: t.Number(),
-          }),
-        }),
-      ]),
+    Projects: t.Array(selectProjectSchema),
+    ProjectStats: t.Array(
+      t.Object({
+        id: t.String(),
+        name: t.String(),
+        Backlog: t.Number(),
+        Todo: t.Number(),
+        "In Progress": t.Number(),
+        Done: t.Number(),
+        Canceled: t.Number(),
+      }),
     ),
   })
   .get(
     "",
     async ({ user }) => {
-      const rows = await db
-        .select({
-          ...getTableColumns(projects),
-          total: count(tasks.id),
-          completed: count(sql`case when ${tasks.status} = 'Done' then 1 end`),
-        })
+      return await db
+        .select()
         .from(projects)
-        .leftJoin(tasks, eq(tasks.projectId, projects.id))
         .where(eq(projects.userId, user.id))
-        .groupBy(projects.id);
-
-      return rows.map(({ total, completed, ...project }) => ({
-        ...project,
-        taskSummary: { total, completed },
-      }));
+        .orderBy(desc(projects.updatedAt));
     },
     {
       auth: true,
@@ -72,53 +63,32 @@ export const projectsRoutes = new Elysia({ prefix: "/projects" })
     },
   )
   .get(
-    "/totals",
+    "/stats",
     async ({ user }) => {
-      const projectsWithTasks = await db.query.projects.findMany({
-        where: eq(projects.userId, user.id),
-        orderBy: (tasks, { desc }) => desc(tasks.updatedAt),
-        columns: {
-          id: true,
-          name: true,
-        },
-        with: {
-          tasks: {
-            columns: {
-              status: true,
-            },
-          },
-        },
-      });
-
-      return projectsWithTasks.map(({ id, name, tasks }) => {
-        return {
-          id,
-          name,
-          ...tasks.reduce(
-            (acc, curr) => {
-              acc[curr.status] = acc[curr.status] + 1;
-
-              return acc;
-            },
-            { Backlog: 0, Todo: 0, "In Progress": 0, Done: 0, Canceled: 0 },
+      return await db
+        .select({
+          id: projects.id,
+          name: projects.name,
+          Backlog: count(sql`case when ${tasks.status} = 'Backlog' then 1 end`),
+          Todo: count(sql`case when ${tasks.status} = 'Todo' then 1 end`),
+          "In Progress": count(
+            sql`case when ${tasks.status} = 'In Progress' then 1 end`,
           ),
-        };
-      });
+          Done: count(sql`case when ${tasks.status} = 'Done' then 1 end`),
+          Canceled: count(
+            sql`case when ${tasks.status} = 'Canceled' then 1 end`,
+          ),
+        })
+        .from(projects)
+        .leftJoin(tasks, eq(tasks.projectId, projects.id))
+        .where(eq(projects.userId, user.id))
+        .groupBy(projects.id)
+        .orderBy(desc(projects.updatedAt));
     },
     {
       auth: true,
-      response: t.Array(
-        t.Object({
-          id: t.String(),
-          name: t.String(),
-          Backlog: t.Number(),
-          Todo: t.Number(),
-          "In Progress": t.Number(),
-          Done: t.Number(),
-          Canceled: t.Number(),
-        }),
-      ),
-      detail: { tags, summary: "List Projects' Totals" },
+      response: "ProjectStats",
+      detail: { tags, summary: "List Project Stats" },
     },
   )
   .use(projectRoutes);

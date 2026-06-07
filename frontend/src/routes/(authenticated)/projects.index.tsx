@@ -1,14 +1,32 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
-
 import { projectsQueryOptions } from "@/api/query-projects";
+import { projectStatsQueryOptions } from "@/api/query-projects-stats";
 import { CreateProject } from "@/components/create-project";
 import { columns } from "@/components/projects-table/columns";
 import { RouteErrorComponent } from "@/components/shared/route-error";
 import { Table } from "@/components/shared/table";
 
+const EMPTY_SUMMARY = {
+  Backlog: 0,
+  Todo: 0,
+  "In Progress": 0,
+  Done: 0,
+  Canceled: 0,
+};
+
 function Projects() {
   const { data: projects } = useSuspenseQuery(projectsQueryOptions);
+  const { data: stats } = useSuspenseQuery(projectStatsQueryOptions);
+
+  const statsById = new Map(
+    stats.map(({ id, name: _name, ...counts }) => [id, counts]),
+  );
+
+  const rows = projects.map((project) => ({
+    ...project,
+    taskSummary: statsById.get(project.id) ?? EMPTY_SUMMARY,
+  }));
 
   return (
     <div className="flex flex-col gap-6">
@@ -16,14 +34,17 @@ function Projects() {
         <h1 className="font-semibold text-base-content text-xl">Projects</h1>
         <CreateProject />
       </div>
-      <Table data={projects} columns={columns} />
+      <Table data={rows} columns={columns} />
     </div>
   );
 }
 
 export const Route = createFileRoute("/(authenticated)/projects/")({
   loader: ({ context }) => {
-    return context.queryClient.ensureQueryData(projectsQueryOptions);
+    return Promise.all([
+      context.queryClient.ensureQueryData(projectsQueryOptions),
+      context.queryClient.ensureQueryData(projectStatsQueryOptions),
+    ]);
   },
   component: Projects,
   errorComponent: RouteErrorComponent,

@@ -3,6 +3,7 @@ import { api } from "@/api/client";
 import { mutationOptions } from "@/api/mutation-options";
 import queryClient from "@/query-client";
 
+import { projectStatsQueryOptions } from "./query-projects-stats";
 import { queryTasksOptions } from "./query-tasks";
 
 export const editTaskMutationOptions = mutationOptions({
@@ -20,6 +21,9 @@ export const editTaskMutationOptions = mutationOptions({
     return res.data;
   },
   onSuccess: async () => {
-    await queryClient.invalidateQueries(queryTasksOptions());
+    await Promise.all([
+      queryClient.invalidateQueries(queryTasksOptions()),
+      queryClient.invalidateQueries(projectStatsQueryOptions),
+    ]);
   },
 });

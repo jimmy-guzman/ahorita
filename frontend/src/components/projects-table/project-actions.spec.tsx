@@ -32,15 +32,10 @@ describe("<ProjectActions />", () => {
       }),
     );
 
-    await render(
-      <ProjectActions
-        project={{ ...project, taskSummary: { total: 4, completed: 2 } }}
-      />,
-      {
-        path: "/(authenticated)/projects/",
-        initialEntries: ["/(authenticated)/projects/"],
-      },
-    );
+    await render(<ProjectActions project={project} />, {
+      path: "/(authenticated)/projects/",
+      initialEntries: ["/(authenticated)/projects/"],
+    });
 
     expect(
       screen.getByRole("button", {

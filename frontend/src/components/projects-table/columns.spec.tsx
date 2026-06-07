@@ -45,13 +45,25 @@ describe("columns", () => {
             description: "has description",
             isFavorite: true,
             status: "Done" as const,
-            taskSummary: { total: 4, completed: 4 },
+            taskSummary: {
+              Backlog: 0,
+              Todo: 0,
+              "In Progress": 0,
+              Done: 4,
+              Canceled: 0,
+            },
           },
           {
             ...baseProject,
             id: "2",
             name: "Another Project",
-            taskSummary: { total: 0, completed: 0 },
+            taskSummary: {
+              Backlog: 0,
+              Todo: 0,
+              "In Progress": 0,
+              Done: 0,
+              Canceled: 0,
+            },
           },
         ]}
         columns={columns}
