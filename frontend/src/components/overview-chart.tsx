@@ -8,10 +8,10 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { projectsTotalsQueryOptions } from "@/api/query-projects-totals";
+import { projectStatsQueryOptions } from "@/api/query-projects-stats";
 
 export const OverviewChart = () => {
-  const { data } = useSuspenseQuery(projectsTotalsQueryOptions);
+  const { data } = useSuspenseQuery(projectStatsQueryOptions);
 
   return (
     <ResponsiveContainer width="100%" height={350}>

@@ -8,7 +8,7 @@ import { OverviewChart } from "./overview-chart";
 describe("<OverviewChart />", () => {
   it("should render", async () => {
     const handlers = [
-      http.get("/projects/totals", () => {
+      http.get("/projects/stats", () => {
         return HttpResponse.json([
           {
             id: "1",

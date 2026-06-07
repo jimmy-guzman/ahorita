@@ -4,6 +4,7 @@ import { mutationOptions } from "@/api/mutation-options";
 import queryClient from "@/query-client";
 import { projectQueryOptions } from "./query-project";
 import { projectsQueryOptions } from "./query-projects";
+import { projectStatsQueryOptions } from "./query-projects-stats";
 
 export const editProjectOptions = mutationOptions({
   meta: { globalError: true, errorMessage: "Couldn't update project." },
@@ -26,9 +27,15 @@ export const editProjectOptions = mutationOptions({
     );
     queryClient.setQueryData(projectsQueryOptions.queryKey, (oldProjects) => {
       return oldProjects?.map((project) =>
-        project.id === updatedProject.id
-          ? { ...updatedProject, taskSummary: project.taskSummary }
-          : project,
+        project.id === updatedProject.id ? updatedProject : project,
+      );
+    });
+
+    queryClient.setQueryData(projectStatsQueryOptions.queryKey, (oldStats) => {
+      return oldStats?.map((stat) =>
+        stat.id === updatedProject.id
+          ? { ...stat, name: updatedProject.name }
+          : stat,
       );
     });
   },

@@ -8,7 +8,12 @@ import { ProjectActions } from "./project-actions";
 import { ProjectStatusCell } from "./status-cell";
 import { ProjectUpdatedCell } from "./updated-cell";
 
-type ProjectRow = APIRoutes["projects"]["get"]["response"]["200"][number];
+type ProjectStats =
+  APIRoutes["projects"]["stats"]["get"]["response"]["200"][number];
+
+type ProjectRow = APIRoutes["projects"]["get"]["response"]["200"][number] & {
+  taskSummary: Omit<ProjectStats, "id" | "name">;
+};
 
 const columnHelper = createColumnHelper<ProjectRow>();
 
@@ -48,19 +53,22 @@ export const columns = [
     cell: (info) => <ProjectStatusCell status={info.getValue()} />,
   }),
   columnHelper.accessor(
-    (row) =>
-      row.taskSummary.total === 0
-        ? 0
-        : row.taskSummary.completed / row.taskSummary.total,
+    (row) => {
+      const total = Object.values(row.taskSummary).reduce((a, b) => a + b, 0);
+
+      return total === 0 ? 0 : row.taskSummary.Done / total;
+    },
     {
       id: "progress",
       header: "Progress",
-      cell: (info) => (
-        <ProjectProgressCell
-          total={info.row.original.taskSummary.total}
-          completed={info.row.original.taskSummary.completed}
-        />
-      ),
+      cell: (info) => {
+        const { taskSummary } = info.row.original;
+        const total = Object.values(taskSummary).reduce((a, b) => a + b, 0);
+
+        return (
+          <ProjectProgressCell total={total} completed={taskSummary.Done} />
+        );
+      },
     },
   ),
   columnHelper.accessor("isFavorite", {
