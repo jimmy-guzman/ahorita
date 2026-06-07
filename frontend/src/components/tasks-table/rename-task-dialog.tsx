@@ -1,6 +1,6 @@
-import * as Dialog from "@radix-ui/react-dialog";
 import { useMutation } from "@tanstack/react-query";
 import { SaveIcon, XIcon } from "lucide-react";
+import { Dialog } from "radix-ui";
 
 import { editTaskMutationOptions } from "@/api/edit-task";
 import { TextInput } from "@/components/shared/text-input";

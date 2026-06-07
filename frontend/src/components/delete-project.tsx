@@ -1,7 +1,7 @@
-import * as AlertDialog from "@radix-ui/react-alert-dialog";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
 import { FolderMinusIcon } from "lucide-react";
+import { AlertDialog } from "radix-ui";
 import { useState } from "react";
 
 import { deleteProjectOptions } from "@/api/delete-project";
@@ -11,31 +11,42 @@ interface DeleteProjectProps {
   className?: string;
   hideText?: boolean;
   projectId: string;
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
+  withTrigger?: boolean;
 }
 
 export const DeleteProject = ({
   className = "dsy-btn dsy-btn-error dsy-btn-sm",
   projectId,
   hideText = false,
+  open: controlledOpen,
+  onOpenChange,
+  withTrigger = true,
 }: DeleteProjectProps) => {
   const navigate = useNavigate();
   const { mutate } = useMutation(deleteProjectOptions);
-  const [open, setOpen] = useState(false);
+  const [internalOpen, setInternalOpen] = useState(false);
+
+  const open = controlledOpen ?? internalOpen;
+  const setOpen = onOpenChange ?? setInternalOpen;
 
   return (
     <AlertDialog.Root open={open} onOpenChange={setOpen}>
-      <AlertDialog.Trigger asChild>
-        <button
-          type="button"
-          className={cn(className)}
-          onClick={() => setOpen(true)}
-        >
-          <span className={cn(hideText ? "sr-only" : "hidden sm:inline")}>
-            Delete{" "}
-          </span>
-          <FolderMinusIcon className="h-4 w-4" />
-        </button>
-      </AlertDialog.Trigger>
+      {withTrigger && (
+        <AlertDialog.Trigger asChild>
+          <button
+            type="button"
+            className={cn(className)}
+            onClick={() => setOpen(true)}
+          >
+            <span className={cn(hideText ? "sr-only" : "hidden sm:inline")}>
+              Delete{" "}
+            </span>
+            <FolderMinusIcon className="h-4 w-4" />
+          </button>
+        </AlertDialog.Trigger>
+      )}
       <AlertDialog.Portal>
         <AlertDialog.Overlay />
         <AlertDialog.Content asChild>

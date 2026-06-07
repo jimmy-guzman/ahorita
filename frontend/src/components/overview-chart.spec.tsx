@@ -1,4 +1,4 @@
-import { http, HttpResponse } from "msw";
+import { HttpResponse, http } from "msw";
 
 import { server } from "@/testing/mocks/server";
 import { render, screen } from "@/testing/utils";

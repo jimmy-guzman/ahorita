@@ -5,6 +5,7 @@ import queryClient from "@/query-client";
 import { projectsQueryOptions } from "./query-projects";
 
 export const deleteProjectOptions = mutationOptions({
+  meta: { globalError: true, errorMessage: "Couldn't delete project." },
   mutationFn: async (projectId: string) => {
     const res = await api.projects({ projectId }).delete();
 

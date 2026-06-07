@@ -1,5 +1,5 @@
-import * as AlertDialog from "@radix-ui/react-alert-dialog";
 import { useMutation } from "@tanstack/react-query";
+import { AlertDialog } from "radix-ui";
 
 import { deleteTaskMutationOptions } from "@/api/delete-task";
 

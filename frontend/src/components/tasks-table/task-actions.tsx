@@ -1,7 +1,7 @@
-import { Menu } from "@base-ui-components/react/menu";
 import { useMutation, useSuspenseQuery } from "@tanstack/react-query";
 import { Link } from "@tanstack/react-router";
 import { EllipsisIcon, EyeIcon, PencilIcon, TrashIcon } from "lucide-react";
+import { DropdownMenu } from "radix-ui";
 import { useState } from "react";
 
 import type { APIRoutes } from "@/api/client";
@@ -24,135 +24,150 @@ export const TaskActions = ({ task }: TaskTableActionsProps) => {
 
   return (
     <>
-      <Menu.Root>
-        <Menu.Trigger className="dsy-btn dsy-btn-ghost dsy-btn-square dsy-btn-sm">
-          <EllipsisIcon className="h-4 w-4" />
-          <span className="sr-only">Open {task.name} menu</span>
-        </Menu.Trigger>
+      <DropdownMenu.Root>
+        <DropdownMenu.Trigger asChild>
+          <button
+            type="button"
+            className="dsy-btn dsy-btn-ghost dsy-btn-square dsy-btn-sm"
+          >
+            <EllipsisIcon className="h-4 w-4" />
+            <span className="sr-only">Open {task.name} menu</span>
+          </button>
+        </DropdownMenu.Trigger>
 
-        <Menu.Portal>
-          <Menu.Positioner sideOffset={8} align="end">
-            <Menu.Popup className="dsy-menu z-1 w-52 rounded-box bg-base-100 p-2 shadow-sm">
-              <div className="dsy-menu-title px-4 py-2">{task.name}</div>
+        <DropdownMenu.Portal>
+          <DropdownMenu.Content
+            sideOffset={8}
+            align="end"
+            className="dsy-menu z-1 w-52 rounded-box bg-base-100 p-2 shadow-sm"
+          >
+            <DropdownMenu.Label className="dsy-menu-title px-4 py-2">
+              {task.name}
+            </DropdownMenu.Label>
 
-              <Menu.SubmenuRoot>
-                <Menu.SubmenuTrigger className="flex cursor-pointer items-center justify-between rounded-lg px-4 py-2 text-sm outline-none hover:bg-base-200 data-highlighted:bg-base-200">
-                  Status
-                </Menu.SubmenuTrigger>
-                <Menu.Portal>
-                  <Menu.Positioner alignOffset={-4} sideOffset={-4}>
-                    <Menu.Popup className="dsy-menu z-1 w-52 rounded-box bg-base-100 p-2 shadow-sm">
-                      {data.statuses.map((status) => (
-                        <Menu.Item
-                          key={status}
-                          onClick={() => {
-                            editMutation.mutate({
-                              params: { taskId: task.id },
-                              body: { status },
-                            });
-                          }}
-                          className="flex cursor-pointer items-center justify-between rounded-lg px-4 py-2 text-sm outline-none hover:bg-base-200 data-highlighted:bg-base-200"
-                        >
-                          {status}
-                          {task.status === status && (
-                            <span className="dsy-badge dsy-badge-xs dsy-badge-info" />
-                          )}
-                        </Menu.Item>
-                      ))}
-                    </Menu.Popup>
-                  </Menu.Positioner>
-                </Menu.Portal>
-              </Menu.SubmenuRoot>
+            <DropdownMenu.Sub>
+              <DropdownMenu.SubTrigger className="flex cursor-pointer items-center justify-between rounded-lg px-4 py-2 text-sm outline-none hover:bg-base-200 data-highlighted:bg-base-200">
+                Status
+              </DropdownMenu.SubTrigger>
+              <DropdownMenu.Portal>
+                <DropdownMenu.SubContent
+                  alignOffset={-4}
+                  sideOffset={-4}
+                  className="dsy-menu z-1 w-52 rounded-box bg-base-100 p-2 shadow-sm"
+                >
+                  {data.statuses.map((status) => (
+                    <DropdownMenu.Item
+                      key={status}
+                      onSelect={() => {
+                        editMutation.mutate({
+                          params: { taskId: task.id },
+                          body: { status },
+                        });
+                      }}
+                      className="flex cursor-pointer items-center justify-between rounded-lg px-4 py-2 text-sm outline-none hover:bg-base-200 data-highlighted:bg-base-200"
+                    >
+                      {status}
+                      {task.status === status && (
+                        <span className="dsy-badge dsy-badge-xs dsy-badge-info" />
+                      )}
+                    </DropdownMenu.Item>
+                  ))}
+                </DropdownMenu.SubContent>
+              </DropdownMenu.Portal>
+            </DropdownMenu.Sub>
 
-              <Menu.SubmenuRoot>
-                <Menu.SubmenuTrigger className="flex cursor-pointer items-center justify-between rounded-lg px-4 py-2 text-sm outline-none hover:bg-base-200 data-highlighted:bg-base-200">
-                  Priority
-                </Menu.SubmenuTrigger>
-                <Menu.Portal>
-                  <Menu.Positioner alignOffset={-4} sideOffset={-4}>
-                    <Menu.Popup className="dsy-menu z-1 w-52 rounded-box bg-base-100 p-2 shadow-sm">
-                      {data.priorities.map((priority) => (
-                        <Menu.Item
-                          key={priority}
-                          onClick={() => {
-                            editMutation.mutate({
-                              params: { taskId: task.id },
-                              body: { priority },
-                            });
-                          }}
-                          className="flex cursor-pointer items-center justify-between rounded-lg px-4 py-2 text-sm outline-none hover:bg-base-200 data-highlighted:bg-base-200"
-                        >
-                          {priority}
-                          {task.priority === priority && (
-                            <span className="dsy-badge dsy-badge-xs dsy-badge-info" />
-                          )}
-                        </Menu.Item>
-                      ))}
-                    </Menu.Popup>
-                  </Menu.Positioner>
-                </Menu.Portal>
-              </Menu.SubmenuRoot>
+            <DropdownMenu.Sub>
+              <DropdownMenu.SubTrigger className="flex cursor-pointer items-center justify-between rounded-lg px-4 py-2 text-sm outline-none hover:bg-base-200 data-highlighted:bg-base-200">
+                Priority
+              </DropdownMenu.SubTrigger>
+              <DropdownMenu.Portal>
+                <DropdownMenu.SubContent
+                  alignOffset={-4}
+                  sideOffset={-4}
+                  className="dsy-menu z-1 w-52 rounded-box bg-base-100 p-2 shadow-sm"
+                >
+                  {data.priorities.map((priority) => (
+                    <DropdownMenu.Item
+                      key={priority}
+                      onSelect={() => {
+                        editMutation.mutate({
+                          params: { taskId: task.id },
+                          body: { priority },
+                        });
+                      }}
+                      className="flex cursor-pointer items-center justify-between rounded-lg px-4 py-2 text-sm outline-none hover:bg-base-200 data-highlighted:bg-base-200"
+                    >
+                      {priority}
+                      {task.priority === priority && (
+                        <span className="dsy-badge dsy-badge-xs dsy-badge-info" />
+                      )}
+                    </DropdownMenu.Item>
+                  ))}
+                </DropdownMenu.SubContent>
+              </DropdownMenu.Portal>
+            </DropdownMenu.Sub>
 
-              <Menu.SubmenuRoot>
-                <Menu.SubmenuTrigger className="flex cursor-pointer items-center justify-between rounded-lg px-4 py-2 text-sm outline-none hover:bg-base-200 data-highlighted:bg-base-200">
-                  Label
-                </Menu.SubmenuTrigger>
-                <Menu.Portal>
-                  <Menu.Positioner alignOffset={-4} sideOffset={-4}>
-                    <Menu.Popup className="dsy-menu z-1 w-52 rounded-box bg-base-100 p-2 shadow-sm">
-                      {data.labels.map((label) => (
-                        <Menu.Item
-                          key={label}
-                          onClick={() => {
-                            editMutation.mutate({
-                              params: { taskId: task.id },
-                              body: { label },
-                            });
-                          }}
-                          className="flex cursor-pointer items-center justify-between rounded-lg px-4 py-2 text-sm outline-none hover:bg-base-200 data-highlighted:bg-base-200"
-                        >
-                          {label}
-                          {task.label === label && (
-                            <span className="dsy-badge dsy-badge-xs dsy-badge-info" />
-                          )}
-                        </Menu.Item>
-                      ))}
-                    </Menu.Popup>
-                  </Menu.Positioner>
-                </Menu.Portal>
-              </Menu.SubmenuRoot>
+            <DropdownMenu.Sub>
+              <DropdownMenu.SubTrigger className="flex cursor-pointer items-center justify-between rounded-lg px-4 py-2 text-sm outline-none hover:bg-base-200 data-highlighted:bg-base-200">
+                Label
+              </DropdownMenu.SubTrigger>
+              <DropdownMenu.Portal>
+                <DropdownMenu.SubContent
+                  alignOffset={-4}
+                  sideOffset={-4}
+                  className="dsy-menu z-1 w-52 rounded-box bg-base-100 p-2 shadow-sm"
+                >
+                  {data.labels.map((label) => (
+                    <DropdownMenu.Item
+                      key={label}
+                      onSelect={() => {
+                        editMutation.mutate({
+                          params: { taskId: task.id },
+                          body: { label },
+                        });
+                      }}
+                      className="flex cursor-pointer items-center justify-between rounded-lg px-4 py-2 text-sm outline-none hover:bg-base-200 data-highlighted:bg-base-200"
+                    >
+                      {label}
+                      {task.label === label && (
+                        <span className="dsy-badge dsy-badge-xs dsy-badge-info" />
+                      )}
+                    </DropdownMenu.Item>
+                  ))}
+                </DropdownMenu.SubContent>
+              </DropdownMenu.Portal>
+            </DropdownMenu.Sub>
 
-              <Menu.Separator className="dsy-divider my-1" />
+            <DropdownMenu.Separator className="dsy-divider my-1" />
 
-              <Menu.Item
-                render={
-                  <Link to="/tasks/$taskId" params={{ taskId: task.id }} />
-                }
-                className="flex cursor-pointer items-center justify-between rounded-lg px-4 py-2 text-sm outline-none hover:bg-base-200 data-highlighted:bg-base-200"
-              >
+            <DropdownMenu.Item
+              asChild
+              className="flex cursor-pointer items-center justify-between rounded-lg px-4 py-2 text-sm outline-none hover:bg-base-200 data-highlighted:bg-base-200"
+            >
+              <Link to="/tasks/$taskId" params={{ taskId: task.id }}>
                 View
                 <EyeIcon className="h-4 w-4" />
-              </Menu.Item>
+              </Link>
+            </DropdownMenu.Item>
 
-              <Menu.Item
-                onClick={() => setRenameOpen(true)}
-                className="flex cursor-pointer items-center justify-between rounded-lg px-4 py-2 text-sm outline-none hover:bg-base-200 data-highlighted:bg-base-200"
-              >
-                Rename
-                <PencilIcon className="h-4 w-4" />
-              </Menu.Item>
+            <DropdownMenu.Item
+              onSelect={() => setRenameOpen(true)}
+              className="flex cursor-pointer items-center justify-between rounded-lg px-4 py-2 text-sm outline-none hover:bg-base-200 data-highlighted:bg-base-200"
+            >
+              Rename
+              <PencilIcon className="h-4 w-4" />
+            </DropdownMenu.Item>
 
-              <Menu.Item
-                onClick={() => setDeleteOpen(true)}
-                className="flex cursor-pointer items-center justify-between rounded-lg px-4 py-2 text-error text-sm outline-none hover:bg-base-200 data-highlighted:bg-base-200"
-              >
-                Delete
-                <TrashIcon className="h-4 w-4" />
-              </Menu.Item>
-            </Menu.Popup>
-          </Menu.Positioner>
-        </Menu.Portal>
-      </Menu.Root>
+            <DropdownMenu.Item
+              onSelect={() => setDeleteOpen(true)}
+              className="flex cursor-pointer items-center justify-between rounded-lg px-4 py-2 text-error text-sm outline-none hover:bg-base-200 data-highlighted:bg-base-200"
+            >
+              Delete
+              <TrashIcon className="h-4 w-4" />
+            </DropdownMenu.Item>
+          </DropdownMenu.Content>
+        </DropdownMenu.Portal>
+      </DropdownMenu.Root>
 
       <RenameTaskDialog
         name={task.name}

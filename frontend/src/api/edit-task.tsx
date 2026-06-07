@@ -6,6 +6,7 @@ import queryClient from "@/query-client";
 import { queryTasksOptions } from "./query-tasks";
 
 export const editTaskMutationOptions = mutationOptions({
+  meta: { globalError: true, errorMessage: "Couldn't update task." },
   mutationFn: async ({
     params,
     body,

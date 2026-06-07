@@ -1,10 +1,10 @@
-import { eq } from "drizzle-orm";
+import { count, eq, getTableColumns, sql } from "drizzle-orm";
 import { Elysia, InternalServerError, t } from "elysia";
 
 import { db } from "../db";
 import { authPlugin } from "../middleware/auth";
 import { selectProjectSchema } from "../models/projects";
-import { projects } from "../schemas";
+import { projects, tasks } from "../schemas";
 import { projectRoutes } from "./projects.$projectId";
 
 const tags = ["Project"];
@@ -13,14 +13,36 @@ export const projectsRoutes = new Elysia({ prefix: "/projects" })
   .use(authPlugin)
   .model({
     Project: selectProjectSchema,
-    Projects: t.Array(selectProjectSchema),
+    Projects: t.Array(
+      t.Composite([
+        selectProjectSchema,
+        t.Object({
+          taskSummary: t.Object({
+            total: t.Number(),
+            completed: t.Number(),
+          }),
+        }),
+      ]),
+    ),
   })
   .get(
     "",
     async ({ user }) => {
-      return await db.query.projects.findMany({
-        where: eq(projects.userId, user.id),
-      });
+      const rows = await db
+        .select({
+          ...getTableColumns(projects),
+          total: count(tasks.id),
+          completed: count(sql`case when ${tasks.status} = 'Done' then 1 end`),
+        })
+        .from(projects)
+        .leftJoin(tasks, eq(tasks.projectId, projects.id))
+        .where(eq(projects.userId, user.id))
+        .groupBy(projects.id);
+
+      return rows.map(({ total, completed, ...project }) => ({
+        ...project,
+        taskSummary: { total, completed },
+      }));
     },
     {
       auth: true,
