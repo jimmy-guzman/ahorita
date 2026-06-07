@@ -1,7 +1,7 @@
-import * as Dialog from "@radix-ui/react-dialog";
 import { useMutation, useSuspenseQuery } from "@tanstack/react-query";
 import { getRouteApi, Link } from "@tanstack/react-router";
 import { ListPlusIcon, XIcon } from "lucide-react";
+import { Dialog } from "radix-ui";
 import { useState } from "react";
 
 import { createTask } from "@/api/create-task";

@@ -17,7 +17,14 @@ export const createProjectOptions = mutationOptions({
   onMutate: async () => {
     await queryClient.cancelQueries(projectsQueryOptions);
   },
-  onSuccess: async () => {
-    await queryClient.invalidateQueries(projectsQueryOptions);
+  onSuccess: (newProject) => {
+    const listItem = {
+      ...newProject,
+      taskSummary: { total: 0, completed: 0 },
+    };
+
+    queryClient.setQueryData(projectsQueryOptions.queryKey, (oldProjects) => {
+      return oldProjects ? [...oldProjects, listItem] : [listItem];
+    });
   },
 });

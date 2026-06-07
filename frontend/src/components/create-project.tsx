@@ -1,6 +1,6 @@
-import * as Dialog from "@radix-ui/react-dialog";
 import { useMutation } from "@tanstack/react-query";
 import { FolderPlusIcon, XIcon } from "lucide-react";
+import { Dialog } from "radix-ui";
 import { useState } from "react";
 
 import { createProjectOptions } from "@/api/create-project";

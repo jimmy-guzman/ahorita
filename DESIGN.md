@@ -7,7 +7,7 @@ Reference for UI decisions, component conventions, and interaction patterns in t
 ## Overview
 
 - **Design system:** DaisyUI v5 on top of Tailwind CSS
-- **Component library:** Radix UI (dialogs), Base UI (menus), Lucide (icons)
+- **Component library:** Radix UI via the unified `radix-ui` package (dialogs **and** menus), Lucide (icons)
 - **Forms:** react-hook-form + valibot resolvers
 - **Data fetching:** TanStack Query with Eden Treaty
 - **Routing:** TanStack Router (file-based)
@@ -93,7 +93,12 @@ When a prerequisite for the dialog's action is missing (for example, no projects
 
 ## Mutation Error State
 
-Errors from mutations are surfaced inline inside the dialog, never via a toast. The pattern is:
+Mutation errors surface in one of two tiers:
+
+1. **Inline, inside form dialogs** (create/add forms) — the default for anything with a visible form. See the `mutationError` pattern below. These mutations do **not** opt in to the global handler.
+2. **Global handler** — for mutations with no inline UI (menu quick-actions, edit/rename/delete). A mutation opts in with `meta: { globalError: true, errorMessage }`; the central `MutationCache.onError` in `src/query-client.ts` presents it (currently `toast.error`). The flag is intent-based and mechanism-agnostic — call sites never reference the toast directly.
+
+The inline pattern:
 
 - A `useState<string | null>` field called `mutationError` holds the current error message or `null`.
 - `setMutationError(null)` is called before each `mutate()` invocation to clear any prior error.
@@ -125,7 +130,9 @@ Project and task lists share a structural pattern: a `ul` container with `divide
 
 ## Tables
 
-The shared `<Table>` component in `src/components/shared/table.tsx` wraps TanStack Table. It supports optional global fuzzy filtering and column sorting. Headers use `text-base-content/50 text-xs uppercase tracking-wider`. Rows use `transition-colors hover:bg-base-200`.
+The shared `<Table>` component in `src/components/shared/table.tsx` wraps TanStack Table. It supports column sorting; it does not filter — filtering chrome was removed in favor of a denser, Linear-like presentation. Headers use `text-base-content/50 text-xs uppercase tracking-wider`. Rows use `transition-colors hover:bg-base-200`.
+
+Both index tables (tasks and projects) share the same column shape: a leading `Name` link, dedicated indicator cells in the middle, and a trailing actions menu. Project indicator columns (Status, Progress, Favorite, Updated) live in `src/components/projects-table/` and mirror the task cells.
 
 The empty state is rendered as a `dsy-alert dsy-alert-soft` with `role="alert"` inside a `<td>` spanning all columns. This keeps the table structure valid while using the standard empty-state appearance.
 
@@ -157,13 +164,15 @@ The wrapper is `inline-flex items-center gap-1.5`.
 | Medium | `text-warning` |
 | Low | `text-base-content/40` |
 
+**Projects reuse this same indicator pattern.** Project Status is `Done` (`CheckCircle2Icon text-success`) vs `Active` (`CircleIcon text-base-content/50`); Favorite is a filled `StarIcon text-warning` vs muted `text-base-content/30`. Progress is the one exception to the icon+label rule: a muted `completed/total` count beside a thin track-and-fill bar (`bg-success` only at 100%), never a badge.
+
 ---
 
 ## Row Actions
 
-**Task rows** use a Base UI `Menu` triggered by an ellipsis icon button (`dsy-btn dsy-btn-ghost dsy-btn-square dsy-btn-sm`). The menu popup uses DaisyUI's `dsy-menu` class with `rounded-box bg-base-100 shadow-sm`. Destructive items (Delete) carry `text-error`. Rename and Delete items open dedicated Radix dialogs by setting local `useState` booleans.
+**Task rows and project rows** share the same pattern: a Radix `DropdownMenu` triggered by an ellipsis icon button (`dsy-btn dsy-btn-ghost dsy-btn-square dsy-btn-sm`) via `DropdownMenu.Trigger asChild`. The popup (`DropdownMenu.Content`, rendered in a `DropdownMenu.Portal`) uses DaisyUI's `dsy-menu` class with `rounded-box bg-base-100 shadow-sm`. Items activate via `onSelect`; navigation items use `DropdownMenu.Item asChild` wrapping a router `Link`. Quick-edit submenus (task Status/Priority/Label) use `DropdownMenu.Sub`/`SubTrigger`/`SubContent`. Destructive items (Delete) carry `text-error`. Edit/Rename and Delete items open dedicated Radix dialogs by setting local `useState` booleans (the dialogs are rendered with `withTrigger={false}` and driven by the menu).
 
-**Project rows** use inline icon buttons revealed on hover — no dropdown menu. The buttons are standard `dsy-btn` elements sized with `dsy-btn-xs`. The delete button uses `dsy-btn-error` directly on the trigger (see Buttons above).
+For project rows, the boolean fields shown as read-only indicator columns (Status, Favorite) are toggled from this same menu (Favorite/Unfavorite, Mark as done/not done) — there are no inline row buttons or toggles.
 
 ---
 
@@ -189,15 +198,13 @@ Every route definition includes `errorComponent: RouteErrorComponent`. The share
 
 ## Toast Policy
 
-There are no `toast.*` calls anywhere in the application.
+Toasts are reserved for **error feedback on mutations that opt in** — never for success, and never called ad-hoc from components.
 
 **Success feedback** is self-evident from the data update — the created item appears, the deleted item disappears, the dialog closes. No confirmation toast is needed.
 
-**Mutation errors** are surfaced inline in the dialog (see Mutation Error State above).
+**Mutation errors** surface either inline (form dialogs) or via the global handler (opt-in `meta: { globalError: true, errorMessage }`). See Mutation Error State above. The only `toast.*` call site is the central `MutationCache.onError` in `src/query-client.ts`; do not add `toast.*` calls elsewhere — opt a mutation in via `meta.globalError` instead.
 
-**Background query errors** are caught by the `QueryCache.onError` fallback in `src/query-client.ts` and routed to `console.error`. This is the only site in the codebase where a console method is intentionally used, and it carries a `biome-ignore` suppression comment explaining why.
-
-The `sonner` package and its `<Toaster>` mount are kept installed but produce no output. Do not uninstall them and do not add new `toast.*` call sites.
+The single `<Toaster>` mount lives in `src/routes/__root.tsx`, styled to DaisyUI alerts (`toast: "dsy-alert"`, `error: "dsy-alert-error"`, etc.).
 
 ---
 

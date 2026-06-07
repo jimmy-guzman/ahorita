@@ -5,6 +5,7 @@ import queryClient from "@/query-client";
 import { queryTasksOptions } from "./query-tasks";
 
 export const deleteTaskMutationOptions = mutationOptions({
+  meta: { globalError: true, errorMessage: "Couldn't delete task." },
   mutationFn: async (taskId: string) => {
     const res = await api.tasks({ taskId }).delete();
 

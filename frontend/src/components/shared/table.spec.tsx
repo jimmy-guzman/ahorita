@@ -1,6 +1,5 @@
-import { render, screen } from "@/testing/utils";
-
 import { createColumnHelper } from "@tanstack/react-table";
+import { render, screen } from "@/testing/utils";
 import { Table } from "./table";
 
 const columnHelper = createColumnHelper<{
@@ -32,7 +31,7 @@ describe("<Table />", () => {
     }
   });
 
-  it("should NOT render global filter", async () => {
+  it("should not render a global filter input", async () => {
     await render(
       <Table
         data={[{ id: 1, name: "apple", color: "red" }]}
@@ -43,36 +42,14 @@ describe("<Table />", () => {
     expect(screen.queryByRole("textbox")).not.toBeInTheDocument();
   });
 
-  it("should be able to filter rows", async () => {
-    const { user } = await render(
-      <Table
-        data={[
-          { id: 1, name: "apple", color: "red" },
-          { id: 2, name: "banana", color: "yellow" },
-        ]}
-        columns={columns}
-        enableGlobalFiltering
-      />,
-    );
-
-    await user.type(screen.getByRole("textbox"), "banana");
-
-    expect(screen.getAllByRole("row")).toHaveLength(2);
-  });
-
-  it("should render filter with placeholder text", async () => {
+  it("should render an empty state when there are no rows", async () => {
     await render(
       <Table
-        data={[
-          { id: 1, name: "apple", color: "red" },
-          { id: 2, name: "banana", color: "yellow" },
-        ]}
+        data={[] as { id: number; name: string; color: string }[]}
         columns={columns}
-        enableGlobalFiltering
-        globalFilterPlaceholder="Search Fruits"
       />,
     );
 
-    expect(screen.getByPlaceholderText("Search Fruits")).toBeInTheDocument();
+    expect(screen.getByRole("alert")).toHaveTextContent("No results.");
   });
 });

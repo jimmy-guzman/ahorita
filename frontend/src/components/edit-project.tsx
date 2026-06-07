@@ -1,6 +1,6 @@
-import * as Dialog from "@radix-ui/react-dialog";
 import { useMutation, useSuspenseQuery } from "@tanstack/react-query";
 import { FolderPenIcon, SaveIcon, XIcon } from "lucide-react";
+import { Dialog } from "radix-ui";
 import { useState } from "react";
 
 import { editProjectOptions } from "@/api/edit-project";
@@ -13,29 +13,40 @@ interface EditProjectProps {
   className?: string;
   hideText?: boolean;
   projectId: string;
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
+  withTrigger?: boolean;
 }
 
 export const EditProject = ({
   className = "dsy-btn dsy-btn-neutral dsy-btn-sm",
   hideText = false,
   projectId,
+  open: controlledOpen,
+  onOpenChange,
+  withTrigger = true,
 }: EditProjectProps) => {
   const { data: project } = useSuspenseQuery(projectQueryOptions(projectId));
   const { mutate } = useMutation(editProjectOptions);
-  const [open, setOpen] = useState(false);
+  const [internalOpen, setInternalOpen] = useState(false);
+
+  const open = controlledOpen ?? internalOpen;
+  const setOpen = onOpenChange ?? setInternalOpen;
 
   const form = useEditProjectForm(project);
 
   return (
     <Dialog.Root open={open} onOpenChange={setOpen}>
-      <Dialog.Trigger asChild>
-        <button type="button" className={cn(className)}>
-          <span className={cn(hideText ? "sr-only" : "hidden sm:inline")}>
-            Edit{" "}
-          </span>
-          <FolderPenIcon className="h-4 w-4" />
-        </button>
-      </Dialog.Trigger>
+      {withTrigger && (
+        <Dialog.Trigger asChild>
+          <button type="button" className={cn(className)}>
+            <span className={cn(hideText ? "sr-only" : "hidden sm:inline")}>
+              Edit{" "}
+            </span>
+            <FolderPenIcon className="h-4 w-4" />
+          </button>
+        </Dialog.Trigger>
+      )}
       <Dialog.Portal>
         <Dialog.Overlay />
         <Dialog.Content asChild>
