@@ -1,4 +1,5 @@
 import type { ErrorComponentProps } from "@tanstack/react-router";
+import { TriangleAlertIcon } from "lucide-react";
 
 export const RouteErrorComponent = ({ error }: ErrorComponentProps) => {
   const message =
@@ -6,6 +7,7 @@ export const RouteErrorComponent = ({ error }: ErrorComponentProps) => {
 
   return (
     <div role="alert" className="dsy-alert dsy-alert-error dsy-alert-soft">
+      <TriangleAlertIcon aria-hidden="true" className="h-4 w-4" />
       <span>{message}</span>
     </div>
   );

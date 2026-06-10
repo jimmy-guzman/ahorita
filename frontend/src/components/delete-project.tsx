@@ -43,7 +43,7 @@ export const DeleteProject = ({
             <span className={cn(hideText ? "sr-only" : "hidden sm:inline")}>
               Delete{" "}
             </span>
-            <FolderMinusIcon className="h-4 w-4" />
+            <FolderMinusIcon aria-hidden="true" className="h-4 w-4" />
           </button>
         </AlertDialog.Trigger>
       )}
@@ -65,7 +65,8 @@ export const DeleteProject = ({
                   });
                 }}
               >
-                <AlertDialog.Title className="font-bold text-lg">
+                <AlertDialog.Title className="inline-flex items-center gap-2 font-bold text-lg">
+                  <FolderMinusIcon aria-hidden="true" className="h-4 w-4" />
                   Are You Sure?
                 </AlertDialog.Title>
                 <AlertDialog.Description className="py-4 text-base-content/60 text-sm">

@@ -73,6 +73,8 @@ All dialogs use Radix UI primitives — `@radix-ui/react-dialog` for non-destruc
 
 **Close button:** positioned `absolute top-2 right-2` with classes `dsy-btn dsy-btn-ghost dsy-btn-circle dsy-btn-sm`. This exact order must be preserved.
 
+**Title icons:** dialog and alert-dialog titles may include one leading Lucide icon when it reinforces the modal's purpose. The icon is decorative (`aria-hidden="true"`). Do not repeat the same action icon in the submit button.
+
 **Dialog.Description** must always be present. When the dialog body already provides sufficient visual context (e.g. an empty-state alert), render the description with `sr-only` to satisfy Radix's accessibility requirement without duplicating visible text.
 
 **Action row:** always `flex justify-end gap-2`. Never use `dsy-modal-action` — it is not part of the pattern.
@@ -213,6 +215,9 @@ The single `<Toaster>` mount lives in `src/routes/__root.tsx`, styled to DaisyUI
 ## Accessibility
 
 - Every icon-only interactive element must have either an `aria-label` prop or an `<span className="sr-only">` sibling providing its accessible name.
+- Use icon-only controls when the icon plus surrounding context tells the action story: the context supplies the object and the icon supplies the verb or state. Page-header create buttons, row action triggers, and tightly grouped detail actions are good candidates.
+- Keep visible text when the icon is ambiguous, the action submits or confirms a form, the action is destructive confirmation, or the item is inside a menu. Pair icon-only controls outside the sidebar with a DaisyUI tooltip for sighted discovery.
+- When visible text already names the action, mark the accompanying icon `aria-hidden="true"` so it does not add noise to the accessible name.
 - Every alert — whether an error, an empty state, or an inline warning — must carry `role="alert"`.
 - `Dialog.Description` must be present on every dialog. Use `className="sr-only"` when the visible dialog content already describes the context adequately.
 - Tooltips on sidebar nav items double as the accessible name discovery path for sighted keyboard users.

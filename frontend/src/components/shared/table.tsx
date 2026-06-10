@@ -9,6 +9,7 @@ import {
   ArrowDownWideNarrowIcon,
   ArrowUpWideNarrowIcon,
   CheckIcon,
+  SearchXIcon,
   XIcon,
 } from "lucide-react";
 import { useState } from "react";
@@ -57,12 +58,21 @@ export function Table<TData, TColumns extends ColumnDef<TData, any>[]>({
                 return (
                   <th
                     key={header.id}
+                    aria-sort={
+                      header.column.getCanSort()
+                        ? sort === "asc"
+                          ? "ascending"
+                          : sort === "desc"
+                            ? "descending"
+                            : "none"
+                        : undefined
+                    }
                     className="text-base-content/50 text-xs uppercase tracking-wider"
                   >
                     {header.isPlaceholder ? null : header.column.getCanSort() ? (
                       <button
                         type="button"
-                        className="uppercase"
+                        className="inline-flex items-center uppercase"
                         onClick={header.column.getToggleSortingHandler()}
                       >
                         {flexRender(
@@ -70,9 +80,15 @@ export function Table<TData, TColumns extends ColumnDef<TData, any>[]>({
                           header.getContext(),
                         )}
                         {sort === false ? null : sort === "asc" ? (
-                          <ArrowUpWideNarrowIcon className="ml-1 inline h-3.5 w-3.5" />
+                          <ArrowUpWideNarrowIcon
+                            aria-hidden="true"
+                            className="ml-1 inline h-3.5 w-3.5"
+                          />
                         ) : (
-                          <ArrowDownWideNarrowIcon className="ml-1 inline h-3.5 w-3.5" />
+                          <ArrowDownWideNarrowIcon
+                            aria-hidden="true"
+                            className="ml-1 inline h-3.5 w-3.5"
+                          />
                         )}
                       </button>
                     ) : (
@@ -92,6 +108,7 @@ export function Table<TData, TColumns extends ColumnDef<TData, any>[]>({
             <tr>
               <td colSpan={table.getVisibleLeafColumns().length}>
                 <div role="alert" className="dsy-alert dsy-alert-soft">
+                  <SearchXIcon aria-hidden="true" className="h-4 w-4" />
                   <span>No results.</span>
                 </div>
               </td>

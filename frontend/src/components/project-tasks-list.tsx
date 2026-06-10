@@ -1,4 +1,5 @@
 import { Link } from "@tanstack/react-router";
+import { ListPlusIcon } from "lucide-react";
 
 import type { APIRoutes } from "@/api/client";
 
@@ -14,6 +15,7 @@ export const ProjectTasksList = ({ tasks }: ProjectTasksListProps) => {
   if (tasks.length === 0) {
     return (
       <div role="alert" className="dsy-alert dsy-alert-soft">
+        <ListPlusIcon aria-hidden="true" className="h-4 w-4" />
         <span>No tasks for this project yet.</span>
       </div>
     );

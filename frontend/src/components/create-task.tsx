@@ -1,6 +1,11 @@
 import { useMutation, useSuspenseQuery } from "@tanstack/react-query";
 import { getRouteApi, Link } from "@tanstack/react-router";
-import { ListPlusIcon, XIcon } from "lucide-react";
+import {
+  FolderPlusIcon,
+  ListPlusIcon,
+  TriangleAlertIcon,
+  XIcon,
+} from "lucide-react";
 import { Dialog } from "radix-ui";
 import { useState } from "react";
 
@@ -49,12 +54,17 @@ export const CreateTask = () => {
 
   return (
     <Dialog.Root open={open} onOpenChange={handleOpenChange}>
-      <Dialog.Trigger asChild>
-        <button type="button" className="dsy-btn dsy-btn-primary dsy-btn-sm">
-          <span className="hidden sm:inline">Create Task</span>
-          <ListPlusIcon className="h-4 w-4" />
-        </button>
-      </Dialog.Trigger>
+      <div className="dsy-tooltip dsy-tooltip-bottom" data-tip="Create task">
+        <Dialog.Trigger asChild>
+          <button
+            type="button"
+            className="dsy-btn dsy-btn-primary dsy-btn-square dsy-btn-sm"
+          >
+            <span className="sr-only">Create Task</span>
+            <ListPlusIcon aria-hidden="true" className="h-4 w-4" />
+          </button>
+        </Dialog.Trigger>
+      </div>
       <Dialog.Portal>
         <Dialog.Overlay />
         <Dialog.Content asChild>
@@ -66,10 +76,11 @@ export const CreateTask = () => {
                   className="dsy-btn dsy-btn-ghost dsy-btn-circle dsy-btn-sm absolute top-2 right-2"
                   aria-label="Close"
                 >
-                  <XIcon className="h-4 w-4" />
+                  <XIcon aria-hidden="true" className="h-4 w-4" />
                 </button>
               </Dialog.Close>
-              <Dialog.Title className="font-bold text-lg">
+              <Dialog.Title className="inline-flex items-center gap-2 font-bold text-lg">
+                <ListPlusIcon aria-hidden="true" className="h-4 w-4" />
                 Create Task
               </Dialog.Title>
               {projects.length === 0 ? (
@@ -78,6 +89,7 @@ export const CreateTask = () => {
                     No projects available. Create a project to add tasks.
                   </Dialog.Description>
                   <div role="alert" className="dsy-alert dsy-alert-soft mt-4">
+                    <FolderPlusIcon aria-hidden="true" className="h-4 w-4" />
                     <span>
                       You need a project before creating a task.{" "}
                       <Link
@@ -152,6 +164,10 @@ export const CreateTask = () => {
                         role="alert"
                         className="dsy-alert dsy-alert-error dsy-alert-soft"
                       >
+                        <TriangleAlertIcon
+                          aria-hidden="true"
+                          className="h-4 w-4"
+                        />
                         <span>{mutationError}</span>
                       </div>
                     )}
@@ -168,7 +184,7 @@ export const CreateTask = () => {
                         className="dsy-btn dsy-btn-primary dsy-btn-sm"
                         disabled={isPending}
                       >
-                        New Task <ListPlusIcon className="h-4 w-4" />
+                        New Task
                       </button>
                     </div>
                   </form>

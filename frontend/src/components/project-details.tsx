@@ -26,9 +26,26 @@ export const ProjectDetails = () => {
       </div>
 
       <div className="flex shrink-0 items-center gap-1">
-        <AddTaskToProject projectId={projectId} />
-        <EditProject projectId={projectId} />
-        <DeleteProject projectId={projectId} />
+        <div className="dsy-tooltip dsy-tooltip-bottom" data-tip="Add task">
+          <AddTaskToProject projectId={projectId} />
+        </div>
+        <div className="dsy-tooltip dsy-tooltip-bottom" data-tip="Edit project">
+          <EditProject
+            projectId={projectId}
+            hideText
+            className="dsy-btn dsy-btn-neutral dsy-btn-square dsy-btn-sm"
+          />
+        </div>
+        <div
+          className="dsy-tooltip dsy-tooltip-bottom"
+          data-tip="Delete project"
+        >
+          <DeleteProject
+            projectId={projectId}
+            hideText
+            className="dsy-btn dsy-btn-error dsy-btn-square dsy-btn-sm"
+          />
+        </div>
       </div>
     </div>
   );

@@ -1,4 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
+import { TrashIcon } from "lucide-react";
 import { AlertDialog } from "radix-ui";
 
 import { deleteTaskMutationOptions } from "@/api/delete-task";
@@ -33,7 +34,8 @@ export const DeleteTaskDialog = ({
                   });
                 }}
               >
-                <AlertDialog.Title className="font-bold text-lg">
+                <AlertDialog.Title className="inline-flex items-center gap-2 font-bold text-lg">
+                  <TrashIcon aria-hidden="true" className="h-4 w-4" />
                   Are You Sure?
                 </AlertDialog.Title>
                 <AlertDialog.Description className="py-4 text-base-content/60 text-sm">
