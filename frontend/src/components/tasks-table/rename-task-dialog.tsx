@@ -35,11 +35,12 @@ export const RenameTaskDialog = ({
                   className="dsy-btn dsy-btn-ghost dsy-btn-circle dsy-btn-sm absolute top-2 right-2"
                   aria-label="Close"
                 >
-                  <XIcon className="h-4 w-4" />
+                  <XIcon aria-hidden="true" className="h-4 w-4" />
                 </button>
               </Dialog.Close>
 
-              <Dialog.Title className="font-bold text-lg">
+              <Dialog.Title className="inline-flex items-center gap-2 font-bold text-lg">
+                <SaveIcon aria-hidden="true" className="h-4 w-4" />
                 Rename The Task
               </Dialog.Title>
 
@@ -68,7 +69,6 @@ export const RenameTaskDialog = ({
                     type="submit"
                     className="dsy-btn dsy-btn-neutral dsy-btn-sm"
                   >
-                    <SaveIcon className="h-4 w-4" />
                     Save
                   </button>
                 </div>

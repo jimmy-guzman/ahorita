@@ -42,5 +42,10 @@ describe("<ProjectDetails />", () => {
     });
 
     expect(heading).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: "Add Task" }),
+    ).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Edit" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Delete" })).toBeInTheDocument();
   });
 });

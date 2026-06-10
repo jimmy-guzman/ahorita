@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { FolderPlusIcon, XIcon } from "lucide-react";
+import { FolderPlusIcon, TriangleAlertIcon, XIcon } from "lucide-react";
 import { Dialog } from "radix-ui";
 import { useState } from "react";
 
@@ -37,12 +37,17 @@ export const CreateProject = () => {
 
   return (
     <Dialog.Root open={open} onOpenChange={handleOpenChange}>
-      <Dialog.Trigger asChild>
-        <button type="button" className="dsy-btn dsy-btn-primary dsy-btn-sm">
-          <span className="hidden sm:inline">Create Project</span>
-          <FolderPlusIcon className="h-4 w-4" />
-        </button>
-      </Dialog.Trigger>
+      <div className="dsy-tooltip dsy-tooltip-bottom" data-tip="Create project">
+        <Dialog.Trigger asChild>
+          <button
+            type="button"
+            className="dsy-btn dsy-btn-primary dsy-btn-square dsy-btn-sm"
+          >
+            <span className="sr-only">Create Project</span>
+            <FolderPlusIcon aria-hidden="true" className="h-4 w-4" />
+          </button>
+        </Dialog.Trigger>
+      </div>
       <Dialog.Portal>
         <Dialog.Overlay />
         <Dialog.Content asChild>
@@ -54,10 +59,11 @@ export const CreateProject = () => {
                   className="dsy-btn dsy-btn-ghost dsy-btn-circle dsy-btn-sm absolute top-2 right-2"
                   aria-label="Close"
                 >
-                  <XIcon className="h-4 w-4" />
+                  <XIcon aria-hidden="true" className="h-4 w-4" />
                 </button>
               </Dialog.Close>
-              <Dialog.Title className="font-bold text-lg">
+              <Dialog.Title className="inline-flex items-center gap-2 font-bold text-lg">
+                <FolderPlusIcon aria-hidden="true" className="h-4 w-4" />
                 Create Project
               </Dialog.Title>
               <Dialog.Description className="py-4 text-base-content/60 text-sm">
@@ -75,6 +81,7 @@ export const CreateProject = () => {
                     role="alert"
                     className="dsy-alert dsy-alert-error dsy-alert-soft"
                   >
+                    <TriangleAlertIcon aria-hidden="true" className="h-4 w-4" />
                     <span>{mutationError}</span>
                   </div>
                 )}
@@ -91,7 +98,7 @@ export const CreateProject = () => {
                     className="dsy-btn dsy-btn-primary dsy-btn-sm"
                     disabled={isPending}
                   >
-                    Create Project <FolderPlusIcon className="h-4 w-4" />
+                    Create Project
                   </button>
                 </div>
               </form>

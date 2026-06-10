@@ -80,7 +80,12 @@ function Component() {
               target="_blank"
               rel="noreferrer"
             >
-              <Icon icon="simple-icons:github" className="h-3.5 w-3.5" />
+              <Icon
+                icon="simple-icons:github"
+                aria-hidden="true"
+                className="h-3.5 w-3.5"
+              />
+              <span className="sr-only">GitHub</span>
             </a>
           </div>
           <div className="dsy-tooltip dsy-tooltip-right" data-tip="API Docs">
@@ -90,7 +95,12 @@ function Component() {
               target="_blank"
               rel="noreferrer"
             >
-              <Icon icon="simple-icons:scalar" className="h-3.5 w-3.5" />
+              <Icon
+                icon="simple-icons:scalar"
+                aria-hidden="true"
+                className="h-3.5 w-3.5"
+              />
+              <span className="sr-only">API Docs</span>
             </a>
           </div>
           <div className="dsy-tooltip dsy-tooltip-right" data-tip="Telemetry">
@@ -100,7 +110,12 @@ function Component() {
               target="_blank"
               rel="noreferrer"
             >
-              <Icon icon="simple-icons:opentelemetry" className="h-3.5 w-3.5" />
+              <Icon
+                icon="simple-icons:opentelemetry"
+                aria-hidden="true"
+                className="h-3.5 w-3.5"
+              />
+              <span className="sr-only">Telemetry</span>
             </a>
           </div>
         </div>
