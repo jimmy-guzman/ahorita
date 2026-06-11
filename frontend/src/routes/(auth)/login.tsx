@@ -1,5 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 import { createFileRoute, getRouteApi, Link } from "@tanstack/react-router";
+import { LogInIcon } from "lucide-react";
 import * as v from "valibot";
 
 import { meQueryOptions } from "@/api/query-me";
@@ -59,6 +60,7 @@ function Login() {
 
           <button type="submit" className="dsy-btn dsy-btn-primary w-full">
             Sign in
+            <LogInIcon aria-hidden="true" className="h-4 w-4" />
           </button>
         </form>
 

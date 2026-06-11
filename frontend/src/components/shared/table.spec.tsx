@@ -31,6 +31,20 @@ describe("<Table />", () => {
     }
   });
 
+  it("should expose unsorted state on sortable column headers", async () => {
+    await render(
+      <Table
+        data={[{ id: 1, name: "apple", color: "red" }]}
+        columns={columns}
+      />,
+    );
+
+    expect(screen.getByRole("columnheader", { name: "name" })).toHaveAttribute(
+      "aria-sort",
+      "none",
+    );
+  });
+
   it("should not render a global filter input", async () => {
     await render(
       <Table

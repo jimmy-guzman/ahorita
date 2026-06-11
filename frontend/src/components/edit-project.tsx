@@ -1,5 +1,5 @@
 import { useMutation, useSuspenseQuery } from "@tanstack/react-query";
-import { FolderPenIcon, SaveIcon, XIcon } from "lucide-react";
+import { FolderPenIcon, XIcon } from "lucide-react";
 import { Dialog } from "radix-ui";
 import { useState } from "react";
 
@@ -46,7 +46,7 @@ export const EditProject = ({
             <span className={cn(hideText ? "sr-only" : "hidden sm:inline")}>
               Edit{" "}
             </span>
-            <FolderPenIcon className="h-4 w-4" />
+            <FolderPenIcon aria-hidden="true" className="h-4 w-4" />
           </button>
         </Dialog.Trigger>
       )}
@@ -61,10 +61,11 @@ export const EditProject = ({
                   className="dsy-btn dsy-btn-ghost dsy-btn-circle dsy-btn-sm absolute top-2 right-2"
                   aria-label="Close"
                 >
-                  <XIcon className="h-4 w-4" />
+                  <XIcon aria-hidden="true" className="h-4 w-4" />
                 </button>
               </Dialog.Close>
-              <Dialog.Title className="font-bold text-lg">
+              <Dialog.Title className="inline-flex items-center gap-2 font-bold text-lg">
+                <FolderPenIcon aria-hidden="true" className="h-4 w-4" />
                 Edit Project
               </Dialog.Title>
               <Dialog.Description className="py-4 text-base-content/60 text-sm">
@@ -118,7 +119,7 @@ export const EditProject = ({
                     type="submit"
                     className="dsy-btn dsy-btn-neutral dsy-btn-sm"
                   >
-                    Save <SaveIcon className="h-4 w-4" />
+                    Save
                   </button>
                 </div>
               </form>

@@ -1,5 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 import { createFileRoute, getRouteApi, Link } from "@tanstack/react-router";
+import { UserPlusIcon } from "lucide-react";
 
 import { PasswordInput } from "@/components/password-input";
 import { RouteErrorComponent } from "@/components/shared/route-error";
@@ -56,6 +57,7 @@ function SignUp() {
 
           <button type="submit" className="dsy-btn dsy-btn-primary w-full">
             Sign up
+            <UserPlusIcon aria-hidden="true" className="h-4 w-4" />
           </button>
         </form>
 
