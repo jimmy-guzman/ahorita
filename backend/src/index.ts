@@ -6,6 +6,7 @@ import { cyan } from "picocolors";
 import env from "./env";
 import { authPlugin } from "./middleware/auth";
 import { opentelemetry } from "./plugins/opentelemetry";
+import { chatRoutes } from "./routes/chat";
 import { metadataRoutes } from "./routes/metadata";
 import { projectsRoutes } from "./routes/projects";
 import { tasksRoutes } from "./routes/tasks";
@@ -43,6 +44,7 @@ const app = new Elysia()
   .use(tasksRoutes)
   .use(usersRoutes)
   .use(metadataRoutes)
+  .use(chatRoutes)
 
   .listen(env.PORT, ({ url }) => {
     // biome-ignore lint/suspicious/noConsole: we want to log the url
@@ -50,3 +52,4 @@ const app = new Elysia()
   });
 
 export type App = typeof app;
+export type { OrchestratorUIMessage } from "./ai/agents/orchestrator";

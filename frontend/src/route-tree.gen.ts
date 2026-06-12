@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from "./routes/__root";
 import { Route as authenticatedRouteRouteImport } from "./routes/(authenticated)/route";
 import { Route as IndexRouteImport } from "./routes/index";
 import { Route as authenticatedDashboardRouteImport } from "./routes/(authenticated)/dashboard";
+import { Route as authenticatedChatRouteImport } from "./routes/(authenticated)/chat";
 import { Route as authSignupRouteImport } from "./routes/(auth)/signup";
 import { Route as authLoginRouteImport } from "./routes/(auth)/login";
 import { Route as authenticatedTasksIndexRouteImport } from "./routes/(authenticated)/tasks.index";
@@ -31,6 +32,11 @@ const IndexRoute = IndexRouteImport.update({
 const authenticatedDashboardRoute = authenticatedDashboardRouteImport.update({
   id: "/dashboard",
   path: "/dashboard",
+  getParentRoute: () => authenticatedRouteRoute,
+} as any);
+const authenticatedChatRoute = authenticatedChatRouteImport.update({
+  id: "/chat",
+  path: "/chat",
   getParentRoute: () => authenticatedRouteRoute,
 } as any);
 const authSignupRoute = authSignupRouteImport.update({
@@ -71,6 +77,7 @@ export interface FileRoutesByFullPath {
   "/": typeof IndexRoute;
   "/login": typeof authLoginRoute;
   "/signup": typeof authSignupRoute;
+  "/chat": typeof authenticatedChatRoute;
   "/dashboard": typeof authenticatedDashboardRoute;
   "/projects/$projectId": typeof authenticatedProjectsProjectIdRoute;
   "/tasks/$taskId": typeof authenticatedTasksTaskIdRoute;
@@ -81,6 +88,7 @@ export interface FileRoutesByTo {
   "/": typeof IndexRoute;
   "/login": typeof authLoginRoute;
   "/signup": typeof authSignupRoute;
+  "/chat": typeof authenticatedChatRoute;
   "/dashboard": typeof authenticatedDashboardRoute;
   "/projects/$projectId": typeof authenticatedProjectsProjectIdRoute;
   "/tasks/$taskId": typeof authenticatedTasksTaskIdRoute;
@@ -93,6 +101,7 @@ export interface FileRoutesById {
   "/(authenticated)": typeof authenticatedRouteRouteWithChildren;
   "/(auth)/login": typeof authLoginRoute;
   "/(auth)/signup": typeof authSignupRoute;
+  "/(authenticated)/chat": typeof authenticatedChatRoute;
   "/(authenticated)/dashboard": typeof authenticatedDashboardRoute;
   "/(authenticated)/projects/$projectId": typeof authenticatedProjectsProjectIdRoute;
   "/(authenticated)/tasks/$taskId": typeof authenticatedTasksTaskIdRoute;
@@ -105,6 +114,7 @@ export interface FileRouteTypes {
     | "/"
     | "/login"
     | "/signup"
+    | "/chat"
     | "/dashboard"
     | "/projects/$projectId"
     | "/tasks/$taskId"
@@ -115,6 +125,7 @@ export interface FileRouteTypes {
     | "/"
     | "/login"
     | "/signup"
+    | "/chat"
     | "/dashboard"
     | "/projects/$projectId"
     | "/tasks/$taskId"
@@ -126,6 +137,7 @@ export interface FileRouteTypes {
     | "/(authenticated)"
     | "/(auth)/login"
     | "/(auth)/signup"
+    | "/(authenticated)/chat"
     | "/(authenticated)/dashboard"
     | "/(authenticated)/projects/$projectId"
     | "/(authenticated)/tasks/$taskId"
@@ -161,6 +173,13 @@ declare module "@tanstack/react-router" {
       path: "/dashboard";
       fullPath: "/dashboard";
       preLoaderRoute: typeof authenticatedDashboardRouteImport;
+      parentRoute: typeof authenticatedRouteRoute;
+    };
+    "/(authenticated)/chat": {
+      id: "/(authenticated)/chat";
+      path: "/chat";
+      fullPath: "/chat";
+      preLoaderRoute: typeof authenticatedChatRouteImport;
       parentRoute: typeof authenticatedRouteRoute;
     };
     "/(auth)/signup": {
@@ -209,6 +228,7 @@ declare module "@tanstack/react-router" {
 }
 
 interface authenticatedRouteRouteChildren {
+  authenticatedChatRoute: typeof authenticatedChatRoute;
   authenticatedDashboardRoute: typeof authenticatedDashboardRoute;
   authenticatedProjectsProjectIdRoute: typeof authenticatedProjectsProjectIdRoute;
   authenticatedTasksTaskIdRoute: typeof authenticatedTasksTaskIdRoute;
@@ -217,6 +237,7 @@ interface authenticatedRouteRouteChildren {
 }
 
 const authenticatedRouteRouteChildren: authenticatedRouteRouteChildren = {
+  authenticatedChatRoute: authenticatedChatRoute,
   authenticatedDashboardRoute: authenticatedDashboardRoute,
   authenticatedProjectsProjectIdRoute: authenticatedProjectsProjectIdRoute,
   authenticatedTasksTaskIdRoute: authenticatedTasksTaskIdRoute,

@@ -5,7 +5,12 @@ import {
   Outlet,
   redirect,
 } from "@tanstack/react-router";
-import { FolderIcon, LayoutDashboardIcon, ListTodoIcon } from "lucide-react";
+import {
+  FolderIcon,
+  LayoutDashboardIcon,
+  ListTodoIcon,
+  MessageSquareIcon,
+} from "lucide-react";
 import { type ReactNode, Suspense } from "react";
 
 import { meQueryOptions } from "@/api/query-me";
@@ -68,6 +73,11 @@ function Component() {
             to="/tasks"
             icon={<ListTodoIcon className="h-4 w-4" />}
             label="Tasks"
+          />
+          <NavItem
+            to="/chat"
+            icon={<MessageSquareIcon className="h-4 w-4" />}
+            label="Chat"
           />
         </nav>
 

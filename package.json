@@ -31,10 +31,10 @@
     "@biomejs/biome": "2.4.16",
     "@dotenv-run/cli": "1.3.6",
     "@types/bun": "1.3.14",
-    "gitzy": "7.0.11",
-    "knip": "6.15.0",
+    "gitzy": "7.1.0",
+    "knip": "6.16.1",
     "lefthook": "2.1.9",
-    "turbo": "2.9.16"
+    "turbo": "2.9.18"
   },
   "packageManager": "bun@1.3.14"
 }

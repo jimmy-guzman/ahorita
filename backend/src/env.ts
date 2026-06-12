@@ -12,6 +12,11 @@ const schema = t.Object({
   ),
   AXIOM_TOKEN: t.Optional(t.String()),
   AXIOM_DATASET: t.Optional(t.String()),
+  OPENROUTER_API_KEY: t.String(),
+  CHAT_ORCHESTRATOR_MODEL: t.String({
+    default: "anthropic/claude-sonnet-4.6",
+  }),
+  CHAT_SPECIALIST_MODEL: t.String({ default: "anthropic/claude-haiku-4.5" }),
   BETTER_AUTH_SECRET: t.String(),
   BETTER_AUTH_URL: t.String(),
   CORS_ORIGIN: t.String(),
